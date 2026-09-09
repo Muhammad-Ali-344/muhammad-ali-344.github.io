@@ -314,6 +314,16 @@ function initSpotlightAndTilt() {
     const cards = document.querySelectorAll('.spotlight-card');
 
     cards.forEach(card => {
+        let isHovered = false;
+        let rafId = null;
+
+        card.addEventListener('mouseenter', () => {
+            if (window.innerWidth <= 992 || card.classList.contains('flagship-card')) return;
+            isHovered = true;
+            // Quick responsive transition on entry
+            card.style.transition = 'transform 0.1s ease-out, border-color 0.35s ease, box-shadow 0.35s ease';
+        });
+
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
@@ -322,20 +332,37 @@ function initSpotlightAndTilt() {
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
 
-            // Subtle 3D card tilt on desktop
-            if (window.innerWidth > 992 && !card.classList.contains('flagship-card')) {
+            if (window.innerWidth <= 992 || card.classList.contains('flagship-card')) return;
+
+            // Remove transition during active mouse tracking for true 1:1 real-time 60fps tilt
+            card.style.transition = 'none';
+
+            if (rafId) cancelAnimationFrame(rafId);
+            rafId = requestAnimationFrame(() => {
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotX = -((y - centerY) / centerY) * 6;
-                const rotY = ((x - centerX) / centerX) * 6;
-                card.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-4px)`;
-            }
+                // Physical real-time 3D tilt: moves with mouse position
+                const rotX = -((y - centerY) / centerY) * 12;
+                const rotY = ((x - centerX) / centerX) * 12;
+                card.style.transform = `perspective(1000px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) scale3d(1.03, 1.03, 1.03) translateY(-6px)`;
+            });
         });
 
         card.addEventListener('mouseleave', () => {
-            if (window.innerWidth > 992 && !card.classList.contains('flagship-card')) {
-                card.style.transform = '';
-            }
+            if (window.innerWidth <= 992 || card.classList.contains('flagship-card')) return;
+            isHovered = false;
+            if (rafId) cancelAnimationFrame(rafId);
+
+            // Smooth spring return back to flat
+            card.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease';
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1) translateY(0px)';
+
+            setTimeout(() => {
+                if (!isHovered) {
+                    card.style.transform = '';
+                    card.style.transition = '';
+                }
+            }, 520);
         });
     });
 }
