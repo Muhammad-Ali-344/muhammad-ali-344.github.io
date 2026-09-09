@@ -694,12 +694,6 @@ h1, h2, h3, h4, h5 {
   margin-top: 0.3rem;
 }
 
-/* Degree chip: longer text needs smaller headline */
-.telemetry-item:last-child h3 {
-  font-size: 1.1rem;
-  line-height: 1.2;
-}
-
 /* ==========================================================================
    2A. HERO LAYERED DEPTH PORTRAIT (Inspired by the 5 References)
    ========================================================================== */
