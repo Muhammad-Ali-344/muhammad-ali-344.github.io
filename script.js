@@ -1224,8 +1224,8 @@ function initCustomCursor() {
 
     // Direct, immediate 1:1 transform for instantaneous zero-lag tracking
     function updatePosition(x, y) {
-        // Offset -3px, -4px so the sharp tip of the SVG arrow matches exact system pointer coordinates
-        cursor.style.transform = `translate3d(${x - 3}px, ${y - 4}px, 0)`;
+        // Offset -4px, -4px so the apex tip of the SVG arrow matches exact system pointer coordinates
+        cursor.style.transform = `translate3d(${x - 4}px, ${y - 4}px, 0)`;
         if (!isVisible) {
             cursor.style.opacity = '1';
             isVisible = true;
