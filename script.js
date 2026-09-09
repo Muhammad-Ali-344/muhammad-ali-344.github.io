@@ -166,7 +166,7 @@ function initWebAudio() {
         }
     });
 
-    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .filter-btn, .side-rail-social-btn');
+    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .filter-btn, .side-rail-social-btn, .timeline-content');
     interactiveBtns.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             if (soundEnabled) playTone(420, 'sine', 0.03, 0.02);
