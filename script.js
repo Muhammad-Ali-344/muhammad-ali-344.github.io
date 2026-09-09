@@ -213,17 +213,17 @@ function initHeroTyping() {
     if (!cycler) return;
 
     const roles = [
+        "GAMEPLAY PROGRAMMER",
+        "ZBRUSH SCULPTOR",
         "3D GENERALIST",
         "VR / XR ARCHITECT",
-        "TECHNICAL ARTIST",
-        "GAMEPLAY PROGRAMMER",
-        "ZBRUSH SCULPTOR"
+        "TECHNICAL ARTIST"
     ];
 
     let currentRoleIdx = 0;
-    let charIdx = 0;
-    let isDeleting = false;
-    let typingSpeed = 100;
+    let charIdx = roles[0].length;
+    let isDeleting = true;
+    let typingSpeed = 85;
 
     function typeLoop() {
         const currentText = roles[currentRoleIdx];
@@ -236,14 +236,14 @@ function initHeroTyping() {
                 setTimeout(typeLoop, 2200); // Pause on complete word
                 return;
             }
-            typingSpeed = 90;
+            typingSpeed = 85;
         } else {
             cycler.textContent = currentText.substring(0, charIdx - 1);
             charIdx--;
             if (charIdx === 0) {
                 isDeleting = false;
                 currentRoleIdx = (currentRoleIdx + 1) % roles.length;
-                setTimeout(typeLoop, 400); // Pause before next word
+                setTimeout(typeLoop, 350); // Pause before next role starts typing
                 return;
             }
             typingSpeed = 45;
@@ -252,7 +252,8 @@ function initHeroTyping() {
         setTimeout(typeLoop, typingSpeed);
     }
 
-    typeLoop();
+    // Begin cycling after initial view hold
+    setTimeout(typeLoop, 2200);
 }
 
 /* ==========================================================================

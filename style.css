@@ -587,33 +587,51 @@ h1, h2, h3, h4, h5 {
   text-transform: uppercase;
 }
 
-.hero-role-line {
-  font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+.hero-role-group {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.hero-role-prefix {
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.2vw, 1.85rem);
   font-weight: 700;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   color: var(--text-secondary);
-  margin-top: 0.4rem;
+  text-transform: uppercase;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
+}
+
+.hero-role-dynamic {
+  font-family: var(--font-heading);
+  font-size: clamp(1.55rem, 3.2vw, 2.45rem);
+  font-weight: 800;
+  letter-spacing: 1.2px;
+  min-height: 1.25em;
+  display: flex;
+  align-items: center;
 }
 
 .role-typing-cycler {
   color: var(--cyan-primary);
-  text-shadow: 0 0 20px var(--cyan-glow);
+  text-shadow: 0 0 24px var(--cyan-glow), 0 0 10px rgba(0, 240, 255, 0.4);
   position: relative;
-  min-height: 1.2em;
   display: inline-block;
+  letter-spacing: 1px;
 }
 
 .role-typing-cursor {
   display: inline-block;
   width: 3px;
-  height: 1em;
+  height: 0.9em;
   background: var(--cyan-primary);
+  box-shadow: 0 0 10px var(--cyan-primary);
   vertical-align: middle;
-  margin-left: 2px;
+  margin-left: 4px;
   animation: cursorBlink 0.8s infinite;
 }
 
@@ -2425,6 +2443,12 @@ h1, h2, h3, h4, h5 {
   }
   .hero-subtitle {
     margin: 0 auto;
+  }
+  .hero-role-group {
+    align-items: center;
+  }
+  .hero-role-prefix, .hero-role-dynamic {
+    justify-content: center;
   }
   .hero-cta-group {
     justify-content: center;
