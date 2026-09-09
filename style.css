@@ -80,6 +80,11 @@ body {
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  cursor: none; /* Custom cursor active on desktop */
+}
+
+@media (hover: none) {
+  body { cursor: auto; }
 }
 
 /* Background Particle / Mesh Canvas */
@@ -1847,6 +1852,117 @@ h1, h2, h3, h4, h5 {
   height: 100%;
   object-fit: cover;
 }
+
+/* ==========================================================================
+   11. CUSTOM CURSOR
+   ========================================================================== */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--cyan-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: width 0.15s ease, height 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 0 10px var(--cyan-primary);
+}
+
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid rgba(0, 240, 255, 0.55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease, width 0.2s ease, height 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.cursor-dot.is-hovering {
+  width: 12px;
+  height: 12px;
+  background: var(--amber-primary);
+  box-shadow: 0 0 15px var(--amber-primary);
+}
+
+.cursor-ring.is-hovering {
+  width: 54px;
+  height: 54px;
+  border-color: rgba(255, 183, 3, 0.6);
+}
+
+.cursor-dot.is-clicking {
+  transform: translate(-50%, -50%) scale(0.7);
+}
+
+/* Hide on touch/mobile */
+@media (hover: none) {
+  .cursor-dot, .cursor-ring { display: none; }
+}
+
+/* ==========================================================================
+   12. SCROLL PROGRESS BAR
+   ========================================================================== */
+.scroll-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--cyan-primary), var(--purple-accent), var(--amber-primary));
+  z-index: 200;
+  pointer-events: none;
+  box-shadow: 0 0 8px var(--cyan-primary);
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   13. SCROLL REVEAL ANIMATIONS
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.reveal-left {
+  transform: translateX(-40px);
+}
+
+.reveal.reveal-right {
+  transform: translateX(40px);
+}
+
+.reveal.reveal-scale {
+  transform: scale(0.9) translateY(20px);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Staggered delays for grid children */
+.reveal-stagger > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > *:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > *:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > *:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > *:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > *:nth-child(6) { transition-delay: 400ms; }
+.reveal-stagger > *:nth-child(7) { transition-delay: 480ms; }
+.reveal-stagger > *:nth-child(8) { transition-delay: 560ms; }
+.reveal-stagger > *:nth-child(9) { transition-delay: 640ms; }
+.reveal-stagger > *:nth-child(10) { transition-delay: 720ms; }
+.reveal-stagger > *:nth-child(11) { transition-delay: 800ms; }
+.reveal-stagger > *:nth-child(12) { transition-delay: 880ms; }
+.reveal-stagger > *:nth-child(n+13) { transition-delay: 960ms; }
 
 /* ==========================================================================
    11. RESPONSIVE BREAKPOINTS

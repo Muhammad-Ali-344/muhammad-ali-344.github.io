@@ -14,6 +14,12 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectModals();
     initProfileModal();
     initContactForm();
+    // New premium features
+    initCustomCursor();
+    initScrollProgress();
+    initScrollReveal();
+    initHeroScrollParallax();
+    initMagneticButtons();
 });
 
 /* ==========================================================================
@@ -1198,5 +1204,172 @@ function initContactForm() {
                 submitBtn.disabled = false;
             }, 4000);
         }
+    });
+}
+
+/* ==========================================================================
+   13. CUSTOM DUAL-LAYER CURSOR
+   ========================================================================== */
+function initCustomCursor() {
+    // Only on devices with a true pointer (desktop)
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const dot  = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    if (!dot || !ring) return;
+
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
+    let rafId;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        // Dot snaps immediately
+        dot.style.left = `${mouseX}px`;
+        dot.style.top  = `${mouseY}px`;
+    }, { passive: true });
+
+    // Ring trails with spring lerp
+    function animateRing() {
+        ringX += (mouseX - ringX) * 0.13;
+        ringY += (mouseY - ringY) * 0.13;
+        ring.style.left = `${ringX}px`;
+        ring.style.top  = `${ringY}px`;
+        rafId = requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Hover state on interactive elements
+    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .nav-avatar-btn';
+
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest(interactiveSelectors)) {
+            dot.classList.add('is-hovering');
+            ring.classList.add('is-hovering');
+        }
+    });
+
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest(interactiveSelectors)) {
+            dot.classList.remove('is-hovering');
+            ring.classList.remove('is-hovering');
+        }
+    });
+
+    document.addEventListener('mousedown', () => dot.classList.add('is-clicking'));
+    document.addEventListener('mouseup',   () => dot.classList.remove('is-clicking'));
+
+    // Hide when leaving window
+    document.addEventListener('mouseleave', () => {
+        dot.style.opacity  = '0';
+        ring.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', () => {
+        dot.style.opacity  = '1';
+        ring.style.opacity = '1';
+    });
+}
+
+/* ==========================================================================
+   14. SCROLL PROGRESS BAR
+   ========================================================================== */
+function initScrollProgress() {
+    const bar = document.getElementById('scroll-progress');
+    if (!bar) return;
+
+    window.addEventListener('scroll', () => {
+        const scrollTop    = window.scrollY || document.documentElement.scrollTop;
+        const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+        bar.style.width = `${Math.min(scrollPercent, 100)}%`;
+    }, { passive: true });
+}
+
+/* ==========================================================================
+   15. INTERSECTION OBSERVER SCROLL REVEAL
+   ========================================================================== */
+function initScrollReveal() {
+    // Mark all direct children of reveal-stagger grids as reveal elements
+    document.querySelectorAll('.reveal-stagger > *').forEach(child => {
+        if (!child.classList.contains('reveal')) {
+            child.classList.add('reveal');
+        }
+    });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    if (!revealEls.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, {
+        threshold: 0.12,
+        rootMargin: '0px 0px -60px 0px'
+    });
+
+    revealEls.forEach(el => observer.observe(el));
+}
+
+/* ==========================================================================
+   16. HERO SCROLL PARALLAX (Portrait depth + content lift)
+   ========================================================================== */
+function initHeroScrollParallax() {
+    const heroSection = document.getElementById('hero');
+    const portraitStage = document.getElementById('hero-portrait-stage');
+    const heroContent   = document.querySelector('.hero-content');
+    if (!heroSection || !portraitStage) return;
+
+    let ticking = false;
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                const scrollY   = window.scrollY;
+                const heroH     = heroSection.offsetHeight;
+                const progress  = Math.min(scrollY / heroH, 1); // 0 → 1 as hero scrolls away
+
+                // Portrait sinks deeper as we scroll
+                portraitStage.style.transform = `translateY(${progress * 60}px)`;
+                portraitStage.style.opacity   = `${1 - progress * 0.6}`;
+
+                // Content lifts and fades slightly
+                if (heroContent) {
+                    heroContent.style.transform = `translateY(${progress * -30}px)`;
+                    heroContent.style.opacity   = `${1 - progress * 0.4}`;
+                }
+
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+}
+
+/* ==========================================================================
+   17. MAGNETIC BUTTONS
+   ========================================================================== */
+function initMagneticButtons() {
+    if (window.matchMedia('(hover: none)').matches) return;
+
+    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-amber, .nav-hire-btn');
+
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect    = btn.getBoundingClientRect();
+            const centerX = rect.left + rect.width  / 2;
+            const centerY = rect.top  + rect.height / 2;
+            const dx = (e.clientX - centerX) * 0.28;
+            const dy = (e.clientY - centerY) * 0.28;
+            btn.style.transform = `translate(${dx}px, ${dy}px)`;
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = '';
+        });
     });
 }
