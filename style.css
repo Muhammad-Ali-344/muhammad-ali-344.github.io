@@ -921,43 +921,117 @@ h1, h2, h3, h4, h5 {
 }
 
 .discipline-card {
+  position: relative;
   padding: 2.2rem;
   border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: var(--bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
-  transition: transform var(--transition-normal), border-color var(--transition-normal);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              background-color 0.35s ease;
+}
+
+/* Glowing left cyber accent edge (matches Career Milestones) */
+.discipline-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--cyan-primary), var(--purple-accent));
+  opacity: 0.45;
+  transition: opacity 0.35s ease, width 0.35s ease, box-shadow 0.35s ease;
+  z-index: 2;
+}
+
+/* Diagonal holographic glass shimmer sweep on hover */
+.discipline-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.16), rgba(255, 255, 255, 0.22), rgba(0, 240, 255, 0.16), transparent);
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 3;
 }
 
 .discipline-card:hover {
-  transform: translateY(-6px);
+  border-color: rgba(0, 240, 255, 0.48);
+  background: rgba(14, 18, 28, 0.9);
+  box-shadow: 0 20px 42px rgba(0, 0, 0, 0.6), 
+              0 0 26px rgba(0, 240, 255, 0.18),
+              inset 0 0 20px rgba(0, 240, 255, 0.05);
+}
+
+.discipline-card:hover::before {
+  opacity: 1;
+  width: 4px;
+  box-shadow: 0 0 14px var(--cyan-primary);
+}
+
+.discipline-card:hover::after {
+  animation: disciplineShimmer 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes disciplineShimmer {
+  0% { left: -150%; }
+  100% { left: 200%; }
 }
 
 .discipline-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1;
 }
 
 .discipline-icon-wrap {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
   border-radius: var(--radius-sm);
   background: rgba(0, 240, 255, 0.1);
   border: 1px solid rgba(0, 240, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   color: var(--cyan-primary);
   box-shadow: 0 0 20px var(--cyan-glow);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.35s ease, 
+              border-color 0.35s ease;
+}
+
+.discipline-card:hover .discipline-icon-wrap {
+  transform: scale(1.15) rotate(4deg);
+  box-shadow: 0 0 28px var(--cyan-primary), inset 0 0 10px rgba(0, 240, 255, 0.35);
+  border-color: var(--cyan-primary);
 }
 
 .discipline-num {
   font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.18);
+  transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.discipline-card:hover .discipline-num {
+  color: var(--cyan-primary);
+  text-shadow: 0 0 14px var(--cyan-primary);
+  transform: translateX(-4px) scale(1.08);
 }
 
 .discipline-title {
@@ -965,12 +1039,22 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
   color: var(--text-main);
   letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.discipline-card:hover .discipline-title {
+  color: #ffffff;
+  transform: translateX(4px);
 }
 
 .discipline-desc {
   font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.6;
+  line-height: 1.62;
+  position: relative;
+  z-index: 1;
 }
 
 .discipline-pills {
@@ -979,21 +1063,27 @@ h1, h2, h3, h4, h5 {
   gap: 0.45rem;
   margin-top: auto;
   padding-top: 0.6rem;
+  position: relative;
+  z-index: 1;
 }
 
 .discipline-pill {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-family: var(--font-mono);
+  font-weight: 500;
   padding: 0.3rem 0.65rem;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-glass);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
 }
 
 .discipline-card:hover .discipline-pill {
-  border-color: rgba(0, 240, 255, 0.3);
-  color: var(--text-main);
+  border-color: rgba(0, 240, 255, 0.35);
+  background: rgba(0, 240, 255, 0.08);
+  color: var(--cyan-light);
+  transform: translateY(-1px);
 }
 
 /* ==========================================================================
@@ -2185,6 +2275,32 @@ h1, h2, h3, h4, h5 {
 .timeline.reveal-stagger > .timeline-item:nth-child(2) { transition-delay: 260ms; }
 .timeline.reveal-stagger > .timeline-item:nth-child(3) { transition-delay: 440ms; }
 .timeline.reveal-stagger > .timeline-item:nth-child(4) { transition-delay: 620ms; }
+
+/* Core Disciplines & Craft: Staggered Fade-Up with Blur Clearing */
+.disciplines-grid > .discipline-card.reveal {
+  opacity: 0;
+  transform: translateY(50px) scale(0.97);
+  filter: blur(6px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease,
+              background-color 0.35s ease;
+}
+
+.disciplines-grid > .discipline-card.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(1) { transition-delay: 60ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(2) { transition-delay: 180ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(3) { transition-delay: 300ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(4) { transition-delay: 420ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(5) { transition-delay: 540ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(6) { transition-delay: 660ms; }
 
 /* ==========================================================================
    11. RESPONSIVE BREAKPOINTS
