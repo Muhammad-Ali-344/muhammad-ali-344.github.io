@@ -925,78 +925,53 @@ h1, h2, h3, h4, h5 {
   padding: 2.2rem;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-glass);
+  border-left: 3px solid var(--cyan-primary);
   background: var(--bg-surface);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
-  transform-style: preserve-3d;
-  will-change: transform;
-  transition: border-color 0.35s ease,
-              box-shadow 0.35s ease,
-              background-color 0.35s ease;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease,
+              box-shadow 0.35s ease;
 }
 
-/* Glowing left cyber accent edge (matches Career Milestones) */
-.discipline-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(to bottom, var(--cyan-primary), var(--purple-accent));
-  opacity: 0.45;
-  transition: opacity 0.35s ease, width 0.35s ease, box-shadow 0.35s ease;
-  z-index: 2;
-}
-
-/* Diagonal holographic glass shimmer sweep on hover */
+/* Diagonal holographic light shimmer sweep on hover */
 .discipline-card::after {
   content: '';
   position: absolute;
   top: 0;
-  left: -150%;
+  left: -160%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.16), rgba(255, 255, 255, 0.22), rgba(0, 240, 255, 0.16), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.16), transparent);
   transform: skewX(-25deg);
   pointer-events: none;
+  transition: left 0.85s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 3;
 }
 
-.discipline-card:hover {
-  border-color: rgba(0, 240, 255, 0.48);
-  background: rgba(14, 18, 28, 0.9);
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.65), 
-              0 0 28px rgba(0, 240, 255, 0.22),
-              inset 0 0 20px rgba(0, 240, 255, 0.05);
-}
-
-.discipline-card:hover::before {
-  opacity: 1;
-  width: 4px;
-  box-shadow: 0 0 14px var(--cyan-primary);
-}
-
 .discipline-card:hover::after {
-  animation: disciplineShimmer 0.95s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  left: 200%;
 }
 
-@keyframes disciplineShimmer {
-  0% { left: -150%; }
-  100% { left: 200%; }
+/* Hover elevation, glowing borders and box-shadow */
+.discipline-card:hover {
+  transform: translateY(-8px) scale(1.015);
+  border-color: rgba(0, 240, 255, 0.45);
+  border-left-color: var(--cyan-primary);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 
+              0 0 25px rgba(0, 240, 255, 0.2), 
+              -4px 0 18px rgba(0, 240, 255, 0.4);
 }
 
 .discipline-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  z-index: 1;
-  transform-style: preserve-3d;
 }
 
 .discipline-icon-wrap {
@@ -1011,31 +986,30 @@ h1, h2, h3, h4, h5 {
   font-size: 1.45rem;
   color: var(--cyan-primary);
   box-shadow: 0 0 20px var(--cyan-glow);
-  transform-style: preserve-3d;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), 
               box-shadow 0.35s ease, 
               border-color 0.35s ease;
 }
 
 .discipline-card:hover .discipline-icon-wrap {
-  transform: translateZ(36px) scale(1.14) rotate(4deg);
-  box-shadow: 0 0 28px var(--cyan-primary), inset 0 0 10px rgba(0, 240, 255, 0.35);
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 0 28px var(--cyan-glow), 0 0 12px var(--cyan-primary);
   border-color: var(--cyan-primary);
 }
 
 .discipline-num {
-  font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-family: var(--font-arcade);
+  font-size: 1.15rem;
   font-weight: 800;
-  color: rgba(255, 255, 255, 0.18);
-  transform-style: preserve-3d;
-  transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 1px;
+  transition: color 0.35s ease, text-shadow 0.35s ease, transform 0.35s ease;
 }
 
 .discipline-card:hover .discipline-num {
   color: var(--cyan-primary);
-  text-shadow: 0 0 14px var(--cyan-primary);
-  transform: translateZ(26px) translateX(-4px) scale(1.08);
+  text-shadow: 0 0 12px var(--cyan-primary);
+  transform: translateX(-3px);
 }
 
 .discipline-title {
@@ -1043,29 +1017,17 @@ h1, h2, h3, h4, h5 {
   font-weight: 700;
   color: var(--text-main);
   letter-spacing: 0.5px;
-  position: relative;
-  z-index: 1;
-  transform-style: preserve-3d;
-  transition: color 0.3s ease, transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.3s ease;
 }
 
 .discipline-card:hover .discipline-title {
   color: #ffffff;
-  transform: translateZ(30px) translateX(4px);
 }
 
 .discipline-desc {
   font-size: 0.95rem;
   color: var(--text-secondary);
-  line-height: 1.62;
-  position: relative;
-  z-index: 1;
-  transform-style: preserve-3d;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.discipline-card:hover .discipline-desc {
-  transform: translateZ(18px);
+  line-height: 1.6;
 }
 
 .discipline-pills {
@@ -1074,33 +1036,159 @@ h1, h2, h3, h4, h5 {
   gap: 0.45rem;
   margin-top: auto;
   padding-top: 0.6rem;
-  position: relative;
-  z-index: 1;
-  transform-style: preserve-3d;
-  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.discipline-card:hover .discipline-pills {
-  transform: translateZ(24px);
 }
 
 .discipline-pill {
-  font-size: 0.76rem;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  padding: 0.3rem 0.65rem;
-  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.32rem 0.7rem;
+  border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: var(--text-secondary);
-  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .discipline-card:hover .discipline-pill {
   border-color: rgba(0, 240, 255, 0.35);
-  background: rgba(0, 240, 255, 0.08);
   color: var(--cyan-light);
-  transform: translateY(-1px);
+  background: rgba(0, 240, 255, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Individual Color Personalities for the 6 Disciplines */
+/* 01: Gameplay (Cyan) */
+.disciplines-grid > .discipline-card:nth-child(1) {
+  border-left-color: var(--cyan-primary);
+}
+.disciplines-grid > .discipline-card:nth-child(1):hover {
+  border-color: rgba(0, 240, 255, 0.45);
+  border-left-color: var(--cyan-primary);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.2), -4px 0 18px rgba(0, 240, 255, 0.4);
+}
+.disciplines-grid > .discipline-card:nth-child(1):hover .discipline-num {
+  color: var(--cyan-primary);
+  text-shadow: 0 0 12px var(--cyan-primary);
+}
+.disciplines-grid > .discipline-card:nth-child(1):hover .discipline-pill {
+  border-color: rgba(0, 240, 255, 0.35);
+  color: var(--cyan-light);
+  background: rgba(0, 240, 255, 0.08);
+}
+
+/* 02: VR / XR (Amber) */
+.disciplines-grid > .discipline-card:nth-child(2) {
+  border-left-color: var(--amber-primary);
+}
+.disciplines-grid > .discipline-card:nth-child(2):hover {
+  border-color: rgba(255, 183, 3, 0.45);
+  border-left-color: var(--amber-primary);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(255, 183, 3, 0.2), -4px 0 18px rgba(255, 183, 3, 0.4);
+}
+.disciplines-grid > .discipline-card:nth-child(2):hover .discipline-num {
+  color: var(--amber-primary);
+  text-shadow: 0 0 12px var(--amber-primary);
+}
+.disciplines-grid > .discipline-card:nth-child(2):hover .discipline-icon-wrap {
+  box-shadow: 0 0 28px rgba(255, 183, 3, 0.4), 0 0 12px var(--amber-primary);
+  border-color: var(--amber-primary);
+}
+.disciplines-grid > .discipline-card:nth-child(2):hover .discipline-pill {
+  border-color: rgba(255, 183, 3, 0.35);
+  color: #fde68a;
+  background: rgba(255, 183, 3, 0.08);
+}
+
+/* 03: 3D Modeling (Cyber Purple) */
+.disciplines-grid > .discipline-card:nth-child(3) {
+  border-left-color: var(--purple-accent);
+}
+.disciplines-grid > .discipline-card:nth-child(3):hover {
+  border-color: rgba(168, 85, 247, 0.45);
+  border-left-color: var(--purple-accent);
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(168, 85, 247, 0.2), -4px 0 18px rgba(168, 85, 247, 0.4);
+}
+.disciplines-grid > .discipline-card:nth-child(3):hover .discipline-num {
+  color: var(--purple-accent);
+  text-shadow: 0 0 12px var(--purple-accent);
+}
+.disciplines-grid > .discipline-card:nth-child(3):hover .discipline-icon-wrap {
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.4), 0 0 12px var(--purple-accent);
+  border-color: var(--purple-accent);
+}
+.disciplines-grid > .discipline-card:nth-child(3):hover .discipline-pill {
+  border-color: rgba(168, 85, 247, 0.35);
+  color: #e9d5ff;
+  background: rgba(168, 85, 247, 0.08);
+}
+
+/* 04: Digital Sculpting (Rose Red) */
+.disciplines-grid > .discipline-card:nth-child(4) {
+  border-left-color: #f43f5e;
+}
+.disciplines-grid > .discipline-card:nth-child(4):hover {
+  border-color: rgba(244, 63, 94, 0.45);
+  border-left-color: #f43f5e;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(244, 63, 94, 0.2), -4px 0 18px rgba(244, 63, 94, 0.4);
+}
+.disciplines-grid > .discipline-card:nth-child(4):hover .discipline-num {
+  color: #f43f5e;
+  text-shadow: 0 0 12px #f43f5e;
+}
+.disciplines-grid > .discipline-card:nth-child(4):hover .discipline-icon-wrap {
+  box-shadow: 0 0 28px rgba(244, 63, 94, 0.4), 0 0 12px #f43f5e;
+  border-color: #f43f5e;
+}
+.disciplines-grid > .discipline-card:nth-child(4):hover .discipline-pill {
+  border-color: rgba(244, 63, 94, 0.35);
+  color: #fecdd3;
+  background: rgba(244, 63, 94, 0.08);
+}
+
+/* 05: UV & PBR Texturing (Sky Blue) */
+.disciplines-grid > .discipline-card:nth-child(5) {
+  border-left-color: #38bdf8;
+}
+.disciplines-grid > .discipline-card:nth-child(5):hover {
+  border-color: rgba(56, 189, 248, 0.45);
+  border-left-color: #38bdf8;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(56, 189, 248, 0.2), -4px 0 18px rgba(56, 189, 248, 0.4);
+}
+.disciplines-grid > .discipline-card:nth-child(5):hover .discipline-num {
+  color: #38bdf8;
+  text-shadow: 0 0 12px #38bdf8;
+}
+.disciplines-grid > .discipline-card:nth-child(5):hover .discipline-icon-wrap {
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.4), 0 0 12px #38bdf8;
+  border-color: #38bdf8;
+}
+.disciplines-grid > .discipline-card:nth-child(5):hover .discipline-pill {
+  border-color: rgba(56, 189, 248, 0.35);
+  color: #bae6fd;
+  background: rgba(56, 189, 248, 0.08);
+}
+
+/* 06: Lighting & Tech Art (Gold) */
+.disciplines-grid > .discipline-card:nth-child(6) {
+  border-left-color: #eab308;
+}
+.disciplines-grid > .discipline-card:nth-child(6):hover {
+  border-color: rgba(234, 179, 8, 0.45);
+  border-left-color: #eab308;
+  box-shadow: 0 22px 45px rgba(0, 0, 0, 0.6), 0 0 25px rgba(234, 179, 8, 0.2), -4px 0 18px rgba(234, 179, 8, 0.4);
+}
+.disciplines-grid > .discipline-card:nth-child(6):hover .discipline-num {
+  color: #eab308;
+  text-shadow: 0 0 12px #eab308;
+}
+.disciplines-grid > .discipline-card:nth-child(6):hover .discipline-icon-wrap {
+  box-shadow: 0 0 28px rgba(234, 179, 8, 0.4), 0 0 12px #eab308;
+  border-color: #eab308;
+}
+.disciplines-grid > .discipline-card:nth-child(6):hover .discipline-pill {
+  border-color: rgba(234, 179, 8, 0.35);
+  color: #fef08a;
+  background: rgba(234, 179, 8, 0.08);
 }
 
 /* ==========================================================================
@@ -2293,17 +2381,14 @@ h1, h2, h3, h4, h5 {
 .timeline.reveal-stagger > .timeline-item:nth-child(3) { transition-delay: 440ms; }
 .timeline.reveal-stagger > .timeline-item:nth-child(4) { transition-delay: 620ms; }
 
-/* Core Disciplines & Craft: Staggered Fade-Up with Blur Clearing */
+/* Core Disciplines & Craft: Cinematic glide up one-by-one with blur dissipation */
 .disciplines-grid > .discipline-card.reveal {
   opacity: 0;
-  transform: translateY(50px) scale(0.97);
-  filter: blur(6px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.35s ease,
-              box-shadow 0.35s ease,
-              background-color 0.35s ease;
+  transform: translateY(50px) scale(0.96);
+  filter: blur(8px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              filter 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .disciplines-grid > .discipline-card.reveal.is-visible {
@@ -2312,12 +2397,13 @@ h1, h2, h3, h4, h5 {
   filter: blur(0);
 }
 
-.disciplines-grid.reveal-stagger > .discipline-card:nth-child(1) { transition-delay: 60ms; }
-.disciplines-grid.reveal-stagger > .discipline-card:nth-child(2) { transition-delay: 180ms; }
-.disciplines-grid.reveal-stagger > .discipline-card:nth-child(3) { transition-delay: 300ms; }
-.disciplines-grid.reveal-stagger > .discipline-card:nth-child(4) { transition-delay: 420ms; }
-.disciplines-grid.reveal-stagger > .discipline-card:nth-child(5) { transition-delay: 540ms; }
-.disciplines-grid.reveal-stagger > .discipline-card:nth-child(6) { transition-delay: 660ms; }
+/* Sequential Stagger Delays for Disciplines (1 to 6) */
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(1) { transition-delay: 80ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(2) { transition-delay: 200ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(3) { transition-delay: 320ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(4) { transition-delay: 440ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(5) { transition-delay: 560ms; }
+.disciplines-grid.reveal-stagger > .discipline-card:nth-child(6) { transition-delay: 680ms; }
 
 /* ==========================================================================
    11. RESPONSIVE BREAKPOINTS
