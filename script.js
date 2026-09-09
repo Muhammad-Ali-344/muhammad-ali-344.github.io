@@ -453,12 +453,12 @@ function initPortfolioFilters() {
 const projectData = {
     'forgotten-train': {
         title: 'The Forgotten Train: VR Escape',
-        subtitle: 'Virtual Reality Multiplayer Puzzle Escape Game · 100% Solo Built from Scratch',
-        engine: 'Unity 3D (URP), C#, XR Interaction Toolkit, Photon PUN2 & Photon Voice, Blender 3D, Substance Painter',
+        subtitle: 'Virtual Reality Single-Player Puzzle Escape Game · 100% Solo Built from Scratch',
+        engine: 'Unity 3D (URP), C#, XR Interaction Toolkit, 3D Spatial Audio, Blender 3D, Substance Painter',
         role: 'Solo Developer & 3D Artist (100% Made from Scratch: 3D Models, Textures, Code & UI)',
         image: 'assets/forgotten_train.webp',
         fallbackImage: 'assets/forgotten_train.webp',
-        desc: 'An atmospheric VR multiplayer escape room set inside an accelerating vintage Victorian carriage hurtling through misty mountains. Handcrafted 100% independently from scratch: every 3D environment asset, mechanical puzzle prop, and carriage structure was manually modeled in Blender and textured in Substance Painter, paired with custom C# gameplay code, diegetic VR UI, tactile hand physics, and synchronized multiplayer networking.',
+        desc: 'An atmospheric single-player VR escape room set inside an accelerating vintage Victorian carriage hurtling through misty mountains. Handcrafted 100% independently from scratch: every 3D environment asset, mechanical puzzle prop, and carriage structure was manually modeled in Blender and textured in Substance Painter, paired with custom C# gameplay code, diegetic VR UI, tactile hand physics, and immersive spatial sound design.',
         gallery: [
             'assets/forgotten_train.webp',
             'assets/forgotten_train/train_1.webp',
@@ -475,17 +475,17 @@ const projectData = {
             'Custom PBR Texturing: Hand-authored all PBR material maps (weathered wood grains, polished brass, rusted iron gears, fabric upholstery, frosted glass) in Substance Painter.',
             'VR Physical Interactions: Architected core VR tactile mechanics using Unity XR Interaction Toolkit (two-handed object grabs, socket docking, rotational valves, pull levers, and physical keyhole turning).',
             'Diegetic In-Game UI / UX: Designed immersive in-world VR interfaces, tactile wrist dials, physical notebook clues, and custom haptic feedback for Meta Quest touch controllers.',
-            'Multiplayer State Replication: Programmed real-time multiplayer synchronization with Photon PUN2 (hand tracking positions, cooperative puzzle state machines, physical object ownership transfers, and Photon Voice 3D spatial audio).'
+            'Atmospheric Soundscape: Engineered positional 3D spatial audio for train locomotion rhythms, steam pressure releases, wind whistling through carriage windows, and mechanical puzzle locks.'
         ],
-        challenge: 'Synchronizing multi-user physical hand interactions and continuous grab physics across Photon PUN2 without grab jitter, clipping through carriage walls, or state divergence when two players interact with interconnected puzzle mechanisms simultaneously.',
-        solution: 'Implemented an authoritative ownership-transfer system using kinematic physics overrides. When a player grabs an interactive object, ownership smoothly transitions to the local client with local velocity prediction and lerped dampening, delivering responsive zero-latency tactile feel while continuously broadcasting authoritative state updates to remote players.',
+        challenge: 'Designing tactile physical hand interactions and continuous grab physics in VR without grab jitter, tracking loss, or clipping through carriage walls, while optimizing volumetric interior lighting and draw calls for high-framerate VR headsets.',
+        solution: 'Implemented custom kinematic grab overrides with continuous collision detection and spring-damped socket snapping. When the player manipulates puzzle dials and valves, rotational constraints and haptic feedback profiles provide tactile physical weight, while GPU instancing and occlusion culling maintain solid 90 FPS on Meta Quest.',
         specs: [
             { label: 'Role & Scope', val: '100% Solo Creator (Code, 3D Models, Textures, UI & Mechanics)' },
             { label: 'Workflow', val: '100% Made from Scratch (No Premade Asset Packs)' },
             { label: 'Art & Texturing', val: 'Blender 3D, Substance Painter (PBR Materials)' },
             { label: 'Engine & Pipeline', val: 'Unity 3D (URP), C#' },
             { label: 'Target Platforms', val: 'Meta Quest 2/3 / PC VR (SteamVR)' },
-            { label: 'Networking & Audio', val: 'Photon PUN2 & Photon Voice 3D Audio' },
+            { label: 'Audio & Acoustics', val: 'Unity 3D Spatial Audio & Positional Acoustics' },
             { label: 'Key Toolkits', val: 'XR Interaction Toolkit, Final IK, Physics Hands, Diegetic VR UI' }
         ]
     },
