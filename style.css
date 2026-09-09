@@ -706,67 +706,18 @@ h1, h2, h3, h4, h5 {
   perspective: 1200px;
 }
 
-/* Rotating Geometric Cyber Portal Aura */
-.portal-ring-outer {
-  position: absolute;
-  width: 480px;
-  height: 480px;
-  border-radius: 50%;
-  border: 1px dashed rgba(0, 240, 255, 0.25);
-  animation: portalSpin 35s linear infinite;
-  pointer-events: none;
-}
+/* Portal ring & halo removed — portrait image has its own background */
 
-.portal-ring-inner {
-  position: absolute;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 183, 3, 0.2);
-  box-shadow: inset 0 0 40px rgba(0, 240, 255, 0.1);
-  animation: portalSpinRev 25s linear infinite;
-  pointer-events: none;
-}
-
-.portal-halo-glow {
-  position: absolute;
-  width: 380px;
-  height: 380px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 240, 255, 0.2) 0%, rgba(168, 85, 247, 0.15) 50%, transparent 75%);
-  filter: blur(40px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-@keyframes portalSpin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes portalSpinRev {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-/* Main Portrait Frame with Depth & Masking */
+/* Portrait wrapper — clean, no border or background frame */
 .hero-portrait-wrapper {
   position: relative;
   width: 380px;
   height: 460px;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: linear-gradient(145deg, rgba(20, 28, 44, 0.85), rgba(9, 12, 18, 0.95));
-  border: 1px solid rgba(0, 240, 255, 0.3);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(0, 240, 255, 0.15);
   z-index: 2;
-  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), box-shadow 0.4s ease;
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
   transform-style: preserve-3d;
-}
-
-.hero-portrait-wrapper:hover {
-  border-color: var(--cyan-primary);
-  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.8), 0 0 50px rgba(0, 240, 255, 0.3);
 }
 
 .hero-portrait-img {
@@ -775,28 +726,12 @@ h1, h2, h3, h4, h5 {
   object-fit: cover;
   object-position: center top;
   display: block;
-  mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
   transition: transform 0.5s ease;
 }
 
 .hero-portrait-wrapper:hover .hero-portrait-img {
   transform: scale(1.03);
 }
-
-/* Portrait Cyber Accent Corner Markers */
-.portrait-corner {
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border: 2px solid var(--cyan-primary);
-  z-index: 4;
-  pointer-events: none;
-}
-.portrait-corner-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
-.portrait-corner-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
-.portrait-corner-bl { bottom: 10px; left: 10px; border-right: none; border-top: none; }
-.portrait-corner-br { bottom: 10px; right: 10px; border-left: none; border-top: none; }
 
 /* Floating Telemetry Chips Around Portrait */
 .floating-chip {
@@ -2527,14 +2462,7 @@ h1, h2, h3, h4, h5 {
     width: 290px;
     height: 360px;
   }
-  .portal-ring-outer {
-    width: 320px;
-    height: 320px;
-  }
-  .portal-ring-inner {
-    width: 280px;
-    height: 280px;
-  }
+  /* portal rings removed */
   .floating-chip {
     padding: 0.4rem 0.75rem;
   }
