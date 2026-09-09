@@ -465,6 +465,7 @@ h1, h2, h3, h4, h5 {
   cursor: pointer;
   transition: var(--transition-fast);
   font-family: var(--font-heading);
+  white-space: nowrap;
 }
 
 .sound-toggle-btn:hover {
@@ -486,6 +487,7 @@ h1, h2, h3, h4, h5 {
   align-items: center;
   gap: 0.4rem;
   transition: var(--transition-fast);
+  white-space: nowrap;
 }
 
 .btn-resume:hover {
@@ -494,6 +496,14 @@ h1, h2, h3, h4, h5 {
   box-shadow: 0 0 16px var(--amber-glow);
   color: #fff;
   transform: translateY(-1px);
+}
+
+/* Navbar "Hire Me" button — compact to match SFX & Resume buttons */
+.nav-hire-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  line-height: 1;
 }
 
 .nav-mobile-toggle {
