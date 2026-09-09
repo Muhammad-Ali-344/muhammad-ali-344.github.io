@@ -1209,66 +1209,61 @@ function initContactForm() {
 }
 
 /* ==========================================================================
-   13. CUSTOM DUAL-LAYER CURSOR
+   13. CUSTOM SCI-FI ARROW CURSOR (Zero-Lag 1:1 Hardware Response & Dynamic Aura)
    ========================================================================== */
 function initCustomCursor() {
-    // Only on devices with a true pointer (desktop)
+    // Only on devices with a true mouse pointer
     if (window.matchMedia('(hover: none)').matches) return;
 
-    const dot  = document.getElementById('cursor-dot');
-    const ring = document.getElementById('cursor-ring');
-    if (!dot || !ring) return;
+    const cursor = document.getElementById('custom-cursor');
+    if (!cursor) return;
 
-    let mouseX = 0, mouseY = 0;
-    let ringX  = 0, ringY  = 0;
-    let rafId;
+    let mouseX = -100;
+    let mouseY = -100;
+    let isVisible = false;
 
-    document.addEventListener('mousemove', (e) => {
+    // Direct, immediate 1:1 transform for instantaneous zero-lag tracking
+    function updatePosition(x, y) {
+        // Offset -3px, -4px so the sharp tip of the SVG arrow matches exact system pointer coordinates
+        cursor.style.transform = `translate3d(${x - 3}px, ${y - 4}px, 0)`;
+        if (!isVisible) {
+            cursor.style.opacity = '1';
+            isVisible = true;
+        }
+    }
+
+    window.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        // Dot snaps immediately
-        dot.style.left = `${mouseX}px`;
-        dot.style.top  = `${mouseY}px`;
+        updatePosition(mouseX, mouseY);
     }, { passive: true });
 
-    // Ring trails with spring lerp
-    function animateRing() {
-        ringX += (mouseX - ringX) * 0.13;
-        ringY += (mouseY - ringY) * 0.13;
-        ring.style.left = `${ringX}px`;
-        ring.style.top  = `${ringY}px`;
-        rafId = requestAnimationFrame(animateRing);
-    }
-    animateRing();
-
-    // Hover state on interactive elements
-    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .nav-avatar-btn';
+    // Hover state on interactive elements (links, buttons, interactive cards)
+    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .nav-avatar-btn, input, textarea';
 
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(interactiveSelectors)) {
-            dot.classList.add('is-hovering');
-            ring.classList.add('is-hovering');
+            cursor.classList.add('is-hovering');
         }
     });
 
     document.addEventListener('mouseout', (e) => {
         if (e.target.closest(interactiveSelectors)) {
-            dot.classList.remove('is-hovering');
-            ring.classList.remove('is-hovering');
+            cursor.classList.remove('is-hovering');
         }
     });
 
-    document.addEventListener('mousedown', () => dot.classList.add('is-clicking'));
-    document.addEventListener('mouseup',   () => dot.classList.remove('is-clicking'));
+    document.addEventListener('mousedown', () => cursor.classList.add('is-clicking'));
+    document.addEventListener('mouseup',   () => cursor.classList.remove('is-clicking'));
 
-    // Hide when leaving window
+    // Window edge entry / exit handlers
     document.addEventListener('mouseleave', () => {
-        dot.style.opacity  = '0';
-        ring.style.opacity = '0';
+        cursor.style.opacity = '0';
+        isVisible = false;
     });
     document.addEventListener('mouseenter', () => {
-        dot.style.opacity  = '1';
-        ring.style.opacity = '1';
+        cursor.style.opacity = '1';
+        isVisible = true;
     });
 }
 
