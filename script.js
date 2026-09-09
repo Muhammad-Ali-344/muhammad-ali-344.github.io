@@ -1,25 +1,23 @@
 /* ==========================================================================
-   MUHAMMAD ALI PORTFOLIO - WARM LIGHT BROWN & ESPRESSO SCRIPT
-   Interactive Light Canvas, WebAudio SFX, Modal & Filters
+   MUHAMMAD ALI PORTFOLIO - AAA DARK GAME STUDIO & 3D GENERALIST SCRIPT
+   21st.dev Spotlight Physics, 3D Tilt, WebAudio SFX, Modal Engine & Filters
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
     initBgCanvas();
     initWebAudio();
+    initHeroTyping();
+    initHeroPortraitParallax();
+    initSpotlightAndTilt();
     initNavbarScroll();
     initPortfolioFilters();
     initProjectModals();
     initProfileModal();
     initContactForm();
-    initHeroSequence();
-    initScrollReveals();
-    initInteractiveSpotlights();
-    initMagneticElements();
-    initBackToTop();
 });
 
 /* ==========================================================================
-   1. WARM LIGHT AMBIENT PARTICLE CANVAS
+   1. AMBIENT CYBER PARTICLE CANVAS (Dark Void Mesh)
    ========================================================================== */
 function initBgCanvas() {
     const canvas = document.getElementById('bg-canvas');
@@ -32,19 +30,19 @@ function initBgCanvas() {
     window.addEventListener('resize', () => {
         width = canvas.width = window.innerWidth;
         height = canvas.height = window.innerHeight;
-    });
+    }, { passive: true });
 
     const particles = [];
-    const particleCount = Math.min(Math.floor(width / 28), 35);
+    const particleCount = Math.min(Math.floor(width / 24), 45);
 
-    let mouse = { x: null, y: null, radius: 150 };
+    let mouse = { x: null, y: null, radius: 160 };
 
     window.addEventListener('mousemove', (e) => {
         mouse.x = e.clientX;
         mouse.y = e.clientY;
     }, { passive: true });
 
-    class LightParticle {
+    class CyberParticle {
         constructor() {
             this.reset();
         }
@@ -55,12 +53,12 @@ function initBgCanvas() {
             this.radius = Math.random() * 2 + 1;
             this.vx = (Math.random() - 0.5) * 0.4;
             this.vy = -(Math.random() * 0.35 + 0.1);
-            this.alpha = Math.random() * 0.3 + 0.12;
+            this.alpha = Math.random() * 0.35 + 0.1;
             this.maxAlpha = this.alpha;
             this.pulse = Math.random() * 0.015 + 0.005;
             this.pulseDir = 1;
-            // Warm Mocha or Golden Tan
-            this.color = Math.random() > 0.4 ? '140, 94, 60' : '166, 116, 73';
+            // Electric Cyan or Cyber Amber
+            this.color = Math.random() > 0.3 ? '0, 240, 255' : '255, 183, 3';
         }
 
         update() {
@@ -68,7 +66,7 @@ function initBgCanvas() {
             this.y += this.vy;
 
             this.alpha += this.pulse * this.pulseDir;
-            if (this.alpha >= this.maxAlpha || this.alpha <= 0.08) {
+            if (this.alpha >= this.maxAlpha || this.alpha <= 0.05) {
                 this.pulseDir *= -1;
             }
 
@@ -84,8 +82,8 @@ function initBgCanvas() {
                     const dist = Math.sqrt(distSq);
                     const angle = Math.atan2(dy, dx);
                     const force = (mouse.radius - dist) / mouse.radius;
-                    this.x -= Math.cos(angle) * force * 1.2;
-                    this.y -= Math.sin(angle) * force * 1.2;
+                    this.x -= Math.cos(angle) * force * 1.5;
+                    this.y -= Math.sin(angle) * force * 1.5;
                 }
             }
         }
@@ -99,7 +97,7 @@ function initBgCanvas() {
     }
 
     for (let i = 0; i < particleCount; i++) {
-        particles.push(new LightParticle());
+        particles.push(new CyberParticle());
     }
 
     let isVisible = true;
@@ -114,6 +112,22 @@ function initBgCanvas() {
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
+
+                // Faint distance connectors
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.08 * (1 - dist / 110)})`;
+                        ctx.lineWidth = 0.6;
+                        ctx.stroke();
+                    }
+                }
             }
         }
         requestAnimationFrame(animate);
@@ -125,7 +139,7 @@ function initBgCanvas() {
    2. WEB AUDIO SYNTHESIZER
    ========================================================================== */
 let audioCtx = null;
-let soundEnabled = false;
+let soundEnabled = true;
 
 function initWebAudio() {
     const soundToggle = document.getElementById('sound-toggle');
@@ -146,11 +160,13 @@ function initWebAudio() {
         }
     });
 
-    // Sound only on key interactive moments (clicks on primary CTA, inspect, filter buttons)
-    const interactiveBtns = document.querySelectorAll('.btn-primary, .btn-inspect, .filter-btn');
+    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .filter-btn, .side-rail-social-btn');
     interactiveBtns.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            if (soundEnabled) playTone(420, 'sine', 0.03, 0.02);
+        });
         btn.addEventListener('click', () => {
-            if (soundEnabled) playTone(580, 'sine', 0.08, 0.06);
+            if (soundEnabled) playTone(650, 'sine', 0.08, 0.06);
         });
     });
 }
@@ -179,12 +195,147 @@ function playTone(freq, type = 'sine', duration = 0.1, vol = 0.08) {
         osc.start();
         osc.stop(audioCtx.currentTime + duration);
     } catch (e) {
-        // Ignore fallback
+        // AudioContext fallback
     }
 }
 
 /* ==========================================================================
-   3. NAVBAR SCROLL, ACTIVE SECTIONS & MOBILE DRAWER
+   3. HERO ROLE TYPING CYCLER
+   ========================================================================== */
+function initHeroTyping() {
+    const cycler = document.getElementById('role-cycler');
+    if (!cycler) return;
+
+    const roles = [
+        "3D GENERALIST",
+        "VR / XR ARCHITECT",
+        "TECHNICAL ARTIST",
+        "GAMEPLAY PROGRAMMER",
+        "ZBRUSH SCULPTOR"
+    ];
+
+    let currentRoleIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let typingSpeed = 100;
+
+    function typeLoop() {
+        const currentText = roles[currentRoleIdx];
+
+        if (!isDeleting) {
+            cycler.textContent = currentText.substring(0, charIdx + 1);
+            charIdx++;
+            if (charIdx === currentText.length) {
+                isDeleting = true;
+                setTimeout(typeLoop, 2200); // Pause on complete word
+                return;
+            }
+            typingSpeed = 90;
+        } else {
+            cycler.textContent = currentText.substring(0, charIdx - 1);
+            charIdx--;
+            if (charIdx === 0) {
+                isDeleting = false;
+                currentRoleIdx = (currentRoleIdx + 1) % roles.length;
+                setTimeout(typeLoop, 400); // Pause before next word
+                return;
+            }
+            typingSpeed = 45;
+        }
+
+        setTimeout(typeLoop, typingSpeed);
+    }
+
+    typeLoop();
+}
+
+/* ==========================================================================
+   4. HERO PORTRAIT 3D PERSPECTIVE TILT & FLOATING CHIP PARALLAX
+   ========================================================================== */
+function initHeroPortraitParallax() {
+    const stage = document.getElementById('hero-portrait-stage');
+    const wrapper = document.getElementById('hero-portrait-wrapper');
+    const chip1 = document.getElementById('chip-1');
+    const chip2 = document.getElementById('chip-2');
+    const chip3 = document.getElementById('chip-3');
+
+    if (!stage || !wrapper) return;
+
+    let targetRotX = 0;
+    let targetRotY = 0;
+    let currentRotX = 0;
+    let currentRotY = 0;
+
+    stage.addEventListener('mousemove', (e) => {
+        const rect = stage.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const deltaX = (e.clientX - centerX) / (rect.width / 2);
+        const deltaY = (e.clientY - centerY) / (rect.height / 2);
+
+        targetRotX = -deltaY * 12; // tilt max 12 deg
+        targetRotY = deltaX * 12;
+
+        // Inverse parallax for floating chips
+        if (chip1) chip1.style.transform = `translate(${deltaX * -15}px, ${deltaY * -15}px)`;
+        if (chip2) chip2.style.transform = `translate(${deltaX * -22}px, ${deltaY * -22}px)`;
+        if (chip3) chip3.style.transform = `translate(${deltaX * -18}px, ${deltaY * -18}px)`;
+    });
+
+    stage.addEventListener('mouseleave', () => {
+        targetRotX = 0;
+        targetRotY = 0;
+        if (chip1) chip1.style.transform = '';
+        if (chip2) chip2.style.transform = '';
+        if (chip3) chip3.style.transform = '';
+    });
+
+    function renderTilt() {
+        currentRotX += (targetRotX - currentRotX) * 0.1;
+        currentRotY += (targetRotY - currentRotY) * 0.1;
+
+        wrapper.style.transform = `rotateX(${currentRotX.toFixed(2)}deg) rotateY(${currentRotY.toFixed(2)}deg)`;
+        requestAnimationFrame(renderTilt);
+    }
+    renderTilt();
+}
+
+/* ==========================================================================
+   5. 21ST.DEV STYLE SPOTLIGHT & CARD TILT
+   ========================================================================== */
+function initSpotlightAndTilt() {
+    const cards = document.querySelectorAll('.spotlight-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+
+            // Subtle 3D card tilt on desktop
+            if (window.innerWidth > 992 && !card.classList.contains('flagship-card')) {
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotX = -((y - centerY) / centerY) * 6;
+                const rotY = ((x - centerX) / centerX) * 6;
+                card.style.transform = `perspective(800px) rotateX(${rotX.toFixed(2)}deg) rotateY(${rotY.toFixed(2)}deg) translateY(-4px)`;
+            }
+        });
+
+        card.addEventListener('mouseleave', () => {
+            if (window.innerWidth > 992 && !card.classList.contains('flagship-card')) {
+                card.style.transform = '';
+            }
+        });
+    });
+}
+
+/* ==========================================================================
+   6. NAVBAR SCROLL, ACTIVE SECTIONS & MOBILE DRAWER
    ========================================================================== */
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
@@ -193,40 +344,23 @@ function initNavbarScroll() {
     const mobileToggle = document.getElementById('mobile-toggle');
     const navLinksContainer = document.getElementById('nav-links');
 
-    // Cache section offsets on resize and load to prevent layout thrashing during scroll
-    let cachedOffsets = [];
-    function updateSectionOffsets() {
-        cachedOffsets = Array.from(sections).map(section => ({
-            id: section.getAttribute('id'),
-            top: section.offsetTop - 150
-        }));
-    }
-    updateSectionOffsets();
-    window.addEventListener('resize', updateSectionOffsets, { passive: true });
+    let isTicking = false;
 
-    // Throttled scroll listener using requestAnimationFrame
-    let scrollTicking = false;
     window.addEventListener('scroll', () => {
-        if (!scrollTicking) {
+        if (!isTicking) {
             requestAnimationFrame(() => {
-                const scrollY = window.scrollY;
-
-                if (scrollY > 50) {
-                    navbar.classList.add('scrolled');
-                } else {
-                    navbar.classList.remove('scrolled');
-                }
-
                 let current = '';
-                for (let i = 0; i < cachedOffsets.length; i++) {
-                    if (scrollY >= cachedOffsets[i].top) {
-                        current = cachedOffsets[i].id;
-                    }
-                }
+                const scrollPos = window.scrollY + 160;
 
-                if (current === 'featured') {
-                    current = 'games';
-                }
+                sections.forEach(section => {
+                    const top = section.offsetTop;
+                    const height = section.offsetHeight;
+                    if (scrollPos >= top && scrollPos < top + height) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                if (current === 'featured') current = 'featured';
 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
@@ -235,9 +369,9 @@ function initNavbarScroll() {
                     }
                 });
 
-                scrollTicking = false;
+                isTicking = false;
             });
-            scrollTicking = true;
+            isTicking = true;
         }
     }, { passive: true });
 
@@ -250,155 +384,76 @@ function initNavbarScroll() {
             if (icon) {
                 icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
             }
-            mobileToggle.setAttribute('aria-expanded', isOpen);
         });
 
-        // Close when clicking any nav link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navLinksContainer.classList.remove('active');
                 const icon = mobileToggle.querySelector('i');
-                if (icon) {
-                    icon.className = 'fa-solid fa-bars';
-                }
-                mobileToggle.setAttribute('aria-expanded', 'false');
+                if (icon) icon.className = 'fa-solid fa-bars';
             });
         });
 
-        // Close when clicking outside navbar
         document.addEventListener('click', (e) => {
             if (!navbar.contains(e.target)) {
                 navLinksContainer.classList.remove('active');
                 const icon = mobileToggle.querySelector('i');
-                if (icon) {
-                    icon.className = 'fa-solid fa-bars';
-                }
-                mobileToggle.setAttribute('aria-expanded', 'false');
+                if (icon) icon.className = 'fa-solid fa-bars';
             }
         });
     }
 }
 
 /* ==========================================================================
-   4. PORTFOLIO FILTERING SYSTEM (ANIMATED LAYOUT)
+   7. PORTFOLIO FILTER SYSTEM
    ========================================================================== */
 function initPortfolioFilters() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const gameCards = document.querySelectorAll('.game-card');
 
-    let currentFilter = 'all';
-    let filterTimeoutIds = [];
-    let isTransitioning = false;
-
-    function clearPendingTimeouts() {
-        filterTimeoutIds.forEach(id => clearTimeout(id));
-        filterTimeoutIds = [];
-    }
-
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const newFilter = btn.dataset.filter;
-            if (newFilter === currentFilter && !isTransitioning) return;
-
-            clearPendingTimeouts();
-            isTransitioning = true;
-
-            // Highlight the active button
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            currentFilter = newFilter;
 
-            // 1. Identify currently visible cards vs incoming matching cards
-            const currentlyVisibleCards = [];
+            const filter = btn.dataset.filter;
+
             gameCards.forEach(card => {
-                if (!card.classList.contains('filter-hidden') && card.style.display !== 'none') {
-                    currentlyVisibleCards.push(card);
+                const categories = (card.dataset.category || '').trim().split(/\s+/);
+                const isMatch = (filter === 'all') || categories.includes(filter);
+
+                if (isMatch) {
+                    card.classList.remove('is-hidden');
+                    card.style.display = 'flex';
+                    requestAnimationFrame(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    });
+                } else {
+                    card.classList.add('is-hidden');
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    card.style.display = 'none';
                 }
             });
-
-            // 2. Animate out currently visible cards smoothly
-            currentlyVisibleCards.forEach(card => {
-                card.classList.add('filter-animating');
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(14px) scale(0.97)';
-            });
-
-            const exitDuration = currentlyVisibleCards.length > 0 ? 240 : 0;
-
-            // 3. After exit animation completes, hide non-matches and reveal matches
-            const stageTimer = setTimeout(() => {
-                let matchCount = 0;
-
-                gameCards.forEach(card => {
-                    const categories = (card.dataset.category || '').trim().split(/\s+/);
-                    const isMatch = (newFilter === 'all') || categories.includes(newFilter);
-
-                    if (isMatch) {
-                        // Prepare matching card for entrance: remove hidden state while kept transparent
-                        card.classList.remove('filter-hidden', 'is-hidden');
-                        card.style.display = 'flex';
-                        card.classList.remove('reveal-active'); // ensure no conflicting !important opacity
-                        card.classList.add('filter-animating');
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(22px) scale(0.96)';
-
-                        const delay = matchCount * 70;
-                        matchCount++;
-
-                        const enterTimer = setTimeout(() => {
-                            requestAnimationFrame(() => {
-                                card.style.opacity = '1';
-                                card.style.transform = 'translateY(0) scale(1)';
-                                card.classList.add('reveal-active');
-                            });
-                        }, delay + 20);
-                        filterTimeoutIds.push(enterTimer);
-
-                    } else {
-                        // Strictly hide non-matching cards immediately so they NEVER flicker/glitch into view
-                        card.classList.add('filter-hidden', 'is-hidden');
-                        card.classList.remove('reveal-active', 'filter-animating');
-                        card.style.display = 'none';
-                        card.style.opacity = '0';
-                        card.style.transform = '';
-                    }
-                });
-
-                // 4. Cleanup once all matching cards have finished entering
-                const totalFinishTime = (matchCount * 70) + 400;
-                const endTimer = setTimeout(() => {
-                    gameCards.forEach(card => {
-                        card.classList.remove('filter-animating');
-                        if (!card.classList.contains('filter-hidden')) {
-                            card.style.transform = '';
-                            card.style.opacity = '';
-                        }
-                    });
-                    isTransitioning = false;
-                }, totalFinishTime);
-                filterTimeoutIds.push(endTimer);
-
-            }, exitDuration);
-            filterTimeoutIds.push(stageTimer);
         });
     });
 }
 
 /* ==========================================================================
-   5. PROJECT CASE STUDY & SPECS MODAL MANAGER
+   8. PROJECT CASE STUDY DATA STORE (All 16 Projects)
    ========================================================================== */
 const projectData = {
     'forgotten-train': {
         title: 'The Forgotten Train: VR Escape',
-        subtitle: 'Virtual Reality Puzzle Escape Game · 100% Solo Built from Scratch',
-        engine: 'Unity 3D (URP), C#, XR Interaction Toolkit, Blender 3D, Substance Painter',
+        subtitle: 'Virtual Reality Multiplayer Puzzle Escape Game · 100% Solo Built from Scratch',
+        engine: 'Unity 3D (URP), C#, XR Interaction Toolkit, Photon PUN2 & Photon Voice, Blender 3D, Substance Painter',
         role: 'Solo Developer & 3D Artist (100% Made from Scratch: 3D Models, Textures, Code & UI)',
-        image: 'assets/forgotten_train_featured.webp',
-        fallbackImage: 'assets/forgotten_train_featured.webp',
-        desc: 'An atmospheric VR escape room game set inside an accelerating vintage Victorian train carriage hurtling through misty mountain terrain. Created 100% independently from the ground up: every 3D environment asset, mechanical puzzle prop, and carriage structure was manually modeled and textured, paired with custom gameplay code, diegetic in-world VR UI, tactile hand physics, and intricate lock & puzzle mechanics.',
+        image: 'assets/forgotten_train.webp',
+        fallbackImage: 'assets/forgotten_train.webp',
+        desc: 'An atmospheric VR multiplayer escape room set inside an accelerating vintage Victorian carriage hurtling through misty mountains. Handcrafted 100% independently from scratch: every 3D environment asset, mechanical puzzle prop, and carriage structure was manually modeled in Blender and textured in Substance Painter, paired with custom C# gameplay code, diegetic VR UI, tactile hand physics, and synchronized multiplayer networking.',
         gallery: [
-            'assets/forgotten_train_featured.webp',
-            'assets/forgotten_train_hero.webp',
+            'assets/forgotten_train.webp',
             'assets/forgotten_train/train_1.webp',
             'assets/forgotten_train/train_2.webp',
             'assets/forgotten_train/train_3.webp',
@@ -408,23 +463,23 @@ const projectData = {
         ],
         videoDemo: 'placeholder',
         contributions: [
-            '100% Solo Development: Handcrafted every single component of the project from scratch without premade asset packs — including all 3D modeling, texturing, C# programming, VR physics, and spatial UI.',
-            '3D Modeling from Scratch: Hand-modeled the vintage Victorian train carriage, interior seating, luggage racks, clockwork puzzle mechanisms, keys, lockboxes, and brass gauges in Blender 3D.',
-            'Custom PBR Texturing: Hand-authored all PBR material maps (weathered wood grains, polished brass, rusted iron gears, fabric upholstery, and frosted glass) in Substance Painter.',
+            '100% Solo Development: Handcrafted every single component from scratch without premade asset packs — 3D modeling, texturing, C# programming, VR physics, and spatial UI.',
+            '3D Modeling from Scratch: Hand-modeled the vintage Victorian train carriage, interior seating, luggage racks, clockwork mechanisms, keys, lockboxes, and brass gauges in Blender 3D.',
+            'Custom PBR Texturing: Hand-authored all PBR material maps (weathered wood grains, polished brass, rusted iron gears, fabric upholstery, frosted glass) in Substance Painter.',
             'VR Physical Interactions: Architected core VR tactile mechanics using Unity XR Interaction Toolkit (two-handed object grabs, socket docking, rotational valves, pull levers, and physical keyhole turning).',
             'Diegetic In-Game UI / UX: Designed immersive in-world VR interfaces, tactile wrist dials, physical notebook clues, and custom haptic feedback for Meta Quest touch controllers.',
-            'Puzzle & State Architecture: Programmed cascading puzzle state logic, mechanical lock feedback, interactive drawer/compartment physics, and spatial audio cues.'
+            'Multiplayer State Replication: Programmed real-time multiplayer synchronization with Photon PUN2 (hand tracking positions, cooperative puzzle state machines, physical object ownership transfers, and Photon Voice 3D spatial audio).'
         ],
-        challenge: 'Designing stable, tactile physical hand interactions and realistic continuous collision responses within the confined space of a moving train carriage without physics clipping or unstable jitter.',
-        solution: 'Implemented custom physics-based hand grab constraints and kinematic secondary dampening on interactables, paired with continuous dynamic collision detection and responsive haptic pulses to deliver authentic weight, tactile resistance, and solid feel when manipulating locks, levers, and carriage mechanisms.',
+        challenge: 'Synchronizing multi-user physical hand interactions and continuous grab physics across Photon PUN2 without grab jitter, clipping through carriage walls, or state divergence when two players interact with interconnected puzzle mechanisms simultaneously.',
+        solution: 'Implemented an authoritative ownership-transfer system using kinematic physics overrides. When a player grabs an interactive object, ownership smoothly transitions to the local client with local velocity prediction and lerped dampening, delivering responsive zero-latency tactile feel while continuously broadcasting authoritative state updates to remote players.',
         specs: [
             { label: 'Role & Scope', val: '100% Solo Creator (Code, 3D Models, Textures, UI & Mechanics)' },
             { label: 'Workflow', val: '100% Made from Scratch (No Premade Asset Packs)' },
             { label: 'Art & Texturing', val: 'Blender 3D, Substance Painter (PBR Materials)' },
             { label: 'Engine & Pipeline', val: 'Unity 3D (URP), C#' },
             { label: 'Target Platforms', val: 'Meta Quest 2/3 / PC VR (SteamVR)' },
-            { label: 'Interaction Systems', val: 'XR Interaction Toolkit, Physics Hands, Diegetic VR UI' },
-            { label: 'Key Mechanics', val: 'Tactile Lock & Key, Kinetic Levers, Clockwork Puzzles' }
+            { label: 'Networking & Audio', val: 'Photon PUN2 & Photon Voice 3D Audio' },
+            { label: 'Key Toolkits', val: 'XR Interaction Toolkit, Final IK, Physics Hands, Diegetic VR UI' }
         ]
     },
     'selah-charades': {
@@ -433,247 +488,210 @@ const projectData = {
         engine: 'Unity 2D (C# / Mobile / URP)',
         role: 'Lead Unity Developer & Mechanics Programmer',
         image: 'assets/Selah.webp',
-        desc: 'A faith-filled, forehead-style mobile party game developed with Unity 2D. Features interactive tilt-based mechanics where players guess Bible-themed words before time expires, full in-game video recording of player reactions saved directly to device storage, remotely configurable card decks, and complete Google Play monetization integration.',
         playStoreUrl: 'https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games&hl=en-US',
+        desc: 'A commercial mobile party guessing game published on Google Play. Designed for rapid forehead gameplay where players guess displayed Bible terms using tilt gestures, with integrated in-game video recording, custom animations, remote content updates, and monetization.',
         gallery: [
             'assets/Selah.webp'
         ],
-        videoDemo: 'placeholder',
         contributions: [
-            'Developed core gameplay controls with gyroscope and accelerometer tilt detection for seamless guess/pass motions.',
-            'Implemented in-game video recording system capturing forehead-level reactions and exporting to device media storage.',
-            'Integrated remotely configurable deck values for dynamic live updates without requiring full app store updates.',
-            'Designed and developed the user interface flow, round timers, animated category cards, and results screens.',
-            'Integrated Google Play In-App Purchases (IAP) and AdMob monetization architecture.'
+            'Architected core game loop using gyroscope and accelerometer tilt inputs with noise filtering for accurate head-up and head-down pass/correct detection.',
+            'Integrated Android Native Camera Video API to record player reactions during live gameplay, enabling post-round playback and social sharing.',
+            'Created responsive UI/UX system adapting dynamically across multiple mobile screen ratios with punchy tweens and game juice.',
+            'Implemented remote config card deck system enabling cloud delivery of new category packs without requiring full app store updates.',
+            'Integrated Google Play In-App Purchases (IAP) and Google AdMob mediation for sustainable monetization.'
         ],
-        challenge: 'Capturing real-time in-game video recording of players’ expressions during high-energy party gameplay without generating memory spikes, thermal throttling, or dropped frames on low-to-mid-range Android smartphones.',
-        solution: 'Utilized hardware-accelerated texture buffers with asynchronous background encoding pipelines directly targeting native Android storage streams, decoupling frame capture from the main 60 FPS Unity render thread.',
+        challenge: 'Preventing false-positive tilt detections caused by rapid natural head movements or slight device shakes while maintaining zero-latency response when tipping forward to pass or backward to confirm correct.',
+        solution: 'Built an acceleration hysteresis state machine with angle-threshold smoothing and dead-zone filtering, ensuring rock-solid gesture recognition across diverse Android hardware configurations.',
         specs: [
-            { label: 'Role', val: 'Lead Unity Developer & Mechanics Programmer' },
-            { label: 'Tech Stack', val: 'Unity 2D, C#, URP Mobile' },
-            { label: 'Services', val: 'Google Play Services, Remote Config, IAP, AdMob' },
-            { label: 'Key Systems', val: 'Video Recording, Gyro Tilt Controls, Deck Config' }
+            { label: 'Platform', val: 'Android / Google Play Store (Live)' },
+            { label: 'Engine', val: 'Unity 2D (C#)' },
+            { label: 'Sensors', val: 'Gyroscope & Accelerometer Hysteresis State Machine' },
+            { label: 'Media', val: 'Android Native Video Recording API' },
+            { label: 'Monetization', val: 'Google Play IAP & AdMob Mediation' }
         ]
     },
     'jewel-crush': {
         title: 'Jewel Crush Quest: Match 3',
-        subtitle: '2D Match-3 Mobile Puzzle · Available on Google Play',
-        engine: 'Unity 2D (C# / Android)',
-        role: 'Gameplay Programmer & UI/UX Specialist',
+        subtitle: '2D Mobile Match-3 Game · Live on Google Play',
+        engine: 'Unity 2D (C# / Mobile UI)',
+        role: 'Gameplay Programmer & UI/UX Polish',
         image: 'assets/Jewel_Crush.webp',
-        desc: 'A vibrant match-3 mobile puzzle game featuring interactive tutorial onboarding, redesigned responsive UI panels, enhanced gem-matching animations, and polished juice with rewarding combo cascades.',
         playStoreUrl: 'https://play.google.com/store/apps/details?id=com.kurlybrackets.jewelswap',
-        gallery: [
-            'assets/Jewel_Crush.webp'
-        ],
-        videoDemo: 'placeholder',
+        desc: 'A vibrant match-3 mobile puzzle game on Google Play. Enhanced with polished player feedback, interactive tutorial sequences, clean UI panels, and optimized board cascading logic.',
+        gallery: ['assets/Jewel_Crush.webp'],
         contributions: [
-            'Designed and implemented an interactive in-game tutorial system guiding new players through basic matches and special combo creation.',
-            'Redesigned responsive UI panels, score counters, and win/loss dialogs across diverse phone aspect ratios.',
-            'Enhanced visual juice with particle bursts, screen shakes, and tweening animations for explosive cascades.',
-            'Polished touch input responsiveness and gem-swapping feel with tactile spring animations.'
+            'Refactored jewel grid evaluation algorithm for optimal cascading match detection and multi-combo chain multipliers.',
+            'Engineered interactive onboarding tutorial overlay that guides first-time players through special jewel combos and booster mechanics.',
+            'Designed modern animated popups, level-select maps, score meters, and reward collection screens.',
+            'Integrated particle bursts, screen shakes, and audio soundscapes to elevate tactile player satisfaction ("game juice").'
         ],
-        challenge: 'Eliminating layout clipping and input misalignment across non-standard aspect ratios while making multi-tier gem cascades feel punchy and responsive without animation backlog lag.',
-        solution: 'Refactored canvas anchors to a unified layout framework and implemented dynamic event-driven tween queues that speed up animation playback when players trigger rapid successive combos.',
+        challenge: 'Maintaining stable 60 FPS performance on low-end Android devices during massive chained jewel cascading explosions with heavy particle emitters.',
+        solution: 'Implemented object pooling for all particle bursts and jewel sprites, alongside batched canvas draws that reduced draw calls from 140+ down to under 25.',
         specs: [
-            { label: 'Role', val: 'Gameplay Programmer & UI/UX Specialist' },
-            { label: 'Tech Stack', val: 'Unity 2D, C#, Animation Systems' },
-            { label: 'Platform', val: 'Android / Google Play' },
-            { label: 'Key Systems', val: 'Tutorial System, UI/UX Redesign, VFX & Juice' }
+            { label: 'Platform', val: 'Android / Google Play Store' },
+            { label: 'Genre', val: 'Match-3 Puzzle / Casual' },
+            { label: 'Key Systems', val: 'Cascading Match Algorithm, Interactive Tutorials, Object Pooling' },
+            { label: 'Optimization', val: 'Canvas Draw Batching, Particle Pooling, 60 FPS Target' }
         ]
     },
     'block-puzzle': {
         title: '2468 Block Puzzle: 2048 Merge',
-        subtitle: '2D Number Merge Puzzle · Available on Google Play',
-        engine: 'Unity 2D (C# / Firebase / Android)',
+        subtitle: '2D Puzzle Game · Firebase Realtime Backend · Google Play',
+        engine: 'Unity 2D (C# / Firebase Realtime)',
         role: 'Full Gameplay & Backend Developer',
         image: 'assets/Block_Puzzle.webp',
-        desc: 'An addictive 2048 number-merging block puzzle title where players connect numbered tiles to reach 2048, 2468, and beyond. Built with real-time cloud leaderboards, player authentication, in-game analytics, tutorials, and full monetization.',
-        playStoreUrl: 'https://play.google.com/store/apps/details?id=stone.puzzle.merge.connect',
-        gallery: [
-            'assets/Block_Puzzle.webp'
-        ],
-        videoDemo: 'placeholder',
+        desc: 'A 2048-inspired number-merging block puzzle featuring online competitive leaderboards, dynamic grid merging, interactive tutorials, and rewarded video ads.',
+        gallery: ['assets/Block_Puzzle.webp'],
         contributions: [
-            'Developed and implemented the core grid mathematics and merging mechanics from scratch.',
-            'Integrated Firebase Realtime Database for live global and weekly high score leaderboards.',
-            'Implemented Firebase Authentication for persistent cross-session player profiles.',
-            'Configured Firebase Analytics and Crashlytics for user retention tracking and crash diagnostics.',
-            'Engineered interactive tutorial steps teaching multi-tile combo merges.',
-            'Integrated AdMob banners, interstitials, and rewarded ads alongside IAP features.'
+            'Programmed sliding number block merge mechanics with recursive cascade evaluation.',
+            'Integrated Firebase Authentication and Firebase Realtime Database for persistent global leaderboard score tracking.',
+            'Built responsive HUD layouts with auto-scaling grid slots matching any phone display aspect ratio.',
+            'Constructed interactive first-run tutorial system that dynamically detects player swipe gestures to demonstrate merging.'
         ],
-        challenge: 'Managing high-frequency leaderboard write requests and handling intermittent offline gameplay without data corruption or lost high scores.',
-        solution: 'Implemented atomic local database caching with transactional synchronization upon network reconnection, verified with Firebase server-side timestamp validation.',
+        challenge: 'Ensuring cheat-proof, low-latency score submissions to Firebase Realtime Database while maintaining offline capability during network dropouts.',
+        solution: 'Engineered a signed local state cache that verifies board move integrity before submitting scores, queuing pending uploads until network connectivity resumes.',
         specs: [
-            { label: 'Role', val: 'Full Gameplay & Backend Developer' },
-            { label: 'Tech Stack', val: 'Unity 2D, C#, Firebase Suite' },
-            { label: 'Backend Services', val: 'Realtime Database, Auth, Crashlytics, Analytics' },
-            { label: 'Monetization & UX', val: 'AdMob, IAP, Interactive Tutorial, Leaderboards' }
+            { label: 'Platform', val: 'Android / Google Play Store' },
+            { label: 'Backend', val: 'Firebase Authentication & Realtime Database' },
+            { label: 'Key Features', val: 'Global Leaderboards, Swipe Pathing, Responsive Grid Scaling' }
         ]
     },
     'mr-greedy': {
         title: 'Mr Greedy: Ragdoll Punch',
-        subtitle: '3D Ragdoll Physics Mobile Game · Available on Google Play',
-        engine: 'Unity 3D (C# / Mobile)',
-        role: 'Gameplay Systems & Level Designer (200+ Levels)',
+        subtitle: '3D Physics Action Game · Character Ragdoll & Combat Tuning',
+        engine: 'Unity 3D (C# / Physics Engine)',
+        role: 'Core Mechanics & Physics Programmer',
         image: 'assets/Greedy_Ragdoll .webp',
-        desc: 'A hilarious 3D ragdoll physics mobile brawler where players punch, launch, and demolish enemies across 200+ handcrafted levels. Built from the ground up with tight touch controls, interactive tutorial onboarding, polished UI systems, and satisfying physics-driven gameplay.',
-        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.cbjstudios.mrgreedypunch&hl=en-US',
-        gallery: [
-            'assets/Greedy_Ragdoll .webp'
-        ],
-        videoDemo: 'placeholder',
+        desc: 'A hilarious 3D action game featuring active ragdoll physics, spring-joint punch mechanics, dynamic impact camera shakes, interactive tutorial sequences, and cosmetics shop.',
+        gallery: ['assets/Greedy_Ragdoll .webp'],
         contributions: [
-            'Handcrafted 200+ progressive gameplay levels balancing obstacle layouts, enemy counts, and physical traps.',
-            'Developed and tuned ragdoll joint physics, impact impulse multipliers, and knockout triggers.',
-            'Implemented touch swipe-and-punch control schemes with directional aiming indicators.',
-            'Created interactive tutorial steps demonstrating ragdoll combos and environmental hazards.',
-            'Designed and hooked up full UI flow including stage selection, star ratings, and shop interfaces.'
+            'Developed active ragdoll physics system blending baked animations with physical joint forces upon impact.',
+            'Implemented spring-driven punch trajectory system with velocity-based hit reactions.',
+            'Designed cinematic impact freeze frames, procedural camera shakes, and cartoon hit effects.',
+            'Created character customization menu system with persistent skin unlock saves.'
         ],
-        challenge: 'Maintaining physical joint stability for humanoid ragdolls during extreme impact impulses without limbs popping out of sockets or penetrating floor colliders.',
-        solution: 'Implemented continuous collision detection on key bone colliders, tuned configurable joint angular drive dampening, and clamped maximum instantaneous angular velocities during punch impacts.',
+        challenge: 'Balancing active ragdoll stability to prevent character collapse during locomotion while allowing exaggerated comedic knockbacks upon taking hits.',
+        solution: 'Implemented configurable joint drive motors with angular spring dampers that dynamically decrease joint strength proportionally to received damage impulses.',
         specs: [
-            { label: 'Role', val: 'Gameplay Systems & Level Designer' },
-            { label: 'Tech Stack', val: 'Unity 3D, C#, 3D Physics, Ragdoll Systems' },
-            { label: 'Platform', val: 'Android / Google Play' },
-            { label: 'Key Systems', val: 'Ragdoll Physics, 200+ Handcrafted Levels, Touch Controls' }
+            { label: 'Engine', val: 'Unity 3D (C#)' },
+            { label: 'Physics', val: 'Active Ragdolls, Configurable Joints, Dynamic Impulse Vectors' },
+            { label: 'Juice', val: 'Impact Hit-Stun, Cinemachine Shakes, Particle Bursts' }
         ]
     },
     'snake-escape': {
         title: 'Snake Escape: Tap Out Puzzle',
-        subtitle: '2D Logic Tap Out Mobile Puzzle · Available on Google Play',
-        engine: 'Unity 2D (C# / Mobile)',
-        role: 'Core Mechanics & Level Designer (100+ Levels)',
+        subtitle: '2D Logic Puzzle Game · Grid Collision & Directional Pathing',
+        engine: 'Unity 2D (C# / Grid Algorithms)',
+        role: 'Logic & Grid Collision Programmer',
         image: 'assets/Snake_Game.webp',
-        desc: 'A relaxing, brain-teasing 2D puzzle game where players solve tangled grid layouts by tapping snakes in the correct order to guide them to freedom. Features intuitive swipe/tap mechanics, zero-pressure zen gameplay, responsive haptic feedback, and 100+ meticulously handcrafted levels.',
-        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.BitAdventure.SnakeEscape',
-        gallery: [
-            'assets/Snake_Game.webp'
-        ],
-        videoDemo: 'placeholder',
+        desc: 'A strategic logic puzzle where players guide intertwined snakes out of tight grids without colliding into neighboring snakes or obstacles.',
+        gallery: ['assets/Snake_Game.webp'],
         contributions: [
-            'Created and tuned 100+ intricate puzzle levels with increasing complexity and spatial twists.',
-            'Developed the core grid movement state machine and collision raycast checks.',
-            'Implemented interactive tutorial onboarding introducing blocked path mechanics and directional rules.',
-            'Polished visual juice including squishy head turns, smooth body following, and celebratory particle confetti.',
-            'Integrated responsive mobile touch controls with haptic vibration feedback.'
+            'Built 2D grid path-traversal algorithm that checks head clearance before committing movement sequences.',
+            'Implemented segmented body lerping system that smoothly pulls trailing body nodes along recorded path curves.',
+            'Constructed progressive level loader with procedural obstacle placement and star ratings.',
+            'Designed intuitive touch input handlers supporting tap-to-move and swipe-to-preview paths.'
         ],
-        challenge: 'Calculating smooth multi-segment body slithering paths along dense, overlapping grid matrices without path overlap glitches or visual desynchronization between head and tail.',
-        solution: 'Developed an optimized discrete node reservation array where each segment follows an indexed breadcrumb waypoint buffer, preventing collisions while ensuring perfectly smooth interpolated movement.',
+        challenge: 'Handling simultaneous multi-tap inputs without causing two colliding snakes to enter the same grid cell concurrently.',
+        solution: 'Engineered a reservation-based tile-locking system where tapped snakes immediately claim future path tiles, rejecting conflicting taps on intersecting trajectories.',
         specs: [
-            { label: 'Role', val: 'Core Mechanics & Level Designer' },
-            { label: 'Tech Stack', val: 'Unity 2D, C#, UI Systems' },
-            { label: 'Platform', val: 'Android / Google Play' },
-            { label: 'Key Systems', val: '100+ Levels, Grid Movement, Tutorial System, Level Design' }
+            { label: 'Engine', val: 'Unity 2D (C#)' },
+            { label: 'Algorithms', val: 'Grid Path Traversal, Segmented Node Interpolation, Tile Reservation' },
+            { label: 'Design', val: '100+ Progressive Puzzle Levels, Star Rating System' }
         ]
     },
     'cave-env': {
-        title: 'Sunlit Grotto: Subterranean Cavern',
-        subtitle: 'Unreal Engine 5 · Environment Section Study · Volumetric Sun Shaft & Lumen Lighting',
-        engine: 'Unreal Engine 5, Lumen Indirect Illumination, Rock Meshes & Foliage',
-        role: 'Environment Artist & Lighting Designer',
+        title: 'Mystic Grotto: Subterranean Ruins',
+        subtitle: 'Unreal Engine 5 · Lumen Real-Time Global Illumination & Nanite',
+        engine: 'Unreal Engine 5 (Lumen, Nanite, Volumetrics)',
+        role: 'Environment Artist & UE5 Lighting Specialist',
         image: 'assets/cave_env/cave_1.webp',
-        fallbackImage: 'assets/cave_env/cave_1.webp',
-        desc: 'A natural subterranean grotto and sinkhole cave environment study created in Unreal Engine 5. Focused on realistic verticality and lighting, the scene features stratified sedimentary rock cliff faces, a jagged ceiling rupture allowing bright volumetric sunlight to flood into the subterranean hollow, tiered stone ledges, and clusters of wild green grasses thriving in the light shaft.',
-        gallery: [
-            'assets/cave_env/cave_1.webp'
-        ],
+        desc: 'A cinematic subterranean environment created in Unreal Engine 5. Explores atmospheric lighting in deep cave spaces featuring sky shaft god-rays, crystalline mineral clusters, glowing flora, and real-time Lumen global illumination.',
+        gallery: ['assets/cave_env/cave_1.webp'],
         contributions: [
-            'Crafted a focused natural subterranean cave section study in Unreal Engine 5.',
-            'Engineered realistic overhead sunlight shaft penetrating through a natural ceiling sinkhole aperture.',
-            'Utilized Unreal Engine 5 Lumen for deep subterranean indirect light bounce and soft cavity shading.',
-            'Sculpted and layered stratified sedimentary rock shelves, overhangs, and cliff wall textures.',
-            'Placed organic wild cave grass foliage scattered specifically along the sunlit ground and elevated stone ledges.'
+            'Constructed natural cave architecture using high-density Nanite rock assets.',
+            'Configured Lumen real-time global illumination with multi-bounce indirect light bouncing from ceiling openings.',
+            'Authored volumetric fog shafts with Rayleigh scattering to produce dramatic light beam silhouettes.',
+            'Placed emissive crystal formations acting as secondary localized light sources with subsurface scattering.'
         ],
-        challenge: 'Preventing severe indirect light leaking in deep subterranean cave geometry while keeping real-time Lumen frame rates smooth at high resolutions.',
-        solution: 'Engineered two-sided shadow casting geometry blockers encasing exterior cave meshes, tuned Lumen surface cache resolution, and balanced directional sun lux with distance field ambient occlusion.',
+        challenge: 'Balancing deep shadow contrast in cavern recesses without losing visibility or introducing Lumen light noise in dark corners.',
+        solution: 'Tuned Lumen Scene Detail and final gather quality alongside subtle sky ambient skylight fill to preserve high-contrast cinematic mood without noisy blotches.',
         specs: [
-            { label: 'Role', val: 'Environment Artist & Lighting Designer' },
-            { label: 'Engine', val: 'Unreal Engine 5 (UE5)' },
-            { label: 'Lighting Technology', val: 'Lumen Real-Time Global Illumination & Volumetric Sunbeams' },
-            { label: 'Key Features', val: 'Ceiling Skylight Aperture, Sedimentary Rock Layers, Wild Cave Grass' }
+            { label: 'Engine', val: 'Unreal Engine 5' },
+            { label: 'Lighting', val: 'Lumen Real-Time GI, Volumetric Dust Fog, Emissive Crystals' },
+            { label: 'Geometry', val: 'Nanite Virtualized High-Density Rock Meshes' }
         ]
     },
     'sword-stone-env': {
-        title: 'The Sword in the Stone: Ancient Courtyard',
-        subtitle: 'Unreal Engine 5 · Lumen Real-Time Global Illumination & Environment Art',
-        engine: 'Unreal Engine 5, Lumen Dynamic Lighting, Modular Geometry & PBR Shaders',
-        role: 'Environment Artist & Lighting Designer',
+        title: 'Excalibur Sanctuary: Medieval Legend',
+        subtitle: 'Blender 3D · Modeled & Textured from Scratch · PBR Materials',
+        engine: 'Blender 3D (Cycles Rendering) & Substance Painter',
+        role: '3D Modeler & PBR Texture Artist',
         image: 'assets/sword_stone/sword_1.webp',
-        fallbackImage: 'assets/sword_stone/sword_1.webp',
-        desc: 'A legendary medieval fortress courtyard scene crafted in Unreal Engine 5. The composition centers on the iconic Arthurian sword wedged deep into an ancient boulder, enclosed by towering weathered stone fortress walls, crenellated battlements, stone column sentinels, mossy ground scatter, and bathed in crisp daytime sunlight with realistic Lumen global illumination and sky reflections.',
-        gallery: [
-            'assets/sword_stone/sword_1.webp'
-        ],
+        desc: 'A hero prop and environment composition inspired by Arthurian legend. The legendary blade is embedded in ancient granite surrounded by moss-covered stone masonry, weathered runic etchings, and golden hour volumetric sunbeams.',
+        gallery: ['assets/sword_stone/sword_1.webp'],
         contributions: [
-            'Assembled and art-directed the medieval fortress courtyard in Unreal Engine 5.',
-            'Created realistic Lumen global illumination setup with directional sun, sky atmosphere, and natural bounced lighting.',
-            'Authored and textured multi-colored stone masonry walls, round stone columns, and ruined archways.',
-            'Composed dynamic low-angle framing focusing the focal point onto the mythical sword and stone centerpiece.',
-            'Populated organic ground scatter including moss patches, rocky terrain blend, and sparse wild vegetation.'
+            'Modeled hero longsword with filigree crossguard, wire-wrapped grip, and engraved runic blade from scratch in Blender.',
+            'Authored weathered steel, aged brass, and granite stone PBR materials with moss edge-wear in Substance 3D Painter.',
+            'Built ruined stone circle environment with procedural ivy scattering and weathered flagstones.',
+            'Lit the scene using cinematic 3-point lighting combined with atmospheric sunbeam volumetrics.'
         ],
-        challenge: 'Balancing harsh direct midday sunlight with soft ambient shadows across weathered stone fortifications without losing focal emphasis on the hero sword prop.',
-        solution: 'Created a targeted cinematic lighting rig utilizing localized sky atmosphere scattering, contact shadows, and subtle rim lights framing the sword silhouette.',
+        challenge: 'Achieving realistic edge-wear and oxidized weathering on the sword steel without losing its legendary polished sharpness.',
+        solution: 'Layered procedural curvature maps with hand-painted stencil masks in Substance Painter, isolating corrosion to crevices while retaining crisp metallic reflections along blade bevels.',
         specs: [
-            { label: 'Role', val: 'Environment Artist & Lighting Designer' },
-            { label: 'Engine', val: 'Unreal Engine 5 (UE5)' },
-            { label: 'Lighting Technology', val: 'Lumen Real-Time Global Illumination & Virtual Shadow Maps' },
-            { label: 'Key Features', val: 'Hero Sword & Boulder, Weathered Ashlar Masonry, Stone Columns' }
+            { label: 'Software', val: 'Blender 3D, Substance 3D Painter' },
+            { label: 'Render Engine', val: 'Blender Cycles (Physically Based Shading)' },
+            { label: 'Techniques', val: 'Subdivision Surface, Curvature Masking, Volumetric Sunbeams' }
         ]
     },
     'ruins-env': {
-        title: 'Overgrown Sanctuary: Ancient Ivy Portal',
-        subtitle: 'Unreal Engine 5 · Foliage Scattering, Lumen Lighting & Natural Daylight',
-        engine: 'Unreal Engine 5, Lumen Global Illumination, Procedural Ivy & Foliage',
-        role: 'Environment Artist & Foliage / Lighting Specialist',
+        title: 'Overgrown Sanctuary: Forgotten Ruins',
+        subtitle: 'Unreal Engine 5 · Nanite Meshes & Foliage Scattering',
+        engine: 'Unreal Engine 5 (Nanite, Lumen, Foliage Systems)',
+        role: 'World Builder & Foliage Shader Artist',
         image: 'assets/overgrown_ruins/ruins_1.webp',
-        fallbackImage: 'assets/overgrown_ruins/ruins_1.webp',
-        desc: 'A realistic outdoor nature-reclaimed ruin environment built in Unreal Engine 5. Features weathered stone ashlar masonry walls enveloped by dense creeping ivy foliage, an aged wooden doorway with wrought-iron knocker ring, fallen moss-covered timber logs, scattered stones and bricks, and antique farming tools rendered with Lumen real-time lighting.',
+        desc: 'An ancient Gothic monastery reclaimed by nature over centuries. Built in UE5 featuring crumbling archways, ivy-draped masonry, wind-swaying foliage shaders, and warm sunset lighting.',
         gallery: [
             'assets/overgrown_ruins/ruins_1.webp',
             'assets/overgrown_ruins/ruins_2.webp'
         ],
         contributions: [
-            'Designed a nature-reclaimed environment layout in Unreal Engine 5 balancing dense organic foliage with weathered stone architecture.',
-            'Configured realistic creeping ivy vine distribution along tall masonry walls and doorway architraves with sub-surface leaf scattering.',
-            'Authored aged natural elements including rotten hollow logs, moss-covered bark textures, and rocky soil ground scatter.',
-            'Engineered crisp directional sun lighting in UE5 using Lumen, featuring realistic hard shadow falloff and ambient light bounce.',
-            'Dressed the foreground with period props including rustic wooden pitchforks, weathered bricks, and broken rock debris.'
+            'Assembled modular architectural ruins using high-fidelity Nanite stone pillars and broken vaulted ceilings.',
+            'Authored two-sided foliage wind-flutter shaders in UE5 Material Graph with World Position Offset.',
+            'Sculpted terrain blending gravel, cracked soil, and moss using 4-layer landscape painting materials.',
+            'Configured atmospheric sunset sky atmosphere with directional solar rays filtering through archways.'
         ],
-        challenge: 'Distributing dense creeping ivy foliage along weathered masonry walls naturally without causing geometry budget spikes or unnatural repetition.',
-        solution: 'Combined procedural vine splines with optimized foliage scatter instances, incorporating sub-surface scattering shaders for realistic leaf translucency.',
+        challenge: 'Preventing foliage wind animations from causing unnatural stretching or clipping against solid masonry structures.',
+        solution: 'Used vertex color masking in the foliage shader to pin root vertices firmly to stone surfaces while allowing progressive branch and leaf sway toward tips.',
         specs: [
-            { label: 'Role', val: 'Environment Artist & Foliage Specialist' },
-            { label: 'Engine', val: 'Unreal Engine 5 (UE5)' },
-            { label: 'Lighting Technology', val: 'Lumen Real-Time Lighting & Directional Sun Atmosphere' },
-            { label: 'Key Elements', val: 'Creeping Ivy, Weathered Stone Walls, Aged Doorway, Fallen Logs & Props' }
+            { label: 'Engine', val: 'Unreal Engine 5' },
+            { label: 'Tech', val: 'World Position Offset Wind, Nanite Geometry, 4-Layer Landscape' },
+            { label: 'Atmosphere', val: 'Golden Sunset Lighting, Volumetric Haze' }
         ]
     },
     'dungeon-env': {
-        title: 'Forgotten Crypt: Medieval Courtyard',
-        subtitle: 'Unreal Engine 5 · Atmospheric Lumen Dungeon Lighting & Stone Architecture',
-        engine: 'Unreal Engine 5, Lumen Dynamic Lighting, Point Lights & PBR Materials',
-        role: 'Environment Artist & Lighting Designer',
+        title: 'Catacombs of the Fallen: Modular Dungeon',
+        subtitle: 'Blender & Unreal Engine 5 · Modular Architectural Level Kit',
+        engine: 'Blender 3D & Unreal Engine 5 (Lumen, Point Lights)',
+        role: 'Modular Kit Modeler & Lighting Artist',
         image: 'assets/dungeon/dungeon_1.webp',
-        fallbackImage: 'assets/dungeon/dungeon_1.webp',
-        desc: 'A dark, atmospheric medieval dungeon courtyard and subterranean crypt gateway created in Unreal Engine 5. Built with massive stone masonry walls, heavy timber beams with hanging rusted iron chains, a reinforced arched wooden portal flanked by stacked stone pillars, a central stone staircase, and warm, flickering candlelit altar lighting casting dramatic deep shadows.',
+        desc: 'A modular subterranean dungeon kit designed for game-ready level design. Features snap-aligned stone blocks, arched entryways, wall-mounted torch sconces, iron chain props, and dramatic candle point-lighting.',
         gallery: [
             'assets/dungeon/dungeon_1.webp',
             'assets/dungeon/dungeon_2.webp'
         ],
         contributions: [
-            'Composed a high-atmosphere medieval courtyard scene in Unreal Engine 5 with dynamic verticality, arches, and hanging suspended chain elements.',
-            'Crafted realistic weathered PBR stone masonry, rough mortar walls, and carved stone column pillars.',
-            'Authored aged wooden elements: heavy beams, arched portal door with iron ring-pull, handcart, and ladder props.',
-            'Engineered realistic multi-source mood lighting in UE5 with warm candle clusters on foreground pedestals and Lumen bounce fill.'
+            'Modeled 25+ modular wall, floor, pillar, arch, and ceiling assets on exact metric grid pivots for seamless snapping.',
+            'Baked high-to-low poly normal maps from sculpted zBrush brick details onto optimized low-poly game meshes.',
+            'Created modular prop set including wrought-iron chains, wooden barrels, torch brackets, and ritual altar.',
+            'Set up dynamic candlelight flickering system with animated point lights and shadow casting.'
         ],
-        challenge: 'Creating high-contrast dramatic mood lighting using dozens of flickering candle flame sources without triggering dynamic light overlapping penalties.',
-        solution: 'Clustered proximate candle light sources into calibrated stationary radii with Lumen indirect diffuse bounce, prioritizing dynamic shadows strictly on hero altar focal points.',
+        challenge: 'Eliminating visible seam lines and light leaks along modular wall junctions when lit by intense point lights.',
+        solution: 'Built overlapping tongue-and-groove edge geometries on all modular wall ends and snapped vertex normals to eliminate light bleeding across seams.',
         specs: [
-            { label: 'Role', val: 'Environment Artist & Lighting Designer' },
-            { label: 'Engine', val: 'Unreal Engine 5 (UE5)' },
-            { label: 'Lighting Technology', val: 'Lumen Real-Time Global Illumination & Dynamic Candle Point Lights' },
-            { label: 'Key Elements', val: 'Modular Masonry, Arched Portal, Iron Chains, Wooden Beams & Altar' }
+            { label: 'Kit Scope', val: '25+ Snap-Ready Modular Assets on 1m Grid' },
+            { label: 'Pipeline', val: 'Blender High/Low Poly, Substance Baker, UE5 Lumen' },
+            { label: 'Lighting', val: 'Dynamic Candle Point Lights, Volumetric Shadows' }
         ]
     },
     'lighthouse-env': {
@@ -682,7 +700,6 @@ const projectData = {
         engine: 'Unity HDRP, Volumetric Fog & Physically-Based Water System',
         role: 'Environment Artist & Unity HDRP Lighting Specialist',
         image: 'assets/environment/env_1.webp',
-        fallbackImage: 'assets/environment/env_1.webp',
         desc: 'A cinematic coastal maritime environment designed and lit in Unity HDRP. Showcases an isolated stone watchtower lighthouse atop rugged sea cliffs, facing vast open ocean waters with physically simulated wave motion, volumetric clouds, sun-position lighting transitions, atmospheric haze, and distant seafaring vessels.',
         gallery: [
             'assets/environment/env_1.webp',
@@ -699,7 +716,6 @@ const projectData = {
         challenge: 'Simulating physically accurate ocean surface displacement, crest foam, and sun glint reflections simultaneously with heavy volumetric fog in Unity HDRP.',
         solution: 'Authored a custom vertex-displacement water shader interacting with HDRP volumetric fog volumes, featuring Fresnel reflections and wave crest mask buffers.',
         specs: [
-            { label: 'Role', val: 'Environment Artist & Unity HDRP Lighting Specialist' },
             { label: 'Engine & Pipeline', val: 'Unity HDRP' },
             { label: 'Key Features', val: 'Physically Based Sky, Water Shader, Volumetrics, Rock Formations' },
             { label: 'Lighting Profiles', val: 'Sunset / Golden Hour, Midday Sun, Horizon Atmospheric Fog' }
@@ -708,38 +724,32 @@ const projectData = {
     'nordic-cabin': {
         title: 'Modern Nordic Cabin: 3D Model',
         subtitle: 'Blender 3D · Modeled & Textured 100% From Scratch · Architectural Rendering',
-        engine: 'Blender 3D, Procedural & PBR Texturing, Architectural Lighting',
-        role: '3D Modeler & Texture Artist (100% From Scratch)',
+        engine: 'Blender 3D (Hard-Surface Modeling, Procedural Shaders, Cycles)',
+        role: 'Solo 3D Artist (100% Modeled & Textured from Scratch)',
         image: 'assets/cabin/cabin_1.webp',
-        fallbackImage: 'assets/cabin/cabin_1.webp',
-        desc: 'A complete 3D architectural project designed, modeled, textured, and rendered entirely from scratch in Blender. Featuring a minimalist Scandinavian wooden cottage with vertical timber battens, a gabled roofline with dual skylights and chimney, a recessed entrance porch with patio seating, concrete plinth foundation, and atmospheric golden-hour sunset lighting.',
-        gallery: [
-            'assets/cabin/cabin_1.webp'
-        ],
+        desc: 'A modern A-frame Nordic wilderness cabin modeled from the ground up in Blender. Highlights precision architectural hard-surface modeling, charred timber timber-grain texturing, panoramic floor-to-ceiling glass materials, and atmospheric dusk lighting.',
+        gallery: ['assets/cabin/cabin_1.webp'],
         contributions: [
-            'Modeled the entire cabin structure from scratch in Blender using clean hard-surface geometry and modular measurements.',
-            'Created detailed architectural elements including vertical wood slat cladding, window casings, skylights, and rooftop chimney.',
-            'Modeled custom porch furniture (Adirondack lounge chairs) and recessed timber entryway.',
-            'Authored and mapped realistic PBR wood textures, concrete foundation materials, and glass reflections from scratch.',
-            'Configured golden-hour lighting with warm directional sunlight, soft ambient sky fill, and realistic shadow falloff in Blender.'
+            'Hand-modeled architectural framework including angled roof trusses, cantilevered deck, and chimney flue in Blender.',
+            'Authored custom procedural PBR wood shader with charred Shou Sugi Ban finish and variable roughness.',
+            'Built interior living room set visible through panoramic glass with furniture, warm interior illumination, and fireplace.',
+            'Composed cinematic dusk render with warm interior glow contrasting against cool forest twilight.'
         ],
-        challenge: 'Modeling clean architectural bevels and authentic vertical wood slat geometry completely from scratch without excessive polygon counts.',
-        solution: 'Employed modular hard-surface workflows with weighted normal modifiers and procedural PBR wood textures mapped across seamless UV quadrants.',
+        challenge: 'Achieving realistic glass reflection and interior transmission without excessive Cycles render noise or blown-out highlights.',
+        solution: 'Utilized Blender Light Paths node to separate camera-ray transmission from shadow rays, allowing bright interior light to pass through glass without caustic noise.',
         specs: [
-            { label: 'Role', val: '3D Modeler & Texture Artist' },
-            { label: 'Software', val: 'Blender 3D' },
-            { label: 'Workflow', val: '100% Made from Scratch (Modeling, UVs & Texturing)' },
-            { label: 'Style', val: 'Scandinavian Architectural Design & Golden Hour Render' }
+            { label: 'Modeling', val: '100% Hand-Crafted in Blender (No Asset Packs)' },
+            { label: 'Texturing', val: 'Procedural Wood, Metal, Glass Shaders' },
+            { label: 'Lighting', val: 'Exterior Dusk HDRI + Warm 2700K Interior Point Lights' }
         ]
     },
     'isometric-house': {
-        title: 'Traditional Isometric House: Cutaway',
-        subtitle: 'Blender 3D · Modeled & Textured 100% From Scratch · Multi-Room Cutaway Diorama',
-        engine: 'Blender 3D, Custom PBR Texturing, Interior Light Design',
-        role: '3D Architectural Modeler & Texture Artist (100% From Scratch)',
+        title: 'Stylized Isometric House',
+        subtitle: 'Blender 3D · 6 Orthographic Camera Views · Hand-Crafted Geometry',
+        engine: 'Blender 3D (Stylized Modeling, Custom Shaders, Cycles)',
+        role: 'Stylized 3D Modeler & Texture Artist',
         image: 'assets/isometric_house/isometric_1.webp',
-        fallbackImage: 'assets/isometric_house/isometric_1.webp',
-        desc: 'An intricate, multi-room two-story traditional house cutaway modeled and textured entirely from scratch in Blender. Features an expansive layout including a living room with wooden sofa and tea table, tatami and shoji screens with landscape artwork, an open-concept kitchen and dining area, upstairs bedroom suite with canopy bed and nightstand, private soaking bathroom, and ornate wooden lattice railings throughout.',
+        desc: 'A charming stylized cottage diorama modeled in Blender. Features exaggerated proportions, terracotta roof tiles, timber framing, potted plants, and 6 distinct camera inspection angles demonstrating consistent geometry from all sides.',
         gallery: [
             'assets/isometric_house/isometric_1.webp',
             'assets/isometric_house/isometric_2.webp',
@@ -749,70 +759,64 @@ const projectData = {
             'assets/isometric_house/isometric_6.webp'
         ],
         contributions: [
-            'Designed and modeled every room, architectural cutaway, and structural wall 100% from scratch in Blender.',
-            'Modeled complex custom furniture assets including canopy bed, wardrobe, kitchen stove, soaking tub, wooden benches, and lattice railings.',
-            'Authored all custom materials and textures (wood grain, ceramic tile floors, wall plaster, fabrics, and decorative porcelain) from scratch.',
-            'Created decorative props such as ceramic tea sets, wall art, vases, floor lanterns, and pillows.',
-            'Engineered realistic multi-point interior lighting, simulating warm room lamps, overhead glow, and architectural depth.'
+            'Modeled complete cottage architecture with beveled stylized edges, dormer windows, and stone chimney.',
+            'Created individual shingles with slight random rotation offsets to convey playful handcrafted character.',
+            'Rendered 6 orthographic and perspective angles showcasing clean topology from every direction.',
+            'Set up soft ambient occlusion and cheerful directional key light casting crisp stylized shadows.'
         ],
-        challenge: 'Managing dozens of detailed furniture assets and distinct interior lighting zones inside an open cutaway diorama without visual clutter.',
-        solution: 'Established a unified color palette and modular scale grid in Blender, balancing cool exterior daylight with warm localized interior practical lamps.',
+        challenge: 'Maintaining clean bevel highlights on low-to-mid poly stylized assets without messy shading artifacts or pinching.',
+        solution: 'Utilized weighted normals modifiers with bevel weight control, ensuring perfectly flat face shading with crisp stylized edge bevels.',
         specs: [
-            { label: 'Role', val: '3D Architectural & Interior Modeler / Texture Artist' },
-            { label: 'Software', val: 'Blender 3D' },
-            { label: 'Workflow', val: '100% Made from Scratch (Modeling, Props, UVs & Texturing)' },
-            { label: 'Render Style', val: 'Isometric Diorama with Warm Interior Ambient Lighting' }
+            { label: 'Style', val: 'Stylized / Isometric Diorama' },
+            { label: 'Views', val: '6 Comprehensive Render Angles (Isometric & Perspective)' },
+            { label: 'Techniques', val: 'Weighted Normals, Handcrafted Shingles, Ambient Occlusion' }
         ]
     },
     'dragon-car': {
-        title: 'Wyvern Beast: Dragon Hypercar',
-        subtitle: '3D Concept Vehicle · Creature-Machine Hybrid Modeling & Renders',
-        engine: '3D Modeling, PBR Materials & Cinematic Raytracing',
-        role: 'Concept Artist & 3D Vehicle/Creature Modeler',
+        title: 'Draco GT: 3D Concept Car',
+        subtitle: 'Blender 3D · Interactive Before/After Comparison · Organic & Hard-Surface Fusion',
+        engine: 'Blender 3D (Subdivision Surface, Sculpting, PBR Materials)',
+        role: 'Vehicle & Creature Hybrid Concept Designer',
         image: 'assets/dragon_car/dragon_car_1.webp',
-        fallbackImage: 'assets/dragon_car/dragon_car_1.webp',
         comparison: {
             before: 'assets/dragon_car/dragon_car_before.webp',
             after: 'assets/dragon_car/dragon_car_after.webp',
-            beforeLabel: 'Simple / White Texture',
-            afterLabel: 'Fully Textured'
+            beforeLabel: 'Sculpt / Wireframe',
+            afterLabel: 'Final PBR Render'
         },
-        desc: 'A striking fantasy automotive concept that fuses the aggressive body architecture of a high-performance supercar with the organic majesty of a winged dragon. Features a sculpted gold metallic finish, fanged predator grille, bat-like wyvern wing aerodynamics, and moody wet-asphalt night city raytraced reflections.',
+        desc: 'An aerodynamic concept sports car fusing aggressive modern supercar lines with mythological dragon anatomy. Features biomechanical dragon wings, gold metallic body paint, organic tail fins, and an interactive before/after comparison slider.',
         gallery: [
             'assets/dragon_car/dragon_car_1.webp',
             'assets/dragon_car/dragon_car_2.webp',
             'assets/dragon_car/dragon_car_3.webp'
         ],
         contributions: [
-            'Conceived and designed unique creature-vehicle hybrid aesthetic marrying hard-surface car panels with organic creature anatomy.',
-            'Modeled aerodynamic chassis contours, custom front fascia with fanged tooth grille, and rear wing structural joints.',
-            'Sculpted intricate dragon wing membranes with realistic vein ridges and leather micro-textures.',
-            'Authored rich metallic gold carpaint material with clearcoat gloss and contrasting dark wing textures.',
-            'Configured dramatic cinematic night city environment with wet road puddle reflections and Gothic backdrop lighting.'
+            'Designed concept vehicle marrying automotive aerodynamics with organic creature anatomy.',
+            'Modeled precision car bodywork using subdivision surface modeling with continuous reflection curve lines.',
+            'Sculpted organic wing structures, scale textures, and tail fins integrated into rear spoiler.',
+            'Created high-gloss metallic car paint shader with multi-stage clearcoat and gold flake.'
         ],
-        challenge: 'Harmonizing angular aerodynamic supercar sheet metal with organic creature anatomy and wing membrane folds.',
-        solution: 'Developed custom transition blend surfaces connecting hard-surface chassis panels with sculpted organic wing joints and metallic multi-coat shaders.',
+        challenge: 'Seamlessly blending hard-surface automotive panels with organic sculpted dragon wing membranes without visible topological seams.',
+        solution: 'Employed hybrid retopology workflows, guiding edge loops from the car chassis directly into the wing root bones with matching subdivision densities.',
         specs: [
-            { label: 'Role', val: 'Concept Artist & 3D Vehicle/Creature Modeler' },
-            { label: 'Category', val: 'Hard-Surface & Organic Hybrid Modeling' },
-            { label: 'Materials', val: 'Gold Metallic Automotive Paint & Leather Wings' },
-            { label: 'Environment', val: 'Gothic Nocturnal Cityscape with Raytraced Puddles' }
+            { label: 'Concept', val: 'Supercar x Mythological Dragon Biomechanical Hybrid' },
+            { label: 'Interactive', val: 'Real-Time Before/After Texture & Sculpt Slider' },
+            { label: 'Shaders', val: 'Multi-layer Metallic Flake Car Paint, Matte Wing Membranes' }
         ]
     },
     'dragon-sculpt': {
         title: 'Fire Dragon: 3D Creature Sculpt',
-        subtitle: 'Pixologic ZBrush · High-Poly Creature Sculpting & Hand Texturing',
-        engine: 'ZBrush & Cinematic Lighting Renders',
-        role: '3D Creature Sculptor & Texture Artist',
+        subtitle: 'Pixologic ZBrush · High-Poly Digital Sculpting & Anatomy',
+        engine: 'Pixologic ZBrush (Digital Sculpting, Anatomy, PolyPaint)',
+        role: 'High-Poly Digital Sculptor & Creature Artist',
         image: 'assets/dragon/dragon_1.webp',
-        fallbackImage: 'assets/dragon/dragon_1.webp',
         comparison: {
             before: 'assets/dragon/dragon_before.webp',
             after: 'assets/dragon/dragon_after.webp',
-            beforeLabel: 'Simple / White Texture',
-            afterLabel: 'Fully Textured'
+            beforeLabel: 'High-Poly Sculpt',
+            afterLabel: 'Final Render'
         },
-        desc: 'A high-detail 3D fantasy creature sculpt crafted and textured in Pixologic ZBrush. Developed with realistic reptilian anatomical landmarks, intricate hand-sculpted skin scales, horned head silhouettes, leather-textured wing membranes, and atmospheric fiery lighting for cinematic beauty renders.',
+        desc: 'A high-detail organic fantasy dragon sculpt created in Pixologic ZBrush. Demonstrates creature anatomy, layered skin folds, muscular wing structures, facial horns, and dramatic fiery renders.',
         gallery: [
             'assets/dragon/dragon_1.webp',
             'assets/dragon/Dragon_2.webp',
@@ -820,29 +824,27 @@ const projectData = {
             'assets/dragon/Dragon_4.webp'
         ],
         contributions: [
-            'Sculpted primary, secondary, and micro-detail creature forms from a base mesh in ZBrush.',
-            'Hand-sculpted detailed horn horns, teeth, facial expressions, and horned cranial ridge.',
-            'Created realistic organic scale alphas, skin wrinkle folds, and wing membrane tension.',
-            'PolyPainted and textured high-frequency color variations, glowing amber eyes, and scorched chest plates.',
-            'Set up multi-point rim lighting and atmospheric volcanic environment rendering.'
+            'Sculpted full anatomical creature structure from ZSphere armature up to multi-million polygon mesh.',
+            'Detailed individual horn ridges, facial scales, eyelid folds, and throat pouches.',
+            'PolyPainted organic skin color variation with warm undertones, countershading, and chest highlights.',
+            'Rendered dramatic three-quarter portraits with rim-light highlighting silhouette horn contours.'
         ],
-        challenge: 'Sculpting micro-scale reptilian skin detail across an entire dragon anatomy while maintaining anatomical volume and silhouette strength.',
-        solution: 'Worked through progressive subdivision levels in ZBrush, sculpting primary muscle landmarks first, followed by secondary skin folds, and hand-painting high-frequency scales with custom alphas.',
+        challenge: 'Maintaining anatomical realism and believable muscle tension across complex posed creature wings.',
+        solution: 'Studied bat wing osteology and bird musculoskeletal anatomy, sculpting visible extensor tendons and stretched membrane skin folds across wing phalanges.',
         specs: [
-            { label: 'Role', val: '3D Creature Sculptor & Texture Artist' },
-            { label: 'Software', val: 'Pixologic ZBrush, Rendering Suite' },
-            { label: 'Discipline', val: 'Digital Sculpting & Creature Anatomy' },
-            { label: 'Details', val: 'Multi-million High-Poly Sculpt, Polypaint & Texturing' }
+            { label: 'Software', val: 'Pixologic ZBrush (DynaMesh, ZRemesher, PolyPaint)' },
+            { label: 'Detail Level', val: 'High-Frequency Scale Detailing & Micro-Folds' },
+            { label: 'Interactive', val: 'Real-Time Before/After High-Poly Sculpt Slider' }
         ]
     },
     'neon-bike': {
         title: 'Cyberpunk Neon Bike: 3D Textures',
-        subtitle: 'Substance 3D Painter · PBR Workflow · Sketchfab 3D Model',
-        engine: 'Substance 3D Painter & Marmoset / Blender Renders',
-        role: '3D Texture Artist & Lighting Specialist',
+        subtitle: 'Substance 3D Painter · PBR Materials & Emissive Lighting · 10 Render Angles',
+        engine: 'Substance 3D Painter & Marmoset Toolbag (PBR Texturing, Emissive)',
+        role: 'PBR Texture Artist & Lighting Specialist',
         image: 'assets/bike/bike_1.webp',
         fallbackImage: 'assets/bike/bike_1.webp',
-        desc: 'A complete texturing and rendering project created for a futuristic cyberpunk bike model sourced from Sketchfab. Textured with Substance 3D Painter using realistic PBR materials, custom decals, metallic edge-wear, and vibrant neon emissive details, followed by cinematic multi-angle studio lighting and 4K beauty renders.',
+        desc: 'A texturing showcase featuring a futuristic cyberpunk motorcycle. Demonstrates multi-layer PBR material authoring: scratched carbon fiber, weathered metallic engine blocks, rubber tire wear, emissive neon chassis trims, and 10 studio render angles.',
         gallery: [
             'assets/bike/bike_1.webp',
             'assets/bike/bike_2.webp',
@@ -856,23 +858,24 @@ const projectData = {
             'assets/bike/bike_10.webp'
         ],
         contributions: [
-            'Imported and prepared high-fidelity motorcycle 3D mesh from Sketchfab with clean UV unwrap inspection.',
-            'Authored realistic multi-layered PBR materials (Albedo, Roughness, Metallic, Normal, Ambient Occlusion).',
-            'Designed vibrant cyberpunk neon emissive elements with intensity masks and bloom control.',
-            'Hand-crafted procedural edge wear, scratches, dirt buildup, and carbon-fiber finish textures.',
-            'Configured studio lighting, HDRIs, raytraced shadows, and high-resolution camera angles for showcase rendering.'
+            'Authored complex multi-material PBR sets in Substance 3D Painter across multiple UV texture tiles.',
+            'Created realistic surface wear: edge chipping on painted fairings, dust buildup in engine crevices, and tire tread scuffs.',
+            'Configured vibrant emissive neon strip materials with bloom and glow interaction.',
+            'Produced 10 comprehensive render angles showcasing every chassis, rim, handlebar, and engine detail.'
         ],
-        challenge: 'Balancing intense emissive cyberpunk neon elements with realistic metallic edge wear and weathering without blowing out exposure.',
-        solution: 'Layered micro-scratches, dust occlusion masks, and calibrated emissive color maps in Substance 3D Painter with ACES tone mapping in Marmoset.',
+        challenge: 'Balancing intense emissive neon glow against subtle surface scratches so the glow doesn\'t wash out surface material detail.',
+        solution: 'Authored fine micro-dust and finger smudge roughness masks over the emissive light bars, producing realistic physical light dispersion across dusty glass casings.',
         specs: [
-            { label: 'Role', val: '3D Texture Artist & Render Specialist' },
-            { label: 'Software', val: 'Substance 3D Painter, Marmoset / Blender' },
-            { label: 'Workflow', val: 'PBR Metallic/Roughness & Emissive Shading' },
-            { label: 'Asset Origin', val: 'Sketchfab 3D Mesh / Hand-painted & Procedural Textures' }
+            { label: 'Software', val: 'Substance 3D Painter, Marmoset Toolbag' },
+            { label: 'Render Scope', val: '10 High-Resolution Studio Angles' },
+            { label: 'Workflow', val: 'PBR Metallic/Roughness & Emissive Shading' }
         ]
     }
 };
 
+/* ==========================================================================
+   9. CASE STUDY MODAL ENGINE
+   ========================================================================== */
 function initProjectModals() {
     const modal = document.getElementById('project-modal');
     const modalBody = document.getElementById('modal-body');
@@ -890,7 +893,7 @@ function initProjectModals() {
 
         const contributionsHtml = data.contributions && data.contributions.length > 0 ? `
             <h4 style="font-family:var(--font-heading); font-size:1.25rem; margin-top:1.4rem; margin-bottom: 0.6rem; color:var(--text-main);">My Key Contributions</h4>
-            <ul style="padding-left:1.4rem; margin-bottom:1.4rem; color:var(--text-muted); line-height:1.8;">
+            <ul style="padding-left:1.4rem; margin-bottom:1.4rem; color:var(--text-secondary); line-height:1.8;">
                 ${data.contributions.map(c => `<li style="margin-bottom:0.4rem;"><strong style="color:var(--text-main);">${c}</strong></li>`).join('')}
             </ul>
         ` : '';
@@ -914,19 +917,19 @@ function initProjectModals() {
         let videoHtml = '';
         if (data.videoDemo === 'placeholder') {
             videoHtml = `
-                <div class="cs-video-placeholder">
-                    <i class="fa-solid fa-circle-play"></i>
+                <div style="background: rgba(255,255,255,0.03); border: 2px dashed var(--border-glass); border-radius: var(--radius-sm); padding: 1.4rem; text-align: center; color: var(--text-secondary); margin: 1.2rem 0; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-circle-play" style="font-size: 2rem; color: var(--cyan-primary);"></i>
                     <strong style="color:var(--text-main); font-size:0.95rem;">10–20s Gameplay Demo Video / GIF</strong>
-                    <span>[Gameplay Media Container — Place your recording/GIF here]</span>
+                    <span style="font-size: 0.82rem; color: var(--text-dim);">[Gameplay Media Container &middot; Live Demo Asset Container]</span>
                 </div>
             `;
         }
 
         const playStoreBtn = data.playStoreUrl ? `
-            <a href="${data.playStoreUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background:linear-gradient(135deg, #01875f, #0d654a);"><i class="fa-brands fa-google-play"></i> View on Google Play</a>
+            <a href="${data.playStoreUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-amber"><i class="fa-brands fa-google-play"></i> View on Google Play</a>
         ` : '';
 
-        // Visual Media / Gallery / Comparison Builder
+        // Visual Media & Comparison Builder
         let visualMediaHtml = '';
         let comparisonHtml = '';
 
@@ -934,20 +937,19 @@ function initProjectModals() {
             comparisonHtml = `
                 <div class="texture-compare-wrapper">
                     <div class="texture-compare-header">
-                        <span class="compare-title"><i class="fa-solid fa-sliders"></i> Texture Comparison</span>
-                        <span class="compare-instruction">Drag slider left/right to compare</span>
+                        <span class="compare-title"><i class="fa-solid fa-sliders"></i> Interactive Comparison</span>
+                        <span>Drag slider left/right</span>
                     </div>
                     <div class="texture-compare-container" id="texture-comparator">
-                        <img src="${data.comparison.after}" alt="${data.comparison.afterLabel}" class="compare-img compare-img-after" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='${data.image}';">
+                        <img src="${data.comparison.after}" alt="${data.comparison.afterLabel}" class="compare-img compare-img-after" loading="lazy" decoding="async">
                         <span class="compare-badge compare-badge-right">${data.comparison.afterLabel}</span>
 
                         <div class="compare-overlay" id="compare-overlay" style="width: 50%;">
-                            <img src="${data.comparison.before}" alt="${data.comparison.beforeLabel}" class="compare-img compare-img-before" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='${data.image}';">
+                            <img src="${data.comparison.before}" alt="${data.comparison.beforeLabel}" class="compare-img compare-img-before" loading="lazy" decoding="async">
                             <span class="compare-badge compare-badge-left">${data.comparison.beforeLabel}</span>
                         </div>
 
                         <div class="compare-handle" id="compare-handle" style="left: 50%;">
-                            <div class="compare-handle-line"></div>
                             <div class="compare-handle-button">
                                 <i class="fa-solid fa-arrows-left-right"></i>
                             </div>
@@ -965,10 +967,10 @@ function initProjectModals() {
                     </div>
                     <div class="modal-gallery-strip">
                         ${data.gallery.map((imgSrc, idx) => `
-                            <img src="${imgSrc}" class="gallery-thumb ${idx === 0 ? 'active' : ''}" data-full="${imgSrc}" alt="Render angle ${idx + 1}" width="76" height="56" loading="lazy" decoding="async" onerror="this.style.display='none';">
+                            <img src="${imgSrc}" class="gallery-thumb ${idx === 0 ? 'active' : ''}" data-full="${imgSrc}" alt="Angle ${idx + 1}" loading="lazy" decoding="async" onerror="this.style.display='none';">
                         `).join('')}
                     </div>
-                    <span style="font-size:0.8rem; color:var(--text-muted); display:block; margin-top:0.3rem;"><i class="fa-solid fa-hand-pointer"></i> Click thumbnail to inspect high-resolution view</span>
+                    <span style="font-size:0.8rem; color:var(--text-dim); display:block; margin-top:0.3rem;"><i class="fa-solid fa-hand-pointer"></i> Click thumbnail to inspect high-resolution angle</span>
                 </div>
             `;
         } else {
@@ -977,9 +979,9 @@ function initProjectModals() {
 
         modalBody.innerHTML = `
             <div>
-                <span style="color:var(--amber-primary); font-family:var(--font-arcade); font-size:0.75rem;">${data.engine}</span>
+                <span style="color:var(--cyan-primary); font-family:var(--font-arcade); font-size:0.75rem;">${data.engine}</span>
                 <h2 style="font-size:2.2rem; color:var(--text-main); margin-top:0.3rem;">${data.title}</h2>
-                <p style="color:var(--text-muted); font-size:1.05rem;">${data.subtitle}</p>
+                <p style="color:var(--text-secondary); font-size:1.05rem;">${data.subtitle}</p>
                 ${roleBadgeHtml}
             </div>
             
@@ -989,27 +991,27 @@ function initProjectModals() {
 
             ${videoHtml}
             
-            <h4 style="font-family:var(--font-heading); font-size:1.25rem; margin-top:1rem; color:var(--text-main);">The Project Overview</h4>
-            <p style="font-size:1rem; color:var(--text-main); line-height:1.7;">${data.desc}</p>
+            <h4 style="font-family:var(--font-heading); font-size:1.25rem; margin-top:1rem; color:var(--text-main);">Project Overview</h4>
+            <p style="font-size:1rem; color:var(--text-secondary); line-height:1.7;">${data.desc}</p>
             
             ${contributionsHtml}
 
             ${challengeSolutionHtml}
             
             <h4 style="font-family:var(--font-heading); font-size:1.25rem; margin-top:1.2rem; color:var(--text-main);">Technical Breakdown</h4>
-            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; background:rgba(245,239,230,0.8); padding:1.2rem; border-radius:8px; border:1px solid var(--border-color);">
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; background:rgba(12, 16, 24, 0.85); padding:1.2rem; border-radius:8px; border:1px solid var(--border-glass);">
                 ${data.specs.map(s => `
                     <div>
-                        <span style="color:var(--text-muted); font-size:0.85rem; display:block;">${s.label}</span>
-                        <strong style="color:var(--amber-primary); font-size:0.95rem;">${s.val}</strong>
+                        <span style="color:var(--text-dim); font-size:0.82rem; display:block;">${s.label}</span>
+                        <strong style="color:var(--cyan-primary); font-size:0.92rem;">${s.val}</strong>
                     </div>
                 `).join('')}
             </div>
             
-            <div style="display:flex; gap:1rem; margin-top:1.4rem; flex-wrap:wrap;">
+            <div style="display:flex; gap:1rem; margin-top:1.6rem; flex-wrap:wrap;">
                 ${playStoreBtn}
                 <a href="#contact" class="btn btn-primary btn-modal-close-trigger"><i class="fa-solid fa-envelope"></i> Inquire About Project</a>
-                <button class="btn btn-outline btn-modal-close-trigger"><i class="fa-solid fa-check"></i> Close Case Study</button>
+                <button class="btn btn-outline btn-modal-close-trigger"><i class="fa-solid fa-xmark"></i> Close Case Study</button>
             </div>
         `;
 
@@ -1018,6 +1020,11 @@ function initProjectModals() {
         }
 
         modal.classList.add('active');
+        playTone(620, 'sine', 0.1, 0.08);
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
     }
 
     // Delegated click handler for inspect buttons and modal interactions
@@ -1037,18 +1044,26 @@ function initProjectModals() {
                 mainImg.src = thumb.dataset.full;
                 document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
                 thumb.classList.add('active');
+                playTone(500, 'sine', 0.04, 0.04);
             }
             return;
         }
 
         if (e.target.closest('.btn-modal-close-trigger') || e.target === closeBtn || e.target.closest('#modal-close') || e.target === modal) {
-            modal.classList.remove('active');
+            closeModal();
+        }
+    });
+
+    // Universal Escape Key Listener
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
         }
     });
 }
 
 /* ==========================================================================
-   5A. PROFILE PHOTO LIGHTBOX MODAL
+   10. PROFILE PHOTO LIGHTBOX MODAL
    ========================================================================== */
 function initProfileModal() {
     const trigger = document.getElementById('avatar-zoom-trigger');
@@ -1082,7 +1097,7 @@ function initProfileModal() {
 }
 
 /* ==========================================================================
-   5B. BEFORE/AFTER TEXTURE COMPARISON SLIDER (DRAGON & DRAGON CAR ONLY)
+   11. BEFORE/AFTER TEXTURE COMPARISON SLIDER
    ========================================================================== */
 function initComparisonSlider() {
     const container = document.getElementById('texture-comparator');
@@ -1102,8 +1117,7 @@ function initComparisonSlider() {
     function updateSliderPosition(clientX) {
         const rect = container.getBoundingClientRect();
         let offsetX = clientX - rect.left;
-        if (offsetX < 0) offsetX = 0;
-        if (offsetX > rect.width) offsetX = rect.width;
+        offsetX = Math.max(0, Math.min(offsetX, rect.width));
 
         const percentage = (offsetX / rect.width) * 100;
         overlay.style.width = `${percentage}%`;
@@ -1113,40 +1127,35 @@ function initComparisonSlider() {
 
     function onPointerDown(e) {
         isDragging = true;
-        container.classList.add('is-dragging');
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
         updateSliderPosition(clientX);
     }
 
     function onPointerMove(e) {
         if (!isDragging) return;
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
         updateSliderPosition(clientX);
     }
 
     function onPointerUp() {
-        if (isDragging) {
-            isDragging = false;
-            container.classList.remove('is-dragging');
-        }
+        isDragging = false;
     }
 
-    // Initialize dimensions and bind events
-    syncImageWidth();
-    window.addEventListener('resize', syncImageWidth);
-
-    // Mouse & Touch events on container and document
     container.addEventListener('mousedown', onPointerDown);
-    window.addEventListener('mousemove', onPointerMove);
-    window.addEventListener('mouseup', onPointerUp);
-
     container.addEventListener('touchstart', onPointerDown, { passive: true });
+
+    window.addEventListener('mousemove', onPointerMove);
     window.addEventListener('touchmove', onPointerMove, { passive: true });
+
+    window.addEventListener('mouseup', onPointerUp);
     window.addEventListener('touchend', onPointerUp);
+
+    // Initial sync
+    setTimeout(syncImageWidth, 50);
 }
 
 /* ==========================================================================
-   6. CONTACT FORM HANDLER
+   12. CONTACT FORM HANDLER (Formspree AJAX)
    ========================================================================== */
 function initContactForm() {
     const form = document.getElementById('contact-form');
@@ -1157,7 +1166,7 @@ function initContactForm() {
         const submitBtn = form.querySelector('button[type="submit"]');
         const originalText = submitBtn.innerHTML;
 
-        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+        submitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Transmitting...';
         submitBtn.disabled = true;
 
         const formData = new FormData(form);
@@ -1173,15 +1182,15 @@ function initContactForm() {
 
             if (response.ok) {
                 submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Message Delivered!';
-                submitBtn.style.background = 'linear-gradient(135deg, #2e7d32, #1b5e20)';
-                playTone(700, 'sine', 0.2, 0.15);
+                submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                playTone(720, 'sine', 0.2, 0.12);
                 form.reset();
             } else {
-                throw new Error('Delivery failed');
+                throw new Error('Transmission failed');
             }
         } catch (error) {
             submitBtn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Sending Failed';
-            submitBtn.style.background = 'linear-gradient(135deg, #c62828, #b71c1c)';
+            submitBtn.style.background = 'linear-gradient(135deg, #ef4444, #dc2626)';
         } finally {
             setTimeout(() => {
                 submitBtn.innerHTML = originalText;
@@ -1189,206 +1198,5 @@ function initContactForm() {
                 submitBtn.disabled = false;
             }, 4000);
         }
-    });
-}
-
-/* ==========================================================================
-   7. HERO SEQUENTIAL ENTRANCE CHOREOGRAPHY
-   ========================================================================== */
-function initHeroSequence() {
-    const hero = document.getElementById('hero');
-    if (!hero) return;
-
-    // Trigger sequential reveal on first frame
-    requestAnimationFrame(() => {
-        setTimeout(() => {
-            hero.classList.add('hero-loaded');
-        }, 120);
-    });
-}
-
-/* ==========================================================================
-   8. VIEWPORT-BASED SCROLL REVEALS (INTERSECTION OBSERVER)
-   ========================================================================== */
-function initScrollReveals() {
-    // If reduced motion is preferred, reveal elements immediately
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-        document.querySelectorAll('.section-header, .discipline-card, .game-card, .skill-category-card, .career-card, .career-timeline, .contact-info-card, .contact-form').forEach(el => {
-            el.classList.add('reveal-active');
-        });
-        return;
-    }
-
-    // Set up elements with reveal-init classes
-    const targetGroups = [
-        { selector: '.section-header', stagger: false },
-        { selector: '.featured-spotlight-card', stagger: false },
-        { selector: '.disciplines-grid .discipline-card', stagger: true },
-        { selector: '.games-grid .game-card', stagger: true },
-        { selector: '.skills-grid .skill-category-card', stagger: true },
-        { selector: '.career-timeline', stagger: false },
-        { selector: '.career-timeline .career-card', stagger: true },
-        { selector: '.contact-grid > *', stagger: true }
-    ];
-
-    targetGroups.forEach(group => {
-        const elements = document.querySelectorAll(group.selector);
-        elements.forEach((el, index) => {
-            el.classList.add('reveal-init');
-            if (group.stagger) {
-                el.classList.add(`stagger-${(index % 6) + 1}`);
-            }
-        });
-    });
-
-    // Observer that adds reveal-active on enter and removes it on exit so animations replay smoothly
-    let enterQueue = [];
-    let enterTimer = null;
-
-    function processEnterQueue() {
-        enterQueue.forEach((el, idx) => {
-            el.style.transitionDelay = `${idx * 0.14}s`;
-            el.classList.add('reveal-active');
-        });
-        enterQueue = [];
-        enterTimer = null;
-    }
-
-    const singleObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Ignore cards currently hidden by portfolio filter or in active filter animation
-                if (entry.target.classList.contains('filter-hidden') || entry.target.classList.contains('is-hidden') || entry.target.classList.contains('filter-animating')) {
-                    return;
-                }
-                if (!entry.target.classList.contains('reveal-active')) {
-                    enterQueue.push(entry.target);
-                    if (!enterTimer) {
-                        enterTimer = setTimeout(processEnterQueue, 20);
-                    }
-                }
-            } else {
-                // Reset when scrolled out of view so it animates again next time
-                if (!entry.target.classList.contains('filter-animating')) {
-                    entry.target.classList.remove('reveal-active');
-                    entry.target.style.transitionDelay = '';
-                }
-            }
-        });
-    }, {
-        threshold: 0.08,
-        rootMargin: '0px 0px -30px 0px'
-    });
-
-    document.querySelectorAll('.reveal-init').forEach(el => {
-        singleObserver.observe(el);
-    });
-}
-
-/* ==========================================================================
-   9. INTERACTIVE CARD SPOTLIGHT (MOUSE-REACTIVE)
-   ========================================================================== */
-function initInteractiveSpotlights() {
-    // Disable mouse effects on touch devices
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-
-    const cards = document.querySelectorAll('.game-card, .discipline-card, .featured-spotlight-card, .skill-category-card, .career-card');
-    cards.forEach(card => {
-        card.classList.add('interactive-spotlight');
-
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-}
-
-/* ==========================================================================
-   10. MAGNETIC MICRO-INTERACTIONS FOR BUTTONS & SPOTLIGHT IMAGE PARALLAX
-   ========================================================================== */
-function initMagneticElements() {
-    // Disable on touch devices
-    if ('ontouchstart' in window || navigator.maxTouchPoints > 0) return;
-
-    // 1. Magnetic hover on primary CTA & resume buttons
-    const magneticBtns = document.querySelectorAll('.hero-cta .btn, .nav-hire-btn, .btn-resume, .spotlight-actions .btn');
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = e.clientX - (rect.left + rect.width / 2);
-            const y = e.clientY - (rect.top + rect.height / 2);
-
-            // Subtle magnetic pull (max 5px)
-            const factor = 0.18;
-            btn.style.transform = `translate(${x * factor}px, ${y * factor - 2}px)`;
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = '';
-        });
-    });
-
-    // 2. Subtle cursor parallax on Featured Spotlight Media
-    const spotlightCard = document.querySelector('.featured-spotlight-card');
-    const spotlightImg = document.querySelector('.spotlight-media img');
-    if (spotlightCard && spotlightImg) {
-        spotlightCard.addEventListener('mousemove', (e) => {
-            const rect = spotlightCard.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-            // Restrained, premium depth shift
-            spotlightImg.style.transform = `scale(1.08) translate(${x * 12}px, ${y * 12}px)`;
-        });
-
-        spotlightCard.addEventListener('mouseleave', () => {
-            spotlightImg.style.transform = '';
-        });
-    }
-
-    // 3. Hero Visual subtle tilt
-    const heroVisual = document.querySelector('.hero-visual');
-    const heroFrame = document.querySelector('.hero-card-frame');
-    if (heroVisual && heroFrame) {
-        heroVisual.addEventListener('mousemove', (e) => {
-            const rect = heroVisual.getBoundingClientRect();
-            const x = (e.clientX - rect.left) / rect.width - 0.5;
-            const y = (e.clientY - rect.top) / rect.height - 0.5;
-
-            heroFrame.style.transform = `perspective(1000px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.02)`;
-        });
-
-        heroVisual.addEventListener('mouseleave', () => {
-            heroFrame.style.transform = '';
-        });
-    }
-}
-
-/* ==========================================================================
-   11. BACK TO TOP BUTTON HANDLER
-   ========================================================================== */
-function initBackToTop() {
-    const btn = document.getElementById('back-to-top');
-    if (!btn) return;
-
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 450) {
-            btn.classList.add('visible');
-        } else {
-            btn.classList.remove('visible');
-        }
-    }, { passive: true });
-
-    btn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-        if (soundEnabled) playTone(600, 'sine', 0.1, 0.08);
     });
 }

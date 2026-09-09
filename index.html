@@ -3,55 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of Muhammad Ali - Game Developer &amp; 3D Generalist building interactive experiences across gameplay, 3D environments, lighting, UI/UX, and technical art.">
+    <meta name="description" content="Portfolio of Muhammad Ali - Game Developer &amp; 3D Generalist building interactive experiences across Unity, C#, VR/XR, 3D environments, ZBrush sculpting, and technical art.">
     <title>Muhammad Ali | Game Developer &amp; 3D Generalist</title>
     
+    <!-- OpenGraph & Twitter Cards -->
+    <meta property="og:title" content="Muhammad Ali | Game Developer &amp; 3D Generalist">
+    <meta property="og:description" content="Explore shipped commercial games, solo-built VR escape rooms, and high-fidelity 3D environments.">
+    <meta property="og:image" content="assets/forgotten_train_hero.webp">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Muhammad Ali | Game Developer &amp; 3D Generalist">
+    <meta name="twitter:description" content="12+ Shipped Games, VR Architecture, and 3D Technical Art.">
+    <meta name="twitter:image" content="assets/forgotten_train_hero.webp">
+
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Press+Start+2P&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Press+Start+2P&family=Rajdhani:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- High-Priority Preload for Above-the-Fold Hero Image -->
-    <link rel="preload" as="image" href="assets/forgotten_train_hero.webp" type="image/webp" fetchpriority="high">
 </head>
 <body>
 
-    <!-- Background Dynamic Particle Canvas -->
+    <!-- Background Particle & Ambient Grid Canvas -->
     <canvas id="bg-canvas"></canvas>
+    <div class="ambient-glow-mesh"></div>
 
-    <!-- Navigation Header -->
+    <!-- Side Telemetry Rails (Inspired by Reference 2 Matias) -->
+    <aside class="side-rail side-rail-left" aria-hidden="true">
+        <div class="side-rail-line"></div>
+        <div class="side-rail-text">
+            <span>RAWALPINDI, PK</span> &middot; WORLDWIDE REMOTE &middot; 2026
+        </div>
+        <div class="side-rail-line"></div>
+    </aside>
+
+    <aside class="side-rail side-rail-right" aria-hidden="true">
+        <div class="side-rail-socials">
+            <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="ArtStation"><i class="fa-brands fa-artstation"></i></a>
+            <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://discord.com" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="Discord: unknown344x_"><i class="fa-brands fa-discord"></i></a>
+        </div>
+        <div class="side-rail-line"></div>
+        <div class="side-rail-text">CONNECT // PROTOCOLS</div>
+    </aside>
+
+    <!-- Floating Navigation Header -->
     <header class="navbar" id="navbar">
-        <div class="container nav-container">
+        <div class="nav-container">
             <div class="nav-logo-group">
                 <button type="button" class="nav-avatar-btn" id="avatar-zoom-trigger" title="Click to view photo">
-                    <img src="assets/profile.webp" alt="Muhammad Ali" class="nav-avatar-img" width="42" height="42" loading="eager" decoding="async">
-                    <span class="avatar-zoom-badge"><i class="fa-solid fa-magnifying-glass-plus"></i></span>
+                    <img src="assets/profile.webp" alt="Muhammad Ali" class="nav-avatar-img" width="40" height="40">
                 </button>
                 <a href="#hero" class="nav-logo-text">MUHAMMAD ALI<span>.DEV</span></a>
             </div>
             
             <ul class="nav-links" id="nav-links">
                 <li><a href="#hero" class="nav-link active">Home</a></li>
-                <li><a href="#disciplines" class="nav-link">What I Do</a></li>
-                <li><a href="#games" class="nav-link">Projects</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#disciplines" class="nav-link">Craft</a></li>
+                <li><a href="#featured" class="nav-link">Spotlight</a></li>
+                <li><a href="#games" class="nav-link">Showcase</a></li>
+                <li><a href="#skills" class="nav-link">Capabilities</a></li>
+                <li><a href="#experience" class="nav-link">Milestones</a></li>
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
 
             <div class="nav-actions">
-                <button class="sound-toggle-btn" id="sound-toggle" title="Toggle UI Sound Effects">
-                    <i class="fa-solid fa-volume-xmark"></i>
-                    <span class="sound-toggle-text">SFX OFF</span>
+                <button class="sound-toggle-btn" id="sound-toggle" title="Toggle UI Sound Synthesizer">
+                    <i class="fa-solid fa-volume-high"></i>
+                    <span>SFX ON</span>
                 </button>
                 <a href="assets/Muhammad_Ali_Resume.pdf" class="btn-resume" download title="Download Resume PDF">
                     <i class="fa-solid fa-file-pdf"></i> Resume &darr;
@@ -65,625 +93,711 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
+        <!-- =================================================================
+             HERO STAGE: Cinematic Layered Depth with Large Personal Portrait
+             ================================================================= -->
         <section class="hero" id="hero">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <!-- <div class="hero-tag">
+                    <div class="hero-status-pill">
                         <span class="pulse-dot"></span>
-                        Available for Studio Roles &amp; Game Development Contracts
-                    </div> -->
+                        Available for Studio Roles &amp; Game Contracts
+                    </div>
                     
-                    <h1 class="hero-title">
-                        <span class="title-line-mask"><span class="title-line title-line-1">GAME DEVELOPER</span></span>
-                        <span class="title-line-mask"><span class="title-line title-line-2 text-gradient-cyan">&amp; 3D GENERALIST</span></span>
-                    </h1>
+                    <div class="hero-title-group">
+                        <span class="hero-intro">Interactive Systems &middot; Real-Time 3D</span>
+                        <h1 class="hero-title-main">
+                            MUHAMMAD ALI
+                        </h1>
+                        <div class="hero-role-line">
+                            GAME DEVELOPER &amp; 
+                            <span class="role-typing-cycler" id="role-cycler">3D GENERALIST</span><span class="role-typing-cursor"></span>
+                        </div>
+                    </div>
                     
                     <p class="hero-subtitle">
-                        Building interactive experiences across gameplay programming, 3D environments, lighting, UI/UX, and technical art.
+                        A multidisciplinary creator bridging <strong>gameplay engineering</strong>, <strong>VR physical mechanics</strong>, and <strong>high-end 3D art pipelines</strong> (Blender, ZBrush, UE5 Lumen, Substance 3D).
                     </p>
                     
-                    <div class="hero-cta">
+                    <div class="hero-cta-group">
                         <a href="#featured" class="btn btn-primary"><i class="fa-solid fa-gamepad"></i> Explore Featured Work</a>
                         <a href="assets/Muhammad_Ali_Resume.pdf" class="btn btn-outline" download><i class="fa-solid fa-file-pdf"></i> Resume &darr;</a>
                         <a href="#contact" class="btn btn-outline"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
                     </div>
                     
-                    <div class="hero-stats">
-                        <div class="stat-item">
+                    <div class="hero-telemetry-strip">
+                        <div class="telemetry-item">
                             <h3>12+</h3>
                             <p>Shipped Games</p>
                         </div>
-                        <div class="stat-item">
+                        <div class="telemetry-item">
                             <h3>3+ Yrs</h3>
-                            <p>Game Development</p>
+                            <p>Game Dev Exp</p>
                         </div>
-                        <div class="stat-item">
-                            <h3>Unity / C#</h3>
+                        <div class="telemetry-item">
+                            <h3>Unity/C#</h3>
                             <p>VR &amp; Multiplayer</p>
                         </div>
-                        <div class="stat-item">
+                        <div class="telemetry-item">
                             <h3>3D &amp; Art</h3>
-                            <p>Blender / ZBrush / UE5</p>
+                            <p>Blender/ZBrush</p>
                         </div>
-                        <div class="stat-item">
+                        <div class="telemetry-item">
                             <h3>3.77</h3>
-                            <p>CGPA &middot; B.S. Game Design</p>
+                            <p>CGPA &middot; Honors</p>
                         </div>
                     </div>
                 </div>
                 
-                <div class="hero-visual">
-                    <div class="hero-card-frame neon-glow-cyan">
-                        <img src="assets/forgotten_train_hero.webp" alt="The Forgotten Train: VR Escape" class="hero-card-img" width="440" height="380" loading="eager" fetchpriority="high" decoding="async">
-                        <div class="hero-card-badge">
-                            <span class="badge-tag">FEATURED PROJECT &middot; VR ESCAPE ROOM</span>
-                            <h3 class="badge-title">THE FORGOTTEN TRAIN</h3>
+                <!-- Hero Layered Depth Portrait Stage -->
+                <div class="hero-portrait-stage" id="hero-portrait-stage">
+                    <div class="portal-ring-outer"></div>
+                    <div class="portal-ring-inner"></div>
+                    <div class="portal-halo-glow"></div>
+
+                    <!-- Personal Picture Container with Cyber Markers & Gradient Depth Mask -->
+                    <div class="hero-portrait-wrapper" id="hero-portrait-wrapper">
+                        <span class="portrait-corner portrait-corner-tl"></span>
+                        <span class="portrait-corner portrait-corner-tr"></span>
+                        <span class="portrait-corner portrait-corner-bl"></span>
+                        <span class="portrait-corner portrait-corner-br"></span>
+
+                        <img src="assets/profile.webp" alt="Muhammad Ali - Game Developer &amp; 3D Generalist" class="hero-portrait-img" id="hero-portrait-img" width="380" height="460" fetchpriority="high" decoding="async">
+                    </div>
+
+                    <!-- Floating Telemetry Chips Anchored in 3D Perspective -->
+                    <div class="floating-chip chip-top-right" id="chip-1">
+                        <div class="floating-chip-icon chip-icon-cyan">
+                            <i class="fa-solid fa-vr-cardboard"></i>
+                        </div>
+                        <div class="floating-chip-text">
+                            <span><i class="fa-solid fa-signal" style="color: var(--emerald-signal);"></i> VR ARCHITECT</span>
+                            <strong>Photon PUN2 &middot; XR Hands</strong>
+                        </div>
+                    </div>
+
+                    <div class="floating-chip chip-bottom-left" id="chip-2">
+                        <div class="floating-chip-icon chip-icon-amber">
+                            <i class="fa-brands fa-google-play"></i>
+                        </div>
+                        <div class="floating-chip-text">
+                            <span>COMMERCIAL SHIPPED</span>
+                            <strong>12+ Titles on Google Play</strong>
+                        </div>
+                    </div>
+
+                    <div class="floating-chip chip-bottom-right" id="chip-3">
+                        <div class="floating-chip-icon chip-icon-purple">
+                            <i class="fa-solid fa-cube"></i>
+                        </div>
+                        <div class="floating-chip-text">
+                            <span>TECHNICAL ART</span>
+                            <strong>ZBrush &middot; Blender &middot; UE5</strong>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- What I Do Section -->
+        <!-- =================================================================
+             CORE CRAFT & DISCIPLINES: The 6 Pillars of Game Dev & 3D Art
+             ================================================================= -->
         <section class="section" id="disciplines">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">&lt; CORE DISCIPLINES &gt;</span>
-                    <h2 class="section-title">What I <span class="text-gradient-cyan">Do</span></h2>
-                    <p class="section-subtitle">Bridging gameplay programming, spatial mechanics, and rich 3D technical pipelines.</p>
+                    <span class="section-tag">&lt; SPECIALIZED CAPABILITIES &gt;</span>
+                    <h2 class="section-title">Core <span class="text-gradient-cyan">Disciplines &amp; Craft</span></h2>
+                    <p class="section-subtitle">Bridging rigorous gameplay programming, real-time spatial mechanics, and handcrafted 3D asset pipelines.</p>
                 </div>
 
                 <div class="disciplines-grid">
-                    <!-- 1. Game Development -->
-                    <div class="glass-panel discipline-card">
-                        <div class="discipline-icon"><i class="fa-solid fa-gamepad"></i></div>
-                        <h3 class="discipline-title">Game Development</h3>
-                        <p class="discipline-desc">I design and implement gameplay systems, mechanics, state machines, and player interactions in Unity &amp; C#.</p>
+                    <!-- 1. Gameplay Engineering -->
+                    <div class="glass-panel discipline-card spotlight-card">
+                        <div class="discipline-header">
+                            <div class="discipline-icon-wrap"><i class="fa-solid fa-gamepad"></i></div>
+                            <span class="discipline-num">01</span>
+                        </div>
+                        <h3 class="discipline-title">Gameplay Systems &amp; Logic</h3>
+                        <p class="discipline-desc">I design modular gameplay loops, hierarchical state machines, character controllers, and physics interactions in Unity &amp; C#.</p>
                         <div class="discipline-pills">
                             <span class="discipline-pill">Unity 3D / 2D</span>
-                            <span class="discipline-pill">C#</span>
-                            <span class="discipline-pill">Gameplay Logic</span>
+                            <span class="discipline-pill">C# Architecture</span>
                             <span class="discipline-pill">State Machines</span>
-                            <span class="discipline-pill">Physics</span>
+                            <span class="discipline-pill">Kinematic Physics</span>
+                            <span class="discipline-pill">Mobile Polish</span>
                         </div>
                     </div>
 
-                    <!-- 2. 3D & Environment -->
-                    <div class="glass-panel discipline-card">
-                        <div class="discipline-icon"><i class="fa-solid fa-cube"></i></div>
-                        <h3 class="discipline-title">3D &amp; Environment</h3>
-                        <p class="discipline-desc">I create and dress environments, props, and modular 3D assets in Blender, ZBrush, and Unreal Engine 5.</p>
-                        <div class="discipline-pills">
-                            <span class="discipline-pill">Blender 3D</span>
-                            <span class="discipline-pill">ZBrush Sculpting</span>
-                            <span class="discipline-pill">Unreal Engine 5</span>
-                            <span class="discipline-pill">Set Dressing</span>
-                            <span class="discipline-pill">PBR Texturing</span>
+                    <!-- 2. VR / XR Systems -->
+                    <div class="glass-panel discipline-card spotlight-card">
+                        <div class="discipline-header">
+                            <div class="discipline-icon-wrap" style="color: var(--amber-primary); border-color: rgba(255, 183, 3, 0.3); background: rgba(255, 183, 3, 0.1);"><i class="fa-solid fa-vr-cardboard"></i></div>
+                            <span class="discipline-num">02</span>
                         </div>
-                    </div>
-
-                    <!-- 3. Lighting & Tech Art -->
-                    <div class="glass-panel discipline-card">
-                        <div class="discipline-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                        <h3 class="discipline-title">Lighting &amp; Tech Art</h3>
-                        <p class="discipline-desc">I work with lighting, materials, shaders, and visual optimization across Lumen, Unity HDRP, and URP.</p>
-                        <div class="discipline-pills">
-                            <span class="discipline-pill">Lumen Lighting</span>
-                            <span class="discipline-pill">HDRP / URP</span>
-                            <span class="discipline-pill">Shader Graph</span>
-                            <span class="discipline-pill">Substance 3D</span>
-                            <span class="discipline-pill">Profiling</span>
-                        </div>
-                    </div>
-
-                    <!-- 4. UI/UX Design -->
-                    <div class="glass-panel discipline-card">
-                        <div class="discipline-icon"><i class="fa-solid fa-palette"></i></div>
-                        <h3 class="discipline-title">UI / UX Design</h3>
-                        <p class="discipline-desc">I design interfaces, HUDs, menus, responsive flow, and player onboarding tutorial experiences.</p>
-                        <div class="discipline-pills">
-                            <span class="discipline-pill">Game HUDs</span>
-                            <span class="discipline-pill">UX Flow</span>
-                            <span class="discipline-pill">Interactive Tutorials</span>
-                            <span class="discipline-pill">Micro-Animations</span>
-                            <span class="discipline-pill">Illustrator</span>
-                        </div>
-                    </div>
-
-                    <!-- 5. VR / XR Systems -->
-                    <div class="glass-panel discipline-card">
-                        <div class="discipline-icon"><i class="fa-solid fa-vr-cardboard"></i></div>
-                        <h3 class="discipline-title">VR / XR Systems</h3>
-                        <p class="discipline-desc">I develop immersive physical interactions, spatial gameplay mechanics, and multiplayer sync for VR headsets.</p>
+                        <h3 class="discipline-title">VR / XR Spatial Mechanics</h3>
+                        <p class="discipline-desc">I develop tactile two-handed grab physics, socket docking, rotational puzzle valves, and zero-latency multiplayer synchronization.</p>
                         <div class="discipline-pills">
                             <span class="discipline-pill">XR Interaction Toolkit</span>
-                            <span class="discipline-pill">Photon Multiplayer</span>
-                            <span class="discipline-pill">Spatial Audio</span>
-                            <span class="discipline-pill">Hand Physics</span>
+                            <span class="discipline-pill">Photon PUN2</span>
+                            <span class="discipline-pill">Physics Hands</span>
+                            <span class="discipline-pill">3D Spatial Audio</span>
                             <span class="discipline-pill">Meta Quest</span>
                         </div>
                     </div>
+
+                    <!-- 3. 3D Hard-Surface & Environments -->
+                    <div class="glass-panel discipline-card spotlight-card">
+                        <div class="discipline-header">
+                            <div class="discipline-icon-wrap" style="color: var(--purple-accent); border-color: rgba(168, 85, 247, 0.3); background: rgba(168, 85, 247, 0.1);"><i class="fa-solid fa-cube"></i></div>
+                            <span class="discipline-num">03</span>
+                        </div>
+                        <h3 class="discipline-title">3D Modeling &amp; Environments</h3>
+                        <p class="discipline-desc">I author hard-surface architectural models, concept vehicles, props, and modular environment kits from the ground up in Blender &amp; UE5.</p>
+                        <div class="discipline-pills">
+                            <span class="discipline-pill">Blender 3D</span>
+                            <span class="discipline-pill">UE5 Nanite</span>
+                            <span class="discipline-pill">Modular Kits</span>
+                            <span class="discipline-pill">Clean Topology</span>
+                            <span class="discipline-pill">Set Dressing</span>
+                        </div>
+                    </div>
+
+                    <!-- 4. Digital Sculpting & Anatomy -->
+                    <div class="glass-panel discipline-card spotlight-card">
+                        <div class="discipline-header">
+                            <div class="discipline-icon-wrap" style="color: #f43f5e; border-color: rgba(244, 63, 94, 0.3); background: rgba(244, 63, 94, 0.1);"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                            <span class="discipline-num">04</span>
+                        </div>
+                        <h3 class="discipline-title">Digital Sculpting &amp; Anatomy</h3>
+                        <p class="discipline-desc">I sculpt organic creatures, mythical beasts, and detailed anatomical muscle forms with high-frequency skin and scale details in ZBrush.</p>
+                        <div class="discipline-pills">
+                            <span class="discipline-pill">Pixologic ZBrush</span>
+                            <span class="discipline-pill">Creature Anatomy</span>
+                            <span class="discipline-pill">High-Poly Meshes</span>
+                            <span class="discipline-pill">Scale Texturing</span>
+                            <span class="discipline-pill">DynaMesh</span>
+                        </div>
+                    </div>
+
+                    <!-- 5. UV Unwrapping & PBR Texturing -->
+                    <div class="glass-panel discipline-card spotlight-card">
+                        <div class="discipline-header">
+                            <div class="discipline-icon-wrap" style="color: #38bdf8; border-color: rgba(56, 189, 248, 0.3); background: rgba(56, 189, 248, 0.1);"><i class="fa-solid fa-paint-roller"></i></div>
+                            <span class="discipline-num">05</span>
+                        </div>
+                        <h3 class="discipline-title">UV &amp; PBR Texturing</h3>
+                        <p class="discipline-desc">I create non-distorted UV unwrap sets and author weathered metallic, wood, fabric, and roughness maps in Substance 3D Painter.</p>
+                        <div class="discipline-pills">
+                            <span class="discipline-pill">Substance 3D Painter</span>
+                            <span class="discipline-pill">Clean UV Mapping</span>
+                            <span class="discipline-pill">Procedural Wear</span>
+                            <span class="discipline-pill">Normal Baking</span>
+                            <span class="discipline-pill">PBR Pipelines</span>
+                        </div>
+                    </div>
+
+                    <!-- 6. Shaders & Real-Time Lighting -->
+                    <div class="glass-panel discipline-card spotlight-card">
+                        <div class="discipline-header">
+                            <div class="discipline-icon-wrap" style="color: #eab308; border-color: rgba(234, 179, 8, 0.3); background: rgba(234, 179, 8, 0.1);"><i class="fa-solid fa-lightbulb"></i></div>
+                            <span class="discipline-num">06</span>
+                        </div>
+                        <h3 class="discipline-title">Lighting, Shaders &amp; Tech Art</h3>
+                        <p class="discipline-desc">I orchestrate real-time global illumination, atmospheric volumetrics, vertex water shaders, and draw call profiling across Lumen and HDRP/URP.</p>
+                        <div class="discipline-pills">
+                            <span class="discipline-pill">Lumen Real-Time GI</span>
+                            <span class="discipline-pill">Unity HDRP / URP</span>
+                            <span class="discipline-pill">Shader Graph</span>
+                            <span class="discipline-pill">Volumetric Fog</span>
+                            <span class="discipline-pill">Draw Call Profiling</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Featured Project Showcase -->
-        <section class="section" id="featured" style="padding-top: 1rem;">
+        <!-- =================================================================
+             CINEMATIC FLAGSHIP SPOTLIGHTS (The Forgotten Train & Selah)
+             ================================================================= -->
+        <section class="section" id="featured">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">&lt; FEATURED PROJECT SPOTLIGHT &gt;</span>
-                    <h2 class="section-title">Featured <span class="text-gradient-cyan">Project</span></h2>
-                    <p class="section-subtitle">Immersive VR puzzle escape game built 100% solo from scratch.</p>
+                    <span class="section-tag">&lt; FLAGSHIP SPOTLIGHTS &gt;</span>
+                    <h2 class="section-title">Cinematic <span class="text-gradient-cyan">Project Spotlights</span></h2>
+                    <p class="section-subtitle">Flagship multiplayer VR architecture and published commercial mobile titles.</p>
                 </div>
 
-                <div class="featured-spotlight-card">
-                    <div class="spotlight-media">
-                        <img src="assets/forgotten_train_featured.webp" alt="The Forgotten Train: VR Escape Showcase" width="640" height="400" loading="lazy" decoding="async">
-                        <span class="spotlight-badge"><i class="fa-solid fa-vr-cardboard"></i> VR ESCAPE ROOM &middot; SOLO PROJECT</span>
-                    </div>
-                    <div class="spotlight-content">
-                        <span class="game-category">VR PUZZLE ESCAPE &middot; 100% SOLO BUILT FROM SCRATCH</span>
-                        <h3 class="spotlight-title">THE FORGOTTEN TRAIN: VR ESCAPE</h3>
-                        <p class="spotlight-desc">
-                            An atmospheric VR escape room game set inside an accelerating vintage Victorian train carriage hurtling through misty mountain terrain. Created 100% independently from the ground up: 3D environment architecture, mechanical puzzle props, tactile XR physics, and diegetic UI.
-                        </p>
-
-                        <div class="spotlight-contributions">
-                            <h4>KEY HIGHLIGHTS &amp; ROLES:</h4>
-                            <div class="spotlight-contrib-grid">
-                                <div class="spotlight-contrib-item"><i class="fa-solid fa-check-circle"></i> 100% Solo Development (Code &amp; Art)</div>
-                                <div class="spotlight-contrib-item"><i class="fa-solid fa-check-circle"></i> Blender 3D Hard-Surface Modeling</div>
-                                <div class="spotlight-contrib-item"><i class="fa-solid fa-check-circle"></i> Custom Substance PBR Texturing</div>
-                                <div class="spotlight-contrib-item"><i class="fa-solid fa-check-circle"></i> XR Interaction Toolkit &amp; Physics Hands</div>
-                                <div class="spotlight-contrib-item"><i class="fa-solid fa-check-circle"></i> Intricate Mechanical Puzzle Systems</div>
-                                <div class="spotlight-contrib-item"><i class="fa-solid fa-check-circle"></i> Diegetic VR In-World UI &amp; Audio</div>
+                <div class="spotlight-showcase-grid">
+                    <!-- Flagship 1: The Forgotten Train -->
+                    <div class="flagship-card spotlight-card">
+                        <div class="flagship-media">
+                            <img src="assets/forgotten_train_featured.webp" alt="The Forgotten Train: VR Escape" class="flagship-img" loading="lazy" decoding="async">
+                            <span class="flagship-badge"><i class="fa-solid fa-crown"></i> 100% SOLO BUILT &middot; VR MULTIPLAYER</span>
+                        </div>
+                        <div class="flagship-content">
+                            <span class="flagship-category">VIRTUAL REALITY &middot; ESCAPE ROOM ADVENTURE</span>
+                            <h3 class="flagship-title">THE FORGOTTEN TRAIN: VR ESCAPE</h3>
+                            <span class="flagship-role-chip"><i class="fa-solid fa-user-gear"></i> Solo Creator: Code, 3D Assets, Textures &amp; UI</span>
+                            <p class="flagship-desc">
+                                Atmospheric VR multiplayer escape room set inside an accelerating vintage Victorian carriage hurtling through misty mountains. Handcrafted 100% independently from scratch: all 3D assets modeled in Blender, custom PBR textures in Substance Painter, tactile XR hand physics, and synchronized Photon PUN2 multiplayer.
+                            </p>
+                            <div class="flagship-highlights">
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Handcrafted 3D Victorian Assets</div>
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Tactile Physical Key &amp; Valve Mechanics</div>
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Photon PUN2 State Replication</div>
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Diegetic In-World Spatial UI</div>
+                            </div>
+                            <div class="flagship-actions">
+                                <button class="btn btn-primary btn-inspect" data-game="forgotten-train">
+                                    <i class="fa-solid fa-file-lines"></i> View Technical Case Study &rarr;
+                                </button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="spotlight-actions">
-                            <button class="btn btn-primary btn-inspect" data-game="forgotten-train">
-                                <i class="fa-solid fa-eye"></i> View Full Case Study &rarr;
-                            </button>
+                    <!-- Flagship 2: Selah: Bible Charades -->
+                    <div class="flagship-card spotlight-card">
+                        <div class="flagship-media">
+                            <img src="assets/Selah.webp" alt="Selah: Bible Charades Gameplay Showcase" class="flagship-img" loading="lazy" decoding="async">
+                            <span class="flagship-badge flagship-badge-amber"><i class="fa-brands fa-google-play"></i> LIVE ON GOOGLE PLAY</span>
+                        </div>
+                        <div class="flagship-content">
+                            <span class="flagship-category">UNITY 2D &middot; COMMERCIAL MOBILE PARTY GAME</span>
+                            <h3 class="flagship-title">SELAH: BIBLE CHARADES</h3>
+                            <span class="flagship-role-chip" style="color: var(--amber-primary); border-left-color: var(--amber-primary); background: rgba(255, 183, 3, 0.08);">
+                                <i class="fa-solid fa-user-gear"></i> Lead Unity Developer &middot; Mechanics &amp; UI/UX
+                            </span>
+                            <p class="flagship-desc">
+                                A published mobile title featuring gyro/tilt forehead motion controls, dynamic cloud-delivered card decks, in-game video recording, and Google Play monetization.
+                            </p>
+                            <div class="flagship-highlights">
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Gyro &amp; Tilt-Pass Detection</div>
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> In-Game Video Recording</div>
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Remote Cloud Decks &amp; IAP</div>
+                                <div class="flagship-highlight-item"><i class="fa-solid fa-check"></i> Responsive Multi-Resolution UI</div>
+                            </div>
+                            <div class="flagship-actions">
+                                <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games&amp;hl=en-US" target="_blank" rel="noopener noreferrer" class="btn btn-amber">
+                                    <i class="fa-brands fa-google-play"></i> View on Google Play &rarr;
+                                </a>
+                                <button class="btn btn-outline btn-inspect" data-game="selah-charades">
+                                    <i class="fa-solid fa-eye"></i> View Case Study
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Games Showcase Section -->
+        <!-- =================================================================
+             PORTFOLIO SHOWCASE: Filterable 21st.dev Bento Grid
+             ================================================================= -->
         <section class="section" id="games">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">&lt; PORTFOLIO SHOWCASE &gt;</span>
-                    <h2 class="section-title">Featured <span class="text-gradient-cyan">Work &amp; Projects</span></h2>
-                    <p class="section-subtitle">Explore shipped commercial games, interactive VR systems, and real-time 3D environment studies.</p>
+                    <span class="section-tag">&lt; VERIFIED PORTFOLIO &gt;</span>
+                    <h2 class="section-title">All Works &amp; <span class="text-gradient-cyan">Projects</span></h2>
+                    <p class="section-subtitle">Shipped commercial games, multiplayer VR prototypes, UE5 environments, and ZBrush creature sculpts.</p>
                 </div>
                 
-                <div class="portfolio-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="games">Games</button>
+                <div class="portfolio-filter-bar">
+                    <button class="filter-btn active" data-filter="all">All Projects</button>
+                    <button class="filter-btn" data-filter="games">Games &amp; VR</button>
                     <button class="filter-btn" data-filter="environments">3D &amp; Environments</button>
                     <button class="filter-btn" data-filter="tech-art">Technical Art</button>
-                    <button class="filter-btn" data-filter="ui-ux">UI/UX</button>
+                    <button class="filter-btn" data-filter="ui-ux">UI / UX</button>
                 </div>
                 
-                <div class="games-grid" id="games-grid">
-                    <!-- ====================================================
-                         GAMES & INTERACTIVE TITLES
-                         ==================================================== -->
-
-                    <!-- Game 1: The Forgotten Train (VR Escape Game) -->
-                    <div class="glass-panel game-card" data-category="games tech-art">
+                <div class="bento-grid" id="games-grid">
+                    <!-- Project 1: The Forgotten Train -->
+                    <div class="glass-panel game-card spotlight-card" data-category="games tech-art">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/forgotten_train_featured.webp" alt="The Forgotten Train - VR Escape Game" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #2b1f14, #4a3320); color: #e5a95d;">UNITY / VR</span>
+                            <img src="assets/forgotten_train.webp" alt="The Forgotten Train - VR Escape Room" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">UNITY / VR MULTIPLAYER</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">VR Escape Room Game &middot; Solo Project</span>
+                            <span class="game-category">VR Escape Game &middot; Solo Project</span>
                             <h3 class="game-title">The Forgotten Train: VR Escape</h3>
-                            <span class="game-role-badge" style="background: rgba(229, 169, 93, 0.15); border-color: rgba(229, 169, 93, 0.4); color: #e5a95d;"><i class="fa-solid fa-crown"></i> SOLO CREATOR: 100% Built from Scratch (Code, 3D Models, Texturing &amp; UI)</span>
-                            <p class="game-desc">Atmospheric VR escape room set inside an accelerating vintage Victorian train carriage. <strong>Created 100% solo from scratch</strong> — hand-modeled all 3D assets &amp; Victorian carriage architecture, authored custom PBR textures, programmed tactile XR physics hand-interactions, and designed diegetic VR UI.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-crown"></i> 100% Solo Creator (Code, 3D, Textures)</span>
+                            <p class="game-desc">Atmospheric VR multiplayer escape room set inside an accelerating vintage train carriage. Hand-modeled 3D Victorian architecture, custom PBR texturing, and XR physics.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">100% Solo Built</span>
+                                <span class="game-tag-pill">Solo Built</span>
                                 <span class="game-tag-pill">3D Modeling</span>
-                                <span class="game-tag-pill">PBR Texturing</span>
-                                <span class="game-tag-pill">VR UI/UX</span>
-                                <span class="game-tag-pill">XR Interaction Toolkit</span>
-                                <span class="game-tag-pill">Physics Hands</span>
-                                <span class="game-tag-pill">C#</span>
+                                <span class="game-tag-pill">Substance Painter</span>
+                                <span class="game-tag-pill">Photon PUN2</span>
+                                <span class="game-tag-pill">XR Toolkit</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="forgotten-train"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="forgotten-train"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Game 2: Selah: Bible Charades -->
-                    <div class="glass-panel game-card" data-category="games ui-ux">
+                    <!-- Project 2: Selah -->
+                    <div class="glass-panel game-card spotlight-card" data-category="games ui-ux">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/Selah.webp" alt="Selah: Bible Charades - Shipped Mobile Game" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
+                            <img src="assets/Selah.webp" alt="Selah: Bible Charades" class="game-thumb" loading="lazy" decoding="async">
                             <span class="game-engine-tag">UNITY 2D / SHIPPED</span>
                         </div>
                         <div class="game-info">
                             <span class="game-category">2D Mobile Party Game</span>
                             <h3 class="game-title">Selah: Bible Charades</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> MY ROLE: Lead Unity Developer &middot; Mechanics &amp; UI/UX</span>
-                            <p class="game-desc">Faith-filled forehead party game featuring tilt-based guess &amp; pass mechanics, dynamic cloud-delivered card decks, in-game video recording, and Google Play monetization.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> Lead Unity Developer &middot; Mechanics</span>
+                            <p class="game-desc">Forehead mobile party game featuring gyro tilt controls, dynamic remote decks, in-game video capture, and Google Play monetization.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unity 2D</span>
-                                <span class="game-tag-pill">C#</span>
-                                <span class="game-tag-pill">Google Play</span>
+                                <span class="game-tag-pill">Gyro Controls</span>
                                 <span class="game-tag-pill">In-App Purchases</span>
-                                <span class="game-tag-pill">Remote Config</span>
+                                <span class="game-tag-pill">Google Play</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="selah-charades"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
-                                <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games&amp;hl=en-US" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="View on Google Play"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                                <button class="btn btn-outline btn-inspect" data-game="selah-charades"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
+                                <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games&amp;hl=en-US" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fa-brands fa-google-play"></i> Store</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Game 3: Jewel Crush Quest: Match 3 -->
-                    <div class="glass-panel game-card" data-category="games ui-ux">
+                    <!-- Project 3: Jewel Crush -->
+                    <div class="glass-panel game-card spotlight-card" data-category="games ui-ux">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/Jewel_Crush.webp" alt="Jewel Crush Quest: Match 3" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
+                            <img src="assets/Jewel_Crush.webp" alt="Jewel Crush Quest" class="game-thumb" loading="lazy" decoding="async">
                             <span class="game-engine-tag">UNITY 2D / SHIPPED</span>
                         </div>
                         <div class="game-info">
                             <span class="game-category">2D Match-3 Mobile Puzzle</span>
                             <h3 class="game-title">Jewel Crush Quest: Match 3</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> MY ROLE: Gameplay Programmer &middot; UI/UX Polish</span>
-                            <p class="game-desc">Vibrant match-3 mobile puzzle title featuring interactive tutorial onboarding, responsive UI panels, enhanced gem cascades, and polished juice.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> Gameplay Programmer &middot; UI/UX</span>
+                            <p class="game-desc">Match-3 mobile puzzle with interactive onboarding tutorials, responsive UI panels, gem cascade mechanics, and audio juice.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unity 2D</span>
-                                <span class="game-tag-pill">C#</span>
                                 <span class="game-tag-pill">Match-3</span>
                                 <span class="game-tag-pill">Tutorial Systems</span>
-                                <span class="game-tag-pill">UI/UX Polish</span>
+                                <span class="game-tag-pill">Juice &amp; SFX</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="jewel-crush"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
-                                <a href="https://play.google.com/store/apps/details?id=com.kurlybrackets.jewelswap" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="View on Google Play"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                                <button class="btn btn-outline btn-inspect" data-game="jewel-crush"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
+                                <a href="https://play.google.com/store/apps/details?id=com.kurlybrackets.jewelswap" target="_blank" rel="noopener noreferrer" class="btn btn-primary"><i class="fa-brands fa-google-play"></i> Store</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Game 4: 2468 Block Puzzle: 2048 Merge -->
-                    <div class="glass-panel game-card" data-category="games ui-ux">
+                    <!-- Project 4: 2468 Block Puzzle -->
+                    <div class="glass-panel game-card spotlight-card" data-category="games ui-ux">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/Block_Puzzle.webp" alt="2468 Block Puzzle: 2048 Merge" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
+                            <img src="assets/Block_Puzzle.webp" alt="2468 Block Puzzle" class="game-thumb" loading="lazy" decoding="async">
                             <span class="game-engine-tag">UNITY 2D / SHIPPED</span>
                         </div>
                         <div class="game-info">
                             <span class="game-category">2D Number Merge Puzzle</span>
                             <h3 class="game-title">2468 Block Puzzle: 2048 Merge</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> MY ROLE: Full Gameplay &amp; Backend Developer</span>
-                            <p class="game-desc">Addictive 2048 number-merging block puzzle featuring Firebase Realtime leaderboards, interactive tutorials, user authentication, and monetization.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> Full Gameplay &amp; Backend Developer</span>
+                            <p class="game-desc">2048 number-merging block puzzle featuring Firebase Realtime leaderboards, interactive tutorials, user authentication, and monetization.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unity 2D</span>
-                                <span class="game-tag-pill">C#</span>
                                 <span class="game-tag-pill">Firebase Realtime</span>
                                 <span class="game-tag-pill">Leaderboards</span>
                                 <span class="game-tag-pill">AdMob / IAP</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="block-puzzle"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
-                                <a href="https://play.google.com/store/apps/details?id=stone.puzzle.merge.connect" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="View on Google Play"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                                <button class="btn btn-outline btn-inspect" data-game="block-puzzle"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Game 5: Mr Greedy: Ragdoll Punch -->
-                    <div class="glass-panel game-card" data-category="games">
+                    <!-- Project 5: Mr Greedy -->
+                    <div class="glass-panel game-card spotlight-card" data-category="games">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/Greedy_Ragdoll .webp" alt="Mr Greedy: Ragdoll Punch" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag">UNITY 3D / SHIPPED</span>
+                            <img src="assets/Greedy_Ragdoll .webp" alt="Mr Greedy: Ragdoll Punch" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">UNITY 3D / PHYSICS</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Ragdoll Physics Game</span>
+                            <span class="game-category">3D Physics Ragdoll Action</span>
                             <h3 class="game-title">Mr Greedy: Ragdoll Punch</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> MY ROLE: Gameplay &middot; Ragdoll Systems &middot; 200+ Levels</span>
-                            <p class="game-desc">Satisfying 3D mobile ragdoll physics brawler with 200+ handcrafted levels, tight touch controls, interactive tutorial onboarding, and punch impact mechanics.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> Core Mechanics &middot; Ragdoll Tuning</span>
+                            <p class="game-desc">Satisfying 3D ragdoll punch combat game with spring-joint physics, dynamic impact camera shakes, interactive tutorials, and shop cosmetics.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unity 3D</span>
-                                <span class="game-tag-pill">C#</span>
                                 <span class="game-tag-pill">Ragdoll Physics</span>
-                                <span class="game-tag-pill">Level Design</span>
-                                <span class="game-tag-pill">Touch Controls</span>
+                                <span class="game-tag-pill">Impulse Forces</span>
+                                <span class="game-tag-pill">Juice &amp; Feel</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="mr-greedy"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
-                                <a href="https://play.google.com/store/apps/details?id=com.cbjstudios.mrgreedypunch&amp;hl=en-US" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="View on Google Play"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                                <button class="btn btn-outline btn-inspect" data-game="mr-greedy"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Game 6: Snake Escape: Tap Out Puzzle -->
-                    <div class="glass-panel game-card" data-category="games ui-ux">
+                    <!-- Project 6: Snake Escape -->
+                    <div class="glass-panel game-card spotlight-card" data-category="games">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/Snake_Game.webp" alt="Snake Escape: Tap Out Puzzle" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag">UNITY 2D / SHIPPED</span>
+                            <img src="assets/Snake_Game.webp" alt="Snake Escape: Tap Out Puzzle" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">UNITY 2D / LOGIC</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">2D Logic Puzzle Game</span>
+                            <span class="game-category">2D Pathfinding Logic Puzzle</span>
                             <h3 class="game-title">Snake Escape: Tap Out Puzzle</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> MY ROLE: Core Mechanics &middot; Level Design (100+ Levels)</span>
-                            <p class="game-desc">Relaxing 2D logic puzzle title where players untangle and guide snakes through intricate grids with 100+ handcrafted levels and responsive feedback.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-user-gear"></i> Logic &amp; Grid Collision Programmer</span>
+                            <p class="game-desc">Strategic tap-out puzzle game where players untangle coiled snakes with custom directional path checkers and non-overlapping collision logic.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unity 2D</span>
-                                <span class="game-tag-pill">C#</span>
-                                <span class="game-tag-pill">Level Design</span>
                                 <span class="game-tag-pill">Grid Mechanics</span>
-                                <span class="game-tag-pill">UI Systems</span>
+                                <span class="game-tag-pill">Collision Logic</span>
+                                <span class="game-tag-pill">Smooth Lerping</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="snake-escape"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
-                                <a href="https://play.google.com/store/apps/details?id=com.BitAdventure.SnakeEscape" target="_blank" rel="noopener noreferrer" class="btn btn-primary" title="View on Google Play"><i class="fa-brands fa-google-play"></i> Play Store</a>
+                                <button class="btn btn-outline btn-inspect" data-game="snake-escape"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ====================================================
-                         3D, ENVIRONMENT & TECHNICAL ART
-                         ==================================================== -->
-
-                    <!-- 3D 1: Sunlit Grotto Cave -->
-                    <div class="glass-panel game-card" data-category="environments tech-art">
+                    <!-- Project 7: Mystic Grotto (UE5) -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments tech-art">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/cave_env/cave_1.webp" alt="Sunlit Grotto Cave - Unreal Engine 5 Subterranean Environment &amp; Lumen Lighting" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">UE5 / CAVE STUDY</span>
+                            <img src="assets/cave_env/cave_1.webp" alt="Mystic Grotto: Unreal Engine 5 Environment" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">UNREAL ENGINE 5 / LUMEN</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">UE5 Subterranean Environment &amp; Volumetric Lighting</span>
-                            <h3 class="game-title">Sunlit Grotto: Subterranean Cavern</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> MY ROLE: Environment Art &middot; UE5 &middot; Lumen Lighting</span>
-                            <p class="game-desc">Atmospheric subterranean cavern environment study created in UE5, focusing on composition, rock stratification, skylight sunbeams, and Lumen indirect light bounces.</p>
+                            <span class="game-category">UE5 Real-Time Environment</span>
+                            <h3 class="game-title">Mystic Grotto: Subterranean Ruins</h3>
+                            <span class="game-role-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> Environment Artist &middot; Lumen Lighting</span>
+                            <p class="game-desc">Subterranean cave ruin with dramatic sky shaft god-rays, glowing crystalline minerals, foliage set dressing, and real-time Lumen global illumination.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">Unreal Engine 5</span>
-                                <span class="game-tag-pill">Lumen Indirect Lighting</span>
-                                <span class="game-tag-pill">Volumetric Sunbeams</span>
-                                <span class="game-tag-pill">Rock Stratification</span>
-                                <span class="game-tag-pill">Foliage Scatter</span>
-                            </div>
-                            <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="cave-env"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3D 2: The Sword in the Stone -->
-                    <div class="glass-panel game-card" data-category="environments tech-art">
-                        <div class="game-thumb-wrapper">
-                            <img src="assets/sword_stone/sword_1.webp" alt="The Sword in the Stone - Unreal Engine 5 Environment Design &amp; Lumen Lighting" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">UE5 / LUMEN</span>
-                        </div>
-                        <div class="game-info">
-                            <span class="game-category">UE5 Environment Design &amp; Cinematic Lighting</span>
-                            <h3 class="game-title">The Sword in the Stone: Ancient Courtyard</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> MY ROLE: Environment Design &middot; Composition &middot; Lighting</span>
-                            <p class="game-desc">Legendary medieval fortress ruin courtyard in UE5 centered around the mythic Arthurian sword boulder, framed by weathered masonry and Lumen illumination.</p>
-                            <div class="game-tags">
-                                <span class="game-tag-pill">Unreal Engine 5</span>
+                                <span class="game-tag-pill">UE5</span>
                                 <span class="game-tag-pill">Lumen Lighting</span>
-                                <span class="game-tag-pill">PBR Stone Masonry</span>
-                                <span class="game-tag-pill">Ground Scatter</span>
-                                <span class="game-tag-pill">Hero Prop Composition</span>
+                                <span class="game-tag-pill">Nanite Geometry</span>
+                                <span class="game-tag-pill">Volumetric Dust</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="sword-stone-env"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="cave-env"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 3: Overgrown Sanctuary Ruins -->
-                    <div class="glass-panel game-card" data-category="environments tech-art">
+                    <!-- Project 8: Excalibur Sanctuary -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/overgrown_ruins/ruins_1.webp" alt="Overgrown Sanctuary Ruins - Unreal Engine 5 Environment Design" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">UE5 / FOLIAGE</span>
+                            <img src="assets/sword_stone/sword_1.webp" alt="Excalibur Sanctuary" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">BLENDER / CINEMATIC</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">UE5 Environment Design &amp; Foliage Dressing</span>
-                            <h3 class="game-title">Overgrown Sanctuary: Ancient Ivy Portal</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> MY ROLE: Foliage Generation &middot; Set Dressing &middot; UE5</span>
-                            <p class="game-desc">Photorealistic overgrown ancient stone ruin in UE5 featuring creeping ivy foliage, fallen mossy timber, and rustic agricultural props.</p>
+                            <span class="game-category">3D Hero Prop &amp; Environment Study</span>
+                            <h3 class="game-title">Excalibur Sanctuary: Medieval Legend</h3>
+                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> 3D Modeler &middot; PBR Texturing</span>
+                            <p class="game-desc">Hero sword embedded in ancient granite with runic etchings, moss-covered masonry, golden hour volumetric sunbeams, and PBR shaders.</p>
+                            <div class="game-tags">
+                                <span class="game-tag-pill">Blender 3D</span>
+                                <span class="game-tag-pill">PBR Materials</span>
+                                <span class="game-tag-pill">Atmospheric God-Rays</span>
+                                <span class="game-tag-pill">Hero Prop</span>
+                            </div>
+                            <div class="game-card-actions">
+                                <button class="btn btn-outline btn-inspect" data-game="sword-stone-env"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 9: Overgrown Sanctuary -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments">
+                        <div class="game-thumb-wrapper">
+                            <img src="assets/overgrown_ruins/ruins_1.webp" alt="Overgrown Sanctuary" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">UE5 / SET DRESSING</span>
+                        </div>
+                        <div class="game-info">
+                            <span class="game-category">Ancient Architecture &amp; Foliage</span>
+                            <h3 class="game-title">Overgrown Sanctuary: Forgotten Ruins</h3>
+                            <span class="game-role-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> World Building &middot; Foliage Scattering</span>
+                            <p class="game-desc">Ancient Gothic ruins reclaimed by creeping ivy, mossy flagstones, fractured stone columns, and warm evening solar lighting.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unreal Engine 5</span>
-                                <span class="game-tag-pill">Lumen Lighting</span>
-                                <span class="game-tag-pill">Ivy &amp; Foliage Generation</span>
-                                <span class="game-tag-pill">Stone Masonry</span>
-                                <span class="game-tag-pill">Rustic Set Dressing</span>
+                                <span class="game-tag-pill">Foliage Shaders</span>
+                                <span class="game-tag-pill">Nanite Meshes</span>
+                                <span class="game-tag-pill">World Building</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="ruins-env"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="ruins-env"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 4: Forgotten Crypt & Dungeon Courtyard -->
-                    <div class="glass-panel game-card" data-category="environments tech-art">
+                    <!-- Project 10: Modular Dungeon -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/dungeon/dungeon_1.webp" alt="Medieval Crypt &amp; Dungeon Courtyard" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">UE5 / LIGHTING</span>
+                            <img src="assets/dungeon/dungeon_1.webp" alt="Modular Dungeon" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">MODULAR 3D / UE5</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">UE5 Environment Design &amp; Atmospheric Lighting</span>
-                            <h3 class="game-title">Forgotten Crypt: Medieval Courtyard</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> MY ROLE: Level Art &middot; Atmospheric Candlelight</span>
-                            <p class="game-desc">Moody medieval dungeon courtyard in UE5 with heavy timber beams, hanging iron chains, ceremonial wooden portals, and flickering candlelight.</p>
+                            <span class="game-category">Modular Level Design Kit</span>
+                            <h3 class="game-title">Catacombs of the Fallen: Dungeon Kit</h3>
+                            <span class="game-role-badge"><i class="fa-solid fa-cube"></i> Modular Kit Modeler &middot; Lighting</span>
+                            <p class="game-desc">Modular subterranean crypt environment featuring snapping wall blocks, arched gateways, hanging iron chains, and dynamic candlelight.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">Unreal Engine 5</span>
-                                <span class="game-tag-pill">Lumen Lighting</span>
-                                <span class="game-tag-pill">Candle Point Lights</span>
-                                <span class="game-tag-pill">Medieval Architecture</span>
-                                <span class="game-tag-pill">Rough PBR Masonry</span>
+                                <span class="game-tag-pill">Modular Kit</span>
+                                <span class="game-tag-pill">Grid Snapping</span>
+                                <span class="game-tag-pill">Candle Lighting</span>
+                                <span class="game-tag-pill">Blender / UE5</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="dungeon-env"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="dungeon-env"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 5: Coastal Sentinel Lighthouse -->
-                    <div class="glass-panel game-card" data-category="environments tech-art">
+                    <!-- Project 11: Ocean Lighthouse -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments tech-art">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/environment/env_1.webp" alt="Coastal Sentinel Ocean Lighthouse - Unity HDRP" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">UNITY HDRP</span>
+                            <img src="assets/environment/env_1.webp" alt="Ocean Lighthouse" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">UNITY HDRP / VOLUMETRICS</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Environment Design &amp; Atmospheric Lighting</span>
+                            <span class="game-category">Atmospheric Maritime Environment</span>
                             <h3 class="game-title">Coastal Sentinel: Ocean Lighthouse</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> MY ROLE: Unity HDRP Environment &middot; Water Shaders</span>
-                            <p class="game-desc">Realistic ocean and watchtower coastal environment in Unity HDRP with physically-based water, volumetric sky, and dynamic solar transitions.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-lightbulb"></i> HDRP Lighting &middot; Water Shader</span>
+                            <p class="game-desc">Dramatic maritime scene in Unity HDRP featuring custom wave displacement water shaders, Rayleigh fog, coastal cliffs, and multi-state sky profiles.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">Unity HDRP</span>
-                                <span class="game-tag-pill">Water Shaders</span>
-                                <span class="game-tag-pill">Volumetric Clouds</span>
-                                <span class="game-tag-pill">Atmospheric Fog</span>
-                                <span class="game-tag-pill">Rock Sculpting</span>
+                                <span class="game-tag-pill">Water Shader</span>
+                                <span class="game-tag-pill">Volumetric Fog</span>
+                                <span class="game-tag-pill">Physical Sky</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="lighthouse-env"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="lighthouse-env"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 6: Modern Nordic Cabin -->
-                    <div class="glass-panel game-card" data-category="environments">
+                    <!-- Project 12: Nordic Cabin -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/cabin/cabin_1.webp" alt="Modern Nordic Cabin - 3D Modeling &amp; Texturing in Blender" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c); color: #ffffff;">BLENDER / SCRATCH</span>
+                            <img src="assets/cabin/cabin_1.webp" alt="Nordic Cabin" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">BLENDER / 100% SCRATCH</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Architectural Modeling &amp; Texturing</span>
+                            <span class="game-category">Architectural 3D Hard-Surface</span>
                             <h3 class="game-title">Modern Nordic Cabin: 3D Model</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-cube"></i> MY ROLE: 100% Modeled &amp; Textured From Scratch</span>
-                            <p class="game-desc">Scandinavian timber cottage modeled and textured completely from scratch in Blender with PBR vertical wood cladding and golden-hour sunset lighting.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-cube"></i> Modeled &amp; Textured 100% from Scratch</span>
+                            <p class="game-desc">A-frame Nordic wilderness cabin modeled from scratch in Blender with charred black timber, floor-to-ceiling panoramic glass, and terrain dressing.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">Blender 3D</span>
-                                <span class="game-tag-pill">Modeled From Scratch</span>
-                                <span class="game-tag-pill">Textured in Blender</span>
+                                <span class="game-tag-pill">100% Solo Built</span>
                                 <span class="game-tag-pill">Hard-Surface</span>
-                                <span class="game-tag-pill">Architectural Lighting</span>
+                                <span class="game-tag-pill">Architectural 3D</span>
+                                <span class="game-tag-pill">Blender Cycles</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="nordic-cabin"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="nordic-cabin"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 7: Traditional Isometric House -->
-                    <div class="glass-panel game-card" data-category="environments">
+                    <!-- Project 13: Stylized Isometric House -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments ui-ux">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/isometric_house/isometric_1.webp" alt="Traditional Isometric House - 3D Interior &amp; Cutaway in Blender" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c); color: #ffffff;">BLENDER / SCRATCH</span>
+                            <img src="assets/isometric_house/isometric_1.webp" alt="Isometric House" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">STYLIZED 3D / BLENDER</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Isometric Architecture &amp; Interior</span>
-                            <h3 class="game-title">Traditional Isometric House: Cutaway</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-cube"></i> MY ROLE: 100% Modeled From Scratch &middot; Architecture &amp; Props</span>
-                            <p class="game-desc">Multi-room two-story traditional house cutaway modeled and textured entirely from scratch in Blender with custom furniture and ambient interior lighting.</p>
+                            <span class="game-category">Stylized 3D Game Asset &middot; 6 Angles</span>
+                            <h3 class="game-title">Stylized Isometric House</h3>
+                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> Stylized Modeler &middot; Orthographic Lighting</span>
+                            <p class="game-desc">Cozy cottage diorama with exaggerated bevels, terracotta tiles, timber framing, and 6 camera inspect angles.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">Blender 3D</span>
-                                <span class="game-tag-pill">Modeled From Scratch</span>
-                                <span class="game-tag-pill">Isometric Diorama</span>
-                                <span class="game-tag-pill">Interior Architecture</span>
-                                <span class="game-tag-pill">Custom Furniture</span>
+                                <span class="game-tag-pill">Stylized 3D</span>
+                                <span class="game-tag-pill">Orthographic</span>
+                                <span class="game-tag-pill">Cozy Diorama</span>
+                                <span class="game-tag-pill">Blender</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="isometric-house"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="isometric-house"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 8: Wyvern Beast Dragon Car -->
-                    <div class="glass-panel game-card" data-category="environments">
+                    <!-- Project 14: Draco GT (Dragon Car) -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments tech-art">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/dragon_car/dragon_car_1.webp" alt="Wyvern Beast: Dragon Hypercar Concept" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">3D CONCEPT / HYBRID</span>
+                            <img src="assets/dragon_car/dragon_car_1.webp" alt="Draco GT Dragon Car" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">3D VEHICLE / COMPARATOR</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Concept Vehicle &amp; Creature Hybrid</span>
-                            <h3 class="game-title">Wyvern Beast: Dragon Hypercar</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-cube"></i> MY ROLE: Concept Vehicle Design &middot; 3D Modeling</span>
-                            <p class="game-desc">Gothic creature-vehicle hybrid combining aerodynamic hypercar styling with sculpted dragon wings, gold metallic finish, and wet-asphalt reflections.</p>
+                            <span class="game-category">Creature &middot; Vehicle Hybrid Concept</span>
+                            <h3 class="game-title">Draco GT: 3D Concept Car</h3>
+                            <span class="game-role-badge"><i class="fa-solid fa-sliders"></i> Hard-Surface &amp; Organic Topology</span>
+                            <p class="game-desc">Aerodynamic sports car hybrid fusing biomechanical dragon wings and carbon-fiber bodywork. Features interactive before/after texture comparison.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">3D Vehicle Modeling</span>
+                                <span class="game-tag-pill">Vehicle Modeling</span>
                                 <span class="game-tag-pill">Creature Hybrid</span>
-                                <span class="game-tag-pill">Gold Metallic Paint</span>
-                                <span class="game-tag-pill">Organic Wings</span>
-                                <span class="game-tag-pill">Cinematic Renders</span>
+                                <span class="game-tag-pill">Interactive Compare</span>
+                                <span class="game-tag-pill">Blender Renders</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="dragon-car"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="dragon-car"><i class="fa-solid fa-sliders"></i> Compare &amp; Inspect &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 9: Dragon 3D Sculpting (ZBrush) -->
-                    <div class="glass-panel game-card" data-category="environments">
+                    <!-- Project 15: Fire Dragon ZBrush Sculpt -->
+                    <div class="glass-panel game-card spotlight-card" data-category="environments">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/dragon/dragon_1.webp" alt="Dragon Character - 3D Sculpting &amp; Texturing" class="game-thumb" width="500" height="280" loading="lazy" decoding="async">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">ZBRUSH / 3D SCULPT</span>
+                            <img src="assets/dragon/dragon_1.webp" alt="Fire Dragon ZBrush Sculpt" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">ZBRUSH / 3D SCULPT</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Character Sculpting &amp; Texturing</span>
+                            <span class="game-category">Organic Anatomy &middot; Digital Sculpt</span>
                             <h3 class="game-title">Fire Dragon: 3D Creature Sculpt</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> MY ROLE: High-Poly Digital Sculpting (ZBrush)</span>
-                            <p class="game-desc">High-detail organic fantasy creature sculpt in Pixologic ZBrush with intricate scale anatomy, winged membranes, and dramatic fiery renders.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> High-Poly Digital Sculpting (ZBrush)</span>
+                            <p class="game-desc">High-poly creature sculpt in ZBrush with intricate scale patterns, muscular wing membranes, and before/after sculpt topology slider.</p>
                             <div class="game-tags">
                                 <span class="game-tag-pill">ZBrush</span>
                                 <span class="game-tag-pill">Digital Sculpting</span>
                                 <span class="game-tag-pill">Creature Anatomy</span>
-                                <span class="game-tag-pill">Texture Painting</span>
-                                <span class="game-tag-pill">High-Poly Sculpt</span>
+                                <span class="game-tag-pill">Interactive Compare</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="dragon-sculpt"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="dragon-sculpt"><i class="fa-solid fa-sliders"></i> Compare &amp; Inspect &rarr;</button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3D 10: Cyberpunk Neon Bike -->
-                    <div class="glass-panel game-card" data-category="tech-art">
+                    <!-- Project 16: Cyberpunk Neon Bike -->
+                    <div class="glass-panel game-card spotlight-card" data-category="tech-art">
                         <div class="game-thumb-wrapper">
-                            <img src="assets/bike/bike_1.webp" alt="Cyberpunk Neon Bike - 3D Texturing &amp; Rendering" class="game-thumb" width="500" height="280" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='assets/bike/bike_1.png';">
-                            <span class="game-engine-tag" style="background: linear-gradient(135deg, #a67449, #8c5e3c);">SUBSTANCE / 3D RENDER</span>
+                            <img src="assets/bike/bike_1.webp" alt="Cyberpunk Neon Bike" class="game-thumb" loading="lazy" decoding="async">
+                            <span class="game-engine-tag">SUBSTANCE 3D / PBR</span>
                         </div>
                         <div class="game-info">
-                            <span class="game-category">3D Texturing &amp; Lighting Showcase</span>
+                            <span class="game-category">PBR Texturing &amp; Emissive Showcase</span>
                             <h3 class="game-title">Cyberpunk Neon Bike: 3D Textures</h3>
-                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> MY ROLE: PBR Texturing &middot; Emissive Lighting</span>
-                            <p class="game-desc">Detailed texturing project in Substance 3D Painter featuring futuristic motorcycle wear, emissive neon highlights, and studio lighting renders.</p>
+                            <span class="game-role-badge"><i class="fa-solid fa-palette"></i> PBR Texturing &middot; Emissive Lighting</span>
+                            <p class="game-desc">Detailed texturing project in Substance 3D Painter with metallic surface scratches, emissive neon highlights, and 10 studio render angles.</p>
                             <div class="game-tags">
-                                <span class="game-tag-pill">Substance 3D Painter</span>
-                                <span class="game-tag-pill">PBR Texturing</span>
-                                <span class="game-tag-pill">Neon &amp; Emissive</span>
-                                <span class="game-tag-pill">Studio Lighting</span>
-                                <span class="game-tag-pill">Marmoset / Blender</span>
+                                <span class="game-tag-pill">Substance Painter</span>
+                                <span class="game-tag-pill">PBR Shading</span>
+                                <span class="game-tag-pill">Emissive Neon</span>
+                                <span class="game-tag-pill">10 Render Angles</span>
                             </div>
                             <div class="game-card-actions">
-                                <button class="btn btn-outline btn-inspect" data-game="neon-bike"><i class="fa-solid fa-file-lines"></i> View Case Study &rarr;</button>
+                                <button class="btn btn-outline btn-inspect" data-game="neon-bike"><i class="fa-solid fa-file-lines"></i> Case Study &rarr;</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- Skills & Generalist Capabilities (No Arbitrary Percentages) -->
+        <!-- =================================================================
+             TECHNICAL SKILLS MATRIX (4 Specialized Categories)
+             ================================================================= -->
         <section class="section" id="skills">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">&lt; CAPABILITIES &amp; TOOLKIT &gt;</span>
-                    <h2 class="section-title">Technical <span class="text-gradient-cyan">Skills Matrix</span></h2>
-                    <p class="section-subtitle">Balanced generalist mastery spanning gameplay programming, real-time 3D pipelines, shaders, and UI design.</p>
+                    <span class="section-tag">&lt; CAPABILITIES MATRIX &gt;</span>
+                    <h2 class="section-title">Technical <span class="text-gradient-cyan">Capabilities</span></h2>
+                    <p class="section-subtitle">Balanced generalist mastery spanning gameplay engineering, spatial physics, and 3D artistic pipelines.</p>
                 </div>
                 
                 <div class="skills-grid">
                     <!-- Pillar 1: Game Development -->
-                    <div class="glass-panel skill-category-card">
+                    <div class="glass-panel skill-category-card spotlight-card">
                         <div class="skill-cat-header">
                             <div class="skill-cat-icon"><i class="fa-solid fa-gamepad"></i></div>
                             <h3 class="skill-cat-title">Game Development</h3>
@@ -697,14 +811,14 @@
                         </div>
                         <ul class="skill-points-list">
                             <li><i class="fa-solid fa-check"></i> <strong>Gameplay Systems:</strong> State machines, mechanics, player controllers, and input buffering.</li>
-                            <li><i class="fa-solid fa-check"></i> <strong>VR Interactions:</strong> Spatial grab mechanics, physics hands, and teleportation.</li>
+                            <li><i class="fa-solid fa-check"></i> <strong>VR Interactions:</strong> Spatial grab mechanics, physics hands, and socket docking.</li>
                             <li><i class="fa-solid fa-check"></i> <strong>Multiplayer:</strong> Room matchmaking, state synchronization, and lag mitigation.</li>
                             <li><i class="fa-solid fa-check"></i> <strong>Physics:</strong> Ragdoll setups, collision layers, and 2D/3D physics tuning.</li>
                         </ul>
                     </div>
 
                     <!-- Pillar 2: 3D & Environment Art -->
-                    <div class="glass-panel skill-category-card">
+                    <div class="glass-panel skill-category-card spotlight-card">
                         <div class="skill-cat-header">
                             <div class="skill-cat-icon"><i class="fa-solid fa-cube"></i></div>
                             <h3 class="skill-cat-title">3D &amp; Environment</h3>
@@ -713,8 +827,8 @@
                             <span class="skill-badge skill-badge-highlight">Blender 3D</span>
                             <span class="skill-badge skill-badge-highlight">Unreal Engine 5</span>
                             <span class="skill-badge">Pixologic ZBrush</span>
+                            <span class="skill-badge">Nanite</span>
                             <span class="skill-badge">Substance Painter</span>
-                            <span class="skill-badge">Level Art</span>
                         </div>
                         <ul class="skill-points-list">
                             <li><i class="fa-solid fa-check"></i> <strong>3D Modeling:</strong> Hard-surface architecture, concept vehicles, props from scratch.</li>
@@ -725,7 +839,7 @@
                     </div>
 
                     <!-- Pillar 3: Technical Art & Lighting -->
-                    <div class="glass-panel skill-category-card">
+                    <div class="glass-panel skill-category-card spotlight-card">
                         <div class="skill-cat-header">
                             <div class="skill-cat-icon"><i class="fa-solid fa-lightbulb"></i></div>
                             <h3 class="skill-cat-title">Technical Art &amp; Lighting</h3>
@@ -746,7 +860,7 @@
                     </div>
 
                     <!-- Pillar 4: UI/UX & Interaction Design -->
-                    <div class="glass-panel skill-category-card">
+                    <div class="glass-panel skill-category-card spotlight-card">
                         <div class="skill-cat-header">
                             <div class="skill-cat-icon"><i class="fa-solid fa-palette"></i></div>
                             <h3 class="skill-cat-title">UI/UX &amp; Interaction</h3>
@@ -769,140 +883,92 @@
             </div>
         </section>
 
-        <!-- Experience & Work (Authentic Milestones) -->
+        <!-- =================================================================
+             CAREER MILESTONES & HONORS
+             ================================================================= -->
         <section class="section" id="experience">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag">&lt; CAREER MILESTONES &gt;</span>
-                    <h2 class="section-title">Experience &amp; <span class="text-gradient-cyan">Work</span></h2>
-                    <p class="section-subtitle">A timeline of my professional game development experience, shipped titles, education, and technical growth.</p>
+                    <span class="section-tag">&lt; VERIFIED TRACK RECORD &gt;</span>
+                    <h2 class="section-title">Career <span class="text-gradient-cyan">Milestones</span></h2>
+                    <p class="section-subtitle">Proven delivery of shipped commercial games, studio collaborations, and academic honors.</p>
                 </div>
                 
-                <div class="career-timeline">
-                    <!-- 01: Kurlee Brackets (Primary & Highlighted Experience) -->
-                    <div class="career-card career-card-featured glass-panel">
-                        <div class="career-card-header">
-                            <div class="career-period-badge">
-                                <span class="career-date">EARLY 2023 &mdash; PRESENT</span>
-                                <span class="career-duration-pill"><i class="fa-solid fa-clock"></i> 3+ YEARS</span>
-                            </div>
-                            <span class="career-status-pill"><span class="pulse-dot"></span> ACTIVE ENGAGEMENT</span>
-                        </div>
-                        <div class="career-card-body">
-                            <div class="career-title-group">
-                                <h3 class="career-role">Game Developer</h3>
-                                <div class="career-company"><i class="fa-solid fa-building"></i> Kurlee Brackets &middot; <span class="career-location"><i class="fa-solid fa-location-dot"></i> On-Site</span></div>
-                            </div>
-                            <p class="career-desc">
-                                Professional game development across core gameplay, mechanics implementation, UI systems, bug fixing, and production work across mobile game pipelines.
-                            </p>
-
-                            <!-- Highlighted Achievement Banner -->
-                            <div class="career-achievement-banner">
-                                <div class="achievement-stat">
-                                    <span class="achievement-number">12+</span>
-                                    <span class="achievement-label">SHIPPED TITLES</span>
-                                </div>
-                                <div class="achievement-details">
-                                    <h4 class="achievement-heading">12+ Published Mobile Game Titles</h4>
-                                    <p class="achievement-subtext">Shipped on Google Play including <em>Selah: Bible Charades</em>, <em>Jewel Crush Quest</em>, <em>2468 Block Puzzle</em>, <em>Mr Greedy</em>, and <em>Snake Escape</em>.</p>
-                                </div>
-                            </div>
+                <div class="timeline">
+                    <!-- 01: Client & Studio Work -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="glass-panel timeline-content">
+                            <span class="timeline-date">01 &middot; FREELANCE &amp; CONTRACTS</span>
+                            <h3 class="timeline-role">Game Developer &middot; Game Designer</h3>
+                            <div class="timeline-company">Client &amp; Studio Collaborations</div>
+                            <p>Collaborated with indie studios and private clients on gameplay mechanics implementation, VR interaction prototyping, UI/UX flows, and game feel polish across multiple commercially targeted projects.</p>
                         </div>
                     </div>
 
-                    <!-- 02: Motion Maze -->
-                    <div class="career-card glass-panel">
-                        <div class="career-card-header">
-                            <div class="career-period-badge">
-                                <span class="career-date">COMPLETED ROLE</span>
-                                <span class="career-duration-pill"><i class="fa-solid fa-clock"></i> 6 MONTHS</span>
-                            </div>
-                            <span class="career-track-tag">STUDIO EXPERIENCE</span>
-                        </div>
-                        <div class="career-card-body">
-                            <div class="career-title-group">
-                                <h3 class="career-role">Game Developer</h3>
-                                <div class="career-company"><i class="fa-solid fa-building"></i> Motion Maze &middot; <span class="career-location"><i class="fa-solid fa-globe"></i> Remote</span></div>
-                            </div>
-                            <p class="career-desc">
-                                Contributed as a Game Developer at Motion Maze, developing gameplay mechanics, UI systems, and game programming for mobile projects.
-                            </p>
+                    <!-- 02: Shipped Games -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="glass-panel timeline-content">
+                            <span class="timeline-date">02 &middot; SHIPPED RELEASES</span>
+                            <h3 class="timeline-role">Lead Game Developer &middot; 12+ Titles</h3>
+                            <div class="timeline-company">Commercial Mobile Titles &middot; Google Play Store</div>
+                            <p>Successfully delivered and maintained 12+ published mobile games including <em>Selah: Bible Charades</em>, <em>Jewel Crush Quest</em>, <em>2468 Block Puzzle</em>, <em>Mr Greedy</em>, and <em>Snake Escape</em>. Handled core mechanics, interactive onboarding tutorials, monetization (AdMob / IAP), and live analytics.</p>
                         </div>
                     </div>
 
-                    <!-- 03: Riphah International University (Primary Academic Achievement) -->
-                    <div class="career-card career-card-academic glass-panel">
-                        <div class="career-card-header">
-                            <div class="career-period-badge">
-                                <span class="career-date">CLASS OF 2026</span>
-                                <span class="career-duration-pill"><i class="fa-solid fa-graduation-cap"></i> GRADUATED</span>
-                            </div>
-                            <div class="career-grade-highlight academic-grade">
-                                <span class="grade-badge">3.77 CGPA</span>
-                            </div>
-                        </div>
-                        <div class="career-card-body">
-                            <div class="career-title-group">
-                                <h3 class="career-role">B.S. Game Design &amp; Production</h3>
-                                <div class="career-company"><i class="fa-solid fa-university"></i> Riphah International University</div>
-                            </div>
-                            <p class="career-desc">
-                                Completed degree studies with a <strong>3.77 CGPA</strong>, focusing on game mechanics design, gameplay programming, 3D art pipelines, and game production.
-                            </p>
+                    <!-- 03: Independent Projects -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="glass-panel timeline-content">
+                            <span class="timeline-date">03 &middot; INDEPENDENT R&amp;D</span>
+                            <h3 class="timeline-role">VR, Multiplayer &amp; 3D Real-Time Studies</h3>
+                            <div class="timeline-company">Unity XR &middot; Unreal Engine 5 &middot; Blender</div>
+                            <p>Designed and programmed complete multiplayer VR escape game prototypes (<em>The Forgotten Train</em>), authored photorealistic UE5 real-time environments exploring Lumen lighting and Nanite geometry, and created hard-surface/organic 3D models 100% from scratch.</p>
                         </div>
                     </div>
 
-                    <!-- 04: Government Game Development Course -->
-                    <div class="career-card glass-panel">
-                        <div class="career-card-header">
-                            <div class="career-period-badge">
-                                <span class="career-date">2022</span>
-                                <span class="career-duration-pill"><i class="fa-solid fa-certificate"></i> CERTIFICATION</span>
-                            </div>
-                            <div class="career-grade-highlight course-grade">
-                                <span class="grade-badge">A+ GRADE &middot; 90%+ MARKS</span>
-                            </div>
-                        </div>
-                        <div class="career-card-body">
-                            <div class="career-title-group">
-                                <h3 class="career-role">Game Development Course</h3>
-                                <div class="career-company"><i class="fa-solid fa-award"></i> Government-Sponsored Program</div>
-                            </div>
-                            <p class="career-desc">
-                                Government-sponsored Game Development course covering core programming, game loops, and interactive systems. Completed with an <strong>A+ grade / 90%+ marks</strong>.
-                            </p>
+                    <!-- 04: Education -->
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="glass-panel timeline-content">
+                            <span class="timeline-date">3.77 CGPA &middot; HIGH HONORS</span>
+                            <h3 class="timeline-role">B.S. in Game Design &amp; Production</h3>
+                            <div class="timeline-company">Riphah International University</div>
+                            <p>Graduated with high academic honors (3.77 CGPA), specializing in game mechanics design, Unity/C# programming, interactive systems, 3D pipelines, and production management.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- =================================================================
+             CONTACT TERMINAL
+             ================================================================= -->
         <section class="section" id="contact">
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag">&lt; GET IN TOUCH &gt;</span>
-                    <h2 class="section-title">Let's Build <span class="text-gradient-cyan">Something Extraordinary</span></h2>
+                    <h2 class="section-title">Let's Build <span class="text-gradient-cyan">Something Legendary</span></h2>
                     <p class="section-subtitle">Interested in hiring me for your game studio, freelance project, or technical consultation?</p>
                 </div>
                 
                 <div class="contact-grid">
                     <div class="glass-panel contact-info-card">
-                        <h3 style="font-size: 1.6rem; margin-bottom: 1.5rem;">Contact Information</h3>
+                        <h3>Direct Connection</h3>
                         
                         <div class="contact-method">
                             <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
                             <div class="contact-text">
                                 <h4>Direct Email</h4>
-                                <p><a href="mailto:muhammadali.offical.gd@gmail.com" style="color: inherit; text-decoration: none;">muhammadali.offical.gd@gmail.com</a></p>
+                                <p><a href="mailto:muhammadali.offical.gd@gmail.com">muhammadali.offical.gd@gmail.com</a></p>
                             </div>
                         </div>
 
                         <div class="contact-method">
                             <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
                             <div class="contact-text">
-                                <h4>Location</h4>
+                                <h4>Base Location</h4>
                                 <p>Pakistan &middot; Available for Remote &amp; Worldwide Studio Contracts</p>
                             </div>
                         </div>
@@ -915,18 +981,20 @@
                             </div>
                         </div>
 
-                        <h4 style="margin-top: 2rem; margin-bottom: 0.8rem; font-family: var(--font-heading);">Connect on Platforms:</h4>
-                        <div class="social-links">
-                            <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" class="social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
-                            <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer" class="social-btn" title="ArtStation"><i class="fa-brands fa-artstation"></i></a>
-                            <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <div style="margin-top: 1rem;">
+                            <h4 style="font-size: 0.85rem; color: var(--text-dim); text-transform: uppercase; margin-bottom: 0.8rem;">Platform Profiles:</h4>
+                            <div style="display: flex; gap: 0.8rem;">
+                                <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="ArtStation"><i class="fa-brands fa-artstation"></i></a>
+                                <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            </div>
                         </div>
                     </div>
 
                     <form class="glass-panel contact-form" id="contact-form" action="https://formspree.io/f/meaqzybp" method="POST">
                         <div class="form-group">
                             <label for="name">Your Name / Studio Name</label>
-                            <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Marcus Vance (Game Studio)" required>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="e.g. Marcus Vance (Indie Game Studio)" required>
                         </div>
 
                         <div class="form-group">
@@ -935,19 +1003,19 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="subject">Project Type / Inquiry</label>
+                            <label for="subject">Inquiry Type</label>
                             <select id="subject" name="subject" class="form-select">
-                                <option value="fulltime">Studio Developer / Generalist Role</option>
+                                <option value="fulltime">Studio Developer / 3D Generalist Role</option>
                                 <option value="freelance">Freelance Gameplay / Unity Dev</option>
                                 <option value="vr">VR / XR Interactive Project</option>
                                 <option value="3d-art">3D Environment / Technical Art</option>
-                                <option value="other">General Inquiry</option>
+                                <option value="other">General Consultation</option>
                             </select>
                         </div>
 
                         <div class="form-group">
-                            <label for="message">Message Details</label>
-                            <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Tell me about your project, game mechanics, or role requirements..." required></textarea>
+                            <label for="message">Project Requirements</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="4" placeholder="Tell me about your game mechanics, project timeline, or role requirements..." required></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Send Message</button>
@@ -957,52 +1025,47 @@
         </section>
     </main>
 
-    <!-- Modal Dialog for Detailed Game Specs -->
-    <div class="modal-backdrop" id="project-modal">
+    <!-- Modal Dialog for Case Studies -->
+    <div class="modal-backdrop" id="project-modal" role="dialog" aria-modal="true" aria-label="Project Case Study">
         <div class="glass-panel modal-content">
-            <button class="modal-close-btn" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <button class="modal-close-btn" id="modal-close" aria-label="Close Case Study"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-body" id="modal-body">
-                <!-- Injected via JavaScript -->
+                <!-- Populated dynamically via JavaScript -->
             </div>
         </div>
     </div>
 
-    <!-- Modal Dialog for Profile Photo Zoom -->
-    <div class="modal-backdrop" id="profile-modal">
+    <!-- Modal Dialog for Profile Photo Lightbox -->
+    <div class="modal-backdrop" id="profile-modal" role="dialog" aria-modal="true" aria-label="Profile Details">
         <div class="glass-panel modal-content profile-modal-content">
-            <button class="modal-close-btn" id="profile-modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <button class="modal-close-btn" id="profile-modal-close" aria-label="Close Profile Details"><i class="fa-solid fa-xmark"></i></button>
             <div class="profile-modal-body">
                 <div class="profile-modal-img-wrap">
-                    <img src="assets/profile.webp" alt="Muhammad Ali" class="profile-modal-img" width="380" height="380" loading="lazy" decoding="async">
+                    <img src="assets/profile.webp" alt="Muhammad Ali" class="profile-modal-img">
                 </div>
                 <div class="profile-modal-info">
-                    <span class="section-tag">&lt; GAME DESIGNER & DEVELOPER &gt;</span>
-                    <h2 style="font-size: 2rem; margin: 0.5rem 0; color: var(--text-main);">Muhammad Ali</h2>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.2rem;">
-                        <i class="fa-solid fa-location-dot" style="color: var(--amber-primary);"></i> Rawalpindi, Pakistan · Unity Specialist
+                    <span class="section-tag">&lt; GAME DEVELOPER &amp; 3D GENERALIST &gt;</span>
+                    <h2 style="font-size: 2.1rem; margin: 0.6rem 0; color: var(--text-main);">Muhammad Ali</h2>
+                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.4rem;">
+                        <i class="fa-solid fa-location-dot" style="color: var(--cyan-primary);"></i> Rawalpindi, Pakistan &middot; Remote Worldwide
                     </p>
                     <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
-                        <a href="mailto:muhammadali.offical.gd@gmail.com" class="btn btn-primary" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;"><i class="fa-solid fa-envelope"></i> Email Me</a>
-                        <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.85rem; padding: 0.6rem 1.2rem;"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+                        <a href="mailto:muhammadali.offical.gd@gmail.com" class="btn btn-primary" style="font-size: 0.85rem;"><i class="fa-solid fa-envelope"></i> Email Me</a>
+                        <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.85rem;"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Floating Back to Top Button -->
-    <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top" title="Back to top">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
-
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2026 MUHAMMAD ALI | GAME DESIGN & DEVELOPMENT. Crafted with passion, Unity, and Web Canvas.</p>
+            <p>&copy; 2026 MUHAMMAD ALI | GAME DEVELOPMENT &amp; 3D ART. Built with passion, Unity, WebGL &amp; Web Canvas.</p>
         </div>
     </footer>
 
-    <!-- JavaScript Script -->
+    <!-- Custom Script -->
     <script src="script.js"></script>
 </body>
 </html>
