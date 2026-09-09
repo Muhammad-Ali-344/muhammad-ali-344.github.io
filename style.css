@@ -520,7 +520,7 @@ h1, h2, h3, h4, h5 {
    ========================================================================== */
 .hero {
   min-height: 100vh;
-  padding: 8rem 0 5rem 0;
+  padding: 6rem 0 4rem 0;
   display: flex;
   align-items: center;
   position: relative;
@@ -712,7 +712,7 @@ h1, h2, h3, h4, h5 {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 540px;
+  min-height: 640px;
   perspective: 1200px;
 }
 
@@ -721,8 +721,8 @@ h1, h2, h3, h4, h5 {
 /* Portrait wrapper — clean, no border or background frame */
 .hero-portrait-wrapper {
   position: relative;
-  width: 380px;
-  height: 460px;
+  width: 480px;
+  height: 600px;
   border-radius: var(--radius-xl);
   overflow: hidden;
   z-index: 2;
