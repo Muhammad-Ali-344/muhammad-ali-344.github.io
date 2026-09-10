@@ -1,19 +1,22 @@
 /* ==========================================================================
-   MUHAMMAD ALI — PORTFOLIO-THEMED RESUME / CV
-   Dark Sci-Fi Cyberpunk & Clean Light ATS-Ready Print System
+   MUHAMMAD ALI — AAA GAME DEVELOPER RESUME & CV DESIGN SYSTEM
+   High-Contrast Dark Sci-Fi Obsidian & Executive Pure White Light Modes
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
-:root {
-  /* Default Dark Sci-Fi Palette (Matches Portfolio) */
+:root,
+[data-theme="dark"] {
+  /* Dark Sci-Fi Executive Obsidian Palette */
   --bg-void: #07090e;
   --bg-surface: #0c1017;
-  --bg-card: rgba(15, 20, 32, 0.9);
-  --bg-card-header: rgba(17, 24, 39, 0.95);
+  --bg-card: #0f1420;
+  --bg-card-header: #131a29;
+  --bg-card-alt: #121927;
   --bg-pill: rgba(0, 240, 255, 0.08);
-  --border-pill: rgba(0, 240, 255, 0.22);
+  --border-pill: rgba(0, 240, 255, 0.28);
 
+  /* Accents */
   --cyan-primary: #00f0ff;
   --cyan-glow: rgba(0, 240, 255, 0.35);
   --cyan-subtle: rgba(0, 240, 255, 0.12);
@@ -22,61 +25,67 @@
   --amber-glow: rgba(255, 183, 3, 0.35);
   --amber-subtle: rgba(255, 183, 3, 0.12);
 
-  --purple-accent: #a855f7;
-  --emerald-accent: #10b981;
+  --purple-accent: #c084fc;
+  --emerald-accent: #34d399;
 
-  --text-main: #f3f6fc;
-  --text-secondary: #94a3b8;
-  --text-dim: #64748b;
+  /* High-Visibility Typography (No muddy or washed-out tones) */
+  --text-main: #ffffff;
+  --text-secondary: #f1f5f9;
+  --text-body: #e2e8f0;
+  --text-dim: #cbd5e1;
   --text-inverted: #07090e;
 
-  --border-glass: rgba(0, 240, 255, 0.18);
-  --border-card: rgba(255, 255, 255, 0.08);
-  --border-divider: rgba(255, 255, 255, 0.1);
+  --border-glass: rgba(0, 240, 255, 0.22);
+  --border-card: rgba(255, 255, 255, 0.12);
+  --border-divider: rgba(255, 255, 255, 0.14);
 
   --font-heading: 'Rajdhani', sans-serif;
   --font-display: 'Space Grotesk', sans-serif;
   --font-body: 'Outfit', sans-serif;
 
-  --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
-  --shadow-neon: 0 0 20px rgba(0, 240, 255, 0.25);
+  --shadow-card: 0 10px 30px -8px rgba(0, 0, 0, 0.7);
+  --shadow-neon: 0 0 20px rgba(0, 240, 255, 0.2);
 }
 
-/* Light Cyber / ATS Print Theme */
+/* Executive High-Contrast Light Theme (Deep Slate / Charcoal, ZERO light gray) */
 [data-theme="light"] {
   --bg-void: #ffffff;
   --bg-surface: #f8fafc;
   --bg-card: #ffffff;
   --bg-card-header: #f1f5f9;
-  --bg-pill: rgba(0, 119, 182, 0.06);
-  --border-pill: rgba(0, 119, 182, 0.25);
+  --bg-card-alt: #f8fafc;
+  --bg-pill: #f1f5f9;
+  --border-pill: #cbd5e1;
 
+  /* Accents */
   --cyan-primary: #0077b6;
   --cyan-glow: rgba(0, 119, 182, 0.2);
   --cyan-subtle: rgba(0, 119, 182, 0.08);
 
-  --amber-primary: #d97706;
-  --amber-glow: rgba(217, 119, 6, 0.2);
-  --amber-subtle: rgba(217, 119, 6, 0.08);
+  --amber-primary: #b45309;
+  --amber-glow: rgba(180, 83, 9, 0.2);
+  --amber-subtle: rgba(180, 83, 9, 0.08);
 
   --purple-accent: #7c3aed;
-  --emerald-accent: #059669;
+  --emerald-accent: #047857;
 
+  /* Solid Deep Charcoal / Black Typography (Ultra High Contrast, WCAG AAA 14:1+) */
   --text-main: #090d16;
-  --text-secondary: #334155;
-  --text-dim: #64748b;
+  --text-secondary: #1e293b;
+  --text-body: #1e293b;
+  --text-dim: #334155;
   --text-inverted: #ffffff;
 
-  --border-glass: rgba(15, 23, 42, 0.12);
-  --border-card: rgba(15, 23, 42, 0.1);
-  --border-divider: rgba(15, 23, 42, 0.1);
+  --border-glass: rgba(15, 23, 42, 0.16);
+  --border-card: rgba(15, 23, 42, 0.12);
+  --border-divider: rgba(15, 23, 42, 0.14);
 
   --shadow-card: 0 8px 24px -6px rgba(0, 0, 0, 0.08);
-  --shadow-neon: 0 0 16px rgba(0, 119, 182, 0.15);
+  --shadow-neon: 0 0 14px rgba(0, 119, 182, 0.12);
 }
 
 /* ==========================================================================
-   BASE & LAYOUT
+   RESET & BASE
    ========================================================================== */
 * {
   box-sizing: border-box;
@@ -85,23 +94,25 @@
 }
 
 html {
-  font-size: 15px;
+  font-size: 14.5px;
   scroll-behavior: smooth;
 }
 
 body {
   font-family: var(--font-body);
   background-color: var(--bg-void);
-  color: var(--text-main);
+  color: var(--text-body);
   line-height: 1.55;
   padding: 2.5rem 1rem 4rem;
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.25s ease, color 0.25s ease;
   position: relative;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Sci-fi mesh background for screen view */
+/* Ambient Background Mesh (Screen Only) */
 .screen-bg-mesh {
   position: fixed;
   top: 0;
@@ -112,7 +123,7 @@ body {
   pointer-events: none;
   background: 
     radial-gradient(circle at 10% 15%, rgba(0, 240, 255, 0.04) 0%, transparent 45%),
-    radial-gradient(circle at 90% 70%, rgba(168, 85, 247, 0.03) 0%, transparent 45%),
+    radial-gradient(circle at 90% 70%, rgba(192, 132, 252, 0.03) 0%, transparent 45%),
     radial-gradient(circle at 50% 95%, rgba(255, 183, 3, 0.03) 0%, transparent 50%);
 }
 
@@ -120,11 +131,11 @@ body {
   background: 
     radial-gradient(circle at 10% 15%, rgba(0, 119, 182, 0.04) 0%, transparent 45%),
     radial-gradient(circle at 90% 70%, rgba(124, 58, 237, 0.03) 0%, transparent 45%),
-    radial-gradient(circle at 50% 95%, rgba(217, 119, 6, 0.03) 0%, transparent 50%);
+    radial-gradient(circle at 50% 95%, rgba(180, 83, 9, 0.03) 0%, transparent 50%);
 }
 
 /* ==========================================================================
-   FLOATING INTERACTIVE CONTROLS BAR (Screen Only)
+   FLOATING ACTION CONTROLS BAR (Screen Only)
    ========================================================================== */
 .resume-controls {
   position: fixed;
@@ -132,11 +143,11 @@ body {
   right: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   z-index: 9999;
   background: var(--bg-card);
   border: 1px solid var(--border-glass);
-  padding: 0.4rem 0.6rem;
+  padding: 0.4rem 0.65rem;
   border-radius: 9999px;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
@@ -172,14 +183,14 @@ body {
 }
 
 .control-btn.btn-primary-action {
-  background: linear-gradient(135deg, #00d8ff 0%, #0077b6 100%);
+  background: linear-gradient(135deg, var(--cyan-primary) 0%, #0077b6 100%);
   color: #ffffff;
-  border-color: #00f0ff;
+  border-color: var(--cyan-primary);
   box-shadow: 0 2px 10px rgba(0, 240, 255, 0.3);
 }
 
 .control-btn.btn-primary-action:hover {
-  background: linear-gradient(135deg, #00f0ff 0%, #0099ff 100%);
+  filter: brightness(1.1);
   box-shadow: 0 4px 16px rgba(0, 240, 255, 0.5);
   color: #ffffff;
 }
@@ -191,14 +202,14 @@ body {
   max-width: 920px;
   margin: 0 auto;
   background: var(--bg-card);
-  border: 1px solid var(--border-glass);
-  border-radius: 18px;
+  border: 1px solid var(--border-card);
+  border-radius: 16px;
   box-shadow: var(--shadow-card);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   overflow: hidden;
   position: relative;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
 }
 
 /* Laser top accent bar */
@@ -217,12 +228,12 @@ body {
    HEADER SECTION & AVATAR HUD
    ========================================================================== */
 .resume-header {
-  padding: 2.2rem 2.4rem 1.6rem;
+  padding: 1.8rem 2.2rem 1.4rem;
   border-bottom: 1px solid var(--border-divider);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 2rem;
+  gap: 1.8rem;
   background: var(--bg-card-header);
   position: relative;
 }
@@ -230,14 +241,14 @@ body {
 .header-main {
   display: flex;
   align-items: center;
-  gap: 1.8rem;
+  gap: 1.6rem;
   flex: 1;
 }
 
 .avatar-hud-wrapper {
   position: relative;
-  width: 104px;
-  height: 104px;
+  width: 96px;
+  height: 96px;
   flex-shrink: 0;
 }
 
@@ -251,6 +262,10 @@ body {
   display: block;
 }
 
+[data-theme="light"] .avatar-img {
+  box-shadow: 0 2px 10px rgba(0, 119, 182, 0.2);
+}
+
 .avatar-corner-tl,
 .avatar-corner-br {
   position: absolute;
@@ -261,15 +276,15 @@ body {
 }
 
 .avatar-corner-tl {
-  top: -4px;
-  left: -4px;
+  top: -3px;
+  left: -3px;
   border-top: 2px solid var(--amber-primary);
   border-left: 2px solid var(--amber-primary);
 }
 
 .avatar-corner-br {
-  bottom: -4px;
-  right: -4px;
+  bottom: -3px;
+  right: -3px;
   border-bottom: 2px solid var(--amber-primary);
   border-right: 2px solid var(--amber-primary);
 }
@@ -281,7 +296,7 @@ body {
 .header-telemetry-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   padding: 0.2rem 0.65rem;
   background: var(--cyan-subtle);
   border: 1px solid var(--border-glass);
@@ -291,27 +306,27 @@ body {
   font-weight: 700;
   letter-spacing: 1.2px;
   color: var(--cyan-primary);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
   text-transform: uppercase;
 }
 
 .header-status-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 8px #10b981;
+  background: var(--emerald-accent);
+  box-shadow: 0 0 8px var(--emerald-accent);
 }
 
 .resume-name {
   font-family: var(--font-heading);
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 800;
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   line-height: 1.05;
   text-transform: uppercase;
   color: var(--text-main);
-  margin-bottom: 0.35rem;
+  margin-bottom: 0.3rem;
 }
 
 .resume-name .highlight-cyan {
@@ -320,9 +335,9 @@ body {
 
 .resume-title-bar {
   font-family: var(--font-display);
-  font-size: 1.02rem;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 0.8px;
   color: var(--text-secondary);
   display: flex;
   align-items: center;
@@ -339,16 +354,16 @@ body {
    CONTACT TELEMETRY STRIP
    ========================================================================== */
 .contact-telemetry-strip {
-  padding: 0.85rem 2.4rem;
-  background: rgba(0, 0, 0, 0.15);
+  padding: 0.75rem 2.2rem;
+  background: rgba(0, 0, 0, 0.2);
   border-bottom: 1px solid var(--border-divider);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.65rem 1.4rem;
+  gap: 0.6rem 1.2rem;
 }
 
 [data-theme="light"] .contact-telemetry-strip {
-  background: rgba(0, 119, 182, 0.03);
+  background: #f1f5f9;
 }
 
 .contact-item {
@@ -356,6 +371,7 @@ body {
   align-items: center;
   gap: 0.55rem;
   font-size: 0.85rem;
+  font-weight: 500;
   color: var(--text-secondary);
   text-decoration: none;
   transition: color 0.15s ease;
@@ -376,15 +392,15 @@ body {
    MAIN TWO-COLUMN RESUME BODY
    ========================================================================== */
 .resume-body {
-  padding: 2rem 2.4rem 2.4rem;
+  padding: 1.8rem 2.2rem 2.2rem;
   display: grid;
-  grid-template-columns: 290px 1fr;
-  gap: 2.2rem;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
 }
 
 /* Section Header styling */
 .cv-section {
-  margin-bottom: 1.9rem;
+  margin-bottom: 1.6rem;
   page-break-inside: avoid;
   break-inside: avoid;
 }
@@ -397,8 +413,8 @@ body {
   display: flex;
   align-items: center;
   gap: 0.55rem;
-  margin-bottom: 0.9rem;
-  border-bottom: 1px solid var(--border-glass);
+  margin-bottom: 0.85rem;
+  border-bottom: 1.5px solid var(--border-glass);
   padding-bottom: 0.4rem;
 }
 
@@ -409,9 +425,9 @@ body {
 
 .section-head h2 {
   font-family: var(--font-heading);
-  font-size: 1.25rem;
+  font-size: 1.22rem;
   font-weight: 800;
-  letter-spacing: 1.4px;
+  letter-spacing: 1.2px;
   text-transform: uppercase;
   color: var(--text-main);
 }
@@ -419,7 +435,7 @@ body {
 .section-head .head-tag {
   margin-left: auto;
   font-family: var(--font-heading);
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--amber-primary);
@@ -430,17 +446,13 @@ body {
    LEFT COLUMN: EDUCATION, SKILLS, CERTIFICATIONS
    ========================================================================== */
 .education-card {
-  background: rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--border-glass);
-  border-radius: 12px;
-  padding: 1rem 1.1rem;
-  margin-bottom: 1.2rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  padding: 0.95rem 1.05rem;
+  margin-bottom: 1.1rem;
   position: relative;
   overflow: hidden;
-}
-
-[data-theme="light"] .education-card {
-  background: var(--bg-surface);
 }
 
 .education-card::before {
@@ -455,7 +467,7 @@ body {
 
 .edu-degree {
   font-family: var(--font-display);
-  font-size: 0.98rem;
+  font-size: 0.96rem;
   font-weight: 700;
   color: var(--text-main);
   line-height: 1.25;
@@ -463,7 +475,8 @@ body {
 }
 
 .edu-institution {
-  font-size: 0.88rem;
+  font-size: 0.86rem;
+  font-weight: 600;
   color: var(--text-secondary);
   margin-bottom: 0.45rem;
 }
@@ -478,7 +491,7 @@ body {
 .edu-year {
   color: var(--text-dim);
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.5px;
 }
 
@@ -487,16 +500,16 @@ body {
   border: 1px solid var(--amber-primary);
   color: var(--amber-primary);
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 9999px;
   letter-spacing: 0.8px;
 }
 
 /* Skill Categories */
 .skill-category {
-  margin-bottom: 1rem;
+  margin-bottom: 0.95rem;
 }
 
 .skill-category:last-child {
@@ -505,12 +518,12 @@ body {
 
 .skill-cat-title {
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--cyan-primary);
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -528,13 +541,13 @@ body {
 
 .skill-pill {
   display: inline-block;
-  font-size: 0.76rem;
-  font-weight: 500;
-  color: var(--text-main);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
   background: var(--bg-pill);
   border: 1px solid var(--border-pill);
   border-radius: 6px;
-  padding: 0.2rem 0.55rem;
+  padding: 0.22rem 0.55rem;
   line-height: 1.35;
   transition: all 0.15s ease;
 }
@@ -542,32 +555,28 @@ body {
 .skill-pill.highlight {
   border-color: var(--cyan-primary);
   color: var(--cyan-primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .skill-pill.amber {
   border-color: var(--amber-primary);
   color: var(--amber-primary);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* Certifications Box */
 .cert-card {
-  background: rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--border-glass);
-  border-radius: 12px;
-  padding: 0.95rem 1.1rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  padding: 0.9rem 1.05rem;
   position: relative;
   overflow: hidden;
 }
 
-[data-theme="light"] .cert-card {
-  background: var(--bg-surface);
-}
-
 .cert-title {
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 700;
   color: var(--text-main);
   margin-bottom: 0.25rem;
@@ -575,7 +584,8 @@ body {
 
 .cert-issuer {
   font-size: 0.82rem;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: var(--text-dim);
   margin-bottom: 0.45rem;
 }
 
@@ -587,9 +597,9 @@ body {
   border: 1px solid var(--emerald-accent);
   color: var(--emerald-accent);
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 800;
-  padding: 0.15rem 0.55rem;
+  padding: 0.18rem 0.6rem;
   border-radius: 9999px;
   letter-spacing: 0.6px;
 }
@@ -598,15 +608,15 @@ body {
    RIGHT COLUMN: SUMMARY, EXPERIENCE, FEATURED PROJECTS
    ========================================================================== */
 .summary-text {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
+  font-size: 0.9rem;
+  color: var(--text-body);
+  line-height: 1.62;
   text-align: justify;
 }
 
 /* Experience Items */
 .experience-item {
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.3rem;
   position: relative;
   padding-left: 1.1rem;
   border-left: 2px solid var(--border-glass);
@@ -621,7 +631,7 @@ body {
 .exp-dot {
   position: absolute;
   left: -6px;
-  top: 4px;
+  top: 5px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
@@ -648,7 +658,7 @@ body {
 
 .exp-duration {
   font-family: var(--font-heading);
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   font-weight: 700;
   letter-spacing: 0.8px;
   color: var(--amber-primary);
@@ -656,8 +666,8 @@ body {
 }
 
 .exp-company {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.88rem;
+  font-weight: 700;
   color: var(--cyan-primary);
   margin-bottom: 0.5rem;
   display: flex;
@@ -667,15 +677,15 @@ body {
 
 .exp-bullets {
   list-style: none;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  font-size: 0.86rem;
+  color: var(--text-body);
 }
 
 .exp-bullets li {
   position: relative;
   padding-left: 1.1rem;
   margin-bottom: 0.35rem;
-  line-height: 1.48;
+  line-height: 1.5;
 }
 
 .exp-bullets li::before {
@@ -688,17 +698,13 @@ body {
 
 /* Featured Project Card */
 .project-card {
-  background: rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--border-glass);
-  border-radius: 12px;
-  padding: 1.1rem 1.25rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  padding: 1.05rem 1.2rem;
   margin-bottom: 1.1rem;
   page-break-inside: avoid;
   break-inside: avoid;
-}
-
-[data-theme="light"] .project-card {
-  background: var(--bg-surface);
 }
 
 .project-head {
@@ -712,7 +718,7 @@ body {
 
 .project-title {
   font-family: var(--font-display);
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--text-main);
 }
@@ -725,44 +731,40 @@ body {
   color: var(--purple-accent);
   background: rgba(168, 85, 247, 0.12);
   border: 1px solid rgba(168, 85, 247, 0.3);
-  padding: 0.15rem 0.5rem;
+  padding: 0.15rem 0.55rem;
   border-radius: 9999px;
   text-transform: uppercase;
 }
 
 .project-role-line {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 0.86rem;
+  font-weight: 700;
   color: var(--cyan-primary);
   margin-bottom: 0.45rem;
 }
 
 .project-desc {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
+  font-size: 0.86rem;
+  color: var(--text-body);
   line-height: 1.5;
-  margin-bottom: 0.65rem;
+  margin-bottom: 0.6rem;
 }
 
 /* Shipped Games Showcase Card */
 .shipped-card {
-  background: rgba(0, 0, 0, 0.12);
-  border: 1px solid var(--border-glass);
-  border-radius: 12px;
-  padding: 1rem 1.2rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-card);
+  border-radius: 10px;
+  padding: 0.95rem 1.15rem;
   page-break-inside: avoid;
   break-inside: avoid;
-}
-
-[data-theme="light"] .shipped-card {
-  background: var(--bg-surface);
 }
 
 .shipped-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
 .shipped-title {
@@ -774,7 +776,7 @@ body {
 
 .shipped-badge {
   font-family: var(--font-heading);
-  font-size: 0.78rem;
+  font-size: 0.82rem;
   font-weight: 800;
   color: var(--amber-primary);
   letter-spacing: 0.8px;
@@ -784,34 +786,36 @@ body {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem;
-  margin-top: 0.55rem;
+  margin-top: 0.5rem;
 }
 
 .game-chip {
-  font-size: 0.74rem;
+  font-size: 0.76rem;
   font-weight: 600;
   background: var(--bg-pill);
   border: 1px solid var(--border-pill);
   color: var(--text-main);
-  padding: 0.18rem 0.55rem;
+  padding: 0.2rem 0.55rem;
   border-radius: 6px;
 }
 
 /* ==========================================================================
-   PRINT STYLESHEET (Exact A4 Formatting)
+   PRINT STYLESHEET (Exact A4 2-Page Strict Formatting)
    ========================================================================== */
 @page {
   size: A4 portrait;
-  margin: 8mm 10mm;
+  margin: 6mm 8mm;
 }
 
 @media print {
+  html {
+    font-size: 13.2px !important;
+  }
+
   body {
-    background: #ffffff !important;
-    color: #090d16 !important;
     padding: 0 !important;
-    font-size: 11.2px !important;
-    line-height: 1.4 !important;
+    font-size: 11px !important;
+    line-height: 1.38 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
@@ -826,197 +830,272 @@ body {
     margin: 0 !important;
     box-shadow: none !important;
     border: none !important;
-    background: #ffffff !important;
     border-radius: 0 !important;
   }
 
-  .resume-sheet::before {
-    height: 3px !important;
+  /* When printing Dark Theme */
+  [data-theme="dark"] body,
+  body:not([data-theme="light"]) {
+    background-color: #07090e !important;
+    color: #f1f5f9 !important;
+  }
+
+  [data-theme="dark"] .resume-sheet,
+  body:not([data-theme="light"]) .resume-sheet {
+    background: #0f1420 !important;
+  }
+
+  [data-theme="dark"] .resume-header,
+  body:not([data-theme="light"]) .resume-header {
+    background: #131a29 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  [data-theme="dark"] .contact-telemetry-strip,
+  body:not([data-theme="light"]) .contact-telemetry-strip {
+    background: #0a0e17 !important;
+    border-bottom-color: rgba(255, 255, 255, 0.15) !important;
+  }
+
+  [data-theme="dark"] .education-card,
+  [data-theme="dark"] .cert-card,
+  [data-theme="dark"] .project-card,
+  [data-theme="dark"] .shipped-card,
+  body:not([data-theme="light"]) .education-card,
+  body:not([data-theme="light"]) .cert-card,
+  body:not([data-theme="light"]) .project-card,
+  body:not([data-theme="light"]) .shipped-card {
+    background: #121927 !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  }
+
+  [data-theme="dark"] .skill-pill,
+  [data-theme="dark"] .game-chip,
+  body:not([data-theme="light"]) .skill-pill,
+  body:not([data-theme="light"]) .game-chip {
+    background: rgba(0, 240, 255, 0.08) !important;
+    border: 1px solid rgba(0, 240, 255, 0.28) !important;
+    color: #f1f5f9 !important;
+  }
+
+  /* When printing Light Theme */
+  [data-theme="light"] body {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+  }
+
+  [data-theme="light"] .resume-sheet {
+    background: #ffffff !important;
+  }
+
+  [data-theme="light"] .resume-sheet::before {
     background: #0077b6 !important;
   }
 
-  .resume-header {
+  [data-theme="light"] .resume-header {
     background: #f8fafc !important;
-    padding: 0.75rem 1.1rem 0.6rem !important;
-    border-bottom: 1px solid #cbd5e1 !important;
+    border-bottom-color: #cbd5e1 !important;
+  }
+
+  [data-theme="light"] .resume-name {
+    color: #090d16 !important;
+  }
+
+  [data-theme="light"] .resume-name .highlight-cyan {
+    color: #0077b6 !important;
+  }
+
+  [data-theme="light"] .contact-telemetry-strip {
+    background: #f1f5f9 !important;
+    border-bottom-color: #cbd5e1 !important;
+  }
+
+  [data-theme="light"] .contact-item,
+  [data-theme="light"] .contact-item i {
+    color: #1e293b !important;
+  }
+
+  [data-theme="light"] .education-card,
+  [data-theme="light"] .cert-card,
+  [data-theme="light"] .project-card,
+  [data-theme="light"] .shipped-card {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  [data-theme="light"] .skill-pill,
+  [data-theme="light"] .game-chip {
+    background: #ffffff !important;
+    border: 1px solid #94a3b8 !important;
+    color: #0f172a !important;
+  }
+
+  [data-theme="light"] .exp-role,
+  [data-theme="light"] .project-title,
+  [data-theme="light"] .shipped-title,
+  [data-theme="light"] .edu-degree,
+  [data-theme="light"] .cert-title,
+  [data-theme="light"] .section-head h2 {
+    color: #090d16 !important;
+  }
+
+  [data-theme="light"] .exp-bullets,
+  [data-theme="light"] .summary-text,
+  [data-theme="light"] .project-desc {
+    color: #1e293b !important;
+  }
+
+  [data-theme="light"] .exp-company,
+  [data-theme="light"] .project-role-line,
+  [data-theme="light"] .skill-cat-title,
+  [data-theme="light"] .section-head i {
+    color: #0077b6 !important;
+  }
+
+  [data-theme="light"] .exp-duration,
+  [data-theme="light"] .section-head .head-tag,
+  [data-theme="light"] .shipped-badge,
+  [data-theme="light"] .edu-gpa-badge {
+    color: #b45309 !important;
+  }
+
+  /* Universal Print Spacing Adjustments */
+  .resume-header {
+    padding: 0.7rem 1rem 0.55rem !important;
   }
 
   .avatar-hud-wrapper {
-    width: 68px !important;
-    height: 68px !important;
+    width: 64px !important;
+    height: 64px !important;
   }
 
   .avatar-img {
-    border-color: #0077b6 !important;
-    border-radius: 12px !important;
-    box-shadow: none !important;
+    border-radius: 10px !important;
   }
 
   .header-telemetry-pill {
-    padding: 0.12rem 0.5rem !important;
-    font-size: 0.7rem !important;
-    margin-bottom: 0.25rem !important;
+    padding: 0.1rem 0.45rem !important;
+    font-size: 0.68rem !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .resume-name {
-    font-size: 1.85rem !important;
+    font-size: 1.75rem !important;
     margin-bottom: 0.15rem !important;
-    color: #090d16 !important;
-  }
-
-  .resume-name .highlight-cyan {
-    color: #0077b6 !important;
   }
 
   .resume-title-bar {
-    font-size: 0.85rem !important;
-    letter-spacing: 0.5px !important;
+    font-size: 0.82rem !important;
+    letter-spacing: 0.4px !important;
   }
 
   .contact-telemetry-strip {
-    background: #f1f5f9 !important;
-    padding: 0.4rem 1.1rem !important;
-    gap: 0.35rem 0.9rem !important;
-    border-bottom: 1px solid #cbd5e1 !important;
+    padding: 0.35rem 1rem !important;
+    gap: 0.3rem 0.8rem !important;
   }
 
   .contact-item {
-    font-size: 0.78rem !important;
-  }
-
-  .contact-item,
-  .contact-item i {
-    color: #090d16 !important;
-  }
-
-  .contact-item i {
-    color: #0077b6 !important;
+    font-size: 0.76rem !important;
   }
 
   .resume-body {
-    padding: 0.85rem 1.1rem !important;
-    grid-template-columns: 230px 1fr !important;
-    gap: 1.25rem !important;
+    padding: 0.75rem 1rem !important;
+    grid-template-columns: 220px 1fr !important;
+    gap: 1.15rem !important;
   }
 
   .cv-section {
-    margin-bottom: 0.85rem !important;
+    margin-bottom: 0.75rem !important;
   }
 
   .section-head {
-    margin-bottom: 0.45rem !important;
-    padding-bottom: 0.25rem !important;
+    margin-bottom: 0.38rem !important;
+    padding-bottom: 0.2rem !important;
   }
 
   .section-head h2 {
-    font-size: 1.05rem !important;
+    font-size: 1rem !important;
   }
 
   .education-card,
   .cert-card,
   .project-card,
   .shipped-card {
-    background: #f8fafc !important;
-    border: 1px solid #e2e8f0 !important;
-    padding: 0.6rem 0.8rem !important;
-    margin-bottom: 0.65rem !important;
-    box-shadow: none !important;
-  }
-
-  .edu-degree {
-    font-size: 0.88rem !important;
-  }
-
-  .skill-category {
+    padding: 0.55rem 0.75rem !important;
     margin-bottom: 0.55rem !important;
   }
 
+  .edu-degree {
+    font-size: 0.86rem !important;
+  }
+
+  .skill-category {
+    margin-bottom: 0.48rem !important;
+  }
+
   .skill-cat-title {
-    font-size: 0.8rem !important;
-    margin-bottom: 0.25rem !important;
+    font-size: 0.78rem !important;
+    margin-bottom: 0.2rem !important;
   }
 
   .skill-pill {
-    background: #ffffff !important;
-    border: 1px solid #cbd5e1 !important;
-    color: #090d16 !important;
-    font-size: 0.7rem !important;
-    padding: 0.12rem 0.42rem !important;
+    font-size: 0.68rem !important;
+    padding: 0.1rem 0.38rem !important;
   }
 
   .experience-item {
-    border-left-color: #cbd5e1 !important;
-    margin-bottom: 0.75rem !important;
-    padding-left: 0.85rem !important;
+    margin-bottom: 0.65rem !important;
+    padding-left: 0.8rem !important;
   }
 
   .exp-role {
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
   }
 
   .exp-company {
     font-size: 0.78rem !important;
-    margin-bottom: 0.35rem !important;
+    margin-bottom: 0.28rem !important;
   }
 
   .exp-bullets {
-    font-size: 0.78rem !important;
+    font-size: 0.76rem !important;
   }
 
   .exp-bullets li {
-    margin-bottom: 0.22rem !important;
-    line-height: 1.38 !important;
-    padding-left: 0.85rem !important;
+    margin-bottom: 0.18rem !important;
+    line-height: 1.34 !important;
+    padding-left: 0.8rem !important;
   }
 
   .exp-dot {
-    background: #0077b6 !important;
-    border-color: #0077b6 !important;
-    width: 8px !important;
-    height: 8px !important;
-    left: -5px !important;
-  }
-
-  .exp-company,
-  .section-head i,
-  .project-role-line {
-    color: #0077b6 !important;
-  }
-
-  .exp-duration,
-  .section-head .head-tag,
-  .shipped-badge,
-  .edu-gpa-badge {
-    color: #d97706 !important;
+    width: 7px !important;
+    height: 7px !important;
+    left: -4.5px !important;
+    top: 4px !important;
   }
 
   .project-title {
-    font-size: 0.95rem !important;
+    font-size: 0.92rem !important;
   }
 
   .project-desc {
-    font-size: 0.78rem !important;
-    margin-bottom: 0.45rem !important;
-    line-height: 1.4 !important;
+    font-size: 0.76rem !important;
+    margin-bottom: 0.38rem !important;
+    line-height: 1.35 !important;
   }
 
   .project-platform {
-    background: #f1f5f9 !important;
-    border-color: #7c3aed !important;
-    color: #7c3aed !important;
-    font-size: 0.72rem !important;
-    padding: 0.1rem 0.4rem !important;
+    font-size: 0.7rem !important;
+    padding: 0.08rem 0.38rem !important;
   }
 
   .shipped-title {
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
   }
 
   .game-chip {
-    font-size: 0.68rem !important;
-    padding: 0.12rem 0.4rem !important;
-    background: #ffffff !important;
-    border-color: #cbd5e1 !important;
+    font-size: 0.66rem !important;
+    padding: 0.1rem 0.38rem !important;
   }
 }
 
