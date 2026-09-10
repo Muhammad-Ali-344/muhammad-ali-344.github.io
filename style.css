@@ -97,15 +97,115 @@
   --border-card: rgba(15, 23, 42, 0.08);
 }
 
-/* Smooth Global Theme Transition (Applied only during active toggle) */
+/* ==========================================================================
+   SMOOTH CINEMATIC THEME TRANSITION SYSTEM
+   Coordinated 520ms curve, subtle content breath (1 -> 0.82 -> 1),
+   and targeted GPU-accelerated property interpolation.
+   ========================================================================== */
+@keyframes themeContentTransition {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  38% {
+    opacity: 0.82;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html.theme-transitioning main,
+html.theme-transitioning .footer {
+  animation: themeContentTransition 0.54s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  will-change: opacity, transform;
+}
+
+html.theme-transitioning img,
+html.theme-transitioning canvas,
+html.theme-transitioning video {
+  filter: none !important;
+}
+
+/* Background & Body Surface Interpolation */
 html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-  transition: background-color 0.35s ease,
-              color 0.35s ease,
-              border-color 0.35s ease,
-              box-shadow 0.35s ease !important;
+html.theme-transitioning body {
+  transition: background-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.48s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Specific UI Surfaces, Borders, Text, and Glass Cards */
+html.theme-transitioning .navbar,
+html.theme-transitioning .nav-island,
+html.theme-transitioning .nav-utilities,
+html.theme-transitioning .vnav-rail,
+html.theme-transitioning .vnav-link,
+html.theme-transitioning .mobile-nav-drawer,
+html.theme-transitioning .glass-panel,
+html.theme-transitioning .discipline-card,
+html.theme-transitioning .flagship-card,
+html.theme-transitioning .game-card,
+html.theme-transitioning .skill-category-card,
+html.theme-transitioning .timeline-content,
+html.theme-transitioning .contact-info-card,
+html.theme-transitioning .contact-form,
+html.theme-transitioning .hero-telemetry-strip,
+html.theme-transitioning .floating-chip,
+html.theme-transitioning .hero-status-pill,
+html.theme-transitioning .modal-content,
+html.theme-transitioning .footer,
+html.theme-transitioning .btn,
+html.theme-transitioning .btn-resume,
+html.theme-transitioning .sound-toggle-btn,
+html.theme-transitioning .theme-toggle-btn,
+html.theme-transitioning .filter-btn,
+html.theme-transitioning .form-input,
+html.theme-transitioning .form-select,
+html.theme-transitioning .form-textarea,
+html.theme-transitioning .discipline-pill,
+html.theme-transitioning .game-engine-tag,
+html.theme-transitioning .game-role-badge,
+html.theme-transitioning .game-tag-pill,
+html.theme-transitioning .skill-badge,
+html.theme-transitioning .timeline-pill,
+html.theme-transitioning h1,
+html.theme-transitioning h2,
+html.theme-transitioning h3,
+html.theme-transitioning h4,
+html.theme-transitioning h5,
+html.theme-transitioning p,
+html.theme-transitioning span,
+html.theme-transitioning a,
+html.theme-transitioning i:not(.theme-moon-icon):not(.theme-sun-icon) {
+  transition: background-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+              color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  html.theme-transitioning main,
+  html.theme-transitioning .footer {
+    animation: none !important;
+    transform: none !important;
+  }
+  .theme-moon-icon,
+  .theme-sun-icon {
+    transition: opacity 0.2s ease !important;
+    transform: translate(-50%, -50%) !important;
+  }
+  .theme-toggle-btn {
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
+    transform: none !important;
+  }
+  .theme-toggle-btn:hover,
+  .theme-toggle-btn:active {
+    transform: none !important;
+  }
 }
 
 /* ==========================================================================
@@ -556,7 +656,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* --------------------------------------------------------------------------
-   THEME TOGGLE BUTTON & CELESTIAL ANIMATION
+   THEME TOGGLE BUTTON & CELESTIAL ORBIT TRANSFORMATION
    -------------------------------------------------------------------------- */
 .theme-toggle-btn {
   background: rgba(255, 255, 255, 0.03);
@@ -570,29 +670,60 @@ h1, h2, h3, h4, h5 {
   align-items: center;
   gap: 0.45rem;
   cursor: pointer;
-  transition: var(--transition-fast);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+              background 0.3s ease,
+              border-color 0.3s ease,
+              color 0.3s ease,
+              box-shadow 0.3s ease;
   font-family: var(--font-heading);
   letter-spacing: 0.5px;
   white-space: nowrap;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .theme-toggle-btn:hover {
   background: rgba(0, 240, 255, 0.08);
   border-color: rgba(0, 240, 255, 0.3);
   color: var(--cyan-primary);
-  box-shadow: 0 0 12px var(--cyan-glow);
-  transform: translateY(-1px);
+  box-shadow: 0 0 14px var(--cyan-glow);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.theme-toggle-btn:active {
+  transform: scale(0.92);
+  transition-duration: 0.08s;
+}
+
+[data-theme="light"] .theme-toggle-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .theme-toggle-btn:hover {
+  background: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.3);
+  color: #b45309;
+  box-shadow: 0 2px 12px rgba(217, 119, 6, 0.18);
+  transform: translateY(-1px) scale(1.02);
+}
+
+[data-theme="light"] .theme-toggle-btn:active {
+  transform: scale(0.92);
+  transition-duration: 0.08s;
 }
 
 /* Celestial Icon Stage (Moon <-> Sun) */
 .theme-icon-stage {
   position: relative;
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .theme-moon-icon,
@@ -601,44 +732,55 @@ h1, h2, h3, h4, h5 {
   top: 50%;
   left: 50%;
   font-size: 0.84rem;
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.3s ease,
-              color 0.3s ease;
+  transition: transform 460ms cubic-bezier(0.22, 1, 0.36, 1),
+              opacity 380ms cubic-bezier(0.22, 1, 0.36, 1),
+              filter 440ms cubic-bezier(0.22, 1, 0.36, 1),
+              color 380ms ease;
+  will-change: transform, opacity;
 }
 
-/* Dark theme: Moon active, Sun hidden */
+/* Dark theme: Moon active in center, Sun waiting on the left */
 .theme-moon-icon {
-  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
   opacity: 1;
   color: #a5f3fc;
+  filter: drop-shadow(0 0 4px rgba(165, 243, 252, 0.45));
+  pointer-events: auto;
 }
 
 .theme-sun-icon {
-  transform: translate(-50%, -50%) scale(0.2) rotate(-90deg);
+  transform: translate(-50%, -50%) translate(-13px, 3px) scale(0.65) rotate(-115deg);
   opacity: 0;
   color: #f59e0b;
+  filter: drop-shadow(0 0 0px transparent);
+  pointer-events: none;
 }
 
 .theme-toggle-btn:hover .theme-moon-icon {
-  transform: translate(-50%, -50%) scale(1.1) rotate(-15deg);
+  transform: translate(-50%, -50%) scale(1.12) rotate(-16deg);
   color: var(--cyan-primary);
+  filter: drop-shadow(0 0 7px var(--cyan-glow));
 }
 
-/* Light theme: Sun active, Moon hidden */
+/* Light theme: Moon slides right and rotates away, Sun enters center from left */
 [data-theme="light"] .theme-moon-icon {
-  transform: translate(-50%, -50%) scale(0.2) rotate(90deg);
+  transform: translate(-50%, -50%) translate(13px, -3px) scale(0.65) rotate(115deg);
   opacity: 0;
+  filter: drop-shadow(0 0 0px transparent);
+  pointer-events: none;
 }
 
 [data-theme="light"] .theme-sun-icon {
-  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  transform: translate(-50%, -50%) translate(0, 0) scale(1) rotate(0deg);
   opacity: 1;
   color: #f59e0b;
-  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
+  filter: drop-shadow(0 0 6px rgba(245, 158, 11, 0.55));
+  pointer-events: auto;
 }
 
 [data-theme="light"] .theme-toggle-btn:hover .theme-sun-icon {
-  transform: translate(-50%, -50%) scale(1.15) rotate(35deg);
+  transform: translate(-50%, -50%) scale(1.14) rotate(45deg);
+  filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.7));
 }
 
 .sound-toggle-btn {

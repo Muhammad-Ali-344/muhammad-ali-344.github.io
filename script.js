@@ -157,6 +157,7 @@ function initThemeToggle() {
     if (!toggleBtn) return;
 
     const labelSpan = toggleBtn.querySelector('.theme-toggle-label');
+    let isTransitioning = false;
 
     // Sync UI with current attribute (which was set in head to prevent FOUC)
     const initialTheme = document.documentElement.getAttribute('data-theme') || localStorage.getItem('portfolio-theme') || 'dark';
@@ -164,6 +165,7 @@ function initThemeToggle() {
 
     function applyThemeUI(theme, animateTransition = true) {
         if (animateTransition) {
+            isTransitioning = true;
             document.documentElement.classList.add('theme-transitioning');
         }
 
@@ -180,11 +182,14 @@ function initThemeToggle() {
         if (animateTransition) {
             setTimeout(() => {
                 document.documentElement.classList.remove('theme-transitioning');
-            }, 380);
+                isTransitioning = false;
+            }, 560);
         }
     }
 
     toggleBtn.addEventListener('click', () => {
+        if (isTransitioning) return; // Prevent rapid-click desync during the cinematic transition
+
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
         const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
 
@@ -194,7 +199,8 @@ function initThemeToggle() {
         } catch (e) {}
 
         if (soundEnabled && typeof playTone === 'function') {
-            playTone(nextTheme === 'light' ? 680 : 440, 'sine', 0.08, 0.05);
+            // Rising major tone on Light (sunrise), grounding resonant tone on Dark (moonrise)
+            playTone(nextTheme === 'light' ? 680 : 440, 'sine', 0.12, 0.05);
         }
     });
 }
