@@ -98,113 +98,378 @@
 }
 
 /* ==========================================================================
-   SMOOTH CINEMATIC THEME TRANSITION SYSTEM
-   Coordinated 520ms curve, subtle content breath (1 -> 0.82 -> 1),
-   and targeted GPU-accelerated property interpolation.
+   CINEMATIC FULL-SCREEN THEME GATE / APERTURE TRANSITION
+   Phase 1: Dual Obsidian Wings Converge from Off-Screen Left & Right (580ms)
+   Phase 2: Complete Viewport Occlusion & Center Seam Energy Lock
+   Phase 3: Orbital Center Hub Rotation & Polarity Shift (550ms)
+   Phase 4: Moon <-> Sun Celestial Transformation & Solar/Lunar Radiance
+   Phase 5: Seamless Background Theme Activation behind Closed Curtain
+   Phase 6: Dual Wings Part Off-Screen Revealing New Settled Theme (580ms)
    ========================================================================== */
-@keyframes themeContentTransition {
-  0% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  38% {
-    opacity: 0.82;
-    transform: translateY(2px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+
+.theme-transition-curtain {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 999999;
+  pointer-events: none;
+  overflow: hidden;
+  display: none;
 }
 
-html.theme-transitioning main,
-html.theme-transitioning .footer {
-  animation: themeContentTransition 0.54s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  will-change: opacity, transform;
+.theme-transition-curtain.is-active {
+  display: block;
+  pointer-events: all;
 }
 
-html.theme-transitioning img,
-html.theme-transitioning canvas,
-html.theme-transitioning video {
-  filter: none !important;
+/* Dual Wing Panels */
+.curtain-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(50% + 2px);
+  height: 100%;
+  background: linear-gradient(135deg, #05070c 0%, #0a0e17 40%, #0d121c 70%, #06080e 100%);
+  will-change: transform;
+  overflow: hidden;
 }
 
-/* Background & Body Surface Interpolation */
+.curtain-panel-left {
+  left: 0;
+  transform: translate3d(-101%, 0, 0);
+  border-right: 1.5px solid rgba(0, 240, 255, 0.4);
+}
+
+.curtain-panel-right {
+  right: 0;
+  transform: translate3d(101%, 0, 0);
+  border-left: 1.5px solid rgba(0, 240, 255, 0.4);
+}
+
+/* Subtle Cyber Grid & Telemetry Hatching on Panels */
+.curtain-panel-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.curtain-panel-grid {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.curtain-panel-stripes {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 140px;
+  opacity: 0.06;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--cyan-primary),
+    var(--cyan-primary) 2px,
+    transparent 2px,
+    transparent 14px
+  );
+}
+
+.curtain-panel-left .curtain-panel-stripes {
+  right: 20px;
+}
+
+.curtain-panel-right .curtain-panel-stripes {
+  left: 20px;
+}
+
+/* Seam Laser Edge Lighting */
+.curtain-seam-glow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 240, 255, 0.8) 25%,
+    #ffffff 50%,
+    rgba(0, 240, 255, 0.8) 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.6), 0 0 50px rgba(0, 240, 255, 0.3);
+  opacity: 0.85;
+}
+
+.curtain-panel-left .curtain-seam-glow {
+  right: 0;
+}
+
+.curtain-panel-right .curtain-seam-glow {
+  left: 0;
+}
+
+/* Polar Shift to Light: Golden Solar Amber Edge */
+.theme-transition-curtain.to-light .curtain-panel-left {
+  border-right-color: rgba(245, 158, 11, 0.5);
+}
+
+.theme-transition-curtain.to-light .curtain-panel-right {
+  border-left-color: rgba(245, 158, 11, 0.5);
+}
+
+.theme-transition-curtain.to-light .curtain-seam-glow {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(245, 158, 11, 0.85) 25%,
+    #ffffff 50%,
+    rgba(245, 158, 11, 0.85) 75%,
+    transparent 100%
+  );
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.7), 0 0 50px rgba(245, 158, 11, 0.35);
+}
+
+/* Center Orbital Aperture & Celestial Core */
+.curtain-center-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0) rotate(-45deg);
+  width: clamp(140px, 24vw, 220px);
+  height: clamp(140px, 24vw, 220px);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+/* Rotating HUD Reticle Rings */
+.curtain-ring {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.curtain-ring-outer {
+  inset: 0;
+  border: 2px dashed rgba(0, 240, 255, 0.5);
+  box-shadow: 0 0 25px rgba(0, 240, 255, 0.25), inset 0 0 20px rgba(0, 240, 255, 0.15);
+  animation: hubRingClockwise 12s linear infinite;
+}
+
+.curtain-ring-middle {
+  inset: 12px;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  border-top-color: var(--cyan-primary);
+  border-bottom-color: var(--cyan-primary);
+  animation: hubRingCounter 8s linear infinite;
+}
+
+.curtain-ring-inner {
+  inset: 24px;
+  border: 1.5px dashed rgba(255, 183, 3, 0.45);
+  animation: hubRingClockwise 6s linear infinite;
+}
+
+.theme-transition-curtain.to-light .curtain-ring-outer {
+  border-color: rgba(245, 158, 11, 0.6);
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.3), inset 0 0 20px rgba(245, 158, 11, 0.2);
+}
+
+.theme-transition-curtain.to-light .curtain-ring-middle {
+  border-top-color: #f59e0b;
+  border-bottom-color: #f59e0b;
+}
+
+@keyframes hubRingClockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes hubRingCounter {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+/* Energy Core Lens */
+.curtain-core-lens {
+  position: absolute;
+  inset: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.25) 0%, rgba(10, 15, 25, 0.95) 75%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1.5px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 35px rgba(0, 240, 255, 0.4), inset 0 0 20px rgba(0, 240, 255, 0.2);
+  transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+.theme-transition-curtain.to-light .curtain-core-lens {
+  background: radial-gradient(circle, #ffffff 0%, rgba(254, 243, 199, 0.95) 55%, rgba(217, 119, 6, 0.5) 100%);
+  border-color: rgba(245, 158, 11, 0.65);
+  box-shadow: 0 0 45px rgba(245, 158, 11, 0.6), inset 0 0 25px rgba(245, 158, 11, 0.3);
+}
+
+/* Celestial Icons (Moon <-> Sun) Inside Hub */
+.curtain-icon-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.curtain-icon-moon,
+.curtain-icon-sun {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+  will-change: transform, opacity;
+  line-height: 1;
+}
+
+/* Default Icon States (when entering) */
+.curtain-icon-moon {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+  color: #a5f3fc;
+  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 0.85));
+}
+
+.curtain-icon-sun {
+  transform: translate(-50%, -50%) scale(0.2) rotate(-130deg);
+  opacity: 0;
+  color: #f59e0b;
+  filter: drop-shadow(0 0 22px rgba(245, 158, 11, 0.9));
+}
+
+/* Starting from Light theme: Sun is initially active */
+.theme-transition-curtain.from-light .curtain-icon-moon {
+  transform: translate(-50%, -50%) scale(0.2) rotate(130deg);
+  opacity: 0;
+}
+
+.theme-transition-curtain.from-light .curtain-icon-sun {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+}
+
+/* Ambient Radial Flare Burst */
+.curtain-flare {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 170%;
+  height: 170%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.4) 0%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.theme-transition-curtain.to-light .curtain-flare {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, transparent 70%);
+}
+
+/* ==========================================================================
+   PHASE TRANSITIONS (Executed via JavaScript sequence)
+   ========================================================================== */
+
+/* Phase 1: Panels Enter (580ms) */
+.theme-transition-curtain.phase-enter .curtain-panel-left {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transition-curtain.phase-enter .curtain-panel-right {
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transition-curtain.phase-enter .curtain-center-hub {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+  transition: transform 0.52s cubic-bezier(0.34, 1.25, 0.64, 1) 0.16s, opacity 0.38s ease 0.12s;
+}
+
+/* Phase 2 & 3: Center Hub Rotation & Polarity Transformation (550ms) */
+.theme-transition-curtain.phase-transform .curtain-center-hub {
+  transform: translate(-50%, -50%) scale(1.08) rotate(180deg);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transition-curtain.phase-transform .curtain-flare {
+  opacity: 1;
+}
+
+/* Morphing Dark -> Light */
+.theme-transition-curtain.to-light.phase-transform .curtain-icon-moon {
+  transform: translate(-50%, -50%) scale(0.2) rotate(140deg);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+
+.theme-transition-curtain.to-light.phase-transform .curtain-icon-sun {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s, opacity 0.4s ease 0.05s;
+}
+
+/* Morphing Light -> Dark */
+.theme-transition-curtain.to-dark.phase-transform .curtain-icon-sun {
+  transform: translate(-50%, -50%) scale(0.2) rotate(-140deg);
+  opacity: 0;
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+
+.theme-transition-curtain.to-dark.phase-transform .curtain-icon-moon {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s, opacity 0.4s ease 0.05s;
+}
+
+/* Phase 4: Panels Part & Exit (580ms) */
+.theme-transition-curtain.phase-exit .curtain-panel-left {
+  transform: translate3d(-101%, 0, 0);
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transition-curtain.phase-exit .curtain-panel-right {
+  transform: translate3d(101%, 0, 0);
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.theme-transition-curtain.phase-exit .curtain-center-hub {
+  transform: translate(-50%, -50%) scale(0.6) rotate(360deg);
+  opacity: 0;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.35s ease;
+}
+
+.theme-transition-curtain.phase-exit .curtain-flare {
+  opacity: 0;
+}
+
+/* Fallback & Reduced Motion Theme Transition */
 html.theme-transitioning,
 html.theme-transitioning body {
-  transition: background-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.48s cubic-bezier(0.22, 1, 0.36, 1) !important;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-/* Specific UI Surfaces, Borders, Text, and Glass Cards */
-html.theme-transitioning .navbar,
-html.theme-transitioning .nav-island,
-html.theme-transitioning .nav-utilities,
-html.theme-transitioning .vnav-rail,
-html.theme-transitioning .vnav-link,
-html.theme-transitioning .mobile-nav-drawer,
-html.theme-transitioning .glass-panel,
-html.theme-transitioning .discipline-card,
-html.theme-transitioning .flagship-card,
-html.theme-transitioning .game-card,
-html.theme-transitioning .skill-category-card,
-html.theme-transitioning .timeline-content,
-html.theme-transitioning .contact-info-card,
-html.theme-transitioning .contact-form,
-html.theme-transitioning .hero-telemetry-strip,
-html.theme-transitioning .floating-chip,
-html.theme-transitioning .hero-status-pill,
-html.theme-transitioning .modal-content,
-html.theme-transitioning .footer,
-html.theme-transitioning .btn,
-html.theme-transitioning .btn-resume,
-html.theme-transitioning .sound-toggle-btn,
-html.theme-transitioning .theme-toggle-btn,
-html.theme-transitioning .filter-btn,
-html.theme-transitioning .form-input,
-html.theme-transitioning .form-select,
-html.theme-transitioning .form-textarea,
-html.theme-transitioning .discipline-pill,
-html.theme-transitioning .game-engine-tag,
-html.theme-transitioning .game-role-badge,
-html.theme-transitioning .game-tag-pill,
-html.theme-transitioning .skill-badge,
-html.theme-transitioning .timeline-pill,
-html.theme-transitioning h1,
-html.theme-transitioning h2,
-html.theme-transitioning h3,
-html.theme-transitioning h4,
-html.theme-transitioning h5,
-html.theme-transitioning p,
-html.theme-transitioning span,
-html.theme-transitioning a,
-html.theme-transitioning i:not(.theme-moon-icon):not(.theme-sun-icon) {
-  transition: background-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-              background 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-              color 0.48s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.52s cubic-bezier(0.22, 1, 0.36, 1) !important;
-}
-
-/* Accessibility: Respect prefers-reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-  html.theme-transitioning main,
-  html.theme-transitioning .footer {
-    animation: none !important;
-    transform: none !important;
-  }
-  .theme-moon-icon,
-  .theme-sun-icon {
-    transition: opacity 0.2s ease !important;
-    transform: translate(-50%, -50%) !important;
-  }
-  .theme-toggle-btn {
-    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease !important;
-    transform: none !important;
-  }
-  .theme-toggle-btn:hover,
-  .theme-toggle-btn:active {
-    transform: none !important;
+  .theme-transition-curtain {
+    display: none !important;
   }
 }
 

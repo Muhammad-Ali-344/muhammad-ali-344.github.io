@@ -154,6 +154,7 @@ function initBgCanvas() {
    ========================================================================== */
 function initThemeToggle() {
     const toggleBtn = document.getElementById('theme-toggle');
+    const curtain = document.getElementById('theme-curtain');
     if (!toggleBtn) return;
 
     const labelSpan = toggleBtn.querySelector('.theme-toggle-label');
@@ -163,9 +164,8 @@ function initThemeToggle() {
     const initialTheme = document.documentElement.getAttribute('data-theme') || localStorage.getItem('portfolio-theme') || 'dark';
     applyThemeUI(initialTheme, false);
 
-    function applyThemeUI(theme, animateTransition = true) {
+    function applyThemeUI(theme, animateTransition = false) {
         if (animateTransition) {
-            isTransitioning = true;
             document.documentElement.classList.add('theme-transitioning');
         }
 
@@ -182,26 +182,85 @@ function initThemeToggle() {
         if (animateTransition) {
             setTimeout(() => {
                 document.documentElement.classList.remove('theme-transitioning');
-                isTransitioning = false;
-            }, 560);
+            }, 400);
         }
     }
 
-    toggleBtn.addEventListener('click', () => {
-        if (isTransitioning) return; // Prevent rapid-click desync during the cinematic transition
+    function triggerCinematicThemeSwitch(nextTheme) {
+        if (isTransitioning) return; // Prevent double-clicks during sequence
+        isTransitioning = true;
 
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
-        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        applyThemeUI(nextTheme, true);
-        try {
-            localStorage.setItem('portfolio-theme', nextTheme);
-        } catch (e) {}
-
-        if (soundEnabled && typeof playTone === 'function') {
-            // Rising major tone on Light (sunrise), grounding resonant tone on Dark (moonrise)
-            playTone(nextTheme === 'light' ? 680 : 440, 'sine', 0.12, 0.05);
+        // Fallback for reduced motion or missing curtain DOM
+        if (prefersReducedMotion || !curtain) {
+            applyThemeUI(nextTheme, true);
+            try { localStorage.setItem('portfolio-theme', nextTheme); } catch (e) {}
+            if (soundEnabled && typeof playTone === 'function') {
+                playTone(nextTheme === 'light' ? 680 : 440, 'sine', 0.12, 0.05);
+            }
+            isTransitioning = false;
+            return;
         }
+
+        // Initialize Curtain with direction classes
+        curtain.className = 'theme-transition-curtain is-active';
+        curtain.classList.add(currentTheme === 'light' ? 'from-light' : 'from-dark');
+        curtain.classList.add(nextTheme === 'light' ? 'to-light' : 'to-dark');
+
+        // Audio: Phase 1 Entrance Gate Sound
+        if (soundEnabled && typeof playTone === 'function') {
+            playTone(nextTheme === 'light' ? 280 : 360, 'sine', 0.22, 0.08);
+        }
+
+        // PHASE 1: Two Panels Enter from Left & Right (580ms)
+        // Force DOM reflow to ensure clean start coordinates
+        void curtain.offsetWidth;
+        curtain.classList.add('phase-enter');
+
+        // PHASE 2 & 3: Panels Meet in Center & Center Transformation (at 580ms)
+        setTimeout(() => {
+            curtain.classList.add('phase-transform');
+
+            // Audio: Phase 3 Center Polarity Transformation Chime
+            if (soundEnabled && typeof playTone === 'function') {
+                playTone(nextTheme === 'light' ? 680 : 320, 'sine', 0.25, 0.06);
+            }
+
+            // PHASE 5: Activate New Theme Underneath while 100% occluded (at 880ms)
+            setTimeout(() => {
+                applyThemeUI(nextTheme, false);
+                try {
+                    localStorage.setItem('portfolio-theme', nextTheme);
+                } catch (e) {}
+            }, 300); // 580ms + 300ms = 880ms (center of transformation)
+
+            // PHASE 6: Panels Part and Exit to Left & Right (at 1180ms)
+            setTimeout(() => {
+                curtain.classList.remove('phase-enter', 'phase-transform');
+                curtain.classList.add('phase-exit');
+
+                // Audio: Phase 6 Gate Opening Settle Chord
+                if (soundEnabled && typeof playTone === 'function') {
+                    playTone(nextTheme === 'light' ? 880 : 440, 'sine', 0.18, 0.05);
+                }
+
+                // Cleanup & Reset (at 1780ms)
+                setTimeout(() => {
+                    curtain.className = 'theme-transition-curtain';
+                    isTransitioning = false;
+                }, 600); // 1180ms + 600ms = 1780ms
+
+            }, 600); // 580ms + 600ms = 1180ms
+
+        }, 580);
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+        triggerCinematicThemeSwitch(nextTheme);
     });
 }
 
