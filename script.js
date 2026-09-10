@@ -4,6 +4,7 @@
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
+    initThemeToggle();
     initBgCanvas();
     initWebAudio();
     initHeroTyping();
@@ -64,7 +65,7 @@ function initBgCanvas() {
             this.pulse = Math.random() * 0.015 + 0.005;
             this.pulseDir = 1;
             // Electric Cyan or Cyber Amber
-            this.color = Math.random() > 0.3 ? '0, 240, 255' : '255, 183, 3';
+            this.isCyan = Math.random() > 0.3;
         }
 
         update() {
@@ -94,10 +95,14 @@ function initBgCanvas() {
             }
         }
 
-        draw() {
+        draw(isLight) {
+            const color = isLight
+                ? (this.isCyan ? '0, 119, 182' : '217, 119, 6')
+                : (this.isCyan ? '0, 240, 255' : '255, 183, 3');
+            const alpha = isLight ? Math.min(this.alpha * 1.6, 0.45) : this.alpha;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${this.color}, ${this.alpha})`;
+            ctx.fillStyle = `rgba(${color}, ${alpha})`;
             ctx.fill();
         }
     }
@@ -114,10 +119,11 @@ function initBgCanvas() {
     function animate() {
         if (isVisible) {
             ctx.clearRect(0, 0, width, height);
+            const isLight = document.documentElement.getAttribute('data-theme') === 'light';
 
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
-                particles[i].draw();
+                particles[i].draw(isLight);
 
                 // Faint distance connectors
                 for (let j = i + 1; j < particles.length; j++) {
@@ -129,7 +135,9 @@ function initBgCanvas() {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 240, 255, ${0.08 * (1 - dist / 110)})`;
+                        const connectorColor = isLight ? '0, 119, 182' : '0, 240, 255';
+                        const connectorAlpha = isLight ? 0.12 * (1 - dist / 110) : 0.08 * (1 - dist / 110);
+                        ctx.strokeStyle = `rgba(${connectorColor}, ${connectorAlpha})`;
                         ctx.lineWidth = 0.6;
                         ctx.stroke();
                     }
@@ -139,6 +147,56 @@ function initBgCanvas() {
         requestAnimationFrame(animate);
     }
     animate();
+}
+
+/* ==========================================================================
+   1A. THEME TOGGLE SYSTEM (Dark / Light Theme Engine)
+   ========================================================================== */
+function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+    if (!toggleBtn) return;
+
+    const labelSpan = toggleBtn.querySelector('.theme-toggle-label');
+
+    // Sync UI with current attribute (which was set in head to prevent FOUC)
+    const initialTheme = document.documentElement.getAttribute('data-theme') || localStorage.getItem('portfolio-theme') || 'dark';
+    applyThemeUI(initialTheme, false);
+
+    function applyThemeUI(theme, animateTransition = true) {
+        if (animateTransition) {
+            document.documentElement.classList.add('theme-transitioning');
+        }
+
+        if (theme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (labelSpan) labelSpan.textContent = 'LIGHT';
+            toggleBtn.setAttribute('title', 'Switch to Dark Theme (🌙)');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (labelSpan) labelSpan.textContent = 'DARK';
+            toggleBtn.setAttribute('title', 'Switch to Light Theme (☀️)');
+        }
+
+        if (animateTransition) {
+            setTimeout(() => {
+                document.documentElement.classList.remove('theme-transitioning');
+            }, 380);
+        }
+    }
+
+    toggleBtn.addEventListener('click', () => {
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        const nextTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+        applyThemeUI(nextTheme, true);
+        try {
+            localStorage.setItem('portfolio-theme', nextTheme);
+        } catch (e) {}
+
+        if (soundEnabled && typeof playTone === 'function') {
+            playTone(nextTheme === 'light' ? 680 : 440, 'sine', 0.08, 0.05);
+        }
+    });
 }
 
 /* ==========================================================================
@@ -166,7 +224,7 @@ function initWebAudio() {
         }
     });
 
-    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .vnav-rail-link, .vnav-link, .mobile-nav-link, .filter-btn, .side-rail-social-btn, .timeline-content, .discipline-card');
+    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .vnav-rail-link, .vnav-link, .mobile-nav-link, .theme-toggle-btn, .sound-toggle-btn, .filter-btn, .side-rail-social-btn, .timeline-content, .discipline-card');
     interactiveBtns.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             if (soundEnabled) playTone(420, 'sine', 0.03, 0.02);

@@ -29,6 +29,20 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Early Theme Detection to prevent FOUC -->
+    <script>
+        (function() {
+            try {
+                const savedTheme = localStorage.getItem('portfolio-theme');
+                if (savedTheme === 'light') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                }
+            } catch (e) {}
+        })();
+    </script>
 </head>
 <body>
 
@@ -108,6 +122,13 @@
             <!-- Top Right: Independent Utilities & Primary HIRE ME CTA -->
             <div class="nav-island nav-island-actions">
                 <div class="nav-utilities">
+                    <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme (Dark / Light)" aria-label="Toggle Theme">
+                        <span class="theme-icon-stage" aria-hidden="true">
+                            <i class="fa-solid fa-moon theme-moon-icon"></i>
+                            <i class="fa-solid fa-sun theme-sun-icon"></i>
+                        </span>
+                        <span class="theme-toggle-label">DARK</span>
+                    </button>
                     <button class="sound-toggle-btn" id="sound-toggle" title="Toggle UI Sound Synthesizer">
                         <i class="fa-solid fa-volume-high"></i>
                         <span>SFX ON</span>

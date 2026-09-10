@@ -57,6 +57,58 @@
 }
 
 /* ==========================================================================
+   LIGHT THEME COLOR SYSTEM (Pure White Background + Accessible Cyber Accents)
+   ========================================================================== */
+[data-theme="light"] {
+  /* Pure White Main Background (#FFFFFF strictly required) */
+  --bg-void: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #ffffff;
+  --bg-glass-nav: rgba(255, 255, 255, 0.92);
+
+  /* Vivid Tech Cyan with High Contrast & Readability */
+  --cyan-primary: #0077b6;
+  --cyan-glow: rgba(0, 119, 182, 0.25);
+  --cyan-subtle: rgba(0, 119, 182, 0.08);
+
+  /* Warm Cyber Amber with High Contrast */
+  --amber-primary: #d97706;
+  --amber-glow: rgba(217, 119, 6, 0.25);
+  --amber-subtle: rgba(217, 119, 6, 0.08);
+
+  /* Deep Cyber Purple */
+  --purple-accent: #7c3aed;
+  --purple-glow: rgba(124, 58, 237, 0.25);
+
+  /* Crisp Emerald */
+  --emerald-signal: #059669;
+  --emerald-glow: rgba(5, 150, 105, 0.3);
+
+  /* High-Contrast Dark Typography */
+  --text-main: #090d16;
+  --text-secondary: #475569;
+  --text-dim: #64748b;
+  --text-inverted: #ffffff;
+
+  /* Borders & Shadows */
+  --border-glass: rgba(15, 23, 42, 0.09);
+  --border-glass-hover: rgba(0, 119, 182, 0.4);
+  --border-card: rgba(15, 23, 42, 0.08);
+}
+
+/* Smooth Global Theme Transition (Applied only during active toggle) */
+html.theme-transitioning,
+html.theme-transitioning *,
+html.theme-transitioning *::before,
+html.theme-transitioning *::after {
+  transition: background-color 0.35s ease,
+              color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease !important;
+}
+
+/* ==========================================================================
    RESET & BASE STYLES
    ========================================================================== */
 *, *::before, *::after {
@@ -501,6 +553,92 @@ h1, h2, h3, h4, h5 {
   gap: 0.35rem;
   padding-right: 0.5rem;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   THEME TOGGLE BUTTON & CELESTIAL ANIMATION
+   -------------------------------------------------------------------------- */
+.theme-toggle-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--text-secondary);
+  padding: 0.38rem 0.72rem;
+  border-radius: 9999px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  font-family: var(--font-heading);
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+
+.theme-toggle-btn:hover {
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.3);
+  color: var(--cyan-primary);
+  box-shadow: 0 0 12px var(--cyan-glow);
+  transform: translateY(-1px);
+}
+
+/* Celestial Icon Stage (Moon <-> Sun) */
+.theme-icon-stage {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.theme-moon-icon,
+.theme-sun-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 0.84rem;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease,
+              color 0.3s ease;
+}
+
+/* Dark theme: Moon active, Sun hidden */
+.theme-moon-icon {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+  color: #a5f3fc;
+}
+
+.theme-sun-icon {
+  transform: translate(-50%, -50%) scale(0.2) rotate(-90deg);
+  opacity: 0;
+  color: #f59e0b;
+}
+
+.theme-toggle-btn:hover .theme-moon-icon {
+  transform: translate(-50%, -50%) scale(1.1) rotate(-15deg);
+  color: var(--cyan-primary);
+}
+
+/* Light theme: Sun active, Moon hidden */
+[data-theme="light"] .theme-moon-icon {
+  transform: translate(-50%, -50%) scale(0.2) rotate(90deg);
+  opacity: 0;
+}
+
+[data-theme="light"] .theme-sun-icon {
+  transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  opacity: 1;
+  color: #f59e0b;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.5));
+}
+
+[data-theme="light"] .theme-toggle-btn:hover .theme-sun-icon {
+  transform: translate(-50%, -50%) scale(1.15) rotate(35deg);
 }
 
 .sound-toggle-btn {
@@ -2814,6 +2952,386 @@ h1, h2, h3, h4, h5 {
 .disciplines-grid.reveal-stagger > .discipline-card:nth-child(6) { transition-delay: 680ms; }
 
 /* ==========================================================================
+   LIGHT THEME COMPONENT OVERRIDES
+   ========================================================================== */
+[data-theme="light"] body {
+  background-color: #ffffff;
+  color: var(--text-main);
+}
+
+[data-theme="light"] .ambient-glow-mesh {
+  background: 
+    radial-gradient(circle at 15% 20%, rgba(0, 119, 182, 0.03) 0%, transparent 45%),
+    radial-gradient(circle at 85% 60%, rgba(124, 58, 237, 0.03) 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(217, 119, 6, 0.02) 0%, transparent 50%);
+}
+
+[data-theme="light"] .nav-island {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.09);
+  box-shadow: 0 10px 30px -8px rgba(0, 0, 0, 0.08), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .nav-utilities {
+  border-right-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .sound-toggle-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .sound-toggle-btn:hover {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.35);
+  color: var(--cyan-primary);
+  box-shadow: 0 0 10px rgba(0, 119, 182, 0.15);
+}
+
+[data-theme="light"] .btn-resume {
+  background: rgba(217, 119, 6, 0.08);
+  border-color: rgba(217, 119, 6, 0.28);
+  color: var(--amber-primary);
+}
+
+[data-theme="light"] .btn-resume:hover {
+  background: rgba(217, 119, 6, 0.14);
+  border-color: var(--amber-primary);
+  color: #b45309;
+  box-shadow: 0 0 12px var(--amber-glow);
+}
+
+[data-theme="light"] .btn-hire-cta {
+  background: linear-gradient(135deg, #008ecf 0%, #0066cc 100%);
+  color: #ffffff !important;
+  border-color: #0077b6;
+  box-shadow: 0 4px 16px rgba(0, 119, 182, 0.35);
+}
+
+[data-theme="light"] .btn-hire-cta:hover {
+  background: #0077b6;
+  color: #ffffff !important;
+  box-shadow: 0 6px 22px rgba(0, 119, 182, 0.5);
+}
+
+[data-theme="light"] .nav-avatar-status {
+  border-color: #ffffff;
+}
+
+[data-theme="light"] .nav-mobile-toggle {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .mobile-nav-drawer {
+  background: rgba(255, 255, 255, 0.98);
+  border-color: rgba(0, 119, 182, 0.25);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.12), 0 0 30px rgba(0, 119, 182, 0.08);
+}
+
+[data-theme="light"] .mobile-nav-link {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .mobile-nav-link:hover,
+[data-theme="light"] .mobile-nav-link.active {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.28);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .vnav-rail {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.09);
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.08), 0 0 16px -4px rgba(0, 119, 182, 0.08);
+}
+
+[data-theme="light"] .vnav-link {
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .vnav-link:hover {
+  background: #ffffff;
+  border-color: rgba(0, 119, 182, 0.4);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1), 0 0 14px rgba(0, 119, 182, 0.18);
+}
+
+[data-theme="light"] .vnav-link:hover .vnav-label {
+  color: var(--text-main);
+  text-shadow: none;
+}
+
+[data-theme="light"] .vnav-link.active {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.3);
+  box-shadow: 0 0 10px rgba(0, 119, 182, 0.12);
+}
+
+[data-theme="light"] .vnav-link.active:hover {
+  background: #ffffff;
+  border-color: rgba(0, 119, 182, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 0 16px rgba(0, 119, 182, 0.2);
+}
+
+[data-theme="light"] .vnav-link.active:hover .vnav-label {
+  color: var(--text-main);
+  text-shadow: none;
+}
+
+[data-theme="light"] .vnav-top-dot .vnav-pulse-ring {
+  border-color: rgba(0, 119, 182, 0.45);
+}
+
+[data-theme="light"] .side-rail-social-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: var(--border-glass);
+  color: var(--text-dim);
+}
+
+[data-theme="light"] .side-rail-social-btn:hover {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: var(--cyan-primary);
+  color: var(--cyan-primary);
+  box-shadow: 0 0 14px var(--cyan-glow);
+}
+
+[data-theme="light"] .glass-panel {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .glass-panel:hover {
+  border-color: rgba(0, 119, 182, 0.35);
+  box-shadow: 0 16px 40px -8px rgba(0, 119, 182, 0.12), 0 0 1px rgba(0, 119, 182, 0.2);
+}
+
+[data-theme="light"] .spotlight-card::before {
+  background: radial-gradient(450px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(0, 119, 182, 0.07), transparent 50%);
+}
+
+[data-theme="light"] .floating-chip {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(15, 23, 42, 0.09);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .hero-badge {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.25);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .hero-role-dynamic {
+  color: var(--cyan-primary);
+  text-shadow: none;
+}
+
+[data-theme="light"] .discipline-pill {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .discipline-card:hover .discipline-pill {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.3);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .disciplines-grid > .discipline-card:hover {
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.08), 0 0 20px rgba(0, 119, 182, 0.1);
+}
+
+[data-theme="light"] .flagship-card {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="light"] .flagship-badge {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 15px rgba(0, 119, 182, 0.2);
+}
+
+[data-theme="light"] .flagship-highlights {
+  background: rgba(15, 23, 42, 0.03);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+[data-theme="light"] .flagship-role-chip {
+  background: rgba(0, 119, 182, 0.08);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .filter-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.09);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .filter-btn:hover {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.35);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .filter-btn.active {
+  background: var(--cyan-primary);
+  color: #ffffff !important;
+  border-color: var(--cyan-primary);
+  box-shadow: 0 4px 16px var(--cyan-glow);
+}
+
+[data-theme="light"] .game-card {
+  background: #ffffff;
+  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .game-engine-tag {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.09);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .game-role-badge {
+  background: rgba(0, 119, 182, 0.08);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .game-tag-pill {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .texture-compare-wrapper {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+[data-theme="light"] .compare-badge {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .compare-handle-button {
+  background: var(--cyan-primary);
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(0, 119, 182, 0.4);
+}
+
+[data-theme="light"] .skill-category-card {
+  background: #ffffff;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .skill-cat-icon {
+  background: rgba(0, 119, 182, 0.08);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .skill-badge {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .skill-badge-highlight {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.3);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .timeline-dot {
+  background: #ffffff;
+  border-color: var(--cyan-primary);
+  box-shadow: 0 0 12px rgba(0, 119, 182, 0.35);
+}
+
+[data-theme="light"] .timeline-content {
+  background: #ffffff;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .timeline-pill {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-secondary);
+}
+
+[data-theme="light"] .contact-info-card,
+[data-theme="light"] .contact-form {
+  background: #ffffff;
+  box-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="light"] .contact-icon {
+  background: rgba(0, 119, 182, 0.08);
+  border-color: rgba(0, 119, 182, 0.25);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .form-input,
+[data-theme="light"] .form-select,
+[data-theme="light"] .form-textarea {
+  background: #f8fafc;
+  border-color: rgba(15, 23, 42, 0.12);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .form-input:focus,
+[data-theme="light"] .form-select:focus,
+[data-theme="light"] .form-textarea:focus {
+  background: #ffffff;
+  border-color: var(--cyan-primary);
+  box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.18);
+}
+
+[data-theme="light"] .footer {
+  border-top-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-dim);
+}
+
+[data-theme="light"] .modal-backdrop {
+  background: rgba(15, 23, 42, 0.55);
+}
+
+[data-theme="light"] .modal-content {
+  background: #ffffff;
+  border-color: rgba(15, 23, 42, 0.1);
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.18);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .modal-close-btn {
+  background: rgba(15, 23, 42, 0.05);
+  border-color: rgba(15, 23, 42, 0.1);
+  color: var(--text-main);
+}
+
+[data-theme="light"] .modal-close-btn:hover {
+  background: rgba(0, 119, 182, 0.1);
+  border-color: var(--cyan-primary);
+  color: var(--cyan-primary);
+}
+
+[data-theme="light"] .cs-challenge-box {
+  background: rgba(239, 68, 68, 0.06);
+}
+
+[data-theme="light"] .cursor-pointer {
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25)) drop-shadow(0 0 6px rgba(0, 119, 182, 0.6));
+}
+
+[data-theme="light"] .custom-cursor-wrap.is-hovering .cursor-glow {
+  background: radial-gradient(circle, rgba(0, 119, 182, 0.35) 0%, rgba(0, 119, 182, 0.1) 50%, transparent 75%);
+}
+
+/* ==========================================================================
    11. RESPONSIVE BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1240px) {
@@ -2956,9 +3474,13 @@ h1, h2, h3, h4, h5 {
   .floating-chip-text strong {
     font-size: 0.75rem;
   }
+  .theme-toggle-btn span.theme-toggle-label,
   .sound-toggle-btn span,
   .btn-resume span {
     display: none;
+  }
+  .theme-toggle-btn {
+    padding: 0.35rem 0.55rem;
   }
   .sound-toggle-btn {
     padding: 0.35rem 0.55rem;
