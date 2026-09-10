@@ -610,239 +610,218 @@ h1, h2, h3, h4, h5 {
 }
 
 /* --------------------------------------------------------------------------
-   SLIM FLOATING VERTICAL SECTION RAIL (LEFT SIDE)
+   SLIM FLOATING VERTICAL CONTROL RAIL (LEFT SIDE)
    -------------------------------------------------------------------------- */
 .vnav-rail {
   position: fixed;
-  left: 2.2rem;
+  left: 1.8rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 90;
   pointer-events: auto;
+  width: 50px;
+  background: rgba(9, 13, 21, 0.78);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 25px;
+  box-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.75), 0 0 16px -4px rgba(0, 240, 255, 0.08);
+  padding: 0.85rem 0.35rem;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 0 0 0 0.85rem;
-  background: transparent;
+  align-items: center;
+  gap: 0.65rem;
+  overflow: visible;
   user-select: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* Top Monogram Signature Mark */
-.vnav-rail-monogram {
+/* Top Status Indicator Pip */
+.vnav-top-dot {
+  position: relative;
+  width: 14px;
+  height: 14px;
   display: flex;
   align-items: center;
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  margin-bottom: 1.35rem;
-  color: var(--text-secondary);
-  transition: color var(--transition-fast);
+  justify-content: center;
+  margin-bottom: 0.2rem;
+  flex-shrink: 0;
 }
 
-.vnav-rail-monogram:hover {
-  color: #ffffff;
+.vnav-pulse-core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan-primary);
+  box-shadow: 0 0 8px var(--cyan-primary);
 }
 
-.vnav-mono-letters {
-  color: var(--text-primary);
-}
-
-.vnav-mono-slash {
-  color: var(--cyan-primary);
-  margin-left: 1px;
-  text-shadow: 0 0 8px var(--cyan-glow);
-  animation: slashBlink 4s infinite ease-in-out;
-}
-
-@keyframes slashBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
-
-/* Vertical Hairline Spine Line */
-.vnav-spine {
+.vnav-pulse-ring {
   position: absolute;
-  left: 0;
-  top: 1.6rem;
-  bottom: 1.6rem;
-  width: 1px;
-  background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(0, 240, 255, 0.3) 12%,
-    rgba(255, 255, 255, 0.08) 50%,
-    rgba(0, 240, 255, 0.25) 88%,
-    transparent 100%
-  );
-  pointer-events: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  animation: vnavPulse 2.5s infinite ease-out;
 }
 
-/* Rail Navigation List */
-.vnav-rail-list {
+@keyframes vnavPulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Vertical Items List */
+.vnav-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 0.5rem;
+  width: 100%;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
-/* Individual Rail Link */
-.vnav-rail-link {
-  display: flex;
-  flex-direction: column;
-  text-decoration: none;
-  padding: 0.2rem 0.5rem 0.2rem 0;
-  border-radius: var(--radius-sm);
+.vnav-list > li {
   position: relative;
-  cursor: pointer;
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Number + Dynamic Line + Section Label Row */
-.vnav-rail-row {
+  width: 38px;
+  height: 38px;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: flex-start;
 }
 
-/* Monospace Index Number */
-.vnav-idx {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  color: var(--text-dim);
-  transition: color 0.25s ease, text-shadow 0.25s ease;
-  min-width: 16px;
-}
-
-/* Dynamic Horizontal Connecting Line */
-.vnav-line {
-  display: inline-block;
-  height: 1px;
-  width: 10px;
-  background: rgba(255, 255, 255, 0.18);
-  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.25s ease,
-              box-shadow 0.25s ease;
-}
-
-/* Section Title */
-.vnav-title {
-  font-family: var(--font-heading);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  color: var(--text-muted);
-  transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
-  white-space: nowrap;
-}
-
-/* Editorial Micro-Description (Reveals on Hover or Active) */
-.vnav-desc {
-  font-family: var(--font-body);
-  font-size: 0.68rem;
-  font-weight: 400;
-  color: var(--text-dim);
-  letter-spacing: 0.3px;
-  margin-left: 2.1rem;
-  margin-top: 0.15rem;
-  max-height: 0;
-  opacity: 0;
+/* Navigation Link: Icon-Only by Default, Expands to the Right on Hover */
+.vnav-link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 38px;
+  width: 38px;
+  max-width: 38px;
+  border-radius: 19px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
   overflow: hidden;
-  transform: translateY(-4px);
-  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.25s ease;
   white-space: nowrap;
-  pointer-events: none;
+  z-index: 1;
+  padding: 0;
+  cursor: pointer;
+  transition: max-width 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.24s ease,
+              border-color 0.24s ease,
+              box-shadow 0.24s ease,
+              padding 0.26s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover Interaction: Inactive items smoothly expand line and reveal description */
-.vnav-rail-link:hover .vnav-idx {
-  color: var(--cyan-primary);
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
-}
-
-.vnav-rail-link:hover .vnav-line {
-  width: 24px;
-  background: var(--cyan-primary);
-  box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
-}
-
-.vnav-rail-link:hover .vnav-title {
-  color: #ffffff;
-  transform: translateX(2px);
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
-}
-
-.vnav-rail-link:hover .vnav-desc {
-  max-height: 20px;
-  opacity: 0.85;
-  color: var(--text-secondary);
-  transform: translateY(0);
-}
-
-/* Active Section State: Bold cyan line expansion, glowing cyan/white typography */
-.vnav-rail-link.active .vnav-idx {
-  color: var(--cyan-primary);
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
-}
-
-.vnav-rail-link.active .vnav-line {
+/* Centered Icon */
+.vnav-icon {
   width: 36px;
-  background: var(--cyan-primary);
-  box-shadow: 0 0 12px var(--cyan-primary), 0 0 20px var(--cyan-glow);
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  transition: color 0.22s ease, transform 0.22s ease, text-shadow 0.22s ease;
 }
 
-.vnav-rail-link.active .vnav-title {
-  color: #ffffff;
-  font-weight: 700;
-  transform: translateX(4px);
-  text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+/* Text Label: Collapsed by Default */
+.vnav-label {
+  font-family: var(--font-heading);
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transform: translateX(-6px);
+  pointer-events: none;
+  transition: opacity 0.22s ease 0.03s,
+              max-width 0.26s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.22s ease 0.03s,
+              color 0.2s ease;
 }
 
-.vnav-rail-link.active .vnav-desc {
-  max-height: 20px;
-  opacity: 0.92;
+/* Single Item Hover: Smoothly Expands Only the Hovered Item */
+.vnav-link:hover {
+  max-width: 170px;
+  padding-right: 0.95rem;
+  background: rgba(10, 16, 26, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(0, 240, 255, 0.38);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.65), 0 0 14px rgba(0, 240, 255, 0.2);
+  z-index: 10;
+}
+
+.vnav-link:hover .vnav-icon {
   color: var(--cyan-primary);
-  transform: translateY(0);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  transform: scale(1.08);
+}
+
+.vnav-link:hover .vnav-label {
+  opacity: 1;
+  max-width: 120px;
+  transform: translateX(0);
+  color: #ffffff;
+  margin-left: 0.15rem;
   text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
 }
 
-/* Bottom Telemetry Detail */
-.vnav-rail-foot {
+/* Active Section State: Minimal Cyan Illumination, Label Remains Collapsed */
+.vnav-link.active {
+  background: rgba(0, 240, 255, 0.07);
+  border-color: rgba(0, 240, 255, 0.25);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.14);
+}
+
+.vnav-link.active .vnav-icon {
+  color: var(--cyan-primary);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.55);
+}
+
+/* Active Section Hover: Expands with Cyan Accent */
+.vnav-link.active:hover {
+  max-width: 170px;
+  padding-right: 0.95rem;
+  background: rgba(10, 16, 26, 0.95);
+  border-color: rgba(0, 240, 255, 0.45);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7), 0 0 16px rgba(0, 240, 255, 0.25);
+}
+
+.vnav-link.active:hover .vnav-label {
+  opacity: 1;
+  max-width: 120px;
+  transform: translateX(0);
+  color: #ffffff;
+  margin-left: 0.15rem;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+/* Bottom Telemetry Arrow Indicator */
+.vnav-bot-arrow {
+  margin-top: 0.2rem;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  opacity: 0.45;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  font-family: var(--font-display);
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: 2px;
-  color: var(--text-dim);
-  margin-top: 1.4rem;
-  opacity: 0.6;
-  transition: opacity var(--transition-fast), color var(--transition-fast);
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.vnav-rail-foot:hover {
-  opacity: 1;
+.vnav-rail:hover .vnav-bot-arrow {
+  opacity: 0.8;
   color: var(--cyan-primary);
-}
-
-.vnav-foot-arrow {
-  display: inline-block;
-  color: var(--cyan-primary);
-  animation: footArrowBounce 2s infinite ease-in-out;
-}
-
-@keyframes footArrowBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(3px); }
 }
 
 /* --------------------------------------------------------------------------
