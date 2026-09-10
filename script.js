@@ -346,41 +346,56 @@ function initSpotlightAndTilt() {
    ========================================================================== */
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
-    const sections = document.querySelectorAll('section');
+    const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
     const mobileToggle = document.getElementById('mobile-toggle');
     const navLinksContainer = document.getElementById('nav-links');
 
     let isTicking = false;
 
+    function updateActiveNav() {
+        let current = '';
+        const scrollPos = window.scrollY + 180;
+        const isBottom = (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 80);
+
+        if (isBottom) {
+            current = 'contact';
+        } else if (window.scrollY < 120) {
+            current = 'hero';
+        } else {
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                if (scrollPos >= top && scrollPos < top + height) {
+                    current = section.getAttribute('id');
+                }
+            });
+        }
+
+        if (current) {
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href === `#${current}`) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+    }
+
     window.addEventListener('scroll', () => {
         if (!isTicking) {
             requestAnimationFrame(() => {
-                let current = '';
-                const scrollPos = window.scrollY + 160;
-
-                sections.forEach(section => {
-                    const top = section.offsetTop;
-                    const height = section.offsetHeight;
-                    if (scrollPos >= top && scrollPos < top + height) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                if (current === 'featured') current = 'featured';
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-
+                updateActiveNav();
                 isTicking = false;
             });
             isTicking = true;
         }
     }, { passive: true });
+
+    // Trigger on initial page load
+    updateActiveNav();
 
     // Mobile drawer toggle
     if (mobileToggle && navLinksContainer) {
