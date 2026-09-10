@@ -179,20 +179,6 @@ function initThemeToggle() {
             toggleBtn.setAttribute('title', 'Switch to Light Theme (☀️)');
         }
 
-        // Dynamically switch resume download targets based on active theme
-        const resumeLinks = document.querySelectorAll('.btn-resume, a[download*="Resume"], a[href*="Resume"]');
-        resumeLinks.forEach(link => {
-            if (theme === 'light') {
-                link.setAttribute('href', 'assets/Muhammad_Ali_Resume_Light.pdf');
-                link.setAttribute('download', 'Muhammad_Ali_Resume_Light.pdf');
-                link.setAttribute('title', 'Download Light Resume PDF (ATS-Ready)');
-            } else {
-                link.setAttribute('href', 'assets/Muhammad_Ali_Resume_Dark.pdf');
-                link.setAttribute('download', 'Muhammad_Ali_Resume_Dark.pdf');
-                link.setAttribute('title', 'Download Dark Resume PDF (Sci-Fi Edition)');
-            }
-        });
-
         if (animateTransition) {
             setTimeout(() => {
                 document.documentElement.classList.remove('theme-transitioning');
