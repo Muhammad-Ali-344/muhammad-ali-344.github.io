@@ -610,233 +610,239 @@ h1, h2, h3, h4, h5 {
 }
 
 /* --------------------------------------------------------------------------
-   SLIM FLOATING VERTICAL NAVIGATION BAR (LEFT SIDE)
+   SLIM FLOATING VERTICAL SECTION RAIL (LEFT SIDE)
    -------------------------------------------------------------------------- */
-.vnav-dock {
+.vnav-rail {
   position: fixed;
-  left: 1.5rem;
+  left: 2.2rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 90;
   pointer-events: auto;
-  width: 58px;
-  background: rgba(8, 12, 18, 0.82);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 26px;
-  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(0, 240, 255, 0.08);
-  padding: 0.85rem 0.38rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 0.45rem;
-  overflow: hidden;
-  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.25s ease,
-              box-shadow 0.3s ease;
+  align-items: flex-start;
+  padding: 0 0 0 0.85rem;
+  background: transparent;
+  user-select: none;
 }
 
-/* On hover: smoothly expands to reveal full section titles */
-.vnav-dock:hover {
-  width: 172px;
-  border-color: rgba(0, 240, 255, 0.25);
-  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 25px -3px rgba(0, 240, 255, 0.12);
-}
-
-/* Top Telemetry Pulse Dot */
-.vnav-header-dot {
-  position: relative;
-  width: 14px;
-  height: 14px;
+/* Top Monogram Signature Mark */
+.vnav-rail-monogram {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-bottom: 0.25rem;
-  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 1.35rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
 }
 
-.vnav-pulse-core {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--cyan-primary);
-  box-shadow: 0 0 8px var(--cyan-primary);
+.vnav-rail-monogram:hover {
+  color: #ffffff;
 }
 
-.vnav-pulse-ring {
+.vnav-mono-letters {
+  color: var(--text-primary);
+}
+
+.vnav-mono-slash {
+  color: var(--cyan-primary);
+  margin-left: 1px;
+  text-shadow: 0 0 8px var(--cyan-glow);
+  animation: slashBlink 4s infinite ease-in-out;
+}
+
+@keyframes slashBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+/* Vertical Hairline Spine Line */
+.vnav-spine {
   position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  border: 1px solid rgba(0, 240, 255, 0.45);
-  animation: vnavPulse 2.5s infinite ease-out;
+  left: 0;
+  top: 1.6rem;
+  bottom: 1.6rem;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 240, 255, 0.3) 12%,
+    rgba(255, 255, 255, 0.08) 50%,
+    rgba(0, 240, 255, 0.25) 88%,
+    transparent 100%
+  );
+  pointer-events: none;
 }
 
-@keyframes vnavPulse {
-  0% { transform: scale(0.6); opacity: 0.9; }
-  70% { transform: scale(1.6); opacity: 0; }
-  100% { transform: scale(1.6); opacity: 0; }
-}
-
-/* Vertical List */
-.vnav-list {
+/* Rail Navigation List */
+.vnav-rail-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 0.22rem;
-  width: 100%;
+  gap: 1.15rem;
   margin: 0;
   padding: 0;
 }
 
-.vnav-link {
-  position: relative;
+/* Individual Rail Link */
+.vnav-rail-link {
   display: flex;
-  align-items: center;
-  width: 100%;
-  height: 40px;
-  border-radius: 20px;
-  border: 1px solid transparent;
-  color: var(--text-secondary);
+  flex-direction: column;
   text-decoration: none;
-  padding: 0 0.5rem;
-  overflow: hidden;
-  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.2rem 0.5rem 0.2rem 0;
+  border-radius: var(--radius-sm);
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.vnav-num {
-  font-family: var(--font-display);
-  font-size: 0.66rem;
-  font-weight: 600;
-  color: var(--cyan-primary);
-  opacity: 0.45;
-  min-width: 18px;
-  text-align: center;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
-}
-
-.vnav-icon {
-  font-size: 0.8rem;
-  min-width: 22px;
+/* Number + Dynamic Line + Section Label Row */
+.vnav-rail-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-left: 0.3rem;
-  flex-shrink: 0;
-  color: var(--text-dim);
-  transition: color 0.2s ease, transform 0.2s ease;
+  gap: 0.55rem;
 }
 
-/* Text label: hidden in compact mode, slides and fades in smoothly on dock hover */
-.vnav-text {
-  font-family: var(--font-heading);
-  font-size: 0.86rem;
+/* Monospace Index Number */
+.vnav-idx {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  color: var(--text-dim);
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+  min-width: 16px;
+}
+
+/* Dynamic Horizontal Connecting Line */
+.vnav-line {
+  display: inline-block;
+  height: 1px;
+  width: 10px;
+  background: rgba(255, 255, 255, 0.18);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.25s ease,
+              box-shadow 0.25s ease;
+}
+
+/* Section Title */
+.vnav-title {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  color: var(--text-muted);
+  transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease;
   white-space: nowrap;
-  overflow: hidden;
-  margin-left: 0.55rem;
+}
+
+/* Editorial Micro-Description (Reveals on Hover or Active) */
+.vnav-desc {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 400;
+  color: var(--text-dim);
+  letter-spacing: 0.3px;
+  margin-left: 2.1rem;
+  margin-top: 0.15rem;
+  max-height: 0;
   opacity: 0;
-  max-width: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.2s ease, max-width 0.25s ease, transform 0.2s ease;
+  overflow: hidden;
+  transform: translateY(-4px);
+  transition: max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.25s ease;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
-.vnav-dock:hover .vnav-text {
-  opacity: 1;
-  max-width: 110px;
-  transform: translateX(0);
-  transition: opacity 0.25s ease 0.05s, max-width 0.28s ease, transform 0.25s ease 0.05s;
+/* Hover Interaction: Inactive items smoothly expand line and reveal description */
+.vnav-rail-link:hover .vnav-idx {
+  color: var(--cyan-primary);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
 }
 
-/* Individual Item Hover Interaction */
-.vnav-link:hover {
+.vnav-rail-link:hover .vnav-line {
+  width: 24px;
+  background: var(--cyan-primary);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+}
+
+.vnav-rail-link:hover .vnav-title {
   color: #ffffff;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
   transform: translateX(2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
 }
 
-.vnav-link:hover .vnav-num {
-  opacity: 0.9;
-  color: var(--cyan-primary);
-  text-shadow: 0 0 6px rgba(0, 240, 255, 0.4);
+.vnav-rail-link:hover .vnav-desc {
+  max-height: 20px;
+  opacity: 0.85;
+  color: var(--text-secondary);
+  transform: translateY(0);
 }
 
-.vnav-link:hover .vnav-icon {
-  color: var(--cyan-primary);
-  transform: scale(1.12);
-}
-
-/* Active Section Highlight */
-.vnav-link.active {
-  color: #ffffff;
-  background: rgba(0, 240, 255, 0.08);
-  border-color: rgba(0, 240, 255, 0.28);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.16), inset 0 0 8px rgba(0, 240, 255, 0.06);
-}
-
-.vnav-link.active .vnav-num {
-  opacity: 1;
+/* Active Section State: Bold cyan line expansion, glowing cyan/white typography */
+.vnav-rail-link.active .vnav-idx {
   color: var(--cyan-primary);
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.7);
 }
 
-.vnav-link.active .vnav-icon {
-  color: var(--cyan-primary);
-  transform: scale(1.08);
-}
-
-.vnav-link.active .vnav-text {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.35);
-}
-
-/* Left Cyan Indicator Line on Active Section */
-.vnav-link::before {
-  content: '';
-  position: absolute;
-  left: 2px;
-  top: 50%;
-  transform: translateY(-50%) scaleY(0);
-  width: 3px;
-  height: 16px;
+.vnav-rail-link.active .vnav-line {
+  width: 36px;
   background: var(--cyan-primary);
-  border-radius: 3px;
-  box-shadow: 0 0 8px var(--cyan-primary);
-  transition: transform 0.22s ease, opacity 0.22s ease;
-  opacity: 0;
+  box-shadow: 0 0 12px var(--cyan-primary), 0 0 20px var(--cyan-glow);
 }
 
-.vnav-link.active::before {
-  transform: translateY(-50%) scaleY(1);
-  opacity: 1;
+.vnav-rail-link.active .vnav-title {
+  color: #ffffff;
+  font-weight: 700;
+  transform: translateX(4px);
+  text-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
 }
 
-/* Bottom Telemetry Indicator Mark */
-.vnav-bottom-mark {
-  margin-top: 0.25rem;
-  font-size: 0.72rem;
+.vnav-rail-link.active .vnav-desc {
+  max-height: 20px;
+  opacity: 0.92;
   color: var(--cyan-primary);
-  opacity: 0.45;
+  transform: translateY(0);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+/* Bottom Telemetry Detail */
+.vnav-rail-foot {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  gap: 0.45rem;
+  font-family: var(--font-display);
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  margin-top: 1.4rem;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast), color var(--transition-fast);
 }
 
-.vnav-dock:hover .vnav-bottom-mark {
-  opacity: 0.85;
-  transform: rotate(45deg);
+.vnav-rail-foot:hover {
+  opacity: 1;
+  color: var(--cyan-primary);
+}
+
+.vnav-foot-arrow {
+  display: inline-block;
+  color: var(--cyan-primary);
+  animation: footArrowBounce 2s infinite ease-in-out;
+}
+
+@keyframes footArrowBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
 }
 
 /* --------------------------------------------------------------------------
@@ -2842,7 +2848,7 @@ h1, h2, h3, h4, h5 {
     font-size: 1.08rem;
     letter-spacing: 1.2px;
   }
-  .vnav-dock {
+  .vnav-rail {
     left: 1rem;
   }
   .nav-island-actions {
@@ -2882,7 +2888,7 @@ h1, h2, h3, h4, h5 {
     width: 100%;
     justify-content: space-between;
   }
-  .vnav-dock {
+  .vnav-rail {
     display: none !important;
   }
   .mobile-nav-drawer {

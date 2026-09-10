@@ -166,7 +166,7 @@ function initWebAudio() {
         }
     });
 
-    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .vnav-link, .mobile-nav-link, .filter-btn, .side-rail-social-btn, .timeline-content, .discipline-card');
+    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .vnav-rail-link, .vnav-link, .mobile-nav-link, .filter-btn, .side-rail-social-btn, .timeline-content, .discipline-card');
     interactiveBtns.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             if (soundEnabled) playTone(420, 'sine', 0.03, 0.02);
@@ -347,7 +347,7 @@ function initSpotlightAndTilt() {
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.vnav-link, .mobile-nav-link');
+    const navLinks = document.querySelectorAll('.vnav-rail-link, .vnav-link, .mobile-nav-link');
     const mobileToggle = document.getElementById('mobile-toggle');
     const mobileDrawer = document.getElementById('mobile-nav-drawer');
 
@@ -1255,7 +1255,7 @@ function initCustomCursor() {
     }, { passive: true });
 
     // Hover state on interactive elements (links, buttons, interactive cards)
-    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .vnav-link, .mobile-nav-link, .nav-avatar-btn, input, textarea';
+    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .vnav-rail-link, .vnav-link, .mobile-nav-link, .nav-avatar-btn, input, textarea';
 
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(interactiveSelectors)) {
