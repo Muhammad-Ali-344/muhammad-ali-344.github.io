@@ -377,29 +377,37 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ==========================================================================
-   1. FLOATING NAVIGATION SYSTEM: CREATIVE DEVELOPER DASHBOARD
+   1. FLOATING NAVIGATION SYSTEM: TOP HEADER BAR & VERTICAL DOCK
    ========================================================================== */
+
+/* Retire the static left telemetry rail in favor of the interactive vertical dock */
+.side-rail-left {
+  display: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   TOP HEADER BAR: Independent Brand & Action Islands
+   -------------------------------------------------------------------------- */
 .navbar {
   position: fixed;
-  top: 1rem;
+  top: 1.1rem;
   left: 0;
   right: 0;
   z-index: 100;
   padding: 0 1.5rem;
-  pointer-events: none; /* Allows click-through in gaps between islands */
+  pointer-events: none; /* Middle area is open and click-through */
 }
 
 .nav-system-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1420px;
+  max-width: 1440px;
   margin: 0 auto;
-  gap: 0.75rem;
   pointer-events: none;
 }
 
-/* Base styling for the floating modular islands */
+/* Base styling for top floating islands */
 .nav-island {
   pointer-events: auto;
   display: inline-flex;
@@ -413,9 +421,7 @@ h1, h2, h3, h4, h5 {
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-/* --------------------------------------------------------------------------
-   LEFT ISLAND: Identity & Personal Brand
-   -------------------------------------------------------------------------- */
+/* TOP LEFT ISLAND: Personal Brand & Avatar */
 .nav-island-brand {
   padding: 0.32rem 0.95rem 0.32rem 0.4rem;
   gap: 0.7rem;
@@ -480,127 +486,7 @@ h1, h2, h3, h4, h5 {
   text-shadow: 0 0 10px rgba(0, 240, 255, 0.45);
 }
 
-/* --------------------------------------------------------------------------
-   CENTER ISLAND: Standalone Floating Navigation Dock with Monospace Indexing
-   -------------------------------------------------------------------------- */
-.nav-island-dock {
-  padding: 0.22rem 0.35rem;
-  background: rgba(9, 14, 22, 0.82);
-}
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  list-style: none;
-  gap: 0.18rem;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-link {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  text-decoration: none;
-  font-family: var(--font-heading);
-  font-size: 0.86rem;
-  font-weight: 600;
-  letter-spacing: 0.45px;
-  padding: 0.38rem 0.75rem;
-  border-radius: 9999px;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
-              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Subtle Monospace Micro-Detail Index Number */
-.nav-num {
-  font-family: var(--font-display);
-  font-size: 0.65rem;
-  font-weight: 600;
-  opacity: 0.42;
-  color: var(--cyan-primary);
-  margin-right: 0.34rem;
-  letter-spacing: 0.5px;
-  transition: opacity 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
-}
-
-.nav-text {
-  transition: color 0.25s ease, text-shadow 0.25s ease;
-}
-
-/* Hover Interaction: Smooth highlight, subtle lift, number brightens */
-.nav-link:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.nav-link:hover .nav-num {
-  opacity: 0.88;
-  color: var(--cyan-primary);
-  text-shadow: 0 0 6px rgba(0, 240, 255, 0.35);
-}
-
-/* Active Section Highlight: Soft cyan glow, brightened index, bottom indicator */
-.nav-link.active {
-  color: #ffffff;
-  background: rgba(0, 240, 255, 0.08);
-  border-color: rgba(0, 240, 255, 0.28);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.16), inset 0 0 8px rgba(0, 240, 255, 0.06);
-  transform: translateY(0);
-}
-
-.nav-link.active:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.1);
-}
-
-.nav-link.active .nav-num {
-  opacity: 1;
-  color: var(--cyan-primary);
-  font-weight: 700;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
-}
-
-.nav-link.active .nav-text {
-  color: #ffffff;
-  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
-}
-
-/* Small animated cyan underline indicator */
-.nav-link::after {
-  content: '';
-  position: absolute;
-  bottom: 2px;
-  left: 50%;
-  transform: translateX(-50%) scaleX(0);
-  width: 14px;
-  height: 2px;
-  background: var(--cyan-primary);
-  border-radius: 2px;
-  box-shadow: 0 0 8px var(--cyan-primary);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.nav-link.active::after {
-  transform: translateX(-50%) scaleX(1);
-  opacity: 1;
-}
-
-/* --------------------------------------------------------------------------
-   RIGHT ISLAND: Visual Separation of Utilities vs. Standout HIRE ME CTA
-   -------------------------------------------------------------------------- */
+/* TOP RIGHT ISLAND: Independent Utility Controls & Primary CTA */
 .nav-island-actions {
   padding: 0.24rem 0.35rem 0.24rem 0.45rem;
   display: flex;
@@ -609,7 +495,6 @@ h1, h2, h3, h4, h5 {
   flex-shrink: 0;
 }
 
-/* Subtle sub-cluster for utilities */
 .nav-utilities {
   display: flex;
   align-items: center;
@@ -722,6 +607,322 @@ h1, h2, h3, h4, h5 {
   border-color: var(--cyan-primary);
   color: var(--cyan-primary);
   box-shadow: 0 0 12px var(--cyan-glow);
+}
+
+/* --------------------------------------------------------------------------
+   SLIM FLOATING VERTICAL NAVIGATION BAR (LEFT SIDE)
+   -------------------------------------------------------------------------- */
+.vnav-dock {
+  position: fixed;
+  left: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  pointer-events: auto;
+  width: 58px;
+  background: rgba(8, 12, 18, 0.82);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 26px;
+  box-shadow: 0 14px 40px -10px rgba(0, 0, 0, 0.7), 0 0 20px -5px rgba(0, 240, 255, 0.08);
+  padding: 0.85rem 0.38rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  overflow: hidden;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s ease,
+              box-shadow 0.3s ease;
+}
+
+/* On hover: smoothly expands to reveal full section titles */
+.vnav-dock:hover {
+  width: 172px;
+  border-color: rgba(0, 240, 255, 0.25);
+  box-shadow: 0 20px 48px -10px rgba(0, 0, 0, 0.8), 0 0 25px -3px rgba(0, 240, 255, 0.12);
+}
+
+/* Top Telemetry Pulse Dot */
+.vnav-header-dot {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.25rem;
+  flex-shrink: 0;
+}
+
+.vnav-pulse-core {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--cyan-primary);
+  box-shadow: 0 0 8px var(--cyan-primary);
+}
+
+.vnav-pulse-ring {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 240, 255, 0.45);
+  animation: vnavPulse 2.5s infinite ease-out;
+}
+
+@keyframes vnavPulse {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  70% { transform: scale(1.6); opacity: 0; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Vertical List */
+.vnav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.22rem;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.vnav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.vnav-num {
+  font-family: var(--font-display);
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: var(--cyan-primary);
+  opacity: 0.45;
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.vnav-icon {
+  font-size: 0.8rem;
+  min-width: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.3rem;
+  flex-shrink: 0;
+  color: var(--text-dim);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Text label: hidden in compact mode, slides and fades in smoothly on dock hover */
+.vnav-text {
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  margin-left: 0.55rem;
+  opacity: 0;
+  max-width: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.2s ease, max-width 0.25s ease, transform 0.2s ease;
+}
+
+.vnav-dock:hover .vnav-text {
+  opacity: 1;
+  max-width: 110px;
+  transform: translateX(0);
+  transition: opacity 0.25s ease 0.05s, max-width 0.28s ease, transform 0.25s ease 0.05s;
+}
+
+/* Individual Item Hover Interaction */
+.vnav-link:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateX(2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.vnav-link:hover .vnav-num {
+  opacity: 0.9;
+  color: var(--cyan-primary);
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.4);
+}
+
+.vnav-link:hover .vnav-icon {
+  color: var(--cyan-primary);
+  transform: scale(1.12);
+}
+
+/* Active Section Highlight */
+.vnav-link.active {
+  color: #ffffff;
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.16), inset 0 0 8px rgba(0, 240, 255, 0.06);
+}
+
+.vnav-link.active .vnav-num {
+  opacity: 1;
+  color: var(--cyan-primary);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.6);
+}
+
+.vnav-link.active .vnav-icon {
+  color: var(--cyan-primary);
+  transform: scale(1.08);
+}
+
+.vnav-link.active .vnav-text {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.35);
+}
+
+/* Left Cyan Indicator Line on Active Section */
+.vnav-link::before {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 16px;
+  background: var(--cyan-primary);
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--cyan-primary);
+  transition: transform 0.22s ease, opacity 0.22s ease;
+  opacity: 0;
+}
+
+.vnav-link.active::before {
+  transform: translateY(-50%) scaleY(1);
+  opacity: 1;
+}
+
+/* Bottom Telemetry Indicator Mark */
+.vnav-bottom-mark {
+  margin-top: 0.25rem;
+  font-size: 0.72rem;
+  color: var(--cyan-primary);
+  opacity: 0.45;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.vnav-dock:hover .vnav-bottom-mark {
+  opacity: 0.85;
+  transform: rotate(45deg);
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE NAVIGATION DRAWER (<= 992px)
+   -------------------------------------------------------------------------- */
+.mobile-nav-drawer {
+  display: none;
+  position: fixed;
+  top: 4.8rem;
+  left: 1rem;
+  right: 1rem;
+  background: rgba(9, 13, 21, 0.96);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.1);
+  z-index: 101;
+  transform: translateY(-16px) scale(0.98);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s cubic-bezier(0.4, 0, 0.2, 1), transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.mobile-nav-drawer.active {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+}
+
+.mobile-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.98rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.m-nav-num {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  color: var(--cyan-primary);
+  opacity: 0.55;
+  margin-right: 0.6rem;
+}
+
+.mobile-nav-link.active {
+  background: rgba(0, 240, 255, 0.1);
+  border-color: rgba(0, 240, 255, 0.3);
+  color: #ffffff;
+}
+
+.mobile-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 3px;
+  height: 16px;
+  background: var(--cyan-primary);
+  border-radius: 3px;
+  box-shadow: 0 0 8px var(--cyan-primary);
+  transition: transform 0.2s ease;
+}
+
+.mobile-nav-link.active::after {
+  transform: translateY(-50%) scaleY(1);
 }
 
 /* ==========================================================================
@@ -2641,16 +2842,8 @@ h1, h2, h3, h4, h5 {
     font-size: 1.08rem;
     letter-spacing: 1.2px;
   }
-  .nav-links {
-    gap: 0.12rem;
-  }
-  .nav-link {
-    padding: 0.34rem 0.52rem;
-    font-size: 0.82rem;
-  }
-  .nav-num {
-    font-size: 0.62rem;
-    margin-right: 0.24rem;
+  .vnav-dock {
+    left: 1rem;
   }
   .nav-island-actions {
     gap: 0.35rem;
@@ -2689,62 +2882,14 @@ h1, h2, h3, h4, h5 {
     width: 100%;
     justify-content: space-between;
   }
-  .nav-island-dock {
-    display: contents;
+  .vnav-dock {
+    display: none !important;
+  }
+  .mobile-nav-drawer {
+    display: block;
   }
   .nav-mobile-toggle {
     display: inline-flex;
-  }
-  .nav-links {
-    position: fixed;
-    top: 4.8rem;
-    left: 1rem;
-    right: 1rem;
-    background: rgba(9, 13, 21, 0.96);
-    backdrop-filter: blur(28px) saturate(180%);
-    -webkit-backdrop-filter: blur(28px) saturate(180%);
-    border: 1px solid rgba(0, 240, 255, 0.25);
-    border-radius: var(--radius-lg);
-    padding: 1.25rem 1rem;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0.4rem;
-    transform: translateY(-16px) scale(0.98);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.24s cubic-bezier(0.4, 0, 0.2, 1), transform 0.24s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85), 0 0 30px rgba(0, 240, 255, 0.1);
-    z-index: 101;
-  }
-  .nav-links.active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0) scale(1);
-  }
-  .nav-link {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 0.65rem 1.2rem;
-    font-size: 0.98rem;
-    border-radius: var(--radius-sm);
-  }
-  .nav-num {
-    font-size: 0.72rem;
-    margin-right: 0.6rem;
-    opacity: 0.55;
-  }
-  .nav-link::after {
-    left: 10px;
-    bottom: 50%;
-    transform: translateY(50%) scaleY(0);
-    width: 3px;
-    height: 16px;
-    border-radius: 3px;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  .nav-link.active::after {
-    transform: translateY(50%) scaleY(1);
-    opacity: 1;
   }
   .hero-grid {
     grid-template-columns: 1fr;

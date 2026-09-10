@@ -81,15 +81,7 @@
     <canvas id="bg-canvas"></canvas>
     <div class="ambient-glow-mesh"></div>
 
-    <!-- Side Telemetry Rails (Inspired by Reference 2 Matias) -->
-    <aside class="side-rail side-rail-left" aria-hidden="true">
-        <div class="side-rail-line"></div>
-        <div class="side-rail-text">
-            <span>RAWALPINDI, PK</span> &middot; WORLDWIDE REMOTE &middot; 2026
-        </div>
-        <div class="side-rail-line"></div>
-    </aside>
-
+    <!-- Right Telemetry Rails (Social Connectors) -->
     <aside class="side-rail side-rail-right" aria-hidden="true">
         <div class="side-rail-socials">
             <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" class="side-rail-social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
@@ -101,10 +93,10 @@
         <div class="side-rail-text">CONNECT // PROTOCOLS</div>
     </aside>
 
-    <!-- Floating Navigation Header: Creative Developer Dashboard -->
+    <!-- Floating Top Header Bar (Branding & Action Controls) -->
     <header class="navbar" id="navbar">
         <div class="nav-system-container">
-            <!-- Left Island: Brand & Avatar -->
+            <!-- Top Left: Personal Brand & Identity -->
             <div class="nav-island nav-island-brand">
                 <button type="button" class="nav-avatar-btn" id="avatar-zoom-trigger" title="Click to view photo">
                     <img src="assets/profile.webp" alt="Muhammad Ali" class="nav-avatar-img" width="36" height="36">
@@ -112,21 +104,8 @@
                 </button>
                 <a href="#hero" class="nav-logo-text">MUHAMMAD ALI<span>.DEV</span></a>
             </div>
-            
-            <!-- Center Island: Floating Navigation Dock with Subtle Monospace Indexing -->
-            <nav class="nav-island nav-island-dock" aria-label="Primary Navigation">
-                <ul class="nav-links" id="nav-links">
-                    <li><a href="#hero" class="nav-link active"><span class="nav-num">01</span><span class="nav-text">Home</span></a></li>
-                    <li><a href="#disciplines" class="nav-link"><span class="nav-num">02</span><span class="nav-text">What I Do</span></a></li>
-                    <li><a href="#featured" class="nav-link"><span class="nav-num">03</span><span class="nav-text">Featured</span></a></li>
-                    <li><a href="#games" class="nav-link"><span class="nav-num">04</span><span class="nav-text">My Work</span></a></li>
-                    <li><a href="#skills" class="nav-link"><span class="nav-num">05</span><span class="nav-text">Skills</span></a></li>
-                    <li><a href="#experience" class="nav-link"><span class="nav-num">06</span><span class="nav-text">Journey</span></a></li>
-                    <li><a href="#contact" class="nav-link"><span class="nav-num">07</span><span class="nav-text">Let's Talk</span></a></li>
-                </ul>
-            </nav>
 
-            <!-- Right Island: Utility Controls & Primary CTA -->
+            <!-- Top Right: Independent Utilities & Primary HIRE ME CTA -->
             <div class="nav-island nav-island-actions">
                 <div class="nav-utilities">
                     <button class="sound-toggle-btn" id="sound-toggle" title="Toggle UI Sound Synthesizer">
@@ -146,7 +125,86 @@
                 </button>
             </div>
         </div>
+
+        <!-- Mobile Expandable Navigation Drawer (<= 992px) -->
+        <div class="mobile-nav-drawer" id="mobile-nav-drawer" aria-label="Mobile Navigation">
+            <ul class="mobile-nav-list" id="mobile-nav-links">
+                <li><a href="#hero" class="mobile-nav-link active"><span class="m-nav-num">01</span><span class="m-nav-text">Home</span></a></li>
+                <li><a href="#disciplines" class="mobile-nav-link"><span class="m-nav-num">02</span><span class="m-nav-text">What I Do</span></a></li>
+                <li><a href="#featured" class="mobile-nav-link"><span class="m-nav-num">03</span><span class="m-nav-text">Featured</span></a></li>
+                <li><a href="#games" class="mobile-nav-link"><span class="m-nav-num">04</span><span class="m-nav-text">My Work</span></a></li>
+                <li><a href="#skills" class="mobile-nav-link"><span class="m-nav-num">05</span><span class="m-nav-text">Skills</span></a></li>
+                <li><a href="#experience" class="mobile-nav-link"><span class="m-nav-num">06</span><span class="m-nav-text">Journey</span></a></li>
+                <li><a href="#contact" class="mobile-nav-link"><span class="m-nav-num">07</span><span class="m-nav-text">Let's Talk</span></a></li>
+            </ul>
+        </div>
     </header>
+
+    <!-- Slim Floating Vertical Navigation Bar (Creative Developer Dashboard) -->
+    <nav class="vnav-dock" id="vnav-dock" aria-label="Section Navigation">
+        <!-- Top Status Indicator Pip -->
+        <div class="vnav-header-dot" aria-hidden="true" title="Navigation Active">
+            <span class="vnav-pulse-ring"></span>
+            <span class="vnav-pulse-core"></span>
+        </div>
+
+        <ul class="vnav-list" id="vnav-list">
+            <li>
+                <a href="#hero" class="vnav-link active" data-index="01" data-label="Home">
+                    <span class="vnav-num">01</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-house"></i></span>
+                    <span class="vnav-text">Home</span>
+                </a>
+            </li>
+            <li>
+                <a href="#disciplines" class="vnav-link" data-index="02" data-label="What I Do">
+                    <span class="vnav-num">02</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-shapes"></i></span>
+                    <span class="vnav-text">What I Do</span>
+                </a>
+            </li>
+            <li>
+                <a href="#featured" class="vnav-link" data-index="03" data-label="Featured">
+                    <span class="vnav-num">03</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>
+                    <span class="vnav-text">Featured</span>
+                </a>
+            </li>
+            <li>
+                <a href="#games" class="vnav-link" data-index="04" data-label="My Work">
+                    <span class="vnav-num">04</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-gamepad"></i></span>
+                    <span class="vnav-text">My Work</span>
+                </a>
+            </li>
+            <li>
+                <a href="#skills" class="vnav-link" data-index="05" data-label="Skills">
+                    <span class="vnav-num">05</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-microchip"></i></span>
+                    <span class="vnav-text">Skills</span>
+                </a>
+            </li>
+            <li>
+                <a href="#experience" class="vnav-link" data-index="06" data-label="Journey">
+                    <span class="vnav-num">06</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-compass"></i></span>
+                    <span class="vnav-text">Journey</span>
+                </a>
+            </li>
+            <li>
+                <a href="#contact" class="vnav-link" data-index="07" data-label="Let's Talk">
+                    <span class="vnav-num">07</span>
+                    <span class="vnav-icon" aria-hidden="true"><i class="fa-solid fa-paper-plane"></i></span>
+                    <span class="vnav-text">Let's Talk</span>
+                </a>
+            </li>
+        </ul>
+
+        <!-- Bottom Telemetry Indicator Mark -->
+        <div class="vnav-bottom-mark" aria-hidden="true" title="Navigate Sections">
+            <i class="fa-solid fa-arrow-trend-up"></i>
+        </div>
+    </nav>
 
     <main>
         <!-- =================================================================

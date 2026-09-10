@@ -166,7 +166,7 @@ function initWebAudio() {
         }
     });
 
-    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .filter-btn, .side-rail-social-btn, .timeline-content, .discipline-card');
+    const interactiveBtns = document.querySelectorAll('.btn, .nav-link, .vnav-link, .mobile-nav-link, .filter-btn, .side-rail-social-btn, .timeline-content, .discipline-card');
     interactiveBtns.forEach(btn => {
         btn.addEventListener('mouseenter', () => {
             if (soundEnabled) playTone(420, 'sine', 0.03, 0.02);
@@ -347,9 +347,9 @@ function initSpotlightAndTilt() {
 function initNavbarScroll() {
     const navbar = document.getElementById('navbar');
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const navLinks = document.querySelectorAll('.vnav-link, .mobile-nav-link');
     const mobileToggle = document.getElementById('mobile-toggle');
-    const navLinksContainer = document.getElementById('nav-links');
+    const mobileDrawer = document.getElementById('mobile-nav-drawer');
 
     let isTicking = false;
 
@@ -398,27 +398,28 @@ function initNavbarScroll() {
     updateActiveNav();
 
     // Mobile drawer toggle
-    if (mobileToggle && navLinksContainer) {
+    if (mobileToggle && mobileDrawer) {
         mobileToggle.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = navLinksContainer.classList.toggle('active');
+            const isOpen = mobileDrawer.classList.toggle('active');
             const icon = mobileToggle.querySelector('i');
             if (icon) {
                 icon.className = isOpen ? 'fa-solid fa-xmark' : 'fa-solid fa-bars';
             }
         });
 
-        navLinks.forEach(link => {
+        const mobileLinks = mobileDrawer.querySelectorAll('.mobile-nav-link');
+        mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                navLinksContainer.classList.remove('active');
+                mobileDrawer.classList.remove('active');
                 const icon = mobileToggle.querySelector('i');
                 if (icon) icon.className = 'fa-solid fa-bars';
             });
         });
 
         document.addEventListener('click', (e) => {
-            if (!navbar.contains(e.target)) {
-                navLinksContainer.classList.remove('active');
+            if (!navbar.contains(e.target) && !mobileDrawer.contains(e.target)) {
+                mobileDrawer.classList.remove('active');
                 const icon = mobileToggle.querySelector('i');
                 if (icon) icon.className = 'fa-solid fa-bars';
             }
@@ -1254,7 +1255,7 @@ function initCustomCursor() {
     }, { passive: true });
 
     // Hover state on interactive elements (links, buttons, interactive cards)
-    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .nav-avatar-btn, input, textarea';
+    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .vnav-link, .mobile-nav-link, .nav-avatar-btn, input, textarea';
 
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(interactiveSelectors)) {
