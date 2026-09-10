@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muhammad Ali — Game Developer & VR Designer | Resume</title>
+    <meta name="description" content="Resume of Muhammad Ali — Game Developer, Unity Developer & VR Designer with 3+ years experience, 8+ shipped titles, and 3.77 CGPA from Riphah International University.">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+    <!-- FontAwesome 6 Pro CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Resume Stylesheet -->
+    <link rel="stylesheet" href="resume.css">
+</head>
+<body>
+
+    <!-- Ambient Mesh Background (Screen Viewing) -->
+    <div class="screen-bg-mesh" aria-hidden="true"></div>
+
+    <!-- Floating Interactive Controls Bar -->
+    <nav class="resume-controls" aria-label="Resume Controls">
+        <a href="index.html" class="control-btn" title="Back to Portfolio Home">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>Portfolio</span>
+        </a>
+        <button id="theme-toggle-btn" class="control-btn" title="Toggle Dark / Light Theme" aria-label="Toggle Theme">
+            <i id="theme-icon" class="fa-solid fa-sun"></i>
+            <span id="theme-text">Light Mode</span>
+        </button>
+        <button onclick="window.print()" class="control-btn" title="Print or Save as PDF">
+            <i class="fa-solid fa-print"></i>
+            <span>Print</span>
+        </button>
+        <a href="assets/Muhammad_Ali_Resume.pdf" download="Muhammad_Ali_Resume.pdf" class="control-btn btn-primary-action" title="Download Official PDF">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Download PDF</span>
+        </a>
+    </nav>
+
+    <!-- Main Resume Sheet (Standard A4 Geometry) -->
+    <main class="resume-sheet">
+
+        <!-- =============================================================
+             HEADER & TELEMETRY
+             ============================================================= -->
+        <header class="resume-header">
+            <div class="header-main">
+                <div class="avatar-hud-wrapper">
+                    <img src="assets/profile.webp" alt="Muhammad Ali" class="avatar-img">
+                    <div class="avatar-corner-tl" aria-hidden="true"></div>
+                    <div class="avatar-corner-br" aria-hidden="true"></div>
+                </div>
+
+                <div class="header-text">
+                    <div class="header-telemetry-pill">
+                        <span class="header-status-dot"></span>
+                        <span>Available for Hire &bull; VR &amp; Game Dev</span>
+                    </div>
+                    <h1 class="resume-name">Muhammad <span class="highlight-cyan">Ali</span></h1>
+                    <div class="resume-title-bar">
+                        <span>GAME DEVELOPER</span>
+                        <span class="title-separator">&bull;</span>
+                        <span>UNITY SPECIALIST</span>
+                        <span class="title-separator">&bull;</span>
+                        <span>VR / XR DESIGNER</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Telemetry Contact Strip -->
+        <div class="contact-telemetry-strip">
+            <a href="tel:+923411155784" class="contact-item">
+                <i class="fa-solid fa-phone"></i>
+                <span>+92 341 1155784</span>
+            </a>
+            <a href="mailto:muhammadali.offical.gd@gmail.com" class="contact-item">
+                <i class="fa-solid fa-envelope"></i>
+                <span>muhammadali.offical.gd@gmail.com</span>
+            </a>
+            <div class="contact-item">
+                <i class="fa-solid fa-location-dot"></i>
+                <span>Rawalpindi, Pakistan</span>
+            </div>
+            <a href="https://muhammad-ali-344.github.io/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <i class="fa-solid fa-globe"></i>
+                <span>muhammad-ali-344.github.io</span>
+            </a>
+            <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <i class="fa-brands fa-github"></i>
+                <span>github.com/Muhammad-Ali-344</span>
+            </a>
+            <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <span>linkedin.com/in/muhammad-ali</span>
+            </a>
+            <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer" class="contact-item">
+                <i class="fa-brands fa-artstation"></i>
+                <span>artstation.com/muhammadali344</span>
+            </a>
+        </div>
+
+        <!-- =============================================================
+             TWO-COLUMN RESUME BODY
+             ============================================================= -->
+        <div class="resume-body">
+
+            <!-- LEFT COLUMN: EDUCATION, SKILLS MATRIX, CERTIFICATIONS -->
+            <aside class="resume-col-left">
+
+                <!-- Education -->
+                <section class="cv-section">
+                    <div class="section-head">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <h2>Education</h2>
+                        <span class="head-tag">3.77 CGPA</span>
+                    </div>
+
+                    <div class="education-card">
+                        <div class="edu-degree">B.S. Game Design &amp; Production</div>
+                        <div class="edu-institution">Riphah International University</div>
+                        <div class="edu-meta">
+                            <span class="edu-year">2022 &mdash; 2026</span>
+                            <span class="edu-gpa-badge">CGPA: 3.77</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Technical Skills Matrix -->
+                <section class="cv-section">
+                    <div class="section-head">
+                        <i class="fa-solid fa-code"></i>
+                        <h2>Tech Skills</h2>
+                        <span class="head-tag">Arsenal</span>
+                    </div>
+
+                    <!-- Programming -->
+                    <div class="skill-category">
+                        <div class="skill-cat-title">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Programming</span>
+                        </div>
+                        <div class="skill-pill-wrap">
+                            <span class="skill-pill highlight">C# (Expert)</span>
+                            <span class="skill-pill">C++</span>
+                            <span class="skill-pill">Python (Basic)</span>
+                        </div>
+                    </div>
+
+                    <!-- Game Engines -->
+                    <div class="skill-category">
+                        <div class="skill-cat-title">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <span>Game Engines</span>
+                        </div>
+                        <div class="skill-pill-wrap">
+                            <span class="skill-pill highlight">Unity Engine</span>
+                            <span class="skill-pill">Unreal Engine (Basic)</span>
+                        </div>
+                    </div>
+
+                    <!-- VR / XR Technologies -->
+                    <div class="skill-category">
+                        <div class="skill-cat-title">
+                            <i class="fa-solid fa-vr-cardboard"></i>
+                            <span>VR / XR Development</span>
+                        </div>
+                        <div class="skill-pill-wrap">
+                            <span class="skill-pill amber">Meta Quest Dev</span>
+                            <span class="skill-pill">XR Interaction Toolkit</span>
+                            <span class="skill-pill">VR Interaction Systems</span>
+                            <span class="skill-pill">Haptics &amp; Motion</span>
+                        </div>
+                    </div>
+
+                    <!-- Game Development Systems -->
+                    <div class="skill-category">
+                        <div class="skill-cat-title">
+                            <i class="fa-solid fa-microchip"></i>
+                            <span>Systems &amp; Architecture</span>
+                        </div>
+                        <div class="skill-pill-wrap">
+                            <span class="skill-pill">Gameplay Programming</span>
+                            <span class="skill-pill">Game Mechanics Design</span>
+                            <span class="skill-pill">UI Systems &amp; Menus</span>
+                            <span class="skill-pill">Performance Optimization</span>
+                            <span class="skill-pill">Debugging &amp; Profiling</span>
+                            <span class="skill-pill">Git / Version Control</span>
+                            <span class="skill-pill">Firebase Analytics</span>
+                            <span class="skill-pill">AdMob &amp; IAP Integration</span>
+                        </div>
+                    </div>
+
+                    <!-- 3D & Art Tools -->
+                    <div class="skill-category">
+                        <div class="skill-cat-title">
+                            <i class="fa-solid fa-cubes"></i>
+                            <span>3D &amp; Art Pipeline</span>
+                        </div>
+                        <div class="skill-pill-wrap">
+                            <span class="skill-pill">Blender</span>
+                            <span class="skill-pill">ZBrush</span>
+                            <span class="skill-pill">Substance Painter</span>
+                            <span class="skill-pill">Character Creator</span>
+                            <span class="skill-pill">Asset Optimization</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Certifications & Honors -->
+                <section class="cv-section">
+                    <div class="section-head">
+                        <i class="fa-solid fa-award"></i>
+                        <h2>Certifications</h2>
+                    </div>
+
+                    <div class="cert-card">
+                        <div class="cert-title">Game Design &amp; Development</div>
+                        <div class="cert-issuer">Government-Sponsored Program (6 Months)</div>
+                        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 0.5rem; line-height: 1.4;">
+                            Core programming, interactive systems, game loops &amp; mechanics design.
+                        </p>
+                        <span class="cert-grade-tag">
+                            <i class="fa-solid fa-star"></i>
+                            <span>A+ Grade &bull; 90%+ Marks</span>
+                        </span>
+                    </div>
+                </section>
+
+            </aside>
+
+            <!-- RIGHT COLUMN: SUMMARY, EXPERIENCE, FEATURED PROJECTS -->
+            <div class="resume-col-right">
+
+                <!-- Professional Summary -->
+                <section class="cv-section">
+                    <div class="section-head">
+                        <i class="fa-solid fa-user-gear"></i>
+                        <h2>Professional Summary</h2>
+                    </div>
+                    <p class="summary-text">
+                        Game Developer with a Bachelor's degree in Game Design and Production (3.77 CGPA) and over 3 years of experience developing commercial, indie, and client-based game projects. Experienced in Unity game development, gameplay programming, UI architecture, 2D/3D asset integration, debugging, performance optimization, and VR development for Meta Quest platforms. Skilled in designing and implementing interactive gameplay systems, VR interaction mechanics, monetization pipelines, and 3D environments. Passionate about engineering responsive, high-performance gameplay experiences and tackling complex technical challenges in modern game production.
+                    </p>
+                </section>
+
+                <!-- Professional Experience -->
+                <section class="cv-section">
+                    <div class="section-head">
+                        <i class="fa-solid fa-briefcase"></i>
+                        <h2>Experience</h2>
+                        <span class="head-tag">3+ Years</span>
+                    </div>
+
+                    <!-- Kurly Brackets -->
+                    <div class="experience-item">
+                        <div class="exp-dot"></div>
+                        <div class="exp-header">
+                            <div class="exp-role">Game Developer</div>
+                            <div class="exp-duration">Early 2023 &mdash; Present</div>
+                        </div>
+                        <div class="exp-company">
+                            <i class="fa-solid fa-building"></i>
+                            <span>Kurly Brackets &bull; On-Site Studio</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Architected and implemented core gameplay mechanics, state machines, and responsive player controls using Unity and C#.</li>
+                            <li>Engineered modular, high-performance UI systems, dynamic HUDs, and animated menu flows across mobile game pipelines.</li>
+                            <li>Profiled CPU/GPU performance, resolved garbage collection spikes, fixed critical bugs, and maintained target frame rates.</li>
+                            <li>Integrated advertising networks (AdMob), In-App Purchases, and Firebase telemetry pipelines for live production titles.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Freelance / Indie Game Development -->
+                    <div class="experience-item">
+                        <div class="exp-dot"></div>
+                        <div class="exp-header">
+                            <div class="exp-role">Indie Game Developer / Unity Developer</div>
+                            <div class="exp-duration">2021 &mdash; Present &bull; 3+ Years</div>
+                        </div>
+                        <div class="exp-company">
+                            <i class="fa-solid fa-laptop-code"></i>
+                            <span>Freelance &amp; Indie Client Projects</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Contributed to <strong>20+ indie and client-based game projects</strong>, delivering turnkey gameplay features, systems, and mechanics.</li>
+                            <li>Designed and developed 2D/3D physics interactions, player movement controllers, AI navigation, and interactive object systems.</li>
+                            <li>Integrated and optimized 3D models, textures, animations, particle effects, and audio systems for mobile and PC platforms.</li>
+                            <li>Collaborated directly with clients from rapid prototyping through final deployment, preparing Android APK/AAB builds and publishing workflows.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Motion Maze -->
+                    <div class="experience-item">
+                        <div class="exp-dot"></div>
+                        <div class="exp-header">
+                            <div class="exp-role">Game Developer</div>
+                            <div class="exp-duration">Completed &bull; 6 Months</div>
+                        </div>
+                        <div class="exp-company">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <span>Motion Maze &bull; Remote Studio</span>
+                        </div>
+                        <ul class="exp-bullets">
+                            <li>Contributed as core game developer creating gameplay mechanics, UI layouts, and programming logic for mobile titles.</li>
+                            <li>Conducted rigorous code debugging, performance improvements, and game asset integration across team milestones.</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Featured Projects -->
+                <section class="cv-section">
+                    <div class="section-head">
+                        <i class="fa-solid fa-rocket"></i>
+                        <h2>Featured Projects</h2>
+                    </div>
+
+                    <!-- The Forgotten Train VR -->
+                    <div class="project-card">
+                        <div class="project-head">
+                            <div class="project-title">The Forgotten Train &mdash; VR Escape Experience</div>
+                            <span class="project-platform">Meta Quest VR</span>
+                        </div>
+                        <div class="project-role-line">Game Designer &bull; Unity Developer &bull; 3D Environment Artist</div>
+                        <p class="project-desc">
+                            An atmospheric, story-driven VR escape room experience developed for Meta Quest where players solve intricate environmental puzzles inside an ominous, dynamically moving locomotive.
+                        </p>
+                        <ul class="exp-bullets">
+                            <li>Designed multi-stage puzzle mechanics, door locks, hidden clues, and narrative trigger sequences.</li>
+                            <li>Implemented direct VR hand-presence, physics grabbing, socket snapping, and item inspection via Unity XR Interaction Toolkit.</li>
+                            <li>Modeled, textured, and lit atmospheric 3D train carriage environments, modular props, and visual effects in Blender &amp; Unity.</li>
+                            <li>Optimized geometry, draw calls, and lighting baked shaders to ensure silky-smooth 72 FPS standalone VR performance.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Shipped Titles Summary -->
+                    <div class="shipped-card">
+                        <div class="shipped-header">
+                            <div class="shipped-title">8+ Published Mobile Game Titles</div>
+                            <span class="shipped-badge">Google Play Store Releases</span>
+                        </div>
+                        <p style="font-size: 0.83rem; color: var(--text-secondary); line-height: 1.45;">
+                            Commercially shipped mobile games with full gameplay loops, UI menus, audio, monetization, and store deployment:
+                        </p>
+                        <div class="shipped-games-list">
+                            <span class="game-chip"><i class="fa-solid fa-circle-check" style="color:#00f0ff;"></i> Selah: Bible Charades</span>
+                            <span class="game-chip"><i class="fa-solid fa-circle-check" style="color:#00f0ff;"></i> Jewel Crush Quest</span>
+                            <span class="game-chip"><i class="fa-solid fa-circle-check" style="color:#00f0ff;"></i> 2468 Block Puzzle</span>
+                            <span class="game-chip"><i class="fa-solid fa-circle-check" style="color:#00f0ff;"></i> Mr Greedy</span>
+                            <span class="game-chip"><i class="fa-solid fa-circle-check" style="color:#00f0ff;"></i> Snake Escape</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Theme Switcher Script -->
+    <script>
+        (function() {
+            const html = document.documentElement;
+            const toggleBtn = document.getElementById('theme-toggle-btn');
+            const themeIcon = document.getElementById('theme-icon');
+            const themeText = document.getElementById('theme-text');
+
+            // Synchronize with portfolio's stored theme
+            const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+            applyTheme(savedTheme);
+
+            function applyTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('portfolio-theme', theme);
+                if (theme === 'light') {
+                    themeIcon.className = 'fa-solid fa-moon';
+                    themeText.textContent = 'Dark Mode';
+                } else {
+                    themeIcon.className = 'fa-solid fa-sun';
+                    themeText.textContent = 'Light Mode';
+                }
+            }
+
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', () => {
+                    const currentTheme = html.getAttribute('data-theme') || 'dark';
+                    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
