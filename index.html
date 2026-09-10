@@ -101,38 +101,46 @@
         <div class="side-rail-text">CONNECT // PROTOCOLS</div>
     </aside>
 
-    <!-- Floating Navigation Header -->
+    <!-- Floating Navigation Header: Creative Developer Dashboard -->
     <header class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo-group">
+        <div class="nav-system-container">
+            <!-- Left Island: Brand & Avatar -->
+            <div class="nav-island nav-island-brand">
                 <button type="button" class="nav-avatar-btn" id="avatar-zoom-trigger" title="Click to view photo">
-                    <img src="assets/profile.webp" alt="Muhammad Ali" class="nav-avatar-img" width="38" height="38">
+                    <img src="assets/profile.webp" alt="Muhammad Ali" class="nav-avatar-img" width="36" height="36">
                     <span class="nav-avatar-status" aria-label="Status: Online"></span>
                 </button>
                 <a href="#hero" class="nav-logo-text">MUHAMMAD ALI<span>.DEV</span></a>
             </div>
             
-            <nav class="nav-dock" aria-label="Primary Navigation">
+            <!-- Center Island: Floating Navigation Dock with Subtle Monospace Indexing -->
+            <nav class="nav-island nav-island-dock" aria-label="Primary Navigation">
                 <ul class="nav-links" id="nav-links">
-                    <li><a href="#hero" class="nav-link active">Home</a></li>
-                    <li><a href="#disciplines" class="nav-link">What I Do</a></li>
-                    <li><a href="#featured" class="nav-link">Featured</a></li>
-                    <li><a href="#games" class="nav-link">My Work</a></li>
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#experience" class="nav-link">Journey</a></li>
-                    <li><a href="#contact" class="nav-link">Let's Talk</a></li>
+                    <li><a href="#hero" class="nav-link active"><span class="nav-num">01</span><span class="nav-text">Home</span></a></li>
+                    <li><a href="#disciplines" class="nav-link"><span class="nav-num">02</span><span class="nav-text">What I Do</span></a></li>
+                    <li><a href="#featured" class="nav-link"><span class="nav-num">03</span><span class="nav-text">Featured</span></a></li>
+                    <li><a href="#games" class="nav-link"><span class="nav-num">04</span><span class="nav-text">My Work</span></a></li>
+                    <li><a href="#skills" class="nav-link"><span class="nav-num">05</span><span class="nav-text">Skills</span></a></li>
+                    <li><a href="#experience" class="nav-link"><span class="nav-num">06</span><span class="nav-text">Journey</span></a></li>
+                    <li><a href="#contact" class="nav-link"><span class="nav-num">07</span><span class="nav-text">Let's Talk</span></a></li>
                 </ul>
             </nav>
 
-            <div class="nav-actions">
-                <button class="sound-toggle-btn" id="sound-toggle" title="Toggle UI Sound Synthesizer">
-                    <i class="fa-solid fa-volume-high"></i>
-                    <span>SFX ON</span>
-                </button>
-                <a href="assets/Muhammad_Ali_Resume.pdf" class="btn-resume" download title="Download Resume PDF">
-                    <i class="fa-solid fa-file-pdf"></i> Resume &darr;
-                </a>
-                <a href="#contact" class="btn btn-primary nav-hire-btn">HIRE ME</a>
+            <!-- Right Island: Utility Controls & Primary CTA -->
+            <div class="nav-island nav-island-actions">
+                <div class="nav-utilities">
+                    <button class="sound-toggle-btn" id="sound-toggle" title="Toggle UI Sound Synthesizer">
+                        <i class="fa-solid fa-volume-high"></i>
+                        <span>SFX ON</span>
+                    </button>
+                    <a href="assets/Muhammad_Ali_Resume.pdf" class="btn-resume" download title="Download Resume PDF">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span>Resume &darr;</span>
+                    </a>
+                </div>
+                <div class="nav-cta-wrap">
+                    <a href="#contact" class="btn btn-primary nav-hire-btn btn-hire-cta">HIRE ME</a>
+                </div>
                 <button class="nav-mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
                     <i class="fa-solid fa-bars"></i>
                 </button>

@@ -377,7 +377,7 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ==========================================================================
-   1. FLOATING NAVIGATION DOCK
+   1. FLOATING NAVIGATION SYSTEM: CREATIVE DEVELOPER DASHBOARD
    ========================================================================== */
 .navbar {
   position: fixed;
@@ -386,52 +386,61 @@ h1, h2, h3, h4, h5 {
   right: 0;
   z-index: 100;
   padding: 0 1.5rem;
-  pointer-events: none; /* Allows click-through outside nav container */
+  pointer-events: none; /* Allows click-through in gaps between islands */
 }
 
-.nav-container {
-  pointer-events: auto;
+.nav-system-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.45rem 1rem 0.45rem 1.1rem;
-  background: rgba(8, 12, 18, 0.78);
-  background-image: radial-gradient(ellipse at 50% -20%, rgba(0, 240, 255, 0.12), transparent 70%);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 9999px;
-  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px -5px rgba(0, 240, 255, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.1);
-  max-width: 1320px;
+  max-width: 1420px;
   margin: 0 auto;
-  transition: all var(--transition-normal);
+  gap: 0.75rem;
+  pointer-events: none;
 }
 
-.nav-logo-group {
-  display: flex;
+/* Base styling for the floating modular islands */
+.nav-island {
+  pointer-events: auto;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
+  background: rgba(8, 12, 18, 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 9999px;
+  box-shadow: 0 14px 34px -8px rgba(0, 0, 0, 0.65), 0 0 1px rgba(0, 240, 255, 0.12);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* --------------------------------------------------------------------------
+   LEFT ISLAND: Identity & Personal Brand
+   -------------------------------------------------------------------------- */
+.nav-island-brand {
+  padding: 0.32rem 0.95rem 0.32rem 0.4rem;
+  gap: 0.7rem;
   flex-shrink: 0;
 }
 
 .nav-avatar-btn {
   position: relative;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  border: 2px solid rgba(0, 240, 255, 0.6);
+  border: 1.5px solid rgba(0, 240, 255, 0.55);
   padding: 0;
   background: none;
   cursor: pointer;
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
   transition: var(--transition-fast);
   flex-shrink: 0;
+  overflow: visible;
 }
 
 .nav-avatar-btn:hover {
-  transform: scale(1.08);
+  transform: scale(1.06);
   border-color: var(--cyan-primary);
-  box-shadow: 0 0 22px rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.55);
 }
 
 .nav-avatar-img {
@@ -446,17 +455,17 @@ h1, h2, h3, h4, h5 {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 10px;
-  height: 10px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: var(--emerald-signal);
   border: 2px solid #080c12;
-  box-shadow: 0 0 8px var(--emerald-signal);
+  box-shadow: 0 0 6px var(--emerald-signal);
 }
 
 .nav-logo-text {
   font-family: var(--font-heading);
-  font-size: 1.18rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: var(--text-main);
   text-decoration: none;
@@ -468,28 +477,24 @@ h1, h2, h3, h4, h5 {
 
 .nav-logo-text span {
   color: var(--cyan-primary);
-  text-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.45);
 }
 
-/* Center Floating Pill Dock */
-.nav-dock {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* --------------------------------------------------------------------------
+   CENTER ISLAND: Standalone Floating Navigation Dock with Monospace Indexing
+   -------------------------------------------------------------------------- */
+.nav-island-dock {
+  padding: 0.22rem 0.35rem;
+  background: rgba(9, 14, 22, 0.82);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
   list-style: none;
-  gap: 0.2rem;
-  padding: 0.22rem 0.3rem;
-  background: rgba(13, 19, 29, 0.65);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 9999px;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.05), 0 4px 14px rgba(0, 0, 0, 0.3);
+  gap: 0.18rem;
+  margin: 0;
+  padding: 0;
 }
 
 .nav-link {
@@ -500,49 +505,89 @@ h1, h2, h3, h4, h5 {
   color: var(--text-secondary);
   text-decoration: none;
   font-family: var(--font-heading);
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
-  letter-spacing: 0.5px;
-  padding: 0.38rem 0.82rem;
+  letter-spacing: 0.45px;
+  padding: 0.38rem 0.75rem;
   border-radius: 9999px;
   border: 1px solid transparent;
   white-space: nowrap;
-  transition: color 0.22s ease, background 0.22s ease, border-color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+  transition: color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Subtle Monospace Micro-Detail Index Number */
+.nav-num {
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 600;
+  opacity: 0.42;
+  color: var(--cyan-primary);
+  margin-right: 0.34rem;
+  letter-spacing: 0.5px;
+  transition: opacity 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.nav-text {
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+/* Hover Interaction: Smooth highlight, subtle lift, number brightens */
 .nav-link:hover {
-  color: var(--text-main);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.09);
-  transform: translateY(-1.5px);
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.nav-link:hover .nav-num {
+  opacity: 0.88;
+  color: var(--cyan-primary);
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.35);
+}
+
+/* Active Section Highlight: Soft cyan glow, brightened index, bottom indicator */
 .nav-link.active {
   color: #ffffff;
-  background: rgba(0, 240, 255, 0.09);
-  border-color: rgba(0, 240, 255, 0.32);
-  box-shadow: 0 0 14px rgba(0, 240, 255, 0.18), inset 0 0 8px rgba(0, 240, 255, 0.08);
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.28);
+  box-shadow: 0 0 14px rgba(0, 240, 255, 0.16), inset 0 0 8px rgba(0, 240, 255, 0.06);
   transform: translateY(0);
 }
 
 .nav-link.active:hover {
   transform: translateY(-1px);
-  box-shadow: 0 0 18px rgba(0, 240, 255, 0.28), inset 0 0 10px rgba(0, 240, 255, 0.12);
+  box-shadow: 0 0 18px rgba(0, 240, 255, 0.25), inset 0 0 10px rgba(0, 240, 255, 0.1);
 }
 
-/* Subtle glowing cyan underline indicator */
+.nav-link.active .nav-num {
+  opacity: 1;
+  color: var(--cyan-primary);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
+}
+
+.nav-link.active .nav-text {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+/* Small animated cyan underline indicator */
 .nav-link::after {
   content: '';
   position: absolute;
   bottom: 2px;
   left: 50%;
   transform: translateX(-50%) scaleX(0);
-  width: 16px;
+  width: 14px;
   height: 2px;
   background: var(--cyan-primary);
   border-radius: 2px;
-  box-shadow: 0 0 8px var(--cyan-primary), 0 0 14px var(--cyan-glow);
+  box-shadow: 0 0 8px var(--cyan-primary);
   transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
   opacity: 0;
   pointer-events: none;
@@ -553,87 +598,105 @@ h1, h2, h3, h4, h5 {
   opacity: 1;
 }
 
-/* Right Action Controls */
-.nav-actions {
+/* --------------------------------------------------------------------------
+   RIGHT ISLAND: Visual Separation of Utilities vs. Standout HIRE ME CTA
+   -------------------------------------------------------------------------- */
+.nav-island-actions {
+  padding: 0.24rem 0.35rem 0.24rem 0.45rem;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   flex-shrink: 0;
 }
 
+/* Subtle sub-cluster for utilities */
+.nav-utilities {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding-right: 0.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .sound-toggle-btn {
-  background: rgba(0, 240, 255, 0.05);
-  border: 1px solid rgba(0, 240, 255, 0.25);
-  color: var(--cyan-primary);
-  padding: 0.42rem 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--text-secondary);
+  padding: 0.38rem 0.72rem;
   border-radius: 9999px;
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 700;
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.42rem;
   cursor: pointer;
   transition: var(--transition-fast);
   font-family: var(--font-heading);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   white-space: nowrap;
 }
 
 .sound-toggle-btn:hover {
-  background: rgba(0, 240, 255, 0.12);
-  border-color: var(--cyan-primary);
-  box-shadow: 0 0 14px var(--cyan-glow);
+  background: rgba(0, 240, 255, 0.08);
+  border-color: rgba(0, 240, 255, 0.3);
+  color: var(--cyan-primary);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.18);
   transform: translateY(-1px);
 }
 
 .btn-resume {
-  background: rgba(255, 183, 3, 0.08);
-  border: 1px solid rgba(255, 183, 3, 0.32);
+  background: rgba(255, 183, 3, 0.06);
+  border: 1px solid rgba(255, 183, 3, 0.22);
   color: var(--amber-primary);
-  padding: 0.42rem 0.85rem;
+  padding: 0.38rem 0.78rem;
   border-radius: 9999px;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   font-family: var(--font-heading);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.38rem;
   transition: var(--transition-fast);
   white-space: nowrap;
 }
 
 .btn-resume:hover {
-  background: rgba(255, 183, 3, 0.18);
+  background: rgba(255, 183, 3, 0.15);
   border-color: var(--amber-primary);
-  box-shadow: 0 0 16px var(--amber-glow);
+  box-shadow: 0 0 12px var(--amber-glow);
   color: #fff;
   transform: translateY(-1px);
 }
 
-/* Navbar "HIRE ME" button — premium high-energy cyber button */
-.nav-hire-btn {
-  background: linear-gradient(135deg, rgba(0, 240, 255, 0.95) 0%, rgba(0, 185, 255, 0.9) 100%);
+.nav-cta-wrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Standout Primary CTA Button */
+.btn-hire-cta {
+  background: linear-gradient(135deg, rgba(0, 240, 255, 0.95) 0%, rgba(0, 180, 255, 0.9) 100%);
   color: #05080e !important;
-  border: 1px solid rgba(0, 240, 255, 0.8);
-  padding: 0.42rem 1.05rem;
+  border: 1px solid rgba(0, 240, 255, 0.85);
+  padding: 0.42rem 1.15rem;
   border-radius: 9999px;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 800;
   font-family: var(--font-heading);
-  letter-spacing: 0.8px;
+  letter-spacing: 0.9px;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 16px rgba(0, 240, 255, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
   transition: var(--transition-fast);
   white-space: nowrap;
   line-height: 1;
 }
 
-.nav-hire-btn:hover {
+.btn-hire-cta:hover {
   background: var(--cyan-primary);
   color: #030508 !important;
   box-shadow: 0 0 24px rgba(0, 240, 255, 0.75);
@@ -2568,28 +2631,46 @@ h1, h2, h3, h4, h5 {
    11. RESPONSIVE BREAKPOINTS
    ========================================================================== */
 @media (max-width: 1240px) {
+  .nav-system-container {
+    gap: 0.5rem;
+  }
+  .nav-island-brand {
+    padding: 0.28rem 0.75rem 0.28rem 0.35rem;
+  }
+  .nav-logo-text {
+    font-size: 1.08rem;
+    letter-spacing: 1.2px;
+  }
   .nav-links {
     gap: 0.12rem;
-    padding: 0.2rem 0.25rem;
   }
   .nav-link {
-    padding: 0.35rem 0.62rem;
-    font-size: 0.83rem;
+    padding: 0.34rem 0.52rem;
+    font-size: 0.82rem;
   }
-  .nav-actions {
-    gap: 0.4rem;
+  .nav-num {
+    font-size: 0.62rem;
+    margin-right: 0.24rem;
+  }
+  .nav-island-actions {
+    gap: 0.35rem;
+    padding: 0.22rem 0.3rem 0.22rem 0.35rem;
+  }
+  .nav-utilities {
+    gap: 0.25rem;
+    padding-right: 0.35rem;
   }
   .sound-toggle-btn {
-    padding: 0.38rem 0.65rem;
-    font-size: 0.75rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.74rem;
   }
   .btn-resume {
-    padding: 0.38rem 0.7rem;
-    font-size: 0.76rem;
+    padding: 0.35rem 0.65rem;
+    font-size: 0.74rem;
   }
-  .nav-hire-btn {
-    padding: 0.38rem 0.85rem;
-    font-size: 0.76rem;
+  .btn-hire-cta {
+    padding: 0.36rem 0.95rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -2604,13 +2685,11 @@ h1, h2, h3, h4, h5 {
     top: 0.75rem;
     padding: 0 1rem;
   }
-  .nav-container {
-    padding: 0.45rem 0.9rem;
+  .nav-system-container {
+    width: 100%;
+    justify-content: space-between;
   }
-  .nav-logo-text {
-    font-size: 1.1rem;
-  }
-  .nav-dock {
+  .nav-island-dock {
     display: contents;
   }
   .nav-mobile-toggle {
@@ -2621,7 +2700,7 @@ h1, h2, h3, h4, h5 {
     top: 4.8rem;
     left: 1rem;
     right: 1rem;
-    background: rgba(9, 13, 21, 0.95);
+    background: rgba(9, 13, 21, 0.96);
     backdrop-filter: blur(28px) saturate(180%);
     -webkit-backdrop-filter: blur(28px) saturate(180%);
     border: 1px solid rgba(0, 240, 255, 0.25);
@@ -2648,6 +2727,11 @@ h1, h2, h3, h4, h5 {
     padding: 0.65rem 1.2rem;
     font-size: 0.98rem;
     border-radius: var(--radius-sm);
+  }
+  .nav-num {
+    font-size: 0.72rem;
+    margin-right: 0.6rem;
+    opacity: 0.55;
   }
   .nav-link::after {
     left: 10px;
@@ -2742,30 +2826,40 @@ h1, h2, h3, h4, h5 {
   .floating-chip-text strong {
     font-size: 0.75rem;
   }
-  .sound-toggle-btn span {
+  .sound-toggle-btn span,
+  .btn-resume span {
     display: none;
   }
   .sound-toggle-btn {
-    padding: 0.38rem 0.55rem;
+    padding: 0.35rem 0.55rem;
   }
   .btn-resume {
-    padding: 0.38rem 0.65rem;
+    padding: 0.35rem 0.55rem;
+    font-size: 0.78rem;
+  }
+  .btn-hire-cta {
+    padding: 0.36rem 0.85rem;
     font-size: 0.74rem;
   }
-  .nav-hire-btn {
-    padding: 0.38rem 0.8rem;
-    font-size: 0.74rem;
+  .nav-island-brand {
+    padding: 0.24rem 0.6rem 0.24rem 0.28rem;
+    gap: 0.45rem;
+  }
+  .nav-island-actions {
+    padding: 0.2rem 0.3rem;
+    gap: 0.3rem;
+  }
+  .nav-utilities {
+    padding-right: 0.3rem;
+    gap: 0.25rem;
   }
   .nav-logo-text {
-    font-size: 1.02rem;
-    letter-spacing: 1px;
+    font-size: 0.95rem;
+    letter-spacing: 0.8px;
   }
   .nav-avatar-btn {
-    width: 32px;
-    height: 32px;
-  }
-  .nav-actions {
-    gap: 0.35rem;
+    width: 30px;
+    height: 30px;
   }
   .flagship-content {
     padding: 1.6rem;

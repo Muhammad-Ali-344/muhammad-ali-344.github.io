@@ -1367,7 +1367,7 @@ function initHeroScrollParallax() {
 function initMagneticButtons() {
     if (window.matchMedia('(hover: none)').matches) return;
 
-    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-amber, .nav-hire-btn');
+    const magneticBtns = document.querySelectorAll('.btn-primary, .btn-amber, .nav-hire-btn, .btn-hire-cta');
 
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
