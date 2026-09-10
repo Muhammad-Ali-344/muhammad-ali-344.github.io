@@ -32,52 +32,45 @@
 </head>
 <body>
 
-    <!-- Custom Sci-Fi Arrow Pointer Cursor -->
+    <!-- Custom Sci-Fi Arrow Pointer Cursor (Matches User Design) -->
     <div class="custom-cursor-wrap" id="custom-cursor" aria-hidden="true">
         <div class="cursor-glow" id="cursor-glow"></div>
-        <svg class="cursor-pointer" id="cursor-pointer" viewBox="0 0 40 40" width="34" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="cursor-pointer" id="cursor-pointer" viewBox="0 0 32 38" width="28" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <filter id="neon-bloom" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur stdDeviation="2.2" result="blur1" />
-                    <feGaussianBlur stdDeviation="4.5" result="blur2" />
+                <filter id="neon-bloom" x="-40%" y="-40%" width="180%" height="180%">
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.6" result="blur1" />
+                    <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="blur2" />
                     <feMerge>
                         <feMergeNode in="blur2" />
                         <feMergeNode in="blur1" />
                         <feMergeNode in="SourceGraphic" />
                     </feMerge>
                 </filter>
-                <linearGradient id="facet-dark" x1="4" y1="4" x2="16" y2="28" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#182330"/>
-                    <stop offset="100%" stop-color="#080d14"/>
+                <linearGradient id="body-gradient" x1="2" y1="2" x2="24" y2="28" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#3b424d"/>
+                    <stop offset="35%" stop-color="#232832"/>
+                    <stop offset="70%" stop-color="#14181f"/>
+                    <stop offset="100%" stop-color="#0c0e13"/>
                 </linearGradient>
-                <linearGradient id="facet-bright" x1="16" y1="20" x2="34" y2="25" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#24374a"/>
-                    <stop offset="100%" stop-color="#0d141e"/>
+                <linearGradient id="edge-gradient" x1="2" y1="2" x2="24" y2="28" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#00d8ff"/>
+                    <stop offset="45%" stop-color="#0099ff"/>
+                    <stop offset="100%" stop-color="#0055ff"/>
                 </linearGradient>
             </defs>
 
             <!-- Outer Neon Ambient Bloom Outline -->
             <path class="cursor-bloom" filter="url(#neon-bloom)"
-                  d="M4 4 L34 22 L20.5 21 C21.5 25 19 29.5 15 31 C11 32.5 7 30 6 26 Z"
-                  stroke="#00f0ff" stroke-width="2.5" fill="none" />
+                  d="M2 2 L24 23 L12 24 L2 34 Z"
+                  stroke="#00b4ff" stroke-width="2.8" fill="none" stroke-linejoin="round" stroke-linecap="round" />
 
-            <!-- Left facet (sharp dark stealth body) -->
-            <path d="M4 4 L17.5 20.5 L6 26 Z" fill="url(#facet-dark)" />
+            <!-- Solid Stealth Gunmetal Body -->
+            <path d="M2 2 L24 23 L12 24 L2 34 Z" fill="url(#body-gradient)" />
 
-            <!-- Right facet (sharp bright stealth body) -->
-            <path d="M4 4 L34 22 L17.5 20.5 Z" fill="url(#facet-bright)" />
-
-            <!-- Circular rear socket notch -->
-            <path d="M6 26 L17.5 20.5 L20.5 21 C21.5 25 19 29.5 15 31 C11 32.5 7 30 6 26 Z"
-                  fill="#060a0f" stroke="#00f0ff" stroke-width="2" stroke-linejoin="round" />
-
-            <!-- Central Crease Spine Ridge -->
-            <path class="cursor-ridge" d="M4 4 L17.5 20.5" stroke="#00f0ff" stroke-width="2.2" stroke-linecap="round" />
-
-            <!-- Sharp Perimeter Border Contours -->
+            <!-- Sharp Glowing Perimeter Border -->
             <path class="cursor-edge"
-                  d="M4 4 L34 22 L20.5 21 C21.5 25 19 29.5 15 31 C11 32.5 7 30 6 26 L4 4 Z"
-                  stroke="#00f0ff" stroke-width="2.2" stroke-linejoin="miter" stroke-linecap="round" />
+                  d="M2 2 L24 23 L12 24 L2 34 Z"
+                  stroke="url(#edge-gradient)" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" />
         </svg>
     </div>
 
