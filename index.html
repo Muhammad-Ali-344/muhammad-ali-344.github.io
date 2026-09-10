@@ -51,15 +51,6 @@
         <div class="cursor-glow" id="cursor-glow"></div>
         <svg class="cursor-pointer" id="cursor-pointer" viewBox="0 0 32 38" width="28" height="34" fill="none" xmlns="http://www.w3.org/2000/svg">
             <defs>
-                <filter id="neon-bloom" x="-40%" y="-40%" width="180%" height="180%">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.6" result="blur1" />
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="3.2" result="blur2" />
-                    <feMerge>
-                        <feMergeNode in="blur2" />
-                        <feMergeNode in="blur1" />
-                        <feMergeNode in="SourceGraphic" />
-                    </feMerge>
-                </filter>
                 <linearGradient id="body-gradient" x1="2" y1="2" x2="24" y2="28" gradientUnits="userSpaceOnUse">
                     <stop offset="0%" stop-color="#3b424d"/>
                     <stop offset="35%" stop-color="#232832"/>
@@ -71,15 +62,21 @@
                     <stop offset="45%" stop-color="#0099ff"/>
                     <stop offset="100%" stop-color="#0055ff"/>
                 </linearGradient>
+                <!-- Orange / Amber Gradient for Light Theme -->
+                <linearGradient id="edge-gradient-orange" x1="2" y1="2" x2="24" y2="28" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stop-color="#fbbf24"/>
+                    <stop offset="45%" stop-color="#f59e0b"/>
+                    <stop offset="100%" stop-color="#d97706"/>
+                </linearGradient>
             </defs>
 
             <!-- Outer Neon Ambient Bloom Outline -->
-            <path class="cursor-bloom" filter="url(#neon-bloom)"
+            <path class="cursor-bloom"
                   d="M2 2 L24 23 L12 24 L2 34 Z"
-                  stroke="#00b4ff" stroke-width="2.8" fill="none" stroke-linejoin="round" stroke-linecap="round" />
+                  stroke="#00b4ff" stroke-width="2.6" fill="none" stroke-linejoin="round" stroke-linecap="round" />
 
             <!-- Solid Stealth Gunmetal Body -->
-            <path d="M2 2 L24 23 L12 24 L2 34 Z" fill="url(#body-gradient)" />
+            <path class="cursor-body" d="M2 2 L24 23 L12 24 L2 34 Z" fill="url(#body-gradient)" />
 
             <!-- Sharp Glowing Perimeter Border -->
             <path class="cursor-edge"
@@ -1035,19 +1032,19 @@
                         </div>
                     </div>
 
-                    <!-- 02: 12+ Shipped Titles Achievement -->
+                    <!-- 02: 8+ Shipped Titles Achievement -->
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
                         <div class="glass-panel timeline-content spotlight-card">
                             <div class="timeline-header">
                                 <span class="timeline-date"><i class="fa-brands fa-google-play"></i> SHIPPED RELEASES</span>
-                                <span class="timeline-status"><i class="fa-solid fa-circle-check"></i> 12+ TITLES LIVE</span>
+                                <span class="timeline-status"><i class="fa-solid fa-circle-check"></i> 8+ TITLES LIVE</span>
                             </div>
-                            <h3 class="timeline-role">12+ Published Mobile Game Titles</h3>
+                            <h3 class="timeline-role">8+ Published Mobile Game Titles</h3>
                             <div class="timeline-company"><i class="fa-solid fa-rocket"></i> Google Play Store &nbsp;&middot;&nbsp; Commercial Releases</div>
                             <p>Shipped on Google Play including <em>Selah: Bible Charades</em>, <em>Jewel Crush Quest</em>, <em>2468 Block Puzzle</em>, <em>Mr Greedy</em>, and <em>Snake Escape</em>.</p>
                             <div class="timeline-tags">
-                                <span class="timeline-pill">12+ Games</span>
+                                <span class="timeline-pill">8+ Games</span>
                                 <span class="timeline-pill">Google Play</span>
                                 <span class="timeline-pill">AdMob &amp; IAP</span>
                                 <span class="timeline-pill">Firebase Analytics</span>

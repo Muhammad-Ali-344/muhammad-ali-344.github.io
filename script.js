@@ -1357,43 +1357,39 @@ function initCustomCursor() {
     const cursor = document.getElementById('custom-cursor');
     if (!cursor) return;
 
-    let mouseX = -100;
-    let mouseY = -100;
     let isVisible = false;
 
-    // Direct, immediate 1:1 transform for instantaneous zero-lag tracking
-    function updatePosition(x, y) {
+    // Direct, immediate 1:1 hardware transform for instantaneous zero-lag tracking
+    function updatePosition(e) {
         // Offset -2px, -2px so the apex tip of the SVG arrow matches exact system pointer coordinates
-        cursor.style.transform = `translate3d(${x - 2}px, ${y - 2}px, 0)`;
+        cursor.style.transform = `translate3d(${e.clientX - 2}px, ${e.clientY - 2}px, 0)`;
         if (!isVisible) {
             cursor.style.opacity = '1';
             isVisible = true;
         }
     }
 
-    window.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        updatePosition(mouseX, mouseY);
-    }, { passive: true });
+    // Pointer events in capture phase execute first with zero pipeline delay
+    window.addEventListener('pointermove', updatePosition, { passive: true, capture: true });
+    window.addEventListener('mousemove', updatePosition, { passive: true, capture: true });
 
     // Hover state on interactive elements (links, buttons, interactive cards)
-    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .vnav-rail-link, .vnav-link, .mobile-nav-link, .nav-avatar-btn, input, textarea';
+    const interactiveSelectors = 'a, button, .btn, .filter-btn, .side-rail-social-btn, .gallery-thumb, .game-card, .discipline-card, .floating-chip, .nav-link, .vnav-rail-link, .vnav-link, .mobile-nav-link, .nav-avatar-btn, input, textarea, select, [role="button"]';
 
     document.addEventListener('mouseover', (e) => {
         if (e.target.closest(interactiveSelectors)) {
             cursor.classList.add('is-hovering');
         }
-    });
+    }, { passive: true });
 
     document.addEventListener('mouseout', (e) => {
         if (e.target.closest(interactiveSelectors)) {
             cursor.classList.remove('is-hovering');
         }
-    });
+    }, { passive: true });
 
-    document.addEventListener('mousedown', () => cursor.classList.add('is-clicking'));
-    document.addEventListener('mouseup',   () => cursor.classList.remove('is-clicking'));
+    document.addEventListener('mousedown', () => cursor.classList.add('is-clicking'), { passive: true });
+    document.addEventListener('mouseup',   () => cursor.classList.remove('is-clicking'), { passive: true });
 
     // Window edge entry / exit handlers
     document.addEventListener('mouseleave', () => {

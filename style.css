@@ -502,7 +502,7 @@ body {
 
 /* Ensure no default system pointer hand appears on interactive elements while custom cursor is active */
 @media (hover: hover) and (pointer: fine) {
-  *, *::before, *::after, a, button, input, select, textarea, [role="button"] {
+  html, body, *, *::before, *::after, a, button, input, select, textarea, [role="button"] {
     cursor: none !important;
   }
 }
@@ -3166,21 +3166,24 @@ h1, h2, h3, h4, h5 {
 }
 
 /* ==========================================================================
-   11. CUSTOM SCI-FI ARROW CURSOR (Responsive, Zero-Lag, Living Pulse)
+   11. CUSTOM SCI-FI ARROW CURSOR (Zero-Lag 1:1 Hardware Response & Adaptive Theme)
    ========================================================================== */
 .custom-cursor-wrap {
   position: fixed;
   top: 0;
   left: 0;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(0, 0);
+  pointer-events: none !important;
+  z-index: 9999999;
+  transform: translate3d(-100px, -100px, 0);
   will-change: transform;
-  transition: opacity 0.2s ease;
+  /* Strictly isolate opacity so transform NEVER inherits transitions */
+  transition: opacity 0.15s ease !important;
+  transition-property: opacity !important;
   contain: layout style;
+  opacity: 0;
 }
 
-/* Ambient glow orb behind pointer */
+/* Ambient glow orb behind pointer - Pure GPU radial gradient, no blur filter */
 .cursor-glow {
   position: absolute;
   top: -10px;
@@ -3188,11 +3191,9 @@ h1, h2, h3, h4, h5 {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(0, 180, 255, 0.4) 0%, rgba(0, 140, 255, 0.12) 45%, transparent 70%);
-  filter: blur(4px);
+  background: radial-gradient(circle, rgba(0, 216, 255, 0.45) 0%, rgba(0, 140, 255, 0.14) 45%, transparent 70%);
   pointer-events: none;
-  animation: cursorPulse 2.4s ease-in-out infinite alternate;
-  transition: width 0.25s cubic-bezier(0.2, 0, 0.2, 1), height 0.25s cubic-bezier(0.2, 0, 0.2, 1), background 0.25s ease, opacity 0.25s ease;
+  transition: width 0.15s ease, height 0.15s ease, top 0.15s ease, left 0.15s ease, background 0.2s ease, opacity 0.2s ease;
 }
 
 /* SVG Sci-Fi Pointer */
@@ -3200,60 +3201,43 @@ h1, h2, h3, h4, h5 {
   position: relative;
   display: block;
   overflow: visible;
-  filter: drop-shadow(0 0 8px rgba(0, 180, 255, 0.9)) drop-shadow(0 2px 12px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 0 7px rgba(0, 216, 255, 0.9)) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.9));
   transform-origin: 2px 2px;
-  transition: transform 0.15s cubic-bezier(0.2, 0, 0.2, 1);
+  transition: transform 0.12s cubic-bezier(0.2, 0, 0.2, 1), filter 0.2s ease;
 }
 
 .cursor-bloom {
   opacity: 0.85;
-  animation: cursorNeonFlicker 3s ease-in-out infinite alternate;
+  transition: stroke 0.25s ease, opacity 0.2s ease;
+}
+
+.cursor-body {
+  transition: fill 0.25s ease;
 }
 
 .cursor-edge {
-  filter: drop-shadow(0 0 4px #00d8ff);
-}
-
-/* Living breathing animations */
-@keyframes cursorPulse {
-  0% {
-    transform: scale(0.9);
-    opacity: 0.55;
-  }
-  100% {
-    transform: scale(1.2);
-    opacity: 0.95;
-  }
-}
-
-@keyframes cursorNeonFlicker {
-  0%, 100% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
+  filter: drop-shadow(0 0 3px #00d8ff);
+  transition: stroke 0.25s ease, filter 0.25s ease;
 }
 
 /* Hover state on interactive elements (links, buttons, cards) */
 .custom-cursor-wrap.is-hovering .cursor-pointer {
   transform: scale(1.15);
-  filter: drop-shadow(0 0 12px rgba(0, 216, 255, 0.95)) drop-shadow(0 0 24px rgba(0, 140, 255, 0.6)) drop-shadow(0 4px 16px rgba(0, 0, 0, 0.95));
+  filter: drop-shadow(0 0 10px rgba(0, 240, 255, 1)) drop-shadow(0 0 20px rgba(0, 140, 255, 0.55)) drop-shadow(0 4px 14px rgba(0, 0, 0, 0.9));
 }
 
 .custom-cursor-wrap.is-hovering .cursor-glow {
-  width: 54px;
-  height: 54px;
+  width: 52px;
+  height: 52px;
   top: -14px;
   left: -14px;
-  background: radial-gradient(circle, rgba(0, 220, 255, 0.6) 0%, rgba(0, 160, 255, 0.22) 50%, transparent 75%);
-  filter: blur(6px);
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.6) 0%, rgba(0, 160, 255, 0.2) 50%, transparent 75%);
 }
 
 /* Clicking / Active state */
 .custom-cursor-wrap.is-clicking .cursor-pointer {
-  transform: scale(0.92) translate(1px, 1px);
-  filter: drop-shadow(0 0 16px rgba(0, 240, 255, 1)) drop-shadow(0 0 8px rgba(0, 180, 255, 0.8));
+  transform: scale(0.9) translate(1px, 1px);
+  filter: drop-shadow(0 0 15px rgba(0, 240, 255, 1)) drop-shadow(0 0 6px rgba(0, 180, 255, 0.8));
 }
 
 .custom-cursor-wrap.is-clicking .cursor-glow {
@@ -3262,6 +3246,49 @@ h1, h2, h3, h4, h5 {
 
 .custom-cursor-wrap.is-clicking .cursor-edge {
   stroke: #00f0ff;
+}
+
+/* ==========================================================================
+   LIGHT THEME CURSOR: CYBER AMBER / ORANGE ACCENT
+   ========================================================================== */
+[data-theme="light"] .cursor-pointer {
+  filter: drop-shadow(0 0 7px rgba(245, 158, 11, 0.95)) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25)) !important;
+}
+
+[data-theme="light"] .cursor-bloom {
+  stroke: #f59e0b !important;
+  opacity: 0.9;
+}
+
+[data-theme="light"] .cursor-edge {
+  stroke: url(#edge-gradient-orange) !important;
+  filter: drop-shadow(0 0 4px rgba(245, 158, 11, 0.95)) !important;
+}
+
+[data-theme="light"] .cursor-glow {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.45) 0%, rgba(217, 119, 6, 0.14) 45%, transparent 70%) !important;
+}
+
+[data-theme="light"] .custom-cursor-wrap.is-hovering .cursor-pointer {
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 12px rgba(245, 158, 11, 1)) drop-shadow(0 0 22px rgba(217, 119, 6, 0.55)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3)) !important;
+}
+
+[data-theme="light"] .custom-cursor-wrap.is-hovering .cursor-glow {
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.6) 0%, rgba(245, 158, 11, 0.22) 50%, transparent 75%) !important;
+}
+
+[data-theme="light"] .custom-cursor-wrap.is-clicking .cursor-pointer {
+  transform: scale(0.9) translate(1px, 1px);
+  filter: drop-shadow(0 0 16px rgba(245, 158, 11, 1)) drop-shadow(0 0 8px rgba(217, 119, 6, 0.85)) !important;
+}
+
+[data-theme="light"] .custom-cursor-wrap.is-clicking .cursor-glow {
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.8) 0%, rgba(245, 158, 11, 0.3) 50%, transparent 75%) !important;
+}
+
+[data-theme="light"] .custom-cursor-wrap.is-clicking .cursor-edge {
+  stroke: #fbbf24 !important;
 }
 
 /* Hide custom cursor on mobile/touch devices */
@@ -3342,11 +3369,14 @@ h1, h2, h3, h4, h5 {
   filter: blur(0);
 }
 
-/* Sequential Stagger Delays for Timeline Milestones */
+/* Sequential Stagger Delays for Timeline Milestones (Strict Top-to-Bottom Order) */
 .timeline.reveal-stagger > .timeline-item:nth-child(1) { transition-delay: 80ms; }
-.timeline.reveal-stagger > .timeline-item:nth-child(2) { transition-delay: 260ms; }
-.timeline.reveal-stagger > .timeline-item:nth-child(3) { transition-delay: 440ms; }
-.timeline.reveal-stagger > .timeline-item:nth-child(4) { transition-delay: 620ms; }
+.timeline.reveal-stagger > .timeline-item:nth-child(2) { transition-delay: 240ms; }
+.timeline.reveal-stagger > .timeline-item:nth-child(3) { transition-delay: 400ms; }
+.timeline.reveal-stagger > .timeline-item:nth-child(4) { transition-delay: 560ms; }
+.timeline.reveal-stagger > .timeline-item:nth-child(5) { transition-delay: 720ms; }
+.timeline.reveal-stagger > .timeline-item:nth-child(6) { transition-delay: 880ms; }
+.timeline.reveal-stagger > .timeline-item:nth-child(n+7) { transition-delay: 1040ms; }
 
 /* Core Disciplines & Craft: Cinematic glide up one-by-one with blur dissipation */
 .disciplines-grid > .discipline-card.reveal {
@@ -3794,14 +3824,6 @@ h1, h2, h3, h4, h5 {
 
 [data-theme="light"] .cs-challenge-box {
   background: rgba(239, 68, 68, 0.06);
-}
-
-[data-theme="light"] .cursor-pointer {
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25)) drop-shadow(0 0 6px rgba(0, 119, 182, 0.6));
-}
-
-[data-theme="light"] .custom-cursor-wrap.is-hovering .cursor-glow {
-  background: radial-gradient(circle, rgba(0, 119, 182, 0.35) 0%, rgba(0, 119, 182, 0.1) 50%, transparent 75%);
 }
 
 /* ==========================================================================
