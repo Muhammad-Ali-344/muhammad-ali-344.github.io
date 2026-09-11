@@ -1469,8 +1469,8 @@ h1, h2, h3, h4, h5 {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 0.95fr;
-  gap: 3.5rem;
+  grid-template-columns: 1.18fr 0.92fr;
+  gap: clamp(2.2rem, 3.5vw, 3.5rem);
   align-items: center;
   position: relative;
   z-index: 2;
@@ -1611,16 +1611,18 @@ h1, h2, h3, h4, h5 {
 
 /* Hero HUD Telemetry Strip */
 .hero-telemetry-strip {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 0.85rem;
-  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.2rem 1.6rem;
   background: rgba(15, 20, 30, 0.65);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-glass);
   border-radius: var(--radius-md);
-  margin-top: 1rem;
+  margin-top: 1.2rem;
+  width: 100%;
   transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
@@ -1632,6 +1634,7 @@ h1, h2, h3, h4, h5 {
 .telemetry-item {
   display: flex;
   flex-direction: column;
+  flex: 0 0 auto;
   transition: transform var(--transition-fast);
 }
 
@@ -1640,22 +1643,24 @@ h1, h2, h3, h4, h5 {
 }
 
 .telemetry-item h3 {
-  font-size: clamp(1.2rem, 1.6vw, 1.75rem);
+  font-size: clamp(1.02rem, 1.28vw, 1.42rem);
   font-weight: 800;
   color: var(--cyan-primary);
   text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
-  line-height: 1.1;
+  line-height: 1.15;
   white-space: nowrap;
+  letter-spacing: 0.5px;
 }
 
 .telemetry-item p {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-dim);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-top: 0.3rem;
+  margin-top: 0.35rem;
   line-height: 1.25;
+  white-space: nowrap;
 }
 
 /* ==========================================================================
@@ -3956,16 +3961,19 @@ h1, h2, h3, h4, h5 {
 
 @media (max-width: 680px) {
   .hero-telemetry-strip {
-    grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
-    gap: 1rem 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+    gap: 1.2rem 1rem;
+    padding: 1.1rem 1.25rem;
   }
 }
 
 @media (max-width: 540px) {
   .hero-telemetry-strip {
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 0.85rem;
-    padding: 1rem;
+    gap: 1.1rem 0.9rem;
+    padding: 1.1rem 1rem;
   }
   .hero-telemetry-strip .telemetry-item:last-child {
     grid-column: span 2;

@@ -135,20 +135,20 @@
     .cv-sidebar {
       background: var(--bg-sidebar);
       border-right: 1px solid var(--b-rule);
-      padding: 26px 18px 30px;
+      padding: 20px 16px 20px;
       display: flex;
       flex-direction: column;
-      gap: 22px;
+      gap: 15px;
     }
 
     /* --- Photo --- */
     .photo-wrap {
-      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
     .photo-ring {
-      width: 96px; height: 96px;
+      width: 90px; height: 90px;
       border-radius: 50%;
-      padding: 2.5px;
+      padding: 2px;
       background: conic-gradient(from 0deg, var(--cyan), var(--purple), var(--amber), var(--cyan));
       flex-shrink: 0;
     }
@@ -158,15 +158,15 @@
       object-fit: cover;
       object-position: center top;
       display: block;
-      border: 2.5px solid var(--bg-sidebar);
+      border: 2px solid var(--bg-sidebar);
     }
     .avail-dot {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 0.72rem; font-weight: 600; color: var(--green);
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.7rem; font-weight: 600; color: var(--green);
       letter-spacing: 0.06em;
     }
     .avail-dot::before {
-      content: ''; width: 7px; height: 7px; border-radius: 50%;
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
       background: var(--green); flex-shrink: 0;
     }
 
@@ -175,43 +175,43 @@
       font-family: var(--f-head);
       font-size: 0.68rem; font-weight: 700;             /* 10.9px */
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 9px;
-      padding-bottom: 5px;
+      color: var(--cyan); margin-bottom: 7px;
+      padding-bottom: 4px;
       border-bottom: 1px solid var(--b-rule);
     }
 
     /* --- Contact list --- */
-    .contact-list { display: flex; flex-direction: column; gap: 7px; }
+    .contact-list { display: flex; flex-direction: column; gap: 6px; }
     .contact-item {
       display: flex; align-items: flex-start; gap: 8px;
-      font-size: 0.78rem;                               /* 12.5px */
-      color: var(--t-body); line-height: 1.45;
+      font-size: 0.77rem;                               /* 12.3px */
+      color: var(--t-body); line-height: 1.4;
     }
     .contact-item i {
-      color: var(--cyan); font-size: 0.72rem; width: 13px;
+      color: var(--cyan); font-size: 0.7rem; width: 13px;
       text-align: center; margin-top: 2px; flex-shrink: 0;
     }
     .contact-item a { color: var(--t-body); word-break: break-all; }
     .contact-item a:hover { color: var(--cyan); text-decoration: none; }
 
     /* --- Skills --- */
-    .skill-group { margin-bottom: 12px; }
+    .skill-group { margin-bottom: 9px; }
     .skill-group:last-child { margin-bottom: 0; }
     .skill-group-name {
-      font-size: 0.75rem; font-weight: 700;             /* 12px */
-      color: var(--t-hi); margin-bottom: 6px; letter-spacing: 0.03em;
+      font-size: 0.74rem; font-weight: 700;             /* 11.8px */
+      color: var(--t-hi); margin-bottom: 5px; letter-spacing: 0.03em;
     }
     .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
     .sk {
       display: inline-block;
-      padding: 3px 8px;
+      padding: 2.5px 7px;
       border-radius: 4px;
-      font-size: 0.72rem; font-weight: 500;             /* 11.5px */
+      font-size: 0.71rem; font-weight: 500;             /* 11.4px */
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--b-soft);
       color: var(--t-body);
       white-space: nowrap;
-      line-height: 1.55;
+      line-height: 1.5;
     }
     .sk-hi {
       background: var(--cyan-dim);
@@ -233,149 +233,149 @@
     }
 
     /* --- Education in sidebar --- */
-    .edu-block { margin-bottom: 13px; }
+    .edu-block { margin-bottom: 9px; }
     .edu-block:last-child { margin-bottom: 0; }
     .edu-degree {
-      font-size: 0.82rem; font-weight: 700;             /* 13px */
-      color: var(--t-hi); line-height: 1.35;
+      font-size: 0.8rem; font-weight: 700;              /* 12.8px */
+      color: var(--t-hi); line-height: 1.3;
     }
     .edu-school {
-      font-size: 0.75rem; color: var(--amber);          /* 12px */
-      margin-bottom: 3px; margin-top: 2px;
+      font-size: 0.73rem; color: var(--amber);          /* 11.7px */
+      margin-bottom: 2px; margin-top: 1px;
     }
-    .edu-meta { font-size: 0.72rem; color: var(--t-dim); line-height: 1.5; } /* 11.5px */
+    .edu-meta { font-size: 0.7rem; color: var(--t-dim); line-height: 1.45; }
     .edu-gpa { color: var(--green); font-weight: 700; }
 
     /* ============================================================
        MAIN COLUMN
        ============================================================ */
     .cv-main {
-      padding: 26px 22px 30px;
-      display: flex; flex-direction: column; gap: 18px;
+      padding: 20px 18px 20px;
+      display: flex; flex-direction: column; gap: 13px;
     }
 
     /* --- Name / Title block --- */
     .cv-name {
       font-family: var(--f-head);
-      font-size: 2.25rem; font-weight: 800;             /* 36px */
+      font-size: 2.15rem; font-weight: 800;             /* 34.4px */
       color: var(--t-hi); letter-spacing: 0.04em;
       line-height: 1.05;
     }
     .cv-title {
-      font-size: 0.9rem; font-weight: 600;              /* 14.4px */
+      font-size: 0.88rem; font-weight: 600;             /* 14px */
       color: var(--t-dim); letter-spacing: 0.04em;
-      margin-top: 5px;
+      margin-top: 4px;
     }
     .cv-title strong { color: var(--cyan); font-weight: 700; }
 
     /* --- Section label (main column) --- */
     .sec-label {
       font-family: var(--f-head);
-      font-size: 0.75rem; font-weight: 700;             /* 12px */
+      font-size: 0.72rem; font-weight: 700;             /* 11.5px */
       letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 10px;
-      padding-bottom: 5px;
+      color: var(--cyan); margin-bottom: 7px;
+      padding-bottom: 4px;
       border-bottom: 1px solid var(--b-rule);
       display: flex; align-items: center; gap: 6px;
     }
-    .sec-label i { font-size: 0.68rem; }
+    .sec-label i { font-size: 0.65rem; }
 
     /* --- Summary --- */
     .summary-text {
-      font-size: 0.9rem; color: var(--t-body); line-height: 1.75; /* 14.4px */
+      font-size: 0.86rem; color: var(--t-body); line-height: 1.6; /* 13.8px */
     }
     .summary-text strong { color: var(--t-hi); }
 
     /* --- Highlights row --- */
     .highlights {
       display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
+      gap: 7px;
     }
     .hl-card {
       background: var(--bg-card);
       border: 1px solid var(--b-soft);
       border-radius: var(--r-sm);
-      padding: 9px 10px;
+      padding: 7px 8px;
       text-align: center;
     }
     .hl-num {
       font-family: var(--f-head);
-      font-size: 1.5rem; font-weight: 800;              /* 24px */
+      font-size: 1.35rem; font-weight: 800;             /* 21.6px */
       color: var(--cyan); letter-spacing: 0.02em;
       line-height: 1.1;
     }
     .hl-num.amber { color: var(--amber); }
     .hl-num.purple { color: var(--purple); }
     .hl-desc {
-      font-size: 0.67rem; color: var(--t-dim);          /* 10.7px */
+      font-size: 0.64rem; color: var(--t-dim);          /* 10.2px */
       font-weight: 600; letter-spacing: 0.07em; margin-top: 2px;
       text-transform: uppercase;
     }
 
     /* --- Experience --- */
-    .exp-block { margin-bottom: 12px; }
+    .exp-block { margin-bottom: 8px; }
     .exp-block:last-child { margin-bottom: 0; }
     .exp-header {
       display: flex; justify-content: space-between;
       align-items: flex-start; flex-wrap: wrap; gap: 4px;
-      margin-bottom: 3px;
+      margin-bottom: 2px;
     }
     .exp-role {
       font-family: var(--f-head);
-      font-size: 1.05rem; font-weight: 700;             /* 16.8px */
+      font-size: 1rem; font-weight: 700;                /* 16px */
       color: var(--t-hi); letter-spacing: 0.02em;
     }
     .exp-date {
-      font-size: 0.72rem; font-weight: 600; color: var(--cyan); /* 11.5px */
+      font-size: 0.7rem; font-weight: 600; color: var(--cyan); /* 11.2px */
       background: var(--cyan-dim); border: 1px solid var(--cyan-border);
-      padding: 2px 8px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+      padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
     }
     .exp-company {
-      font-size: 0.84rem; color: var(--amber); font-weight: 600; /* 13.4px */
-      margin-bottom: 7px;
+      font-size: 0.82rem; color: var(--amber); font-weight: 600; /* 13.1px */
+      margin-bottom: 5px;
     }
     .exp-company span { color: var(--t-dim); font-weight: 400; }
     .exp-bullets { padding-left: 0; }
     .exp-bullets li {
       position: relative; padding-left: 13px;
-      font-size: 0.9rem; color: var(--t-body); line-height: 1.7; /* 14.4px */
-      margin-bottom: 5px;
+      font-size: 0.86rem; color: var(--t-body); line-height: 1.55; /* 13.8px */
+      margin-bottom: 3.5px;
     }
     .exp-bullets li:last-child { margin-bottom: 0; }
     .exp-bullets li::before {
       content: '▸'; position: absolute; left: 0;
-      color: var(--cyan); font-size: 0.67rem; top: 3px;
+      color: var(--cyan); font-size: 0.65rem; top: 3px;
     }
     .exp-bullets li strong { color: var(--t-hi); }
 
     /* --- Divider between exp blocks --- */
-    .exp-divider { border: none; border-top: 1px solid var(--b-rule); margin: 12px 0; }
+    .exp-divider { border: none; border-top: 1px solid var(--b-rule); margin: 9px 0; }
 
     /* --- Projects --- */
-    .proj-block { margin-bottom: 11px; }
+    .proj-block { margin-bottom: 8px; }
     .proj-block:last-child { margin-bottom: 0; }
     .proj-header {
       display: flex; align-items: baseline; flex-wrap: wrap;
-      gap: 4px 10px; margin-bottom: 3px;
+      gap: 4px 8px; margin-bottom: 2px;
     }
     .proj-name {
       font-family: var(--f-head);
-      font-size: 0.98rem; font-weight: 700;             /* 15.7px */
+      font-size: 0.94rem; font-weight: 700;             /* 15px */
       color: var(--t-hi); letter-spacing: 0.01em;
     }
     .proj-role {
-      font-size: 0.76rem; font-weight: 600;             /* 12.2px */
+      font-size: 0.74rem; font-weight: 600;             /* 11.8px */
       color: var(--cyan);
     }
     .proj-platform {
-      font-size: 0.72rem; color: var(--t-dim);          /* 11.5px */
+      font-size: 0.7rem; color: var(--t-dim);           /* 11.2px */
     }
     .proj-desc {
-      font-size: 0.86rem; color: var(--t-body); line-height: 1.7; /* 13.8px */
+      font-size: 0.83rem; color: var(--t-body); line-height: 1.55; /* 13.3px */
     }
     .proj-desc strong { color: var(--t-hi); }
 
-    .proj-divider { border: none; border-top: 1px solid var(--b-rule); margin: 8px 0; }
+    .proj-divider { border: none; border-top: 1px solid var(--b-rule); margin: 7px 0; }
 
     /* ============================================================
        RESPONSIVE — tablet / mobile
@@ -688,7 +688,7 @@
               <span class="proj-platform">· Unity XR · Meta Quest · PC VR</span>
             </div>
             <p class="proj-desc">
-              Atmospheric VR puzzle escape room, <strong>built 100% independently</strong>: all 3D Victorian assets modelled in Blender, PBR-textured in Substance Painter, and programmed in Unity with two-handed XR physics interactions, valve &amp; key puzzles, socket docking, and spatial audio.
+              Atmospheric VR puzzle escape room, <strong>built 100% solo</strong>: custom Blender 3D assets, Substance PBR texturing, and Unity XR two-handed physics, socket docking, and valve puzzles.
             </p>
           </div>
 
@@ -699,10 +699,10 @@
             <div class="proj-header">
               <span class="proj-name">Selah: Bible Charades</span>
               <span class="proj-role">Lead Unity Developer · Mechanics &amp; UI/UX</span>
-              <span class="proj-platform">· Android · <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games" target="_blank" rel="noopener noreferrer">Live on Google Play</a></span>
+              <span class="proj-platform">· Android · <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games" target="_blank" rel="noopener noreferrer">Live on Play Store</a></span>
             </div>
             <p class="proj-desc">
-              Published mobile party game with <strong>gyro/tilt forehead motion controls</strong>, dynamic cloud-delivered card decks, in-game video recording, responsive multi-resolution UI, and Google Play IAP monetisation.
+              Published mobile title featuring <strong>gyro/tilt forehead motion controls</strong>, dynamic cloud card decks, in-game video recording, and responsive multi-resolution UI.
             </p>
           </div>
 
@@ -713,24 +713,10 @@
             <div class="proj-header">
               <span class="proj-name">2468 Block Puzzle: 2048 Merge</span>
               <span class="proj-role">Full Gameplay &amp; Backend Developer</span>
-              <span class="proj-platform">· Android · Google Play</span>
+              <span class="proj-platform">· Android · Live on Play Store</span>
             </div>
             <p class="proj-desc">
-              Number-merging puzzle with <strong>Firebase Realtime leaderboards, user authentication</strong>, interactive tutorial, and AdMob/IAP monetisation.
-            </p>
-          </div>
-
-          <hr class="proj-divider">
-
-          <!-- Jewel Crush -->
-          <div class="proj-block">
-            <div class="proj-header">
-              <span class="proj-name">Jewel Crush Quest: Match 3</span>
-              <span class="proj-role">Gameplay Programmer · UI/UX</span>
-              <span class="proj-platform">· Android · Google Play</span>
-            </div>
-            <p class="proj-desc">
-              Match-3 mobile puzzle featuring gem cascade mechanics, interactive onboarding tutorials, responsive UI panels, and polished juice / audio feedback.
+              Number-merging block puzzle with <strong>Firebase Realtime leaderboards</strong>, user authentication, interactive onboarding tutorial, and AdMob/IAP monetization.
             </p>
           </div>
 
@@ -741,10 +727,10 @@
             <div class="proj-header">
               <span class="proj-name">Mr Greedy: Ragdoll Punch</span>
               <span class="proj-role">Core Mechanics · Physics Tuning</span>
-              <span class="proj-platform">· Android · Unity 3D</span>
+              <span class="proj-platform">· Android · Live on Play Store</span>
             </div>
             <p class="proj-desc">
-              3D ragdoll punch game with spring-joint physics, impulse-force impacts, dynamic camera shakes, and cosmetic shop — showcasing Unity physics simulation and game-feel work.
+              3D physics combat game featuring <strong>spring-joint ragdoll mechanics</strong>, impulse force impacts, dynamic camera shakes, and cosmetic reward systems.
             </p>
           </div>
 
