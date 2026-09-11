@@ -3,1680 +3,750 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Muhammad Ali — Game Developer & 3D Generalist. Unity/C#, VR/XR, Blender, ZBrush, UE5. 8+ Shipped Games. Resume/CV.">
-  <title>Muhammad Ali | CV — Game Developer & 3D Generalist</title>
+  <meta name="description" content="Muhammad Ali — Game Developer & 3D Generalist. Resume / CV.">
+  <title>Muhammad Ali — CV</title>
 
-  <!-- Google Fonts — same stack as portfolio -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
-  <!-- FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
-    /* ================================================================
-       DESIGN TOKENS — mirrors portfolio :root exactly
-       ================================================================ */
+    /* ============================================================
+       DESIGN TOKENS  — portfolio palette, used with restraint
+       ============================================================ */
     :root {
-      --bg-void:          #07090e;
-      --bg-surface:       #0c1017;
-      --bg-card:          rgba(15, 20, 30, 0.85);
-      --bg-card-solid:    #0f141e;
+      /* Backgrounds */
+      --bg-page:      #08090f;
+      --bg-sidebar:   #0d1119;
+      --bg-main:      #0a0c14;
+      --bg-card:      rgba(255,255,255,0.03);
 
-      --cyan-primary:     #00f0ff;
-      --cyan-glow:        rgba(0, 240, 255, 0.30);
-      --cyan-subtle:      rgba(0, 240, 255, 0.10);
-      --cyan-text:        #00d8e8;
+      /* Accents */
+      --cyan:         #00e5ff;
+      --cyan-dim:     rgba(0,229,255,0.18);
+      --cyan-border:  rgba(0,229,255,0.28);
+      --amber:        #ffb703;
+      --amber-dim:    rgba(255,183,3,0.14);
+      --purple:       #a855f7;
+      --green:        #10b981;
 
-      --amber-primary:    #ffb703;
-      --amber-glow:       rgba(255, 183, 3, 0.25);
-      --amber-subtle:     rgba(255, 183, 3, 0.10);
+      /* Text */
+      --t-hi:         #f0f4fb;
+      --t-body:       #9dafc6;
+      --t-dim:        #5a6a80;
+      --t-inv:        #07090e;
 
-      --purple-accent:    #a855f7;
-      --purple-subtle:    rgba(168, 85, 247, 0.12);
+      /* Borders */
+      --b-soft:       rgba(255,255,255,0.06);
+      --b-rule:       rgba(255,255,255,0.08);
 
-      --emerald-signal:   #10b981;
+      /* Type */
+      --f-head:       'Rajdhani', sans-serif;
+      --f-body:       'Outfit', sans-serif;
 
-      --text-main:        #f3f6fc;
-      --text-secondary:   #94a3b8;
-      --text-dim:         #64748b;
+      /* Geometry */
+      --r-sm:         5px;
+      --r-md:         9px;
 
-      --border-glass:     rgba(255, 255, 255, 0.07);
-      --border-card:      rgba(255, 255, 255, 0.05);
-      --border-cyan:      rgba(0, 240, 255, 0.35);
+      /* A4 page dimensions */
+      --page-w:       210mm;
+      --page-h:       297mm;
 
-      --font-heading:     'Rajdhani', sans-serif;
-      --font-display:     'Space Grotesk', sans-serif;
-      --font-body:        'Outfit', sans-serif;
-
-      --radius-sm:        8px;
-      --radius-md:        14px;
-      --radius-lg:        22px;
-
-      --transition:       0.25s cubic-bezier(0.4, 0, 0.2, 1);
-
-      /* Page layout */
-      --page-max:         900px;
-      --col-left:         220px;
-      --col-right:        1fr;
-      --gap:              1.5rem;
+      /* Layout */
+      --sidebar-w:    62mm;
+      --gap:          10px;
     }
 
-    /* ================================================================
-       RESET & BASE
-       ================================================================ */
+    /* ============================================================
+       RESET
+       ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: var(--font-body);
-      background: var(--bg-void);
-      color: var(--text-main);
-      font-size: 15px;
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    a {
-      color: var(--cyan-text);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
-    a:hover { color: var(--cyan-primary); text-decoration: underline; }
-
+    html { font-size: 13px; }
+    body { font-family: var(--f-body); background: var(--bg-page); color: var(--t-body); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; }
     ul { list-style: none; }
 
-    /* ================================================================
-       BACKGROUND — subtle grid like portfolio
-       ================================================================ */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0, 240, 255, 0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 240, 255, 0.025) 1px, transparent 1px);
-      background-size: 44px 44px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      top: -20%;
-      right: -10%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.055) 0%, transparent 65%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* ================================================================
-       TOP ACTION BAR
-       ================================================================ */
-    .action-bar {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(9, 12, 18, 0.92);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border-glass);
-      padding: 0.6rem 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ============================================================
+       WEB ACTION BAR  (hidden at print)
+       ============================================================ */
+    .web-bar {
+      position: sticky; top: 0; z-index: 50;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.55rem 1.5rem;
+      background: rgba(8,9,15,0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--b-soft);
       gap: 1rem;
     }
-
-    .action-bar-brand {
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      color: var(--text-main);
+    .web-bar-brand {
+      font-family: var(--f-head); font-size: 0.95rem; font-weight: 700;
+      color: var(--t-hi); letter-spacing: 0.06em;
     }
-    .action-bar-brand span { color: var(--cyan-primary); }
-
-    .action-bar-actions {
-      display: flex;
-      gap: 0.75rem;
-      align-items: center;
+    .web-bar-brand span { color: var(--cyan); }
+    .web-bar-actions { display: flex; gap: 0.6rem; }
+    .wb-btn {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.38rem 0.9rem; border-radius: var(--r-sm);
+      font-family: var(--f-body); font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; border: none; transition: all 0.2s; text-decoration: none;
     }
+    .wb-outline {
+      background: transparent; border: 1px solid var(--cyan-border); color: var(--cyan);
+    }
+    .wb-outline:hover { background: var(--cyan-dim); text-decoration: none; }
+    .wb-solid {
+      background: var(--cyan); color: var(--t-inv);
+    }
+    .wb-solid:hover { background: #00cde8; text-decoration: none; }
 
-    .btn-bar {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
-      padding: 0.4rem 1rem;
-      border-radius: var(--radius-sm);
-      font-family: var(--font-body);
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      cursor: pointer;
-      border: none;
-      transition: all var(--transition);
-      text-decoration: none;
+    /* ============================================================
+       PAGE WRAPPER  — centres the A4 sheet on screen
+       ============================================================ */
+    .page-wrap {
+      display: flex; justify-content: center; align-items: flex-start;
+      padding: 2rem 1rem 4rem;
     }
 
-    .btn-bar-outline {
-      background: transparent;
-      border: 1px solid var(--border-cyan);
-      color: var(--cyan-primary);
-    }
-    .btn-bar-outline:hover {
-      background: var(--cyan-subtle);
-      color: var(--cyan-primary);
-      text-decoration: none;
-    }
-
-    .btn-bar-primary {
-      background: var(--cyan-primary);
-      color: #07090e;
-    }
-    .btn-bar-primary:hover {
-      background: #00d8e8;
-      color: #07090e;
-      text-decoration: none;
-    }
-
-    /* ================================================================
-       PAGE WRAPPER
-       ================================================================ */
-    .cv-page {
-      position: relative;
-      z-index: 1;
-      max-width: var(--page-max);
-      margin: 2.5rem auto 4rem;
-      padding: 0 1.25rem;
-    }
-
-    /* ================================================================
-       HEADER / HERO STRIP
-       ================================================================ */
-    .cv-header {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-lg);
-      border-top: 2px solid var(--cyan-primary);
-      overflow: hidden;
+    /* ============================================================
+       THE A4 SHEET
+       ============================================================ */
+    .cv-sheet {
+      width: var(--page-w);
+      min-height: var(--page-h);
       display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 0;
-      margin-bottom: var(--gap);
+      grid-template-columns: var(--sidebar-w) 1fr;
+      background: var(--bg-page);
+      box-shadow: 0 8px 48px rgba(0,0,0,0.7);
+      border: 1px solid var(--b-soft);
+      border-top: 3px solid var(--cyan);
+      border-radius: var(--r-md);
+      overflow: hidden;
       position: relative;
     }
 
-    /* Subtle cyan glow in header */
-    .cv-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 200px;
-      background: linear-gradient(180deg, rgba(0,240,255,0.045) 0%, transparent 100%);
-      pointer-events: none;
-    }
-
-    .cv-header-photo-col {
-      padding: 2rem 1.5rem 2rem 2rem;
+    /* ============================================================
+       SIDEBAR
+       ============================================================ */
+    .cv-sidebar {
+      background: var(--bg-sidebar);
+      border-right: 1px solid var(--b-rule);
+      padding: 20px 14px;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
     }
 
-    .cv-photo-frame {
-      position: relative;
-      width: 130px;
-      height: 130px;
+    /* --- Photo --- */
+    .photo-wrap {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .photo-ring {
+      width: 82px; height: 82px;
+      border-radius: 50%;
+      padding: 2px;
+      background: conic-gradient(from 0deg, var(--cyan), var(--purple), var(--amber), var(--cyan));
       flex-shrink: 0;
     }
-
-    .cv-photo-frame::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, var(--cyan-primary), var(--purple-accent), var(--amber-primary), var(--cyan-primary));
-      z-index: 0;
-      animation: spin 8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .cv-photo-frame::after {
-      content: '';
-      position: absolute;
-      inset: -1px;
-      border-radius: 50%;
-      background: var(--bg-card-solid);
-      z-index: 1;
-    }
-
-    .cv-photo {
-      position: relative;
-      z-index: 2;
-      width: 130px;
-      height: 130px;
+    .photo-ring img {
+      width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
       object-position: center top;
       display: block;
+      border: 2px solid var(--bg-sidebar);
+    }
+    .avail-dot {
+      display: flex; align-items: center; gap: 5px;
+      font-size: 0.65rem; font-weight: 600; color: var(--green);
+      letter-spacing: 0.06em;
+    }
+    .avail-dot::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green); flex-shrink: 0;
     }
 
-    .cv-status-dot {
-      position: absolute;
-      bottom: 6px;
-      right: 6px;
-      z-index: 3;
-      width: 16px;
-      height: 16px;
-      background: var(--emerald-signal);
-      border-radius: 50%;
-      border: 3px solid var(--bg-card-solid);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
-      animation: pulse-green 2.5s ease-in-out infinite;
+    /* --- Sidebar section label --- */
+    .sb-label {
+      font-family: var(--f-head);
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--b-rule);
     }
 
-    @keyframes pulse-green {
-      0%, 100% { box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3); }
-      50%       { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0.1); }
+    /* --- Contact list --- */
+    .contact-list { display: flex; flex-direction: column; gap: 5px; }
+    .contact-item {
+      display: flex; align-items: flex-start; gap: 6px;
+      font-size: 0.7rem; color: var(--t-body); line-height: 1.4;
     }
+    .contact-item i {
+      color: var(--cyan); font-size: 0.65rem; width: 11px;
+      text-align: center; margin-top: 1px; flex-shrink: 0;
+    }
+    .contact-item a { color: var(--t-body); word-break: break-all; }
+    .contact-item a:hover { color: var(--cyan); text-decoration: none; }
 
-    .cv-header-info {
-      padding: 1.75rem 2rem 1.75rem 0.5rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    /* --- Skills --- */
+    .skill-group { margin-bottom: 8px; }
+    .skill-group:last-child { margin-bottom: 0; }
+    .skill-group-name {
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--t-hi); margin-bottom: 5px; letter-spacing: 0.04em;
     }
-
-    .cv-tag-line {
-      font-family: var(--font-display);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--cyan-primary);
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
-    }
-
-    .cv-name {
-      font-family: var(--font-heading);
-      font-size: 2.6rem;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-      color: var(--text-main);
-      line-height: 1.1;
-      margin-bottom: 0.35rem;
-    }
-
-    .cv-title {
-      font-family: var(--font-display);
-      font-size: 0.96rem;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 1rem;
-    }
-
-    .cv-title strong {
-      color: var(--amber-primary);
-    }
-
-    .cv-contacts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1.25rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .cv-contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-    .cv-contact-item i {
-      color: var(--cyan-primary);
-      font-size: 0.75rem;
-      width: 14px;
-      text-align: center;
-    }
-    .cv-contact-item a {
-      color: var(--text-secondary);
-      transition: color var(--transition);
-    }
-    .cv-contact-item a:hover {
-      color: var(--cyan-primary);
-      text-decoration: none;
-    }
-
-    .cv-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .cv-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-    }
-
-    .cv-badge-cyan {
-      background: var(--cyan-subtle);
-      border: 1px solid var(--border-cyan);
-      color: var(--cyan-primary);
-    }
-
-    .cv-badge-amber {
-      background: var(--amber-subtle);
-      border: 1px solid rgba(255, 183, 3, 0.3);
-      color: var(--amber-primary);
-    }
-
-    .cv-badge-purple {
-      background: var(--purple-subtle);
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      color: var(--purple-accent);
-    }
-
-    /* ================================================================
-       TWO-COLUMN MAIN LAYOUT
-       ================================================================ */
-    .cv-body {
-      display: grid;
-      grid-template-columns: var(--col-left) var(--col-right);
-      gap: var(--gap);
-      align-items: start;
-    }
-
-    /* ================================================================
-       SECTION — SHARED STYLES
-       ================================================================ */
-    .cv-section {
-      background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 1.25rem;
-      margin-bottom: var(--gap);
-    }
-
-    .cv-section:last-child { margin-bottom: 0; }
-
-    .section-label {
-      font-family: var(--font-heading);
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--cyan-primary);
-      margin-bottom: 0.8rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-card);
-      display: flex;
-      align-items: center;
-      gap: 0.45rem;
-    }
-
-    .section-label i {
-      font-size: 0.7rem;
-    }
-
-    /* ================================================================
-       SIDEBAR — LEFT COLUMN
-       ================================================================ */
-    .cv-sidebar { }
-
-    /* Skill category */
-    .skill-cat-title {
-      font-family: var(--font-display);
-      font-size: 0.78rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 0.5rem;
-      margin-top: 0.8rem;
-    }
-    .skill-cat-title:first-of-type { margin-top: 0; }
-
-    .skill-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .skill-pill {
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 3px; }
+    .sk {
       display: inline-block;
-      padding: 0.2rem 0.55rem;
-      border-radius: 999px;
-      font-size: 0.72rem;
-      font-weight: 500;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-glass);
-      color: var(--text-secondary);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.62rem; font-weight: 500;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--b-soft);
+      color: var(--t-body);
       white-space: nowrap;
     }
-
-    .skill-pill-hi {
-      background: var(--cyan-subtle);
-      border-color: rgba(0,240,255,0.25);
-      color: var(--cyan-text);
+    .sk-hi {
+      background: var(--cyan-dim);
+      border-color: var(--cyan-border);
+      color: var(--cyan);
       font-weight: 600;
     }
-
-    .skill-pill-amber {
-      background: var(--amber-subtle);
+    .sk-amber {
+      background: var(--amber-dim);
       border-color: rgba(255,183,3,0.25);
-      color: var(--amber-primary);
+      color: var(--amber);
       font-weight: 600;
     }
-
-    .skill-pill-purple {
-      background: var(--purple-subtle);
+    .sk-purple {
+      background: rgba(168,85,247,0.12);
       border-color: rgba(168,85,247,0.25);
-      color: var(--purple-accent);
+      color: var(--purple);
       font-weight: 600;
     }
 
-    /* Profile summary */
-    .cv-summary {
-      font-size: 0.88rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .cv-summary strong {
-      color: var(--text-main);
-    }
-
-    /* ================================================================
-       EXPERIENCE / TIMELINE ITEMS
-       ================================================================ */
-    .exp-item {
-      position: relative;
-      padding-left: 1.1rem;
-      margin-bottom: 1.35rem;
-      padding-bottom: 1.35rem;
-      border-bottom: 1px solid var(--border-card);
-    }
-
-    .exp-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .exp-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 6px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--cyan-primary);
-      box-shadow: 0 0 8px var(--cyan-glow);
-    }
-
-    .exp-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 0.5rem;
-      margin-bottom: 0.15rem;
-      flex-wrap: wrap;
-    }
-
-    .exp-role {
-      font-family: var(--font-heading);
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      color: var(--text-main);
-      line-height: 1.25;
-    }
-
-    .exp-date {
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--cyan-primary);
-      white-space: nowrap;
-      padding: 0.15rem 0.5rem;
-      border-radius: var(--radius-sm);
-      background: var(--cyan-subtle);
-      border: 1px solid rgba(0,240,255,0.2);
-      flex-shrink: 0;
-      align-self: flex-start;
-    }
-
-    .exp-company {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--amber-primary);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-
-    .exp-company-meta {
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--text-dim);
-    }
-
-    .exp-bullets {
-      padding-left: 0;
-      margin-top: 0.3rem;
-    }
-
-    .exp-bullets li {
-      position: relative;
-      padding-left: 1rem;
-      margin-bottom: 0.3rem;
-      font-size: 0.83rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    .exp-bullets li::before {
-      content: '▸';
-      position: absolute;
-      left: 0;
-      color: var(--cyan-primary);
-      font-size: 0.65rem;
-      top: 2px;
-    }
-
-    .exp-bullets li strong {
-      color: var(--text-main);
-    }
-
-    .exp-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-      margin-top: 0.5rem;
-    }
-
-    .exp-tag {
-      font-size: 0.68rem;
-      font-weight: 600;
-      padding: 0.15rem 0.45rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border-glass);
-      color: var(--text-dim);
-    }
-
-    /* ================================================================
-       PROJECTS / GAMES GRID
-       ================================================================ */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-    }
-
-    .project-card {
-      background: rgba(255,255,255,0.025);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-sm);
-      padding: 0.85rem;
-      transition: border-color var(--transition);
-    }
-
-    .project-card:hover {
-      border-color: rgba(0,240,255,0.2);
-    }
-
-    .project-card.featured {
-      grid-column: 1 / -1;
-      background: rgba(0, 240, 255, 0.03);
-      border-color: rgba(0, 240, 255, 0.15);
-      border-left: 3px solid var(--cyan-primary);
-    }
-
-    .project-card.featured-amber {
-      background: rgba(255, 183, 3, 0.03);
-      border-color: rgba(255, 183, 3, 0.15);
-      border-left: 3px solid var(--amber-primary);
-    }
-
-    .project-name {
-      font-family: var(--font-heading);
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--text-main);
-      margin-bottom: 0.1rem;
-      letter-spacing: 0.02em;
-    }
-
-    .project-role-line {
-      font-size: 0.72rem;
-      color: var(--cyan-text);
-      font-weight: 600;
-      margin-bottom: 0.25rem;
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.3rem;
-    }
-
-    .project-role-line .platform {
-      color: var(--text-dim);
-      font-weight: 400;
-    }
-
-    .project-desc {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      line-height: 1.55;
-      margin-bottom: 0.4rem;
-    }
-
-    .project-tech {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.25rem;
-    }
-
-    .tech-pill {
-      font-size: 0.65rem;
-      font-weight: 600;
-      padding: 0.1rem 0.4rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border-glass);
-      color: var(--text-dim);
-    }
-
-    /* ================================================================
-       EDUCATION
-       ================================================================ */
-    .edu-item {
-      position: relative;
-      padding-left: 1.1rem;
-      margin-bottom: 1rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border-card);
-    }
-
-    .edu-item:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
-    }
-
-    .edu-item::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 7px;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--amber-primary);
-      box-shadow: 0 0 8px var(--amber-glow);
-    }
-
+    /* --- Education in sidebar --- */
+    .edu-block { margin-bottom: 8px; }
     .edu-degree {
-      font-family: var(--font-heading);
-      font-size: 0.98rem;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 0.02em;
+      font-size: 0.72rem; font-weight: 700; color: var(--t-hi);
+      line-height: 1.3;
     }
-
     .edu-school {
-      font-size: 0.82rem;
-      color: var(--amber-primary);
-      font-weight: 600;
-      margin-bottom: 0.2rem;
+      font-size: 0.66rem; color: var(--amber); margin-bottom: 2px;
+    }
+    .edu-meta { font-size: 0.63rem; color: var(--t-dim); }
+    .edu-gpa { color: var(--green); font-weight: 700; }
+
+    /* ============================================================
+       MAIN COLUMN
+       ============================================================ */
+    .cv-main {
+      padding: 20px 18px;
+      display: flex; flex-direction: column; gap: 13px;
     }
 
-    .edu-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 0.25rem;
+    /* --- Name/Title block --- */
+    .cv-name {
+      font-family: var(--f-head);
+      font-size: 1.9rem; font-weight: 800;
+      color: var(--t-hi); letter-spacing: 0.04em;
+      line-height: 1.05;
     }
-
-    .edu-meta span {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
+    .cv-title {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--t-dim); letter-spacing: 0.05em;
+      margin-top: 3px;
     }
+    .cv-title strong { color: var(--cyan); font-weight: 700; }
 
-    .edu-meta .highlight {
-      color: var(--emerald-signal);
-      font-weight: 700;
+    /* --- Section label (main column) --- */
+    .sec-label {
+      font-family: var(--f-head);
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--cyan); margin-bottom: 7px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--b-rule);
+      display: flex; align-items: center; gap: 5px;
     }
+    .sec-label i { font-size: 0.6rem; }
 
-    /* ================================================================
-       CERTIFICATIONS / ACHIEVEMENTS
-       ================================================================ */
-    .cert-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--border-card);
+    /* --- Summary --- */
+    .summary-text {
+      font-size: 0.78rem; color: var(--t-body); line-height: 1.7;
     }
+    .summary-text strong { color: var(--t-hi); }
 
-    .cert-item:last-child { border-bottom: none; }
-
-    .cert-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      flex-shrink: 0;
+    /* --- Highlights row --- */
+    .highlights {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
     }
-
-    .cert-icon-cyan {
-      background: var(--cyan-subtle);
-      border: 1px solid rgba(0,240,255,0.2);
-      color: var(--cyan-primary);
-    }
-
-    .cert-icon-amber {
-      background: var(--amber-subtle);
-      border: 1px solid rgba(255,183,3,0.2);
-      color: var(--amber-primary);
-    }
-
-    .cert-icon-purple {
-      background: var(--purple-subtle);
-      border: 1px solid rgba(168,85,247,0.2);
-      color: var(--purple-accent);
-    }
-
-    .cert-text {}
-
-    .cert-name {
-      font-size: 0.83rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .cert-issuer {
-      font-size: 0.75rem;
-      color: var(--text-secondary);
-    }
-
-    .cert-year {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-    }
-
-    /* ================================================================
-       PROFILE STATS ROW
-       ================================================================ */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0.6rem;
-      margin-bottom: var(--gap);
-    }
-
-    .stat-card {
+    .hl-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-card);
-      border-radius: var(--radius-md);
-      padding: 0.85rem 1rem;
+      border: 1px solid var(--b-soft);
+      border-radius: var(--r-sm);
+      padding: 6px 8px;
       text-align: center;
     }
-
-    .stat-num {
-      font-family: var(--font-heading);
-      font-size: 1.55rem;
-      font-weight: 800;
-      color: var(--cyan-primary);
-      letter-spacing: 0.02em;
+    .hl-num {
+      font-family: var(--f-head);
+      font-size: 1.25rem; font-weight: 800;
+      color: var(--cyan); letter-spacing: 0.02em;
       line-height: 1.1;
     }
-
-    .stat-label {
-      font-size: 0.7rem;
-      color: var(--text-dim);
-      margin-top: 0.15rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
+    .hl-num.amber { color: var(--amber); }
+    .hl-num.purple { color: var(--purple); }
+    .hl-desc {
+      font-size: 0.58rem; color: var(--t-dim);
+      font-weight: 600; letter-spacing: 0.06em; margin-top: 1px;
     }
 
-    /* ================================================================
-       DIVIDER TAG (matches portfolio section-tag style)
-       ================================================================ */
-    .section-tag-line {
-      font-family: var(--font-display);
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--text-dim);
-      text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      padding: 0.35rem 0;
-      border-top: 1px solid var(--border-card);
-      border-bottom: 1px solid var(--border-card);
-      text-align: center;
+    /* --- Experience --- */
+    .exp-block { margin-bottom: 9px; }
+    .exp-block:last-child { margin-bottom: 0; }
+    .exp-header {
+      display: flex; justify-content: space-between;
+      align-items: flex-start; flex-wrap: wrap; gap: 4px;
+      margin-bottom: 1px;
+    }
+    .exp-role {
+      font-family: var(--f-head);
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--t-hi); letter-spacing: 0.02em;
+    }
+    .exp-date {
+      font-size: 0.63rem; font-weight: 600; color: var(--cyan);
+      background: var(--cyan-dim); border: 1px solid var(--cyan-border);
+      padding: 1px 6px; border-radius: 3px; white-space: nowrap; flex-shrink: 0;
+    }
+    .exp-company {
+      font-size: 0.72rem; color: var(--amber); font-weight: 600;
+      margin-bottom: 5px;
+    }
+    .exp-company span { color: var(--t-dim); font-weight: 400; }
+    .exp-bullets { padding-left: 0; }
+    .exp-bullets li {
+      position: relative; padding-left: 10px;
+      font-size: 0.74rem; color: var(--t-body); line-height: 1.55;
+      margin-bottom: 3px;
+    }
+    .exp-bullets li::before {
+      content: '▸'; position: absolute; left: 0;
+      color: var(--cyan); font-size: 0.58rem; top: 2px;
+    }
+    .exp-bullets li strong { color: var(--t-hi); }
+
+    /* --- Divider between exp blocks --- */
+    .exp-divider { border: none; border-top: 1px solid var(--b-rule); margin: 8px 0; }
+
+    /* --- Projects --- */
+    .proj-block { margin-bottom: 7px; }
+    .proj-block:last-child { margin-bottom: 0; }
+    .proj-header {
+      display: flex; align-items: baseline; flex-wrap: wrap;
+      gap: 4px 8px; margin-bottom: 2px;
+    }
+    .proj-name {
+      font-family: var(--f-head);
+      font-size: 0.82rem; font-weight: 700;
+      color: var(--t-hi); letter-spacing: 0.01em;
+    }
+    .proj-role {
+      font-size: 0.64rem; font-weight: 600;
+      color: var(--cyan); white-space: nowrap;
+    }
+    .proj-platform {
+      font-size: 0.62rem; color: var(--t-dim);
+    }
+    .proj-desc {
+      font-size: 0.72rem; color: var(--t-body); line-height: 1.55;
+    }
+    .proj-desc strong { color: var(--t-hi); }
+
+    .proj-divider { border: none; border-top: 1px solid var(--b-rule); margin: 5px 0; }
+
+    /* ============================================================
+       RESPONSIVE — tablet/mobile
+       ============================================================ */
+    @media (max-width: 680px) {
+      .page-wrap { padding: 0; }
+      .cv-sheet {
+        width: 100%; min-height: unset;
+        grid-template-columns: 1fr;
+        border-radius: 0;
+        border-top-width: 3px;
+      }
+      .cv-sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--b-rule);
+        padding: 18px 16px;
+      }
+      .photo-wrap { flex-direction: row; align-items: center; }
+      .cv-main { padding: 18px 16px; }
+      .highlights { grid-template-columns: repeat(2, 1fr); }
+      .exp-header { flex-direction: column; gap: 2px; }
     }
 
-    /* ================================================================
-       CONTACT LINKS ROW (bottom of sidebar)
-       ================================================================ */
-    .social-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+    @media (max-width: 400px) {
+      html { font-size: 12px; }
+      .cv-name { font-size: 1.6rem; }
     }
 
-    .social-link {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      transition: color var(--transition);
-      text-decoration: none;
-      border-radius: var(--radius-sm);
-      padding: 0.3rem 0.45rem;
-    }
-
-    .social-link:hover {
-      color: var(--cyan-primary);
-      background: var(--cyan-subtle);
-      text-decoration: none;
-    }
-
-    .social-link i {
-      width: 16px;
-      text-align: center;
-      color: var(--text-dim);
-      transition: color var(--transition);
-      font-size: 0.8rem;
-    }
-
-    .social-link:hover i { color: var(--cyan-primary); }
-
-    /* ================================================================
-       AVAILABILITY CHIP
-       ================================================================ */
-    .availability-chip {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.55rem 0.85rem;
-      border-radius: var(--radius-sm);
-      background: rgba(16, 185, 129, 0.08);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--emerald-signal);
-      margin-bottom: var(--gap);
-    }
-
-    .availability-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--emerald-signal);
-      animation: pulse-green 2s infinite;
-      flex-shrink: 0;
-    }
-
-    /* ================================================================
+    /* ============================================================
        PRINT / PDF
-       ================================================================ */
+       ============================================================ */
     @media print {
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
-      body {
-        background: #07090e !important;
-        font-size: 12px;
+      html, body {
+        width: 210mm; height: 297mm;
+        margin: 0; padding: 0;
+        font-size: 11.5px;
+        background: #08090f !important;
       }
 
-      body::before, body::after { display: none; }
+      .web-bar { display: none !important; }
 
-      .action-bar { display: none; }
-
-      .cv-photo-frame::before { animation: none; }
-      .cv-status-dot { animation: none; }
-      .availability-dot { animation: none; }
-
-      .cv-page {
-        margin: 0 auto;
-        padding: 0 0.5rem;
-        max-width: 100%;
+      .page-wrap {
+        padding: 0;
+        display: block;
       }
 
-      .cv-header {
+      .cv-sheet {
+        width: 210mm;
+        min-height: 297mm;
+        max-height: 297mm;
+        box-shadow: none;
         border-radius: 0;
-        page-break-inside: avoid;
+        border: none;
+        border-top: 3px solid var(--cyan);
       }
 
-      .exp-item, .edu-item, .project-card, .cert-item {
-        page-break-inside: avoid;
-      }
+      .photo-ring::before { display: none; }
 
-      .cv-section {
-        page-break-inside: avoid;
-      }
-
-      .cv-body {
-        grid-template-columns: 200px 1fr;
-      }
-    }
-
-    /* ================================================================
-       RESPONSIVE — TABLET
-       ================================================================ */
-    @media (max-width: 760px) {
-      .cv-body {
-        grid-template-columns: 1fr;
-      }
-
-      .cv-header {
-        grid-template-columns: 1fr;
-      }
-
-      .cv-header-photo-col {
-        padding: 1.75rem 1.5rem 0.5rem;
-        justify-content: flex-start;
-      }
-
-      .cv-header-info {
-        padding: 0.75rem 1.5rem 1.75rem;
-      }
-
-      .stats-row {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .project-card.featured {
-        grid-column: 1;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .cv-name { font-size: 2rem; }
-      .stats-row { grid-template-columns: 1fr 1fr; }
-      .cv-contacts { flex-direction: column; gap: 0.35rem; }
+      .highlights { page-break-inside: avoid; }
+      .exp-block  { page-break-inside: avoid; }
+      .proj-block { page-break-inside: avoid; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ================================================================
-       TOP ACTION BAR
-       ================================================================ -->
-  <header class="action-bar" aria-label="Page actions">
-    <div class="action-bar-brand">
-      MUHAMMAD ALI<span>.DEV</span>
-      <span style="color: var(--text-dim); font-weight: 400; font-size: 0.75rem; margin-left: 0.6rem;">— Résumé / CV</span>
-    </div>
-    <div class="action-bar-actions">
-      <a href="index.html" class="btn-bar btn-bar-outline">
-        <i class="fa-solid fa-arrow-left"></i> Portfolio
-      </a>
-      <button class="btn-bar btn-bar-outline" onclick="window.print()" aria-label="Print or save as PDF">
-        <i class="fa-solid fa-print"></i> Print / PDF
-      </button>
-      <a href="assets/Muhammad_Ali_Resume.pdf" class="btn-bar btn-bar-primary" download>
-        <i class="fa-solid fa-file-pdf"></i> Download PDF
-      </a>
+  <!-- WEB-ONLY ACTION BAR -->
+  <header class="web-bar" aria-label="Page controls">
+    <div class="web-bar-brand">MUHAMMAD ALI<span>.DEV</span> <span style="color:var(--t-dim);font-weight:400;font-size:0.72rem;">— Résumé</span></div>
+    <div class="web-bar-actions">
+      <a href="index.html" class="wb-btn wb-outline"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
+      <button class="wb-btn wb-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Print / PDF</button>
+      <a href="assets/Muhammad_Ali_Resume.pdf" class="wb-btn wb-solid" download><i class="fa-solid fa-download"></i> Download PDF</a>
     </div>
   </header>
 
-  <!-- ================================================================
-       MAIN PAGE
-       ================================================================ -->
-  <main class="cv-page" aria-label="Curriculum Vitae">
+  <div class="page-wrap">
+    <article class="cv-sheet" aria-label="Muhammad Ali — Curriculum Vitae">
 
-    <!-- HEADER / IDENTITY HERO STRIP -->
-    <header class="cv-header">
+      <!-- ====================================================
+           SIDEBAR
+           ==================================================== -->
+      <aside class="cv-sidebar" aria-label="Contact and skills">
 
-      <!-- Profile Photo -->
-      <div class="cv-header-photo-col">
-        <div class="cv-photo-frame">
-          <img src="assets/profile.webp"
-               alt="Muhammad Ali — Game Developer & 3D Generalist"
-               class="cv-photo"
-               width="130" height="130"
-               fetchpriority="high">
-          <span class="cv-status-dot" aria-label="Open to opportunities"></span>
-        </div>
-      </div>
-
-      <!-- Identity, Contacts, Badges -->
-      <div class="cv-header-info">
-        <p class="cv-tag-line">
-          <i class="fa-solid fa-gamepad" style="margin-right:0.3rem;"></i>
-          Game Developer &nbsp;·&nbsp; 3D Generalist &nbsp;·&nbsp; VR/XR Developer
-        </p>
-
-        <h1 class="cv-name">MUHAMMAD ALI</h1>
-
-        <p class="cv-title">
-          <strong>Unity / C# Developer</strong> &nbsp;|&nbsp;
-          Gameplay Systems &nbsp;|&nbsp; VR Architecture &nbsp;|&nbsp; 3D Art &amp; Environments
-        </p>
-
-        <div class="cv-contacts" role="list" aria-label="Contact information">
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
-            <a href="mailto:muhammadali.offical.gd@gmail.com">muhammadali.offical.gd@gmail.com</a>
+        <!-- Photo -->
+        <div class="photo-wrap">
+          <div class="photo-ring">
+            <img src="assets/profile.webp"
+                 alt="Muhammad Ali"
+                 width="82" height="82"
+                 fetchpriority="high">
           </div>
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-            Rawalpindi, Pakistan &nbsp;·&nbsp; Remote Worldwide
-          </div>
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-brands fa-discord" aria-hidden="true"></i>
-            unknown344x_
-          </div>
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-brands fa-github" aria-hidden="true"></i>
-            <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer">github.com/Muhammad-Ali-344</a>
-          </div>
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-            <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer">linkedin.com/in/muhammad-ali-381865352</a>
-          </div>
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-brands fa-artstation" aria-hidden="true"></i>
-            <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer">artstation.com/muhammadali344</a>
-          </div>
-          <div class="cv-contact-item" role="listitem">
-            <i class="fa-solid fa-globe" aria-hidden="true"></i>
-            <a href="https://muhammad-ali-344.github.io" target="_blank" rel="noopener noreferrer">muhammad-ali-344.github.io</a>
-          </div>
+          <p class="avail-dot">Open to Hire</p>
         </div>
 
-        <div class="cv-badges" role="list" aria-label="Key credentials">
-          <span class="cv-badge cv-badge-cyan" role="listitem">
-            <i class="fa-brands fa-google-play" aria-hidden="true"></i>
-            8+ Shipped Games
-          </span>
-          <span class="cv-badge cv-badge-amber" role="listitem">
-            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-            B.S. Game Design &amp; Production &nbsp;·&nbsp; CGPA 3.77
-          </span>
-          <span class="cv-badge cv-badge-purple" role="listitem">
-            <i class="fa-solid fa-vr-cardboard" aria-hidden="true"></i>
-            VR/XR Specialist
-          </span>
-          <span class="cv-badge cv-badge-cyan" role="listitem">
-            <i class="fa-solid fa-cube" aria-hidden="true"></i>
-            3+ Yrs Professional Experience
-          </span>
-        </div>
-      </div>
-    </header>
-
-    <!-- AVAILABILITY CHIP -->
-    <div class="availability-chip" role="status" aria-label="Availability status">
-      <span class="availability-dot"></span>
-      Open to full-time game developer roles, VR/XR projects, and freelance contracts &nbsp;·&nbsp; Worldwide &amp; Remote
-    </div>
-
-    <!-- QUICK STATS ROW -->
-    <div class="stats-row" role="region" aria-label="Key statistics">
-      <div class="stat-card">
-        <div class="stat-num">8+</div>
-        <div class="stat-label">Shipped Games</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3+</div>
-        <div class="stat-label">Years Exp</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" style="color: var(--amber-primary);">3.77</div>
-        <div class="stat-label">CGPA · Honors</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" style="color: var(--purple-accent);">VR / XR</div>
-        <div class="stat-label">Meta Quest</div>
-      </div>
-    </div>
-
-    <!-- TWO-COLUMN BODY -->
-    <div class="cv-body">
-
-      <!-- ========================================================
-           LEFT SIDEBAR
-           ======================================================== -->
-      <aside class="cv-sidebar" aria-label="Skills and supplementary info">
-
-        <!-- PROFESSIONAL PROFILE -->
-        <section class="cv-section" aria-labelledby="sidebar-profile">
-          <h2 class="section-label" id="sidebar-profile">
-            <i class="fa-solid fa-user-gear" aria-hidden="true"></i>
-            Profile
-          </h2>
-          <p class="cv-summary">
-            <strong>Well-rounded game developer</strong> with 3+ years of professional experience delivering
-            gameplay systems, mobile games, and VR escape rooms. Equally proficient in
-            <strong>Unity/C# engineering</strong> and <strong>3D art pipelines</strong> — enabling me to
-            take products from concept through to a polished, shipped experience.
-          </p>
-        </section>
-
-        <!-- CORE SKILLS -->
-        <section class="cv-section" aria-labelledby="sidebar-skills">
-          <h2 class="section-label" id="sidebar-skills">
-            <i class="fa-solid fa-code" aria-hidden="true"></i>
-            Core Skills
-          </h2>
-
-          <h3 class="skill-cat-title">Game Development</h3>
-          <div class="skill-pills">
-            <span class="skill-pill skill-pill-hi">Unity 3D / 2D</span>
-            <span class="skill-pill skill-pill-hi">C#</span>
-            <span class="skill-pill">Gameplay Systems</span>
-            <span class="skill-pill">Physics &amp; Ragdoll</span>
-            <span class="skill-pill">Mobile (Android)</span>
-            <span class="skill-pill">Photon PUN2</span>
-            <span class="skill-pill">Firebase</span>
-          </div>
-
-          <h3 class="skill-cat-title">VR / XR</h3>
-          <div class="skill-pills">
-            <span class="skill-pill skill-pill-purple">XR Interaction Toolkit</span>
-            <span class="skill-pill skill-pill-purple">Meta Quest</span>
-            <span class="skill-pill">Physics Hands</span>
-            <span class="skill-pill">Spatial Audio</span>
-            <span class="skill-pill">Socket Docking</span>
-          </div>
-
-          <h3 class="skill-cat-title">3D &amp; Environment Art</h3>
-          <div class="skill-pills">
-            <span class="skill-pill skill-pill-amber">Blender 3D</span>
-            <span class="skill-pill skill-pill-amber">ZBrush</span>
-            <span class="skill-pill">Unreal Engine 5</span>
-            <span class="skill-pill">Substance 3D Painter</span>
-            <span class="skill-pill">UV Unwrapping</span>
-            <span class="skill-pill">PBR Texturing</span>
-            <span class="skill-pill">Normal Baking</span>
-          </div>
-
-          <h3 class="skill-cat-title">Technical Art</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Unity HDRP / URP</span>
-            <span class="skill-pill">Shader Graph</span>
-            <span class="skill-pill">Lumen Real-Time GI</span>
-            <span class="skill-pill">Nanite</span>
-            <span class="skill-pill">Profiling &amp; LODs</span>
-            <span class="skill-pill">Draw Call Batching</span>
-          </div>
-
-          <h3 class="skill-cat-title">Game Design &amp; UI/UX</h3>
-          <div class="skill-pills">
-            <span class="skill-pill">Mechanics Design</span>
-            <span class="skill-pill">Level Design</span>
-            <span class="skill-pill">HUD &amp; Menu Systems</span>
-            <span class="skill-pill">Tutorial Systems</span>
-            <span class="skill-pill">AdMob / IAP</span>
-            <span class="skill-pill">Adobe Illustrator</span>
-          </div>
-        </section>
-
-        <!-- TOOLS & SOFTWARE -->
-        <section class="cv-section" aria-labelledby="sidebar-tools">
-          <h2 class="section-label" id="sidebar-tools">
-            <i class="fa-solid fa-toolbox" aria-hidden="true"></i>
-            Tools &amp; Software
-          </h2>
-          <div class="skill-pills">
-            <span class="skill-pill">Unity 6</span>
-            <span class="skill-pill">Unreal Engine 5</span>
-            <span class="skill-pill">Blender</span>
-            <span class="skill-pill">ZBrush</span>
-            <span class="skill-pill">Substance 3D Painter</span>
-            <span class="skill-pill">Firebase / Realtime DB</span>
-            <span class="skill-pill">Photon PUN2</span>
-            <span class="skill-pill">Git / GitHub</span>
-            <span class="skill-pill">Adobe Illustrator</span>
-            <span class="skill-pill">Google Play Console</span>
-          </div>
-        </section>
-
-        <!-- CONTACT & PROFILES -->
-        <section class="cv-section" aria-labelledby="sidebar-contact">
-          <h2 class="section-label" id="sidebar-contact">
-            <i class="fa-solid fa-link" aria-hidden="true"></i>
-            Online Profiles
-          </h2>
-          <nav class="social-links" aria-label="Social and portfolio links">
-            <a href="https://muhammad-ali-344.github.io" target="_blank" rel="noopener noreferrer" class="social-link">
-              <i class="fa-solid fa-globe"></i>
-              Portfolio Website
-            </a>
-            <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" class="social-link">
+        <!-- Contact -->
+        <section aria-labelledby="sb-contact">
+          <h2 class="sb-label" id="sb-contact">Contact</h2>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <i class="fa-solid fa-envelope"></i>
+              <a href="mailto:muhammadali.offical.gd@gmail.com">muhammadali.offical.gd@gmail.com</a>
+            </li>
+            <li class="contact-item">
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Rawalpindi, Pakistan<br>Remote Worldwide</span>
+            </li>
+            <li class="contact-item">
               <i class="fa-brands fa-github"></i>
-              GitHub
-            </a>
-            <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" class="social-link">
+              <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer">github.com/Muhammad-Ali-344</a>
+            </li>
+            <li class="contact-item">
               <i class="fa-brands fa-linkedin"></i>
-              LinkedIn
-            </a>
-            <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer" class="social-link">
+              <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer">linkedin.com/in/muhammad-ali-381865352</a>
+            </li>
+            <li class="contact-item">
+              <i class="fa-solid fa-globe"></i>
+              <a href="https://muhammad-ali-344.github.io" target="_blank" rel="noopener noreferrer">muhammad-ali-344.github.io</a>
+            </li>
+            <li class="contact-item">
               <i class="fa-brands fa-artstation"></i>
-              ArtStation
-            </a>
-          </nav>
+              <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer">artstation.com/muhammadali344</a>
+            </li>
+            <li class="contact-item">
+              <i class="fa-brands fa-discord"></i>
+              <span>unknown344x_</span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Core Skills -->
+        <section aria-labelledby="sb-skills">
+          <h2 class="sb-label" id="sb-skills">Core Skills</h2>
+
+          <div class="skill-group">
+            <div class="skill-group-name">Game Development</div>
+            <div class="skill-tags">
+              <span class="sk sk-hi">Unity 3D / 2D</span>
+              <span class="sk sk-hi">C#</span>
+              <span class="sk">Gameplay Systems</span>
+              <span class="sk">State Machines</span>
+              <span class="sk">Physics &amp; Ragdoll</span>
+              <span class="sk">Mobile (Android)</span>
+              <span class="sk">UI/UX Systems</span>
+              <span class="sk">Tutorial Systems</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">VR / XR</div>
+            <div class="skill-tags">
+              <span class="sk sk-purple">XR Interaction Toolkit</span>
+              <span class="sk sk-purple">Meta Quest</span>
+              <span class="sk">Physics Hands</span>
+              <span class="sk">Spatial Audio</span>
+              <span class="sk">Socket Docking</span>
+              <span class="sk">Photon PUN2</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">3D / Technical Art</div>
+            <div class="skill-tags">
+              <span class="sk sk-amber">Blender 3D</span>
+              <span class="sk sk-amber">ZBrush</span>
+              <span class="sk">Substance 3D Painter</span>
+              <span class="sk">Unreal Engine 5</span>
+              <span class="sk">UV Unwrapping</span>
+              <span class="sk">PBR Texturing</span>
+              <span class="sk">Lumen / Nanite</span>
+              <span class="sk">Unity HDRP / URP</span>
+              <span class="sk">Shader Graph</span>
+              <span class="sk">Normal Baking</span>
+            </div>
+          </div>
+
+          <div class="skill-group">
+            <div class="skill-group-name">Tools / Services</div>
+            <div class="skill-tags">
+              <span class="sk">Firebase</span>
+              <span class="sk">AdMob</span>
+              <span class="sk">In-App Purchases</span>
+              <span class="sk">Google Play Console</span>
+              <span class="sk">Git / GitHub</span>
+              <span class="sk">Adobe Illustrator</span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Education -->
+        <section aria-labelledby="sb-edu">
+          <h2 class="sb-label" id="sb-edu">Education</h2>
+
+          <div class="edu-block">
+            <div class="edu-degree">B.S. Game Design &amp; Production</div>
+            <div class="edu-school">Riphah International University</div>
+            <div class="edu-meta">
+              Class of 2026 &nbsp;·&nbsp; <span class="edu-gpa">CGPA&nbsp;3.77&nbsp;/&nbsp;4.00</span>
+            </div>
+          </div>
+
+          <div class="edu-block">
+            <div class="edu-degree">Game Development Certification</div>
+            <div class="edu-school">Government-Sponsored Program</div>
+            <div class="edu-meta">2022 &nbsp;·&nbsp; <span class="edu-gpa">A+ Grade · 90%+</span></div>
+          </div>
         </section>
 
       </aside>
 
-      <!-- ========================================================
-           RIGHT MAIN COLUMN
-           ======================================================== -->
-      <main aria-label="Experience, projects, education">
+      <!-- ====================================================
+           MAIN COLUMN
+           ==================================================== -->
+      <main class="cv-main" aria-label="Resume main content">
 
-        <!-- PROFESSIONAL EXPERIENCE -->
-        <section class="cv-section" aria-labelledby="main-exp">
-          <h2 class="section-label" id="main-exp">
-            <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
-            Professional Experience
-          </h2>
+        <!-- Name & Title -->
+        <header>
+          <h1 class="cv-name">MUHAMMAD ALI</h1>
+          <p class="cv-title">
+            <strong>Game Developer</strong> &nbsp;|&nbsp;
+            Unity / C# &nbsp;|&nbsp; VR / XR &nbsp;|&nbsp; 3D Generalist
+          </p>
+        </header>
+
+        <!-- Summary -->
+        <section aria-labelledby="sec-summary">
+          <h2 class="sec-label" id="sec-summary"><i class="fa-solid fa-user"></i> Profile</h2>
+          <p class="summary-text">
+            <strong>Game Developer with 3+ years of professional experience</strong> shipping Unity games across mobile and VR/XR.
+            Proficient in <strong>gameplay systems, C#, UI/UX, physics, and optimization</strong>, with a parallel background in
+            3D modeling, digital sculpting (ZBrush), environment art, and PBR pipelines.
+            Equally at home writing tight C# gameplay code and building hand-crafted 3D assets — enabling full solo ownership
+            of projects when needed. <strong>8+ games shipped on Google Play.</strong>
+          </p>
+        </section>
+
+        <!-- Highlights -->
+        <section aria-label="Key achievements">
+          <div class="highlights">
+            <div class="hl-card">
+              <div class="hl-num">8+</div>
+              <div class="hl-desc">Shipped Games</div>
+            </div>
+            <div class="hl-card">
+              <div class="hl-num">3+</div>
+              <div class="hl-desc">Years Experience</div>
+            </div>
+            <div class="hl-card">
+              <div class="hl-num amber">3.77</div>
+              <div class="hl-desc">CGPA · Honors</div>
+            </div>
+            <div class="hl-card">
+              <div class="hl-num purple">VR / XR</div>
+              <div class="hl-desc">Meta Quest</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section aria-labelledby="sec-exp">
+          <h2 class="sec-label" id="sec-exp"><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
 
           <!-- Kurly Brackets -->
-          <article class="exp-item">
+          <div class="exp-block">
             <div class="exp-header">
               <h3 class="exp-role">Game Developer</h3>
               <span class="exp-date">Early 2023 — Present</span>
             </div>
-            <div class="exp-company">
-              Kurly Brackets
-              <span class="exp-company-meta">· On-Site · Pakistan</span>
-            </div>
-            <ul class="exp-bullets" aria-label="Responsibilities and achievements">
-              <li>
-                <strong>Shipped 8+ commercial mobile games</strong> on Google Play, spanning puzzle, arcade, party, and physics genres — driving the full development cycle from prototyping to store release.
-              </li>
-              <li>
-                Designed and implemented modular <strong>gameplay systems in Unity/C#</strong> including state machines, player controllers, input handling, and responsive physics interactions.
-              </li>
-              <li>
-                Engineered complete <strong>UI/UX systems</strong> — responsive menus, HUDs, interactive onboarding tutorials, and multi-resolution canvas layouts for Android targets.
-              </li>
-              <li>
-                Integrated <strong>Firebase Realtime Database</strong> for live leaderboards and player authentication, and implemented <strong>AdMob &amp; IAP</strong> monetization pipelines.
-              </li>
-              <li>
-                Authored game-feel improvements including punchy camera shakes, tweening animations, audio juice, and ragdoll physics tuning to maximize player retention.
-              </li>
-              <li>
-                Maintained game stability through systematic <strong>bug investigation, profiling, and draw-call optimization</strong> across multiple concurrent projects.
-              </li>
+            <p class="exp-company">
+              Kurly Brackets &nbsp;<span>· On-Site, Pakistan</span>
+            </p>
+            <ul class="exp-bullets">
+              <li>Developed and shipped <strong>8+ commercial mobile games</strong> on Google Play, covering the full cycle from gameplay prototyping to store release across puzzle, arcade, physics, and party genres.</li>
+              <li>Built modular <strong>Unity/C# gameplay systems</strong> — state machines, player controllers, physics interactions, ragdoll tuning, and mobile-optimised UI/UX with responsive canvas layouts and onboarding tutorials.</li>
+              <li>Integrated <strong>Firebase Realtime Database</strong> (leaderboards, auth) and monetisation pipelines (<strong>AdMob, IAP</strong>); maintained Android build stability through profiling, draw-call batching, and systematic bug-fixing.</li>
             </ul>
-            <div class="exp-tags" aria-label="Technologies used">
-              <span class="exp-tag">Unity 3D / 2D</span>
-              <span class="exp-tag">C#</span>
-              <span class="exp-tag">Firebase</span>
-              <span class="exp-tag">AdMob / IAP</span>
-              <span class="exp-tag">Google Play</span>
-              <span class="exp-tag">Android</span>
-              <span class="exp-tag">UI Systems</span>
-            </div>
-          </article>
+          </div>
+
+          <hr class="exp-divider">
 
           <!-- Motion Maze -->
-          <article class="exp-item">
+          <div class="exp-block">
             <div class="exp-header">
               <h3 class="exp-role">Game Developer</h3>
-              <span class="exp-date" style="background: rgba(168,85,247,0.1); border-color: rgba(168,85,247,0.25); color: var(--purple-accent);">6 Months · Remote</span>
+              <span class="exp-date" style="background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.28);color:var(--purple);">6 Months</span>
             </div>
-            <div class="exp-company" style="color: var(--purple-accent);">
-              Motion Maze
-              <span class="exp-company-meta">· Remote Studio</span>
-            </div>
+            <p class="exp-company" style="color:var(--purple);">
+              Motion Maze &nbsp;<span>· Remote Studio</span>
+            </p>
             <ul class="exp-bullets">
-              <li>
-                Contributed to mobile game development, implementing <strong>gameplay mechanics, UI systems, and game logic</strong> within a collaborative remote studio workflow.
-              </li>
-              <li>
-                Developed and iterated on game features under production timelines, coordinating with art and design teams to ship polished, playable builds.
-              </li>
-              <li>
-                Gained professional experience working in a <strong>remote, multi-discipline team</strong> environment using version control and structured project pipelines.
-              </li>
+              <li>Contributed gameplay mechanics, UI systems, and game-logic programming for mobile projects within a collaborative remote team pipeline.</li>
+              <li>Coordinated with art and design across versioned builds, gaining professional experience in structured multi-discipline studio workflows.</li>
             </ul>
-            <div class="exp-tags">
-              <span class="exp-tag">Unity</span>
-              <span class="exp-tag">C#</span>
-              <span class="exp-tag">Mobile</span>
-              <span class="exp-tag">Remote Collaboration</span>
-            </div>
-          </article>
-
-          <!-- Freelance -->
-          <article class="exp-item">
-            <div class="exp-header">
-              <h3 class="exp-role">Freelance Game Developer &amp; 3D Artist</h3>
-              <span class="exp-date" style="background: rgba(255,183,3,0.1); border-color: rgba(255,183,3,0.25); color: var(--amber-primary);">Ongoing</span>
-            </div>
-            <div class="exp-company" style="color: var(--amber-primary);">
-              Independent / Contract Work
-              <span class="exp-company-meta">· Remote Worldwide</span>
-            </div>
-            <ul class="exp-bullets">
-              <li>
-                Solo-developed <strong>The Forgotten Train: VR Escape Room</strong> — a complete VR experience built independently from the ground up, handling all 3D modeling, texturing, XR programming, and sound design.
-              </li>
-              <li>
-                Produced a diverse range of <strong>3D art commissions</strong> including environment scenes, hard-surface models, creature sculpts (ZBrush), and PBR-textured assets.
-              </li>
-              <li>
-                Available for Unity game development, VR/XR interactive experiences, Blender modeling, and technical art consulting.
-              </li>
-            </ul>
-            <div class="exp-tags">
-              <span class="exp-tag">VR / XR</span>
-              <span class="exp-tag">Unity</span>
-              <span class="exp-tag">Blender</span>
-              <span class="exp-tag">ZBrush</span>
-              <span class="exp-tag">Solo Development</span>
-            </div>
-          </article>
-        </section>
-
-        <!-- SELECTED PROJECTS & SHIPPED GAMES -->
-        <section class="cv-section" aria-labelledby="main-projects">
-          <h2 class="section-label" id="main-projects">
-            <i class="fa-solid fa-star" aria-hidden="true"></i>
-            Selected Projects &amp; Shipped Games
-          </h2>
-
-          <div class="projects-grid" role="list">
-
-            <!-- Featured: The Forgotten Train -->
-            <article class="project-card featured" role="listitem">
-              <div class="project-name">
-                <i class="fa-solid fa-crown" style="color: var(--cyan-primary); font-size: 0.75rem; margin-right: 0.3rem;"></i>
-                The Forgotten Train: VR Escape
-              </div>
-              <div class="project-role-line">
-                100% Solo Creator: Code, 3D Assets, Textures &amp; UI
-                <span class="platform">· PC VR · Meta Quest</span>
-              </div>
-              <p class="project-desc">
-                Atmospheric single-player VR puzzle escape room inside an accelerating Victorian train carriage.
-                All 3D assets hand-modeled in Blender with custom PBR textures. Features tactile two-handed XR
-                physics interactions, rotational valve puzzles, socket key docking, and diegetic in-world UI.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">Unity XR</span>
-                <span class="tech-pill">XR Interaction Toolkit</span>
-                <span class="tech-pill">Blender 3D</span>
-                <span class="tech-pill">Substance Painter</span>
-                <span class="tech-pill">Spatial Audio</span>
-                <span class="tech-pill">C#</span>
-              </div>
-            </article>
-
-            <!-- Featured: Selah -->
-            <article class="project-card featured featured-amber" role="listitem">
-              <div class="project-name">
-                <i class="fa-brands fa-google-play" style="color: var(--amber-primary); font-size: 0.75rem; margin-right: 0.3rem;"></i>
-                Selah: Bible Charades
-              </div>
-              <div class="project-role-line" style="color: var(--amber-primary);">
-                Lead Unity Developer · Mechanics &amp; UI/UX
-                <span class="platform">· Android (Live on Google Play)</span>
-              </div>
-              <p class="project-desc">
-                Published commercial mobile party game featuring gyro/tilt forehead motion controls,
-                dynamic cloud-delivered card decks, in-game video recording, responsive multi-resolution UI,
-                and Google Play monetization (IAP).
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">Unity 2D</span>
-                <span class="tech-pill">Gyroscope Controls</span>
-                <span class="tech-pill">In-Game Video Capture</span>
-                <span class="tech-pill">Remote Cloud Decks</span>
-                <span class="tech-pill">IAP</span>
-                <span class="tech-pill">C#</span>
-              </div>
-            </article>
-
-            <!-- Jewel Crush -->
-            <article class="project-card" role="listitem">
-              <div class="project-name">Jewel Crush Quest: Match 3</div>
-              <div class="project-role-line">
-                Gameplay Programmer · UI/UX
-                <span class="platform">· Android · Shipped</span>
-              </div>
-              <p class="project-desc">
-                Match-3 mobile puzzle with gem cascade mechanics, interactive onboarding tutorials,
-                responsive UI panels, juice animations, and audio feedback.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">Unity 2D</span>
-                <span class="tech-pill">Match-3 System</span>
-                <span class="tech-pill">Tutorial Systems</span>
-                <span class="tech-pill">AdMob</span>
-              </div>
-            </article>
-
-            <!-- 2468 Block Puzzle -->
-            <article class="project-card" role="listitem">
-              <div class="project-name">2468 Block Puzzle: 2048 Merge</div>
-              <div class="project-role-line">
-                Full Gameplay &amp; Backend Developer
-                <span class="platform">· Android · Shipped</span>
-              </div>
-              <p class="project-desc">
-                Number-merging block puzzle with Firebase Realtime leaderboards, user authentication,
-                interactive tutorials, and monetization.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">Unity 2D</span>
-                <span class="tech-pill">Firebase Realtime DB</span>
-                <span class="tech-pill">AdMob / IAP</span>
-                <span class="tech-pill">Auth</span>
-              </div>
-            </article>
-
-            <!-- Mr Greedy -->
-            <article class="project-card" role="listitem">
-              <div class="project-name">Mr Greedy: Ragdoll Punch</div>
-              <div class="project-role-line">
-                Core Mechanics · Ragdoll Tuning
-                <span class="platform">· Android · Shipped</span>
-              </div>
-              <p class="project-desc">
-                3D ragdoll punch combat game with spring-joint physics, dynamic camera shakes,
-                tutorials, and shop cosmetics.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">Unity 3D</span>
-                <span class="tech-pill">Ragdoll Physics</span>
-                <span class="tech-pill">Spring Joints</span>
-                <span class="tech-pill">Camera FX</span>
-              </div>
-            </article>
-
-            <!-- Snake Escape -->
-            <article class="project-card" role="listitem">
-              <div class="project-name">Snake Escape: Tap Out Puzzle</div>
-              <div class="project-role-line">
-                Logic &amp; Grid Collision Programmer
-                <span class="platform">· Android · Shipped</span>
-              </div>
-              <p class="project-desc">
-                Strategic tap-out puzzle with custom directional path checkers and
-                non-overlapping collision logic for snake untangling mechanics.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">Unity 2D</span>
-                <span class="tech-pill">Grid Mechanics</span>
-                <span class="tech-pill">Pathfinding Logic</span>
-                <span class="tech-pill">Lerping</span>
-              </div>
-            </article>
-
-            <!-- 3D Work Highlight -->
-            <article class="project-card" role="listitem">
-              <div class="project-name">UE5 &amp; Blender Environment Work</div>
-              <div class="project-role-line">
-                Environment Artist · Technical Artist
-                <span class="platform">· Unreal Engine 5 · Blender</span>
-              </div>
-              <p class="project-desc">
-                Multiple high-fidelity environment scenes including Mystic Grotto (UE5 Lumen/Nanite),
-                Overgrown Sanctuary, Modular Dungeon Kit, Ocean Lighthouse (Unity HDRP),
-                and architectural 3D models.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">UE5 / Lumen</span>
-                <span class="tech-pill">Nanite</span>
-                <span class="tech-pill">Blender</span>
-                <span class="tech-pill">Unity HDRP</span>
-                <span class="tech-pill">Shader Graph</span>
-              </div>
-            </article>
-
-            <!-- ZBrush Sculpting -->
-            <article class="project-card" role="listitem">
-              <div class="project-name">Digital Sculpting &amp; 3D Art</div>
-              <div class="project-role-line">
-                Character / Creature Sculptor
-                <span class="platform">· ZBrush · Substance 3D Painter</span>
-              </div>
-              <p class="project-desc">
-                High-poly creature sculpts (Fire Dragon), concept vehicle hybrids (Draco GT),
-                and PBR texturing showcases (Cyberpunk Neon Bike) demonstrating full 3D art pipeline mastery.
-              </p>
-              <div class="project-tech">
-                <span class="tech-pill">ZBrush</span>
-                <span class="tech-pill">DynaMesh</span>
-                <span class="tech-pill">Substance Painter</span>
-                <span class="tech-pill">PBR Materials</span>
-              </div>
-            </article>
-
           </div>
         </section>
 
-        <!-- EDUCATION -->
-        <section class="cv-section" aria-labelledby="main-edu">
-          <h2 class="section-label" id="main-edu">
-            <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
-            Education
-          </h2>
+        <!-- Selected Projects -->
+        <section aria-labelledby="sec-proj">
+          <h2 class="sec-label" id="sec-proj"><i class="fa-solid fa-star"></i> Selected Projects</h2>
 
-          <article class="edu-item">
-            <div class="edu-degree">B.S. Game Design &amp; Production</div>
-            <div class="edu-school">Riphah International University</div>
-            <div class="edu-meta">
-              <span><i class="fa-solid fa-calendar" aria-hidden="true"></i> Class of 2026 — Graduated</span>
-              <span><i class="fa-solid fa-award" aria-hidden="true"></i> <span class="highlight">CGPA 3.77 / 4.0 — Honors</span></span>
-              <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Pakistan</span>
+          <!-- Forgotten Train -->
+          <div class="proj-block">
+            <div class="proj-header">
+              <span class="proj-name">The Forgotten Train: VR Escape</span>
+              <span class="proj-role">Solo Creator — Code, 3D, Textures &amp; Audio</span>
+              <span class="proj-platform">· Unity XR · Meta Quest · PC VR</span>
             </div>
-          </article>
-
-          <article class="edu-item">
-            <div class="edu-degree">Game Development Certification Course</div>
-            <div class="edu-school">Government-Sponsored Program</div>
-            <div class="edu-meta">
-              <span><i class="fa-solid fa-calendar" aria-hidden="true"></i> 2022</span>
-              <span><i class="fa-solid fa-star" aria-hidden="true"></i> <span class="highlight">A+ Grade · 90%+ Marks</span></span>
-            </div>
-          </article>
-        </section>
-
-        <!-- CERTIFICATIONS & ACHIEVEMENTS -->
-        <section class="cv-section" aria-labelledby="main-certs">
-          <h2 class="section-label" id="main-certs">
-            <i class="fa-solid fa-certificate" aria-hidden="true"></i>
-            Certifications &amp; Achievements
-          </h2>
-
-          <div class="cert-item" role="listitem">
-            <div class="cert-icon cert-icon-cyan">
-              <i class="fa-brands fa-google-play" aria-hidden="true"></i>
-            </div>
-            <div class="cert-text">
-              <div class="cert-name">8+ Games Published on Google Play</div>
-              <div class="cert-issuer">Commercial releases including Selah, Jewel Crush Quest, 2468 Block Puzzle, Mr Greedy, Snake Escape, and more</div>
-              <div class="cert-year">2023 — Present · Kurly Brackets</div>
-            </div>
+            <p class="proj-desc">
+              Atmospheric VR puzzle escape room, <strong>built 100% independently</strong>: all 3D Victorian assets modelled in Blender, PBR-textured in Substance Painter, and programmed in Unity with two-handed XR physics interactions, valve &amp; key puzzles, socket docking, and spatial audio.
+            </p>
           </div>
 
-          <div class="cert-item" role="listitem">
-            <div class="cert-icon cert-icon-amber">
-              <i class="fa-solid fa-certificate" aria-hidden="true"></i>
+          <hr class="proj-divider">
+
+          <!-- Selah -->
+          <div class="proj-block">
+            <div class="proj-header">
+              <span class="proj-name">Selah: Bible Charades</span>
+              <span class="proj-role">Lead Unity Developer · Mechanics &amp; UI/UX</span>
+              <span class="proj-platform">· Android · <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games" target="_blank" rel="noopener noreferrer">Live on Google Play</a></span>
             </div>
-            <div class="cert-text">
-              <div class="cert-name">Government Game Development Certification</div>
-              <div class="cert-issuer">Government-sponsored program covering core programming, game loops, and interactive systems</div>
-              <div class="cert-year">2022 · A+ Grade · 90%+ Marks</div>
-            </div>
+            <p class="proj-desc">
+              Published mobile party game with <strong>gyro/tilt forehead motion controls</strong>, dynamic cloud-delivered card decks, in-game video recording, responsive multi-resolution UI, and Google Play IAP monetisation.
+            </p>
           </div>
 
-          <div class="cert-item" role="listitem">
-            <div class="cert-icon cert-icon-purple">
-              <i class="fa-solid fa-vr-cardboard" aria-hidden="true"></i>
+          <hr class="proj-divider">
+
+          <!-- 2468 Block Puzzle -->
+          <div class="proj-block">
+            <div class="proj-header">
+              <span class="proj-name">2468 Block Puzzle: 2048 Merge</span>
+              <span class="proj-role">Full Gameplay &amp; Backend Developer</span>
+              <span class="proj-platform">· Android · Google Play</span>
             </div>
-            <div class="cert-text">
-              <div class="cert-name">Solo VR Escape Room — The Forgotten Train</div>
-              <div class="cert-issuer">Independently developed a full VR escape room (3D, code, textures, audio) in Unity XR from scratch</div>
-              <div class="cert-year">Solo Project · Unity XR · Blender · Substance Painter</div>
-            </div>
+            <p class="proj-desc">
+              Number-merging puzzle with <strong>Firebase Realtime leaderboards, user authentication</strong>, interactive tutorial, and AdMob/IAP monetisation.
+            </p>
           </div>
 
-          <div class="cert-item" role="listitem">
-            <div class="cert-icon cert-icon-cyan">
-              <i class="fa-solid fa-award" aria-hidden="true"></i>
+          <hr class="proj-divider">
+
+          <!-- Jewel Crush -->
+          <div class="proj-block">
+            <div class="proj-header">
+              <span class="proj-name">Jewel Crush Quest: Match 3</span>
+              <span class="proj-role">Gameplay Programmer · UI/UX</span>
+              <span class="proj-platform">· Android · Google Play</span>
             </div>
-            <div class="cert-text">
-              <div class="cert-name">B.S. Honors — CGPA 3.77 / 4.0</div>
-              <div class="cert-issuer">Riphah International University — B.S. Game Design &amp; Production</div>
-              <div class="cert-year">Class of 2026</div>
+            <p class="proj-desc">
+              Match-3 mobile puzzle featuring gem cascade mechanics, interactive onboarding tutorials, responsive UI panels, and polished juice / audio feedback.
+            </p>
+          </div>
+
+          <hr class="proj-divider">
+
+          <!-- Mr Greedy -->
+          <div class="proj-block">
+            <div class="proj-header">
+              <span class="proj-name">Mr Greedy: Ragdoll Punch</span>
+              <span class="proj-role">Core Mechanics · Physics Tuning</span>
+              <span class="proj-platform">· Android · Unity 3D</span>
             </div>
+            <p class="proj-desc">
+              3D ragdoll punch game with spring-joint physics, impulse-force impacts, dynamic camera shakes, and cosmetic shop — showcasing Unity physics simulation and game-feel work.
+            </p>
           </div>
 
         </section>
 
       </main>
-
-    </div><!-- /cv-body -->
-
-  </main><!-- /cv-page -->
-
-  <!-- PRINT-ONLY FOOTER -->
-  <footer style="display:none;" class="print-footer">
-    <p>Muhammad Ali · muhammadali.offical.gd@gmail.com · Rawalpindi, Pakistan · muhammad-ali-344.github.io</p>
-  </footer>
-
-  <style>
-    @media print {
-      .print-footer { display: block !important; text-align: center; font-size: 0.75rem; color: var(--text-dim); padding: 1rem; border-top: 1px solid var(--border-card); margin-top: 1rem; }
-    }
-  </style>
+    </article>
+  </div>
 
 </body>
 </html>
