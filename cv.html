@@ -6,6 +6,20 @@
   <meta name="description" content="Muhammad Ali — Game Developer & 3D Generalist. Resume / CV.">
   <title>Muhammad Ali — CV</title>
 
+  <!-- Early Theme Detection to match portfolio and prevent FOUC -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('portfolio-theme');
+        if (savedTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Rajdhani:wght@600;700;800&display=swap" rel="stylesheet">
@@ -13,51 +27,91 @@
 
   <style>
     /* ============================================================
-       DESIGN TOKENS  — portfolio palette, used with restraint
+       THEME VARIABLES — Exact match to portfolio design tokens
+       Default / Dark Mode:
        ============================================================ */
-    :root {
+    :root,
+    [data-theme="dark"] {
       /* Backgrounds */
-      --bg-page:      #08090f;
-      --bg-sidebar:   #0d1119;
-      --bg-main:      #0a0c14;
-      --bg-card:      rgba(255,255,255,0.03);
+      --bg-page:        #07090e;
+      --bg-sidebar:     #0c1017;
+      --bg-main:        #0c1017;
+      --bg-card:        rgba(255, 255, 255, 0.03);
+      --bg-bar:         rgba(9, 12, 18, 0.94);
+      --box-shadow:     0 10px 56px rgba(0, 0, 0, 0.75);
 
       /* Accents */
-      --cyan:         #00e5ff;
-      --cyan-dim:     rgba(0,229,255,0.18);
-      --cyan-border:  rgba(0,229,255,0.28);
-      --amber:        #ffb703;
-      --amber-dim:    rgba(255,183,3,0.14);
-      --purple:       #a855f7;
-      --green:        #10b981;
+      --cyan:           #00f0ff;
+      --cyan-dim:       rgba(0, 240, 255, 0.14);
+      --cyan-border:    rgba(0, 240, 255, 0.30);
+      --amber:          #ffb703;
+      --amber-dim:      rgba(255, 183, 3, 0.14);
+      --amber-border:   rgba(255, 183, 3, 0.28);
+      --purple:         #a855f7;
+      --purple-dim:     rgba(168, 85, 247, 0.14);
+      --purple-border:  rgba(168, 85, 247, 0.28);
+      --green:          #10b981;
 
       /* Text */
-      --t-hi:         #f0f4fb;
-      --t-body:       #a8bdd4;
-      --t-dim:        #6b7d93;
-      --t-inv:        #07090e;
+      --t-hi:           #f3f6fc;
+      --t-body:         #a8bdd4;
+      --t-dim:          #64748b;
+      --t-inv:          #07090e;
 
       /* Borders */
-      --b-soft:       rgba(255,255,255,0.07);
-      --b-rule:       rgba(255,255,255,0.09);
+      --b-soft:         rgba(255, 255, 255, 0.07);
+      --b-rule:         rgba(255, 255, 255, 0.09);
+      --photo-border:   #0c1017;
+    }
 
-      /* Type */
+    /* ============================================================
+       LIGHT THEME — Exact match to portfolio light theme
+       ============================================================ */
+    [data-theme="light"] {
+      /* Pure White & Clean Slate Palette matching portfolio */
+      --bg-page:        #f4f6fb;
+      --bg-sidebar:     #f8fafc;
+      --bg-main:        #ffffff;
+      --bg-card:        rgba(15, 23, 42, 0.035);
+      --bg-bar:         rgba(255, 255, 255, 0.95);
+      --box-shadow:     0 12px 40px rgba(15, 23, 42, 0.08);
+
+      /* High-Contrast Accessible Cyber Accents matching portfolio */
+      --cyan:           #0077b6;
+      --cyan-dim:       rgba(0, 119, 182, 0.10);
+      --cyan-border:    rgba(0, 119, 182, 0.28);
+      --amber:          #d97706;
+      --amber-dim:      rgba(217, 119, 6, 0.12);
+      --amber-border:   rgba(217, 119, 6, 0.28);
+      --purple:         #7c3aed;
+      --purple-dim:     rgba(124, 58, 237, 0.10);
+      --purple-border:  rgba(124, 58, 237, 0.28);
+      --green:          #059669;
+
+      /* High-Contrast Dark Typography matching portfolio */
+      --t-hi:           #090d16;
+      --t-body:         #334155;
+      --t-dim:          #64748b;
+      --t-inv:          #ffffff;
+
+      /* Subtle Light Borders */
+      --b-soft:         rgba(15, 23, 42, 0.08);
+      --b-rule:         rgba(15, 23, 42, 0.10);
+      --photo-border:   #f8fafc;
+    }
+
+    /* Type & Layout Constants */
+    :root {
       --f-head:       'Rajdhani', sans-serif;
       --f-body:       'Outfit', sans-serif;
-
-      /* Geometry */
       --r-sm:         5px;
       --r-md:         10px;
-
-      /* A4 page width */
       --page-w:       210mm;
-
-      /* Sidebar width */
       --sidebar-w:    68mm;
     }
 
     /* ============================================================
-       RESET
+       RESET & SMOOTH TRANSITION
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -70,8 +124,9 @@
       color: var(--t-body);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
-    a { color: var(--cyan); text-decoration: none; }
+    a { color: var(--cyan); text-decoration: none; transition: color 0.2s ease; }
     a:hover { text-decoration: underline; }
     ul { list-style: none; }
 
@@ -82,22 +137,25 @@
       position: sticky; top: 0; z-index: 50;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0.6rem 1.75rem;
-      background: rgba(8,9,15,0.95);
+      background: var(--bg-bar);
       backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--b-soft);
       gap: 1rem;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .web-bar-brand {
       font-family: var(--f-head); font-size: 1rem; font-weight: 700;
       color: var(--t-hi); letter-spacing: 0.06em;
+      transition: color 0.3s ease;
     }
     .web-bar-brand span { color: var(--cyan); }
-    .web-bar-actions { display: flex; gap: 0.55rem; }
+    .web-bar-actions { display: flex; gap: 0.55rem; align-items: center; }
     .wb-btn {
       display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.42rem 1rem; border-radius: var(--r-sm);
+      padding: 0.42rem 0.95rem; border-radius: var(--r-sm);
       font-family: var(--f-body); font-size: 0.82rem; font-weight: 600;
-      cursor: pointer; border: none; transition: all 0.2s; text-decoration: none;
+      cursor: pointer; border: none; transition: all 0.25s ease; text-decoration: none;
     }
     .wb-outline {
       background: transparent; border: 1px solid var(--cyan-border); color: var(--cyan);
@@ -105,6 +163,10 @@
     .wb-outline:hover { background: var(--cyan-dim); text-decoration: none; }
     .wb-solid { background: var(--cyan); color: var(--t-inv); }
     .wb-solid:hover { background: #00cde8; text-decoration: none; }
+
+    [data-theme="light"] .wb-solid:hover {
+      background: #0284c7;
+    }
 
     /* ============================================================
        PAGE WRAPPER
@@ -121,12 +183,13 @@
       width: var(--page-w);
       display: grid;
       grid-template-columns: var(--sidebar-w) 1fr;
-      background: var(--bg-page);
-      box-shadow: 0 10px 56px rgba(0,0,0,0.75);
+      background: var(--bg-main);
+      box-shadow: var(--box-shadow);
       border: 1px solid var(--b-soft);
       border-top: 3px solid var(--cyan);
       border-radius: var(--r-md);
       overflow: hidden;
+      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     /* ============================================================
@@ -139,6 +202,7 @@
       display: flex;
       flex-direction: column;
       gap: 15px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
     /* --- Photo --- */
@@ -207,11 +271,12 @@
       padding: 2.5px 7px;
       border-radius: 4px;
       font-size: 0.71rem; font-weight: 500;             /* 11.4px */
-      background: rgba(255,255,255,0.04);
+      background: var(--bg-card);
       border: 1px solid var(--b-soft);
       color: var(--t-body);
       white-space: nowrap;
       line-height: 1.5;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
     }
     .sk-hi {
       background: var(--cyan-dim);
@@ -221,13 +286,13 @@
     }
     .sk-amber {
       background: var(--amber-dim);
-      border-color: rgba(255,183,3,0.28);
+      border-color: var(--amber-border);
       color: var(--amber);
       font-weight: 600;
     }
     .sk-purple {
-      background: rgba(168,85,247,0.12);
-      border-color: rgba(168,85,247,0.28);
+      background: var(--purple-dim);
+      border-color: var(--purple-border);
       color: var(--purple);
       font-weight: 600;
     }
@@ -329,6 +394,12 @@
       font-size: 0.7rem; font-weight: 600; color: var(--cyan); /* 11.2px */
       background: var(--cyan-dim); border: 1px solid var(--cyan-border);
       padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
+      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+    .exp-date-purple {
+      background: var(--purple-dim);
+      border-color: var(--purple-border);
+      color: var(--purple);
     }
     .exp-company {
       font-size: 0.82rem; color: var(--amber); font-weight: 600; /* 13.1px */
@@ -405,8 +476,8 @@
 
     /* ============================================================
        PRINT / PDF
-       — 13.5px base → body text ~12.2px, comfortable for A4
-       — No max-height cap; content naturally flows to page 2
+       — Professional ink-friendly white layout for print & PDF
+       — Ensures maximum readability and zero ink waste
        ============================================================ */
     @media print {
       @page {
@@ -414,15 +485,19 @@
         margin: 0;
       }
 
-      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+      * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
 
       html {
-        font-size: 13.5px;
+        font-size: 13px;
       }
 
       body {
         width: 210mm;
-        background: #08090f !important;
+        background: #ffffff !important;
+        color: #0f172a !important;
       }
 
       .web-bar { display: none !important; }
@@ -434,25 +509,94 @@
 
       .cv-sheet {
         width: 210mm;
-        box-shadow: none;
-        border-radius: 0;
-        border: none;
-        border-top: 3px solid var(--cyan);
-        /* Let content flow across pages naturally */
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        border: none !important;
+        border-top: 3px solid #0077b6 !important;
+        background: #ffffff !important;
         min-height: unset;
         max-height: unset;
         overflow: visible;
       }
 
-      /* Keep logical blocks together; allow page breaks between them */
-      .highlights   { page-break-inside: avoid; break-inside: avoid; }
-      .exp-block    { page-break-inside: avoid; break-inside: avoid; }
-      .proj-block   { page-break-inside: avoid; break-inside: avoid; }
-      .edu-block    { page-break-inside: avoid; break-inside: avoid; }
+      .cv-sidebar {
+        background: #f8fafc !important;
+        border-right: 1px solid #e2e8f0 !important;
+      }
 
-      /* Prevent orphan headings at bottom of page */
+      .photo-ring img {
+        border-color: #f8fafc !important;
+      }
+
+      /* Clean print typography */
+      .cv-name, .exp-role, .proj-name, .edu-degree, .skill-group-name {
+        color: #090d16 !important;
+      }
+
+      .cv-title, .edu-meta, .proj-platform, .exp-company span, .hl-desc {
+        color: #475569 !important;
+      }
+
+      .cv-title strong, .sec-label, .sb-label, .contact-item i, .exp-bullets li::before, .proj-role {
+        color: #0077b6 !important;
+      }
+
+      .exp-company, .edu-school, .hl-num.amber {
+        color: #d97706 !important;
+      }
+
+      .summary-text, .exp-bullets li, .proj-desc, .contact-item {
+        color: #1e293b !important;
+      }
+
+      .hl-card {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+      }
+
+      .sk {
+        background: #f1f5f9 !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #334155 !important;
+      }
+
+      .sk-hi {
+        background: rgba(0, 119, 182, 0.1) !important;
+        border-color: rgba(0, 119, 182, 0.3) !important;
+        color: #0077b6 !important;
+      }
+
+      .sk-amber {
+        background: rgba(217, 119, 6, 0.1) !important;
+        border-color: rgba(217, 119, 6, 0.3) !important;
+        color: #d97706 !important;
+      }
+
+      .sk-purple {
+        background: rgba(124, 58, 237, 0.1) !important;
+        border-color: rgba(124, 58, 237, 0.3) !important;
+        color: #7c3aed !important;
+      }
+
+      .exp-date {
+        background: rgba(0, 119, 182, 0.08) !important;
+        border-color: rgba(0, 119, 182, 0.25) !important;
+        color: #0077b6 !important;
+      }
+
+      .exp-divider, .proj-divider, .sec-label, .sb-label {
+        border-color: #e2e8f0 !important;
+      }
+
+      /* Keep logical blocks together */
+      .highlights { page-break-inside: avoid; break-inside: avoid; }
+      .exp-block { page-break-inside: avoid; break-inside: avoid; }
+      .proj-block { page-break-inside: avoid; break-inside: avoid; }
+      .edu-block { page-break-inside: avoid; break-inside: avoid; }
+
+      /* Prevent orphan headings */
       .sec-label,
-      .sb-label     { page-break-after: avoid; break-after: avoid; }
+      .sb-label { page-break-after: avoid; break-after: avoid; }
     }
   </style>
 </head>
@@ -462,6 +606,10 @@
   <header class="web-bar" aria-label="Page controls">
     <div class="web-bar-brand">MUHAMMAD ALI<span>.DEV</span> <span style="color:var(--t-dim);font-weight:400;font-size:0.72rem;">— Résumé</span></div>
     <div class="web-bar-actions">
+      <button class="wb-btn wb-outline" id="theme-toggle" title="Toggle Dark / Light Mode" aria-label="Toggle Theme">
+        <i class="fa-solid fa-moon" id="theme-icon"></i>
+        <span id="theme-label">Theme</span>
+      </button>
       <a href="index.html" class="wb-btn wb-outline"><i class="fa-solid fa-arrow-left"></i> Portfolio</a>
       <button class="wb-btn wb-outline" onclick="window.print()"><i class="fa-solid fa-print"></i> Print / PDF</button>
       <a href="assets/Muhammad_Ali_Resume.pdf" class="wb-btn wb-solid" download><i class="fa-solid fa-download"></i> Download PDF</a>
@@ -664,7 +812,7 @@
           <div class="exp-block">
             <div class="exp-header">
               <h3 class="exp-role">Game Developer</h3>
-              <span class="exp-date" style="background:rgba(168,85,247,0.12);border-color:rgba(168,85,247,0.28);color:var(--purple);">6 Months</span>
+              <span class="exp-date exp-date-purple">6 Months</span>
             </div>
             <p class="exp-company" style="color:var(--purple);">
               Motion Maze &nbsp;<span>· Remote Studio</span>
@@ -740,5 +888,53 @@
     </article>
   </div>
 
+  <!-- Theme Toggle & Storage Sync Script -->
+  <script>
+    (function() {
+      const toggleBtn = document.getElementById('theme-toggle');
+      const icon = document.getElementById('theme-icon');
+      const label = document.getElementById('theme-label');
+
+      function updateToggleUI(theme) {
+        if (!icon || !label) return;
+        if (theme === 'light') {
+          icon.className = 'fa-solid fa-sun';
+          label.textContent = 'Light';
+          if (toggleBtn) toggleBtn.setAttribute('title', 'Switch to Dark Mode');
+        } else {
+          icon.className = 'fa-solid fa-moon';
+          label.textContent = 'Dark';
+          if (toggleBtn) toggleBtn.setAttribute('title', 'Switch to Light Mode');
+        }
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        try {
+          localStorage.setItem('portfolio-theme', theme);
+        } catch (e) {}
+        updateToggleUI(theme);
+      }
+
+      const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+      updateToggleUI(currentTheme);
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+          const active = document.documentElement.getAttribute('data-theme');
+          const next = active === 'light' ? 'dark' : 'light';
+          setTheme(next);
+        });
+      }
+
+      // Sync across browser tabs if theme is changed in portfolio
+      window.addEventListener('storage', function(e) {
+        if (e.key === 'portfolio-theme' && e.newValue) {
+          document.documentElement.setAttribute('data-theme', e.newValue);
+          updateToggleUI(e.newValue);
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
