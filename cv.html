@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Muhammad Ali — Game Developer & 3D Generalist. Resume / CV.">
-  <title>Muhammad Ali — CV</title>
+  <meta name="description" content="Muhammad Ali — Game Developer | Unity & C# | VR/XR | Gameplay Systems. Professional Curriculum Vitae.">
+  <title>Muhammad Ali — Game Developer CV</title>
 
   <!-- Early Theme Detection to match portfolio and prevent FOUC -->
   <script>
@@ -27,169 +27,170 @@
 
   <style>
     /* ============================================================
-       THEME VARIABLES — Exact match to portfolio design tokens
+       THEME VARIABLES
        Default / Dark Mode:
        ============================================================ */
     :root,
     [data-theme="dark"] {
-      /* Backgrounds */
       --bg-page:        #07090e;
-      --bg-sidebar:     #0c1017;
-      --bg-main:        #0c1017;
-      --bg-card:        rgba(255, 255, 255, 0.03);
+      --bg-sidebar:     #0b0f17;
+      --bg-main:        #0e131d;
+      --bg-card:        rgba(255, 255, 255, 0.035);
       --bg-bar:         rgba(9, 12, 18, 0.94);
-      --box-shadow:     0 10px 56px rgba(0, 0, 0, 0.75);
+      --box-shadow:     0 16px 52px rgba(0, 0, 0, 0.75);
 
       /* Accents */
-      --cyan:           #00f0ff;
-      --cyan-dim:       rgba(0, 240, 255, 0.14);
-      --cyan-border:    rgba(0, 240, 255, 0.30);
+      --cyan:           #00e5ff;
+      --cyan-dim:       rgba(0, 229, 255, 0.12);
+      --cyan-border:    rgba(0, 229, 255, 0.28);
       --amber:          #ffb703;
-      --amber-dim:      rgba(255, 183, 3, 0.14);
-      --amber-border:   rgba(255, 183, 3, 0.28);
+      --amber-dim:      rgba(255, 183, 3, 0.12);
+      --amber-border:   rgba(255, 183, 3, 0.26);
       --purple:         #a855f7;
-      --purple-dim:     rgba(168, 85, 247, 0.14);
-      --purple-border:  rgba(168, 85, 247, 0.28);
+      --purple-dim:     rgba(168, 85, 247, 0.12);
+      --purple-border:  rgba(168, 85, 247, 0.26);
       --green:          #10b981;
+      --green-dim:      rgba(16, 185, 129, 0.12);
 
       /* Text */
-      --t-hi:           #f3f6fc;
-      --t-body:         #a8bdd4;
+      --t-hi:           #f8fafc;
+      --t-body:         #94a3b8;
       --t-dim:          #64748b;
       --t-inv:          #07090e;
 
       /* Borders */
-      --b-soft:         rgba(255, 255, 255, 0.07);
-      --b-rule:         rgba(255, 255, 255, 0.09);
-      --photo-border:   #0c1017;
+      --b-soft:         rgba(255, 255, 255, 0.08);
+      --b-rule:         rgba(255, 255, 255, 0.10);
+      --photo-border:   #0b0f17;
     }
 
     /* ============================================================
-       LIGHT THEME — Exact match to portfolio light theme
+       LIGHT THEME
        ============================================================ */
     [data-theme="light"] {
-      /* Pure White & Clean Slate Palette matching portfolio */
-      --bg-page:        #f4f6fb;
+      --bg-page:        #f1f5f9;
       --bg-sidebar:     #f8fafc;
       --bg-main:        #ffffff;
-      --bg-card:        rgba(15, 23, 42, 0.035);
-      --bg-bar:         rgba(255, 255, 255, 0.95);
-      --box-shadow:     0 12px 40px rgba(15, 23, 42, 0.08);
+      --bg-card:        #f1f5f9;
+      --bg-bar:         rgba(255, 255, 255, 0.96);
+      --box-shadow:     0 12px 36px rgba(15, 23, 42, 0.08);
 
-      /* High-Contrast Accessible Cyber Accents matching portfolio */
-      --cyan:           #0077b6;
-      --cyan-dim:       rgba(0, 119, 182, 0.10);
-      --cyan-border:    rgba(0, 119, 182, 0.28);
-      --amber:          #d97706;
-      --amber-dim:      rgba(217, 119, 6, 0.12);
-      --amber-border:   rgba(217, 119, 6, 0.28);
+      /* High-Contrast Accessible Accents */
+      --cyan:           #0284c7;
+      --cyan-dim:       rgba(2, 132, 199, 0.10);
+      --cyan-border:    rgba(2, 132, 199, 0.28);
+      --amber:          #b45309;
+      --amber-dim:      rgba(180, 83, 9, 0.10);
+      --amber-border:   rgba(180, 83, 9, 0.28);
       --purple:         #7c3aed;
       --purple-dim:     rgba(124, 58, 237, 0.10);
       --purple-border:  rgba(124, 58, 237, 0.28);
       --green:          #059669;
+      --green-dim:      rgba(5, 150, 105, 0.10);
 
-      /* High-Contrast Dark Typography matching portfolio */
+      /* Typography */
       --t-hi:           #090d16;
       --t-body:         #334155;
       --t-dim:          #64748b;
       --t-inv:          #ffffff;
 
-      /* Subtle Light Borders */
-      --b-soft:         rgba(15, 23, 42, 0.08);
-      --b-rule:         rgba(15, 23, 42, 0.10);
+      /* Borders */
+      --b-soft:         #e2e8f0;
+      --b-rule:         #e2e8f0;
       --photo-border:   #f8fafc;
     }
 
-    /* Type & Layout Constants */
+    /* Layout Constants */
     :root {
       --f-head:       'Rajdhani', sans-serif;
-      --f-body:       'Outfit', sans-serif;
-      --r-sm:         5px;
-      --r-md:         10px;
+      --f-body:       'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --r-sm:         4px;
+      --r-md:         8px;
       --page-w:       210mm;
-      --sidebar-w:    68mm;
+      --sidebar-w:    65mm;
     }
 
-    /* ============================================================
-       RESET & SMOOTH TRANSITION
-       ============================================================ */
+    /* Reset */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Base = 16px. Every rem value in the file is relative to this. */
-    html { font-size: 16px; }
+    html {
+      font-size: 15px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
     body {
       font-family: var(--f-body);
       background: var(--bg-page);
       color: var(--t-body);
-      line-height: 1.65;
-      -webkit-font-smoothing: antialiased;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      line-height: 1.5;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
-    a { color: var(--cyan); text-decoration: none; transition: color 0.2s ease; }
+
+    a {
+      color: var(--cyan);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
     a:hover { text-decoration: underline; }
     ul { list-style: none; }
 
     /* ============================================================
-       WEB ACTION BAR  (hidden at print)
+       WEB ACTION BAR (Hidden in Print)
        ============================================================ */
     .web-bar {
       position: sticky; top: 0; z-index: 50;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 0.6rem 1.75rem;
+      padding: 0.55rem 1.75rem;
       background: var(--bg-bar);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--b-soft);
       gap: 1rem;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
     .web-bar-brand {
-      font-family: var(--f-head); font-size: 1rem; font-weight: 700;
-      color: var(--t-hi); letter-spacing: 0.06em;
-      transition: color 0.3s ease;
+      font-family: var(--f-head); font-size: 1.05rem; font-weight: 700;
+      color: var(--t-hi); letter-spacing: 0.05em;
     }
     .web-bar-brand span { color: var(--cyan); }
-    .web-bar-actions { display: flex; gap: 0.55rem; align-items: center; }
+    .web-bar-actions { display: flex; gap: 0.5rem; align-items: center; }
     .wb-btn {
-      display: inline-flex; align-items: center; gap: 0.4rem;
-      padding: 0.42rem 0.95rem; border-radius: var(--r-sm);
-      font-family: var(--f-body); font-size: 0.82rem; font-weight: 600;
-      cursor: pointer; border: none; transition: all 0.25s ease; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.38rem;
+      padding: 0.38rem 0.85rem; border-radius: var(--r-sm);
+      font-family: var(--f-body); font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; border: none; transition: all 0.2s ease; text-decoration: none;
     }
     .wb-outline {
       background: transparent; border: 1px solid var(--cyan-border); color: var(--cyan);
     }
     .wb-outline:hover { background: var(--cyan-dim); text-decoration: none; }
     .wb-solid { background: var(--cyan); color: var(--t-inv); }
-    .wb-solid:hover { background: #00cde8; text-decoration: none; }
-
-    [data-theme="light"] .wb-solid:hover {
-      background: #0284c7;
-    }
+    .wb-solid:hover { background: #00b4d8; text-decoration: none; }
 
     /* ============================================================
-       PAGE WRAPPER
+       PAGE CONTAINER
        ============================================================ */
     .page-wrap {
       display: flex; justify-content: center; align-items: flex-start;
-      padding: 2.25rem 1rem 5rem;
+      padding: 1.75rem 1rem 3.5rem;
     }
 
     /* ============================================================
-       THE A4 SHEET
+       A4 CV SHEET
+       210mm x 297mm exactly
        ============================================================ */
     .cv-sheet {
       width: var(--page-w);
+      min-height: 297mm;
       display: grid;
       grid-template-columns: var(--sidebar-w) 1fr;
       background: var(--bg-main);
       box-shadow: var(--box-shadow);
       border: 1px solid var(--b-soft);
-      border-top: 3px solid var(--cyan);
+      border-top: 3.5px solid var(--cyan);
       border-radius: var(--r-md);
       overflow: hidden;
-      transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
     }
 
     /* ============================================================
@@ -198,203 +199,336 @@
     .cv-sidebar {
       background: var(--bg-sidebar);
       border-right: 1px solid var(--b-rule);
-      padding: 20px 16px 20px;
+      padding: 20px 15px 20px 16px;
       display: flex;
       flex-direction: column;
       gap: 15px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
     }
 
-    /* --- Photo --- */
+    /* Photo & Availability */
     .photo-wrap {
-      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
     .photo-ring {
-      width: 90px; height: 90px;
+      width: 82px;
+      height: 82px;
       border-radius: 50%;
-      padding: 2px;
-      background: conic-gradient(from 0deg, var(--cyan), var(--purple), var(--amber), var(--cyan));
+      padding: 2.5px;
+      background: conic-gradient(from 180deg, var(--cyan), var(--purple), var(--amber), var(--cyan));
       flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
     .photo-ring img {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       object-fit: cover;
       object-position: center top;
       display: block;
       border: 2px solid var(--bg-sidebar);
     }
-    .avail-dot {
-      display: flex; align-items: center; gap: 5px;
-      font-size: 0.7rem; font-weight: 600; color: var(--green);
-      letter-spacing: 0.06em;
+    .avail-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: var(--green-dim);
+      padding: 2.5px 9px;
+      border-radius: 12px;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      white-space: nowrap;
     }
-    .avail-dot::before {
-      content: ''; width: 6px; height: 6px; border-radius: 50%;
-      background: var(--green); flex-shrink: 0;
+    .avail-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
     }
 
-    /* --- Sidebar section label --- */
+    /* Sidebar Section Heading */
     .sb-label {
       font-family: var(--f-head);
-      font-size: 0.68rem; font-weight: 700;             /* 10.9px */
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 7px;
-      padding-bottom: 4px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 7px;
+      padding-bottom: 3px;
       border-bottom: 1px solid var(--b-rule);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
+    .sb-label i { font-size: 0.65rem; }
 
-    /* --- Contact list --- */
-    .contact-list { display: flex; flex-direction: column; gap: 6px; }
+    /* Contact List */
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
     .contact-item {
-      display: flex; align-items: flex-start; gap: 8px;
-      font-size: 0.77rem;                               /* 12.3px */
-      color: var(--t-body); line-height: 1.4;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.74rem;
+      color: var(--t-body);
+      line-height: 1.35;
     }
     .contact-item i {
-      color: var(--cyan); font-size: 0.7rem; width: 13px;
-      text-align: center; margin-top: 2px; flex-shrink: 0;
-    }
-    .contact-item a { color: var(--t-body); word-break: break-all; }
-    .contact-item a:hover { color: var(--cyan); text-decoration: none; }
-
-    /* --- Skills --- */
-    .skill-group { margin-bottom: 9px; }
-    .skill-group:last-child { margin-bottom: 0; }
-    .skill-group-name {
-      font-size: 0.74rem; font-weight: 700;             /* 11.8px */
-      color: var(--t-hi); margin-bottom: 5px; letter-spacing: 0.03em;
-    }
-    .skill-tags { display: flex; flex-wrap: wrap; gap: 4px; }
-    .sk {
-      display: inline-block;
-      padding: 2.5px 7px;
-      border-radius: 4px;
-      font-size: 0.71rem; font-weight: 500;             /* 11.4px */
-      background: var(--bg-card);
-      border: 1px solid var(--b-soft);
-      color: var(--t-body);
-      white-space: nowrap;
-      line-height: 1.5;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-    }
-    .sk-hi {
-      background: var(--cyan-dim);
-      border-color: var(--cyan-border);
       color: var(--cyan);
-      font-weight: 600;
+      font-size: 0.72rem;
+      width: 14px;
+      text-align: center;
+      flex-shrink: 0;
     }
-    .sk-amber {
-      background: var(--amber-dim);
-      border-color: var(--amber-border);
-      color: var(--amber);
-      font-weight: 600;
+    .contact-item a {
+      color: var(--t-body);
+      text-decoration: none;
+      transition: color 0.15s ease;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .contact-item a:hover {
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+    .contact-item span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Core Skills Groups */
+    .skill-group {
+      margin-bottom: 8px;
+    }
+    .skill-group:last-child {
+      margin-bottom: 0;
+    }
+    .skill-group-name {
+      font-family: var(--f-head);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--t-hi);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .skill-group-name i {
+      font-size: 0.65rem;
+      color: var(--cyan);
+    }
+    .skill-group:nth-child(2) .skill-group-name i { color: var(--purple); }
+    .skill-group:nth-child(3) .skill-group-name i { color: var(--amber); }
+
+    .skill-desc {
+      font-size: 0.73rem;
+      line-height: 1.5;
+      color: var(--t-body);
+    }
+    .sk-pri {
+      color: var(--cyan);
+      font-weight: 700;
     }
     .sk-purple {
-      background: var(--purple-dim);
-      border-color: var(--purple-border);
       color: var(--purple);
-      font-weight: 600;
+      font-weight: 700;
+    }
+    .sk-amber {
+      color: var(--amber);
+      font-weight: 700;
+    }
+    .sk-dot {
+      color: var(--t-dim);
+      font-size: 0.68rem;
+      margin: 0 3px;
+      user-select: none;
     }
 
-    /* --- Education in sidebar --- */
-    .edu-block { margin-bottom: 9px; }
-    .edu-block:last-child { margin-bottom: 0; }
+    /* Education in Sidebar */
+    .edu-block {
+      margin-bottom: 8px;
+    }
+    .edu-block:last-child {
+      margin-bottom: 0;
+    }
     .edu-degree {
-      font-size: 0.8rem; font-weight: 700;              /* 12.8px */
-      color: var(--t-hi); line-height: 1.3;
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: var(--t-hi);
+      line-height: 1.25;
     }
     .edu-school {
-      font-size: 0.73rem; color: var(--amber);          /* 11.7px */
-      margin-bottom: 2px; margin-top: 1px;
+      font-size: 0.72rem;
+      color: var(--amber);
+      font-weight: 500;
+      margin-top: 1.5px;
     }
-    .edu-meta { font-size: 0.7rem; color: var(--t-dim); line-height: 1.45; }
-    .edu-gpa { color: var(--green); font-weight: 700; }
+    .edu-meta {
+      font-size: 0.69rem;
+      color: var(--t-dim);
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .edu-gpa {
+      color: var(--green);
+      font-weight: 700;
+    }
 
     /* ============================================================
        MAIN COLUMN
        ============================================================ */
     .cv-main {
-      padding: 20px 18px 20px;
-      display: flex; flex-direction: column; gap: 13px;
+      padding: 20px 22px 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    /* --- Name / Title block --- */
+    /* Header Block */
+    .cv-header {
+      border-bottom: 1px solid var(--b-rule);
+      padding-bottom: 8px;
+    }
     .cv-name {
       font-family: var(--f-head);
-      font-size: 2.15rem; font-weight: 800;             /* 34.4px */
-      color: var(--t-hi); letter-spacing: 0.04em;
-      line-height: 1.05;
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: var(--t-hi);
+      letter-spacing: 0.05em;
+      line-height: 1;
     }
     .cv-title {
-      font-size: 0.88rem; font-weight: 600;             /* 14px */
-      color: var(--t-dim); letter-spacing: 0.04em;
-      margin-top: 4px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--t-body);
+      margin-top: 5px;
+      letter-spacing: 0.02em;
     }
-    .cv-title strong { color: var(--cyan); font-weight: 700; }
+    .cv-title strong {
+      color: var(--cyan);
+      font-weight: 700;
+    }
+    .title-sep {
+      color: var(--t-dim);
+      margin: 0 4px;
+    }
+    .cv-subtitle {
+      font-size: 0.73rem;
+      color: var(--t-dim);
+      font-weight: 500;
+      margin-top: 2.5px;
+      letter-spacing: 0.01em;
+    }
 
-    /* --- Section label (main column) --- */
+    /* Section Label (Main Column) */
     .sec-label {
       font-family: var(--f-head);
-      font-size: 0.72rem; font-weight: 700;             /* 11.5px */
-      letter-spacing: 0.15em; text-transform: uppercase;
-      color: var(--cyan); margin-bottom: 7px;
-      padding-bottom: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 6px;
+      padding-bottom: 3px;
       border-bottom: 1px solid var(--b-rule);
-      display: flex; align-items: center; gap: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
     .sec-label i { font-size: 0.65rem; }
 
-    /* --- Summary --- */
+    /* Profile / Summary */
     .summary-text {
-      font-size: 0.86rem; color: var(--t-body); line-height: 1.6; /* 13.8px */
+      font-size: 0.80rem;
+      color: var(--t-body);
+      line-height: 1.55;
     }
-    .summary-text strong { color: var(--t-hi); }
+    .summary-text strong {
+      color: var(--t-hi);
+      font-weight: 600;
+    }
 
-    /* --- Highlights row --- */
+    /* Key Highlights / Metrics Row */
     .highlights {
-      display: grid; grid-template-columns: repeat(4, 1fr);
-      gap: 7px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
     }
     .hl-card {
       background: var(--bg-card);
       border: 1px solid var(--b-soft);
       border-radius: var(--r-sm);
-      padding: 7px 8px;
+      padding: 6px 8px;
       text-align: center;
     }
     .hl-num {
       font-family: var(--f-head);
-      font-size: 1.35rem; font-weight: 800;             /* 21.6px */
-      color: var(--cyan); letter-spacing: 0.02em;
+      font-size: 1.30rem;
+      font-weight: 800;
+      color: var(--cyan);
+      letter-spacing: 0.02em;
       line-height: 1.1;
     }
-    .hl-num.amber { color: var(--amber); }
-    .hl-num.purple { color: var(--purple); }
+    .hl-num.hl-amber { color: var(--amber); }
+    .hl-num.hl-purple { color: var(--purple); }
     .hl-desc {
-      font-size: 0.64rem; color: var(--t-dim);          /* 10.2px */
-      font-weight: 600; letter-spacing: 0.07em; margin-top: 2px;
+      font-size: 0.63rem;
+      color: var(--t-dim);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-top: 2px;
       text-transform: uppercase;
     }
 
-    /* --- Experience --- */
-    .exp-block { margin-bottom: 8px; }
-    .exp-block:last-child { margin-bottom: 0; }
+    /* Professional Experience */
+    .exp-block {
+      margin-bottom: 7px;
+    }
+    .exp-block:last-child {
+      margin-bottom: 0;
+    }
     .exp-header {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; flex-wrap: wrap; gap: 4px;
-      margin-bottom: 2px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 6px;
+      margin-bottom: 3px;
     }
     .exp-role {
       font-family: var(--f-head);
-      font-size: 1rem; font-weight: 700;                /* 16px */
-      color: var(--t-hi); letter-spacing: 0.02em;
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--t-hi);
+      letter-spacing: 0.02em;
+      line-height: 1.2;
     }
     .exp-date {
-      font-size: 0.7rem; font-weight: 600; color: var(--cyan); /* 11.2px */
-      background: var(--cyan-dim); border: 1px solid var(--cyan-border);
-      padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0;
-      transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--cyan);
+      background: var(--cyan-dim);
+      border: 1px solid var(--cyan-border);
+      padding: 2px 7px;
+      border-radius: 3px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
     .exp-date-purple {
       background: var(--purple-dim);
@@ -402,151 +536,297 @@
       color: var(--purple);
     }
     .exp-company {
-      font-size: 0.82rem; color: var(--amber); font-weight: 600; /* 13.1px */
-      margin-bottom: 5px;
-    }
-    .exp-company span { color: var(--t-dim); font-weight: 400; }
-    .exp-bullets { padding-left: 0; }
-    .exp-bullets li {
-      position: relative; padding-left: 13px;
-      font-size: 0.86rem; color: var(--t-body); line-height: 1.55; /* 13.8px */
+      font-size: 0.78rem;
+      color: var(--amber);
+      font-weight: 600;
       margin-bottom: 3.5px;
     }
-    .exp-bullets li:last-child { margin-bottom: 0; }
-    .exp-bullets li::before {
-      content: '▸'; position: absolute; left: 0;
-      color: var(--cyan); font-size: 0.65rem; top: 3px;
+    .exp-company span {
+      color: var(--t-dim);
+      font-weight: 400;
     }
-    .exp-bullets li strong { color: var(--t-hi); }
+    .exp-bullets {
+      padding-left: 0;
+    }
+    .exp-bullets li {
+      position: relative;
+      padding-left: 12px;
+      font-size: 0.77rem;
+      color: var(--t-body);
+      line-height: 1.48;
+      margin-bottom: 3px;
+    }
+    .exp-bullets li:last-child {
+      margin-bottom: 0;
+    }
+    .exp-bullets li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--cyan);
+      font-size: 0.65rem;
+      top: 1.5px;
+    }
+    .exp-bullets li strong {
+      color: var(--t-hi);
+      font-weight: 600;
+    }
 
-    /* --- Divider between exp blocks --- */
-    .exp-divider { border: none; border-top: 1px solid var(--b-rule); margin: 9px 0; }
+    .exp-divider {
+      border: none;
+      border-top: 1px solid var(--b-rule);
+      margin: 7px 0;
+    }
 
-    /* --- Projects --- */
-    .proj-block { margin-bottom: 8px; }
-    .proj-block:last-child { margin-bottom: 0; }
+    /* Selected Projects */
+    .proj-block {
+      margin-bottom: 6px;
+    }
+    .proj-block:last-child {
+      margin-bottom: 0;
+    }
     .proj-header {
-      display: flex; align-items: baseline; flex-wrap: wrap;
-      gap: 4px 8px; margin-bottom: 2px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 3px 6px;
+      margin-bottom: 2px;
     }
     .proj-name {
       font-family: var(--f-head);
-      font-size: 0.94rem; font-weight: 700;             /* 15px */
-      color: var(--t-hi); letter-spacing: 0.01em;
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--t-hi);
+      letter-spacing: 0.01em;
+      line-height: 1.2;
     }
-    .proj-role {
-      font-size: 0.74rem; font-weight: 600;             /* 11.8px */
+    .proj-meta {
+      font-size: 0.70rem;
+      color: var(--t-dim);
+      font-weight: 500;
+    }
+    .proj-meta strong {
       color: var(--cyan);
+      font-weight: 600;
     }
-    .proj-platform {
-      font-size: 0.7rem; color: var(--t-dim);           /* 11.2px */
+    .proj-link {
+      color: var(--cyan);
+      font-weight: 600;
+      text-decoration: underline;
     }
     .proj-desc {
-      font-size: 0.83rem; color: var(--t-body); line-height: 1.55; /* 13.3px */
+      font-size: 0.76rem;
+      color: var(--t-body);
+      line-height: 1.48;
     }
-    .proj-desc strong { color: var(--t-hi); }
+    .proj-desc strong {
+      color: var(--t-hi);
+      font-weight: 600;
+    }
 
-    .proj-divider { border: none; border-top: 1px solid var(--b-rule); margin: 7px 0; }
+    .proj-divider {
+      border: none;
+      border-top: 1px solid var(--b-rule);
+      margin: 6px 0;
+    }
 
     /* ============================================================
-       RESPONSIVE — tablet / mobile
+       RESPONSIVE (Screen only)
        ============================================================ */
-    @media (max-width: 700px) {
+    @media screen and (max-width: 768px) {
       .page-wrap { padding: 0; }
       .cv-sheet {
         width: 100%;
+        min-height: auto;
         grid-template-columns: 1fr;
         border-radius: 0;
-        border-top-width: 3px;
       }
       .cv-sidebar {
         border-right: none;
         border-bottom: 1px solid var(--b-rule);
-        padding: 22px 18px;
+        padding: 18px 16px;
       }
-      .photo-wrap { flex-direction: row; align-items: center; gap: 14px; }
-      .cv-main { padding: 22px 18px; }
+      .photo-wrap { flex-direction: row; justify-content: flex-start; gap: 14px; }
+      .cv-main { padding: 18px 16px; }
       .highlights { grid-template-columns: repeat(2, 1fr); }
-      .exp-header { flex-direction: column; gap: 3px; }
-    }
-
-    @media (max-width: 420px) {
-      .cv-name { font-size: 1.85rem; }
     }
 
     /* ============================================================
-       PRINT / PDF
-       — Professional ink-friendly white layout for print & PDF
-       — Ensures maximum readability and zero ink waste
+       PRINT / PDF SPECIFIC STYLES
+       Guaranteed EXACTLY 1 A4 PAGE (210mm x 297mm)
+       Crisp, high-contrast, ink-friendly typography
        ============================================================ */
-    @media print {
-      @page {
-        size: A4;
-        margin: 0;
-      }
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
 
-      * {
+    @media print {
+      *, *::before, *::after {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
       }
 
-      html {
-        font-size: 13px;
-      }
-
+      :root,
+      [data-theme="dark"],
+      [data-theme="light"],
       body {
-        width: 210mm;
-        background: #ffffff !important;
-        color: #0f172a !important;
+        --bg-page:        #ffffff !important;
+        --bg-sidebar:     #f8fafc !important;
+        --bg-main:        #ffffff !important;
+        --bg-card:        #f1f5f9 !important;
+        --cyan:           #0284c7 !important;
+        --cyan-dim:       rgba(2, 132, 199, 0.08) !important;
+        --cyan-border:    rgba(2, 132, 199, 0.32) !important;
+        --amber:          #b45309 !important;
+        --amber-dim:      rgba(180, 83, 9, 0.08) !important;
+        --amber-border:   rgba(180, 83, 9, 0.30) !important;
+        --purple:         #6d28d9 !important;
+        --purple-dim:     rgba(109, 40, 217, 0.08) !important;
+        --purple-border:  rgba(109, 40, 217, 0.30) !important;
+        --green:          #047857 !important;
+        --green-dim:      rgba(4, 120, 87, 0.08) !important;
+        --t-hi:           #090d16 !important;
+        --t-body:         #263344 !important;
+        --t-dim:          #475569 !important;
+        --t-inv:          #ffffff !important;
+        --b-soft:         #e2e8f0 !important;
+        --b-rule:         #e2e8f0 !important;
       }
 
-      .web-bar { display: none !important; }
+      html, body {
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        color: #263344 !important;
+        overflow: hidden !important;
+        font-size: 14.5px !important;
+      }
+
+      .web-bar {
+        display: none !important;
+      }
 
       .page-wrap {
-        padding: 0;
-        display: block;
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        overflow: hidden !important;
       }
 
       .cv-sheet {
-        width: 210mm;
-        box-shadow: none !important;
-        border-radius: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
         border: none !important;
-        border-top: 3px solid #0077b6 !important;
+        border-top: 3.5px solid #0284c7 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
         background: #ffffff !important;
-        min-height: unset;
-        max-height: unset;
-        overflow: visible;
+        overflow: hidden !important;
+        grid-template-columns: var(--sidebar-w) 1fr !important;
       }
 
       .cv-sidebar {
         background: #f8fafc !important;
         border-right: 1px solid #e2e8f0 !important;
+        padding: 20px 15px 18px 16px !important;
+        gap: 15px !important;
       }
 
+      .photo-wrap {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        width: 100% !important;
+      }
+
+      .photo-ring {
+        background: #0284c7 !important;
+        padding: 2px !important;
+        box-shadow: none !important;
+      }
       .photo-ring img {
         border-color: #f8fafc !important;
       }
+      .avail-badge {
+        background: #ecfdf5 !important;
+        border-color: #a7f3d0 !important;
+        color: #047857 !important;
+        white-space: nowrap !important;
+        padding: 2.5px 9px !important;
+      }
+      .avail-dot {
+        background: #047857 !important;
+      }
 
-      /* Clean print typography */
+      .cv-main {
+        padding: 20px 22px 18px 20px !important;
+        gap: 12px !important;
+        background: #ffffff !important;
+      }
+
+      /* High-Contrast Print Typography */
       .cv-name, .exp-role, .proj-name, .edu-degree, .skill-group-name {
         color: #090d16 !important;
       }
 
-      .cv-title, .edu-meta, .proj-platform, .exp-company span, .hl-desc {
+      .cv-title strong, .sec-label, .sb-label, .contact-item i, .exp-bullets li::before, .proj-meta strong, .proj-link {
+        color: #0284c7 !important;
+      }
+
+      .cv-title, .cv-subtitle, .proj-meta, .edu-meta, .hl-desc, .exp-company span {
         color: #475569 !important;
       }
 
-      .cv-title strong, .sec-label, .sb-label, .contact-item i, .exp-bullets li::before, .proj-role {
-        color: #0077b6 !important;
+      .summary-text, .exp-bullets li, .proj-desc, .contact-item, .contact-item a, .contact-item span, .skill-desc {
+        color: #263344 !important;
       }
 
-      .exp-company, .edu-school, .hl-num.amber {
-        color: #d97706 !important;
+      /* CRITICAL: ensure all strong text is deeply visible in print */
+      strong,
+      .summary-text strong,
+      .exp-bullets li strong,
+      .proj-desc strong,
+      .edu-gpa {
+        color: #090d16 !important;
+        font-weight: 700 !important;
       }
 
-      .summary-text, .exp-bullets li, .proj-desc, .contact-item {
-        color: #1e293b !important;
+      .sk-pri {
+        color: #0284c7 !important;
+        font-weight: 700 !important;
+      }
+
+      .sk-purple {
+        color: #6d28d9 !important;
+        font-weight: 700 !important;
+      }
+
+      .sk-amber {
+        color: #b45309 !important;
+        font-weight: 700 !important;
+      }
+
+      .sk-dot {
+        color: #94a3b8 !important;
+      }
+
+      .exp-company, .edu-school, .hl-num.hl-amber {
+        color: #b45309 !important;
+      }
+
+      .hl-num.hl-purple {
+        color: #6d28d9 !important;
       }
 
       .hl-card {
@@ -554,49 +834,27 @@
         border: 1px solid #e2e8f0 !important;
       }
 
-      .sk {
-        background: #f1f5f9 !important;
-        border: 1px solid #e2e8f0 !important;
-        color: #334155 !important;
-      }
-
-      .sk-hi {
-        background: rgba(0, 119, 182, 0.1) !important;
-        border-color: rgba(0, 119, 182, 0.3) !important;
-        color: #0077b6 !important;
-      }
-
-      .sk-amber {
-        background: rgba(217, 119, 6, 0.1) !important;
-        border-color: rgba(217, 119, 6, 0.3) !important;
-        color: #d97706 !important;
-      }
-
-      .sk-purple {
-        background: rgba(124, 58, 237, 0.1) !important;
-        border-color: rgba(124, 58, 237, 0.3) !important;
-        color: #7c3aed !important;
-      }
-
       .exp-date {
-        background: rgba(0, 119, 182, 0.08) !important;
-        border-color: rgba(0, 119, 182, 0.25) !important;
-        color: #0077b6 !important;
+        background: rgba(2, 132, 199, 0.08) !important;
+        border-color: rgba(2, 132, 199, 0.30) !important;
+        color: #0284c7 !important;
       }
 
-      .exp-divider, .proj-divider, .sec-label, .sb-label {
+      .exp-date-purple {
+        background: rgba(109, 40, 217, 0.08) !important;
+        border-color: rgba(109, 40, 217, 0.30) !important;
+        color: #6d28d9 !important;
+      }
+
+      .exp-divider, .proj-divider, .sec-label, .sb-label, .cv-header {
         border-color: #e2e8f0 !important;
       }
 
-      /* Keep logical blocks together */
-      .highlights { page-break-inside: avoid; break-inside: avoid; }
-      .exp-block { page-break-inside: avoid; break-inside: avoid; }
-      .proj-block { page-break-inside: avoid; break-inside: avoid; }
-      .edu-block { page-break-inside: avoid; break-inside: avoid; }
-
-      /* Prevent orphan headings */
-      .sec-label,
-      .sb-label { page-break-after: avoid; break-after: avoid; }
+      /* Prevent any page splits */
+      .highlights, .exp-block, .proj-block, .edu-block, .skill-group {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+      }
     }
   </style>
 </head>
@@ -604,7 +862,7 @@
 
   <!-- WEB-ONLY ACTION BAR -->
   <header class="web-bar" aria-label="Page controls">
-    <div class="web-bar-brand">MUHAMMAD ALI<span>.DEV</span> <span style="color:var(--t-dim);font-weight:400;font-size:0.72rem;">— Résumé</span></div>
+    <div class="web-bar-brand">MUHAMMAD ALI<span>.DEV</span> <span style="color:var(--t-dim);font-weight:400;font-size:0.75rem;">— Résumé</span></div>
     <div class="web-bar-actions">
       <button class="wb-btn wb-outline" id="theme-toggle" title="Toggle Dark / Light Mode" aria-label="Toggle Theme">
         <i class="fa-solid fa-moon" id="theme-icon"></i>
@@ -620,152 +878,161 @@
     <article class="cv-sheet" aria-label="Muhammad Ali — Curriculum Vitae">
 
       <!-- ====================================================
-           SIDEBAR
+           SIDEBAR (Left Column)
            ==================================================== -->
-      <aside class="cv-sidebar" aria-label="Contact and skills">
+      <aside class="cv-sidebar" aria-label="Candidate details and core competencies">
 
-        <!-- Photo -->
+        <!-- Photo & Availability -->
         <div class="photo-wrap">
           <div class="photo-ring">
             <img src="assets/profile.webp"
                  alt="Muhammad Ali"
-                 width="82" height="82"
+                 width="77" height="77"
                  fetchpriority="high">
           </div>
-          <p class="avail-dot">Open to Hire</p>
+          <div class="avail-badge">
+            <span class="avail-dot"></span> Open to Hire · Remote
+          </div>
         </div>
 
-        <!-- Contact -->
+        <!-- Contact Information -->
         <section aria-labelledby="sb-contact">
-          <h2 class="sb-label" id="sb-contact">Contact</h2>
+          <h2 class="sb-label" id="sb-contact"><i class="fa-solid fa-address-card"></i> Contact</h2>
           <ul class="contact-list">
             <li class="contact-item">
               <i class="fa-solid fa-envelope"></i>
-              <a href="mailto:muhammadali.offical.gd@gmail.com">muhammadali.offical.gd@gmail.com</a>
+              <a href="mailto:muhammadali.offical.gd@gmail.com" title="Email Muhammad Ali">muhammadali.offical.gd@gmail.com</a>
             </li>
             <li class="contact-item">
               <i class="fa-solid fa-location-dot"></i>
-              <span>Rawalpindi, Pakistan<br>Remote Worldwide</span>
+              <span>Rawalpindi, PK · Remote Worldwide</span>
             </li>
             <li class="contact-item">
               <i class="fa-brands fa-github"></i>
-              <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer">github.com/Muhammad-Ali-344</a>
+              <a href="https://github.com/Muhammad-Ali-344" target="_blank" rel="noopener noreferrer" title="GitHub Profile">GitHub</a>
             </li>
             <li class="contact-item">
               <i class="fa-brands fa-linkedin"></i>
-              <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer">linkedin.com/in/muhammad-ali-381865352</a>
+              <a href="https://www.linkedin.com/in/muhammad-ali-381865352/" target="_blank" rel="noopener noreferrer" title="LinkedIn Profile">LinkedIn</a>
             </li>
             <li class="contact-item">
               <i class="fa-solid fa-globe"></i>
-              <a href="https://muhammad-ali-344.github.io" target="_blank" rel="noopener noreferrer">muhammad-ali-344.github.io</a>
+              <a href="https://muhammad-ali-344.github.io" target="_blank" rel="noopener noreferrer" title="Portfolio Website">Portfolio</a>
             </li>
             <li class="contact-item">
               <i class="fa-brands fa-artstation"></i>
-              <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer">artstation.com/muhammadali344</a>
+              <a href="https://www.artstation.com/muhammadali344" target="_blank" rel="noopener noreferrer" title="ArtStation Profile">ArtStation</a>
             </li>
           </ul>
         </section>
 
         <!-- Core Skills -->
         <section aria-labelledby="sb-skills">
-          <h2 class="sb-label" id="sb-skills">Core Skills</h2>
+          <h2 class="sb-label" id="sb-skills"><i class="fa-solid fa-sliders"></i> Core Skills</h2>
 
+          <!-- Game Development -->
           <div class="skill-group">
-            <div class="skill-group-name">Game Development</div>
-            <div class="skill-tags">
-              <span class="sk sk-hi">Unity 3D / 2D</span>
-              <span class="sk sk-hi">C#</span>
-              <span class="sk">Gameplay Systems</span>
-              <span class="sk">UI/UX Systems</span>
-              <span class="sk">Tutorial Systems</span>
-            </div>
+            <div class="skill-group-name"><i class="fa-solid fa-gamepad"></i> Game Development</div>
+            <p class="skill-desc">
+              <span class="sk-pri">Unity 3D/2D</span> <span class="sk-dot">•</span>
+              <span class="sk-pri">C#</span> <span class="sk-dot">•</span>
+              <span>Gameplay Systems</span> <span class="sk-dot">•</span>
+              <span>UI/UX</span> <span class="sk-dot">•</span>
+              <span>Physics</span> <span class="sk-dot">•</span>
+              <span>Optimization</span> <span class="sk-dot">•</span>
+              <span>Tutorial Systems</span>
+            </p>
           </div>
 
+          <!-- VR / XR -->
           <div class="skill-group">
-            <div class="skill-group-name">VR / XR</div>
-            <div class="skill-tags">
-              <span class="sk sk-purple">XR Interaction Toolkit</span>
-              <span class="sk sk-purple">Meta Quest</span>
-              <span class="sk">Physics Hands</span>
-              <span class="sk">Socket Docking</span>
-            </div>
+            <div class="skill-group-name"><i class="fa-solid fa-vr-cardboard"></i> VR / XR</div>
+            <p class="skill-desc">
+              <span class="sk-purple">XR Interaction Toolkit</span> <span class="sk-dot">•</span>
+              <span class="sk-purple">Meta Quest</span> <span class="sk-dot">•</span>
+              <span>VR Interaction</span> <span class="sk-dot">•</span>
+              <span>Physics Hands</span> <span class="sk-dot">•</span>
+              <span>Socket / Docking Systems</span>
+            </p>
           </div>
 
+          <!-- 3D / Technical Art -->
           <div class="skill-group">
-            <div class="skill-group-name">3D / Technical Art</div>
-            <div class="skill-tags">
-              <span class="sk sk-amber">Blender 3D</span>
-              <span class="sk sk-amber">ZBrush</span>
-              <span class="sk">Substance 3D Painter</span>
-              <span class="sk">Unreal Engine 5</span>
-              <span class="sk">UV Unwrapping</span>
-              <span class="sk">PBR Texturing</span>
-              <span class="sk">Unity HDRP / URP</span>
-              <span class="sk">Shader Graph</span>
-              <span class="sk">Normal Baking</span>
-            </div>
+            <div class="skill-group-name"><i class="fa-solid fa-cube"></i> 3D / Technical Art</div>
+            <p class="skill-desc">
+              <span class="sk-amber">Blender</span> <span class="sk-dot">•</span>
+              <span class="sk-amber">ZBrush</span> <span class="sk-dot">•</span>
+              <span>Substance 3D Painter</span> <span class="sk-dot">•</span>
+              <span>Unreal Engine 5</span> <span class="sk-dot">•</span>
+              <span>UV Unwrapping</span> <span class="sk-dot">•</span>
+              <span>PBR</span> <span class="sk-dot">•</span>
+              <span>Unity HDRP/URP</span> <span class="sk-dot">•</span>
+              <span>Shader Graph</span> <span class="sk-dot">•</span>
+              <span>Normal Baking</span>
+            </p>
           </div>
 
+          <!-- Tools / Services -->
           <div class="skill-group">
-            <div class="skill-group-name">Tools / Services</div>
-            <div class="skill-tags">
-              <span class="sk">Firebase</span>
-              <span class="sk">AdMob</span>
-              <span class="sk">Git / GitHub</span>
-              <span class="sk">Adobe Illustrator</span>
-            </div>
+            <div class="skill-group-name"><i class="fa-solid fa-screwdriver-wrench"></i> Tools / Services</div>
+            <p class="skill-desc">
+              <span class="sk-pri">Firebase</span> <span class="sk-dot">•</span>
+              <span>AdMob</span> <span class="sk-dot">•</span>
+              <span class="sk-pri">Git / GitHub</span> <span class="sk-dot">•</span>
+              <span>Adobe Illustrator</span>
+            </p>
           </div>
         </section>
 
         <!-- Education -->
         <section aria-labelledby="sb-edu">
-          <h2 class="sb-label" id="sb-edu">Education</h2>
+          <h2 class="sb-label" id="sb-edu"><i class="fa-solid fa-graduation-cap"></i> Education</h2>
 
           <div class="edu-block">
             <div class="edu-degree">B.S. Game Design &amp; Production</div>
             <div class="edu-school">Riphah International University</div>
             <div class="edu-meta">
-              Class of 2026 &nbsp;·&nbsp; <span class="edu-gpa">CGPA&nbsp;3.77&nbsp;/&nbsp;4.00</span>
+              <span>Class of 2026</span> &nbsp;·&nbsp; <span class="edu-gpa">CGPA 3.77 / 4.00</span>
             </div>
           </div>
 
           <div class="edu-block">
             <div class="edu-degree">Game Development Certification</div>
             <div class="edu-school">Government-Sponsored Program</div>
-            <div class="edu-meta">2022 &nbsp;·&nbsp; <span class="edu-gpa">A+ Grade · 90%+</span></div>
+            <div class="edu-meta">
+              <span>2022</span> &nbsp;·&nbsp; <span class="edu-gpa">A+ Grade · 90%+</span>
+            </div>
           </div>
         </section>
 
       </aside>
 
       <!-- ====================================================
-           MAIN COLUMN
+           MAIN COLUMN (Right Column)
            ==================================================== -->
-      <main class="cv-main" aria-label="Resume main content">
+      <main class="cv-main" aria-label="Professional Experience and Projects">
 
-        <!-- Name & Title -->
-        <header>
+        <!-- Header: Name & Positioning -->
+        <header class="cv-header">
           <h1 class="cv-name">MUHAMMAD ALI</h1>
           <p class="cv-title">
-            <strong>Game Developer</strong> &nbsp;|&nbsp;
-            Unity / C# &nbsp;|&nbsp; VR / XR &nbsp;|&nbsp; 3D Generalist
+            <strong>Game Developer</strong> <span class="title-sep">|</span> Unity &amp; C# <span class="title-sep">|</span> VR/XR <span class="title-sep">|</span> Gameplay Systems
+          </p>
+          <p class="cv-subtitle">
+            Secondary Specialization: 3D &amp; Technical Art (Blender · ZBrush · PBR Pipelines)
           </p>
         </header>
 
-        <!-- Summary -->
-        <section aria-labelledby="sec-summary">
-          <h2 class="sec-label" id="sec-summary"><i class="fa-solid fa-user"></i> Profile</h2>
+        <!-- Profile / Summary -->
+        <section aria-labelledby="sec-profile">
+          <h2 class="sec-label" id="sec-profile"><i class="fa-solid fa-user-check"></i> Profile</h2>
           <p class="summary-text">
-            <strong>Game Developer with 3+ years of professional experience</strong> shipping Unity games across mobile and VR/XR.
-            Proficient in <strong>gameplay systems, C#, UI/UX, physics, and optimization</strong>, with a parallel background in
-            3D modeling, digital sculpting (ZBrush), environment art, and PBR pipelines.
-            Equally at home writing tight C# gameplay code and building hand-crafted 3D assets — enabling full solo ownership
-            of projects when needed. <strong>8+ games shipped on Google Play.</strong>
+            <strong>Game Developer with 3+ years of professional experience</strong> building and shipping <strong>8+ commercial games</strong> across Google Play and VR/XR platforms. Specialized in <strong>Unity, C#, modular gameplay systems, physics, and mobile optimization</strong>, supported by a proven foundation in <strong>3D &amp; technical art (Blender, ZBrush, Substance PBR)</strong> for complete end-to-end game production.
           </p>
         </section>
 
-        <!-- Highlights -->
-        <section aria-label="Key achievements">
+        <!-- Key Achievements / Metrics -->
+        <section aria-label="Key Achievements">
           <div class="highlights">
             <div class="hl-card">
               <div class="hl-num">8+</div>
@@ -776,33 +1043,34 @@
               <div class="hl-desc">Years Experience</div>
             </div>
             <div class="hl-card">
-              <div class="hl-num amber" style="font-size:1.1rem;">BS Game</div>
-              <div class="hl-desc">3.77 CGPA</div>
+              <div class="hl-num hl-amber">3.77</div>
+              <div class="hl-desc">CGPA / 4.00</div>
             </div>
             <div class="hl-card">
-              <div class="hl-num purple">VR / XR</div>
+              <div class="hl-num hl-purple">VR / XR</div>
               <div class="hl-desc">Meta Quest</div>
             </div>
           </div>
         </section>
 
-        <!-- Experience -->
+        <!-- Professional Experience -->
         <section aria-labelledby="sec-exp">
           <h2 class="sec-label" id="sec-exp"><i class="fa-solid fa-briefcase"></i> Professional Experience</h2>
 
           <!-- Kurly Brackets -->
           <div class="exp-block">
             <div class="exp-header">
-              <h3 class="exp-role">Game Developer</h3>
+              <div>
+                <h3 class="exp-role">Game Developer</h3>
+                <p class="exp-company">Kurly Brackets <span>· Rawalpindi, Pakistan · On-Site</span></p>
+              </div>
               <span class="exp-date">Early 2023 — Present</span>
             </div>
-            <p class="exp-company">
-              Kurly Brackets &nbsp;<span>· On-Site, Pakistan</span>
-            </p>
             <ul class="exp-bullets">
-              <li>Developed and shipped <strong>8+ commercial mobile games</strong> on Google Play, covering the full cycle from gameplay prototyping to store release across puzzle, arcade, physics, and party genres.</li>
-              <li>Built modular <strong>Unity/C# gameplay systems</strong> — state machines, player controllers, physics interactions, ragdoll tuning, and mobile-optimised UI/UX with responsive canvas layouts and onboarding tutorials.</li>
-              <li>Integrated <strong>Firebase Realtime Database</strong> (leaderboards, auth) and monetisation pipelines (<strong>AdMob, IAP</strong>); maintained Android build stability through profiling, draw-call batching, and systematic bug-fixing.</li>
+              <li>Shipped <strong>8+ commercial mobile games</strong> on Google Play, driving the full cycle from gameplay prototyping and mechanics design to store release across puzzle, arcade, physics, and party genres.</li>
+              <li>Architected modular <strong>Unity/C# gameplay systems</strong>, including state machines, character controllers, physics-driven interactions, and tuned ragdoll combat behaviors.</li>
+              <li>Engineered dynamic <strong>UI/UX systems</strong> with responsive multi-resolution canvas scaling and interactive step-by-step tutorial onboarding flows.</li>
+              <li>Integrated <strong>Firebase Realtime Database</strong> (leaderboards, authentication) and monetization stacks (<strong>AdMob, IAP</strong>); optimized mobile runtime through draw-call batching and profiler analysis.</li>
             </ul>
           </div>
 
@@ -811,74 +1079,70 @@
           <!-- Motion Maze -->
           <div class="exp-block">
             <div class="exp-header">
-              <h3 class="exp-role">Game Developer</h3>
+              <div>
+                <h3 class="exp-role">Game Developer</h3>
+                <p class="exp-company" style="color:var(--purple);">Motion Maze <span>· Remote Studio</span></p>
+              </div>
               <span class="exp-date exp-date-purple">6 Months</span>
             </div>
-            <p class="exp-company" style="color:var(--purple);">
-              Motion Maze &nbsp;<span>· Remote Studio</span>
-            </p>
             <ul class="exp-bullets">
-              <li>Contributed gameplay mechanics, UI systems, and game-logic programming for mobile projects within a collaborative remote team pipeline.</li>
-              <li>Coordinated with art and design across versioned builds, gaining professional experience in structured multi-discipline studio workflows.</li>
+              <li>Programmed core <strong>gameplay mechanics, UI systems</strong>, and game logic for mobile projects within an agile, collaborative remote team pipeline.</li>
+              <li>Coordinated cross-functionally with 3D artists and game designers, delivering versioned feature builds through structured Git version control workflows.</li>
             </ul>
           </div>
         </section>
 
         <!-- Selected Projects -->
         <section aria-labelledby="sec-proj">
-          <h2 class="sec-label" id="sec-proj"><i class="fa-solid fa-star"></i> Selected Projects</h2>
+          <h2 class="sec-label" id="sec-proj"><i class="fa-solid fa-gamepad"></i> Selected Projects</h2>
 
-          <!-- Forgotten Train -->
+          <!-- Project 1: The Forgotten Train -->
           <div class="proj-block">
             <div class="proj-header">
-              <span class="proj-name">The Forgotten Train: VR Escape</span>
-              <span class="proj-role">Solo Creator — Code, 3D, Textures &amp; Audio</span>
-              <span class="proj-platform">· Unity XR · Meta Quest · PC VR</span>
+              <h3 class="proj-name">The Forgotten Train: VR Escape</h3>
+              <span class="proj-meta"><strong>Solo Developer &amp; 3D Artist</strong> · Unity XR · Meta Quest · PC VR</span>
             </div>
             <p class="proj-desc">
-              Atmospheric VR puzzle escape room, <strong>built 100% solo</strong>: custom Blender 3D assets, Substance PBR texturing, and Unity XR two-handed physics, socket docking, and valve puzzles.
+              Atmospheric VR puzzle escape room built 100% solo in <strong>Unity XR</strong>. Engineered two-handed physics interactions, socket/docking systems, and valve puzzles; created all 3D modular assets in <strong>Blender</strong> with <strong>Substance PBR</strong> texturing.
             </p>
           </div>
 
           <hr class="proj-divider">
 
-          <!-- Selah -->
+          <!-- Project 2: Selah -->
           <div class="proj-block">
             <div class="proj-header">
-              <span class="proj-name">Selah: Bible Charades</span>
-              <span class="proj-role">Lead Unity Developer · Mechanics &amp; UI/UX</span>
-              <span class="proj-platform">· Android · <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games" target="_blank" rel="noopener noreferrer">Live on Play Store</a></span>
+              <h3 class="proj-name">Selah: Bible Charades</h3>
+              <span class="proj-meta"><strong>Lead Unity Developer</strong> · Android · <a href="https://play.google.com/store/apps/details?id=com.selah.bible.headsup.quiz.games" target="_blank" rel="noopener noreferrer" class="proj-link">Live on Google Play</a></span>
             </div>
             <p class="proj-desc">
-              Published mobile title featuring <strong>gyro/tilt forehead motion controls</strong>, dynamic cloud card decks, in-game video recording, and responsive multi-resolution UI.
+              Published mobile party game featuring custom <strong>gyroscope &amp; tilt forehead motion controls</strong>, dynamic cloud-updated card decks, in-game video recording, and responsive multi-resolution UI.
             </p>
           </div>
 
           <hr class="proj-divider">
 
-          <!-- 2468 Block Puzzle -->
+          <!-- Project 3: 2468 Block Puzzle -->
           <div class="proj-block">
             <div class="proj-header">
-              <span class="proj-name">2468 Block Puzzle: 2048 Merge</span>
-              <span class="proj-role">Full Gameplay &amp; Backend Developer</span>
-              <span class="proj-platform">· Android · Live on Play Store</span>
+              <h3 class="proj-name">2468 Block Puzzle: 2048 Merge</h3>
+              <span class="proj-meta"><strong>Gameplay &amp; Backend Developer</strong> · Android · Live on Google Play</span>
             </div>
             <p class="proj-desc">
-              Number-merging block puzzle with <strong>Firebase Realtime leaderboards</strong>, user authentication, interactive onboarding tutorial, and AdMob/IAP monetization.
+              Fast-paced block-merging puzzle with <strong>Firebase Realtime Database</strong> leaderboards, user authentication, interactive onboarding tutorial, and <strong>AdMob / IAP</strong> monetization.
             </p>
           </div>
 
           <hr class="proj-divider">
 
-          <!-- Mr Greedy -->
+          <!-- Project 4: Mr Greedy -->
           <div class="proj-block">
             <div class="proj-header">
-              <span class="proj-name">Mr Greedy: Ragdoll Punch</span>
-              <span class="proj-role">Core Mechanics · Physics Tuning</span>
-              <span class="proj-platform">· Android · Live on Play Store</span>
+              <h3 class="proj-name">Mr Greedy: Ragdoll Punch</h3>
+              <span class="proj-meta"><strong>Core Gameplay &amp; Physics Developer</strong> · Android · Live on Google Play</span>
             </div>
             <p class="proj-desc">
-              3D physics combat game featuring <strong>spring-joint ragdoll mechanics</strong>, impulse force impacts, dynamic camera shakes, and cosmetic reward systems.
+              3D physics combat title implementing tuned <strong>spring-joint ragdoll mechanics</strong>, impulse hit reactions, dynamic camera shakes, and cosmetic unlock reward systems.
             </p>
           </div>
 
@@ -927,7 +1191,6 @@
         });
       }
 
-      // Sync across browser tabs if theme is changed in portfolio
       window.addEventListener('storage', function(e) {
         if (e.key === 'portfolio-theme' && e.newValue) {
           document.documentElement.setAttribute('data-theme', e.newValue);
