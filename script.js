@@ -686,6 +686,7 @@ const projectData = {
         engine: 'Unity 2D (C# / Firebase Realtime)',
         role: 'Full Gameplay & Backend Developer',
         image: 'assets/Block_Puzzle.webp',
+        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.kurlybrackets.merge2048',
         desc: 'A 2048-inspired number-merging block puzzle featuring online competitive leaderboards, dynamic grid merging, interactive tutorials, and rewarded video ads.',
         gallery: ['assets/Block_Puzzle.webp'],
         contributions: [
@@ -708,6 +709,7 @@ const projectData = {
         engine: 'Unity 3D (C# / Physics Engine)',
         role: 'Core Mechanics & Physics Programmer',
         image: 'assets/Greedy_Ragdoll .webp',
+        playStoreUrl: 'https://play.google.com/store/apps/details?id=com.mrgreedy.ragdollpunch',
         desc: 'A hilarious 3D action game featuring active ragdoll physics, spring-joint punch mechanics, dynamic impact camera shakes, interactive tutorial sequences, and cosmetics shop.',
         gallery: ['assets/Greedy_Ragdoll .webp'],
         contributions: [
